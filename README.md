@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fengshui Club Thailand: landing page
 
-## Getting Started
+Next.js (App Router) + TypeScript + Tailwind CSS. Built from the Figma frame
+`Fengshui Club - Website` › `fengshui` (node 358:403), which is the source of truth.
 
-First, run the development server:
+## Commands
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run lint
+npm run typecheck
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+app/                     layout (fonts, metadata), page, robots, sitemap, manifest, icons, OG image
+components/sections/     Hero, ServiceList, Consultation, Footer
+components/ui/           ConsultationForm (the only Client Component), SocialIcon, button styles
+content/site.ts          all page copy and links
+lib/consultation/        form schema + validation, server action, delivery adapter
+lib/site-url.ts          production URL and indexability
+public/images/           design assets exported from Figma
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Design tokens (colours, type scale, radii, shadows) live in `app/globals.css` under `@theme`.
 
-## Learn More
+## Consultation form
 
-To learn more about Next.js, take a look at the following resources:
+The form posts to a Server Action (`lib/consultation/submit.ts`) that validates on the server and
+hands the request to `deliverConsultation` in `lib/consultation/deliver.ts`. That function is the
+only thing to change when connecting a CRM, email service or form provider. By default it POSTs
+JSON to `CONSULTATION_WEBHOOK_URL`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```json
+{ "name": "…", "birthDate": "1985-03-14", "email": "…", "phone": "…", "submittedAt": "ISO-8601" }
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Without that variable the form shows an error message instead of pretending to succeed.
 
-## Deploy on Vercel
+## Environment variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+See `.env.example`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical domain for metadata, sitemap, OG. Falls back to Vercel's production URL. |
+| `CONSULTATION_WEBHOOK_URL` | Where form submissions are sent. |
+| `SITE_INDEXABLE` | `true` to allow indexing outside Vercel. On Vercel only the production deployment is indexable. |
