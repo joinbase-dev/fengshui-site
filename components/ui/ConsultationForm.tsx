@@ -64,7 +64,7 @@ export function ConsultationForm() {
                       defaultValue={values[field.name]}
                       aria-invalid={error ? true : undefined}
                       aria-describedby={error ? `${id}-error` : undefined}
-                      className="h-11 w-full rounded-sm border border-border bg-white px-4 text-input font-medium text-ink placeholder:text-placeholder focus-visible:border-brand focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-brand aria-invalid:border-brand"
+                      className="h-11 w-full rounded-sm border border-border bg-white px-4 text-input font-medium text-ink placeholder:text-placeholder focus:border-brand focus:outline-2 focus:-outline-offset-1 focus:outline-brand aria-invalid:border-brand"
                     />
                     {error && (
                       <p id={`${id}-error`} className="text-caption text-brand">
