@@ -1,19 +1,26 @@
 @import "tailwindcss";
 
-/* Design tokens from the Figma file (Fengshui Club - Website, node 358:403). */
+/* Design tokens from the Figma file (Fengshui Club - Website): homepage node 358:403,
+   service detail page node 389:518. */
 @theme {
   --color-*: initial;
   --color-white: #ffffff;
   --color-cream: #fffbfa; /* Primary/Base/0 */
+  --color-cream-300: #f7f2f0; /* Primary/Base/300 */
+  --color-cream-400: #f1ece9; /* Primary/Base/400 */
   --color-ink: #333333;
   --color-gray-900: #333232; /* Gray/900 */
   --color-gray-800: #5d5d5d; /* Gray/800 */
+  --color-gray-400: #a9a8a8; /* glass card border */
+  --color-gray-100: #ededed; /* video frame */
   --color-text-strong: #2d303c; /* neutral/text-strong */
   --color-border: #dfe2eb; /* neutral/border */
   --color-placeholder: #c1c7d9; /* neutral/text-placeholder */
   --color-brand: #b80920;
-  --color-footer: #ac0805;
   --color-red-900: #870200; /* Primary/Red/900 */
+  --color-red-800: #ac0805; /* Primary/Red/800 */
+  --color-red-700: #c91815; /* Primary/Red/700 */
+  --color-footer: var(--color-red-800);
   --color-red-500: #eb5d5b; /* Primary/Red/500 */
 
   /* Sukhumvit Set in the design; Noto Sans Thai is the web-licensable stand-in. */
@@ -31,12 +38,35 @@
   --text-lead--line-height: 32px;
   --text-lead-sm: 18px;
   --text-lead-sm--line-height: 28px;
-  --text-title: 40px;
+  --text-display: 64px; /* Thai/Heading/H1 */
+  --text-display--line-height: 1.12;
+  --text-display--letter-spacing: -0.5px;
+  --text-display-sm: 40px;
+  --text-display-sm--line-height: 1.2;
+  --text-display-sm--letter-spacing: -0.4px;
+  --text-heading: 48px;
+  --text-heading--line-height: 1.24;
+  --text-heading--letter-spacing: -0.5px;
+  --text-heading-sm: 32px;
+  --text-heading-sm--line-height: 1.3;
+  --text-heading-sm--letter-spacing: -0.4px;
+  --text-subheading: 32px; /* Thai/Heading/H4 */
+  --text-subheading--line-height: 1.38;
+  --text-subheading--letter-spacing: 0.5px;
+  --text-subheading-sm: 22px;
+  --text-subheading-sm--line-height: 1.38;
+  --text-subheading-sm--letter-spacing: 0.25px;
+  --text-title: 40px; /* Thai/Heading/H3 */
   --text-title--line-height: 1.4;
   --text-title--letter-spacing: -0.5px;
   --text-title-sm: 28px;
   --text-title-sm--line-height: 1.4;
   --text-title-sm--letter-spacing: -0.35px;
+  --text-tile: 24px;
+  --text-tile--line-height: 1.32;
+  --text-tile--letter-spacing: -0.5px;
+  --text-tile-sm: 18px;
+  --text-tile-sm--line-height: 1.4;
   --text-service: 24px;
   --text-service--line-height: 29px;
   --text-service-sm: 20px;
@@ -69,7 +99,13 @@
 
   --shadow-base: 0px 1px 3px 0px rgb(0 0 0 / 0.1), 0px 1px 2px 0px rgb(0 0 0 / 0.06);
   --shadow-card: 4px 8px 40px 0px rgb(0 0 0 / 0.06);
+  --shadow-portrait: 0px 16px 100px 0px rgb(0 0 0);
+  --shadow-glass: 8px 16px 46px 0px rgb(0 0 0 / 0.4);
+  --drop-shadow-tile: 4px 16px 23px rgb(0 0 0 / 0.2);
+  --drop-shadow-video: 4px 16px 32px rgb(0 0 0 / 0.2);
   --blur-card: 2px;
+  --blur-glass: 8px;
+  --blur-photo: 3px;
 
   --leading-label: 22px; /* Figma field: 22 label + 8 gap + 44 input = 74 */
 
@@ -78,6 +114,9 @@
   --container-page: 1280px;
   --container-card: 1200px;
   --container-form: 670px;
+  --container-intro: 916px;
+  --container-portrait: 470px;
+  --container-location-title: 320px;
 }
 
 html {

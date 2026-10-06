@@ -1,6 +1,7 @@
 import { Hero } from "@/components/sections/Hero";
 import { Consultation } from "@/components/sections/Consultation";
 import { Footer } from "@/components/sections/Footer";
+import { JsonLd } from "@/components/ui/JsonLd";
 import { site } from "@/content/site";
 import { siteUrl } from "@/lib/site-url";
 
@@ -22,11 +23,7 @@ export default function Home() {
         <Consultation />
       </main>
       <Footer />
-      <script
-        type="application/ld+json"
-        // Static, build-time data; escaping "<" keeps it inert inside the script tag.
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd data={structuredData} />
     </>
   );
 }

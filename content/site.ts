@@ -65,6 +65,25 @@ export const consultation = {
   },
 } as const;
 
+export const header = {
+  homeLabel: "หน้าแรก คลับฮวงจุ้ยแห่งประเทศไทย",
+  menuLabel: "เมนู",
+  navLabel: "เมนูหลัก",
+  // Same targets as the footer: only the sae-ki service has its own page so far.
+  nav: [
+    { label: "หน้าแรก", href: "/" },
+    { label: "ดูดวง ฮวงจุ้ย", href: "/#services" },
+    { label: "แซกีเสริมดวง", href: "/services/sae-ki" },
+    { label: "คอร์สเรียนดูดวง", href: "/#services" },
+  ],
+  cta: { label: "ปรึกษา/ขอคำแนะนำ", href: `#${consultation.id}` },
+} as const;
+
+export const video = {
+  // Not in the design: the screen-reader name of the play button.
+  play: "เล่นวิดีโอ",
+} as const;
+
 export type SocialPlatform = "facebook" | "youtube" | "tiktok" | "line";
 
 export const footer = {
@@ -79,13 +98,13 @@ export const footer = {
     { platform: "tiktok", label: "TikTok", href: "https://www.tiktok.com/" },
     { platform: "line", label: "LINE", href: "https://line.me/" },
   ] satisfies { platform: SocialPlatform; label: string; href: string }[],
-  // Only the home and contact anchors exist on this page; the other targets
-  // need their own pages or URLs.
+  // "ดูฮวงจุ้ย" and "คอร์สเรียนดูดวง" have no pages yet, so they point at the
+  // homepage services band. "#consultation" exists on every page.
   nav: [
-    { label: "หน้าแรก", href: "#top" },
-    { label: "ดูฮวงจุ้ย", href: "#services" },
-    { label: "แซกีเสริมดวง", href: "#services" },
-    { label: "คอร์สเรียนดูดวง", href: "#services" },
+    { label: "หน้าแรก", href: "/" },
+    { label: "ดูฮวงจุ้ย", href: "/#services" },
+    { label: "แซกีเสริมดวง", href: "/services/sae-ki" },
+    { label: "คอร์สเรียนดูดวง", href: "/#services" },
     { label: "ติดต่อเรา", href: "#consultation" },
   ],
   copyright: "©2025 FengShui Club Thailand. All rights reserved.",
