@@ -7,6 +7,10 @@
 // real photo when it lands.
 
 import type { StaticImageData } from "next/image";
+import saeKiHero from "@/public/images/services/sae-ki-hero.jpg";
+import saeKiMasterVase from "@/public/images/services/sae-ki-master-vase.jpg";
+// 1x render from the Figma MCP, trimmed of its rounded corners; replace with a 2x export.
+import saeKiTree from "@/public/images/services/sae-ki-tree.jpg";
 
 export type PhotoAsset = {
   src: StaticImageData | null;
@@ -58,7 +62,7 @@ export const serviceDetails: ServiceDetail[] = [
     metaTitle: "แซกีเสริมดวง | คลับฮวงจุ้ยแห่งประเทศไทย",
     metaDescription:
       "แซกีเสริมดวง เปลี่ยนดวง แก้กรรม ศาสตร์แขนงหนึ่งของฮวงจุ้ยที่เสริมพลังชีวิตและลดพลังปะทะ กับอาจารย์ดำรงชัย",
-    heroPhoto: pending("ศาลเจ้าจีนหลังคาสีแดงท่ามกลางต้นไม้"),
+    heroPhoto: { src: saeKiHero, alt: "ซุ้มประตูจีนสีแดงหลังคากระเบื้องเคลือบ ท่ามกลางต้นไม้" },
     intro: {
       tagline: "เปลี่ยนดวง แก้กรรม",
       paragraphs: [
@@ -67,7 +71,7 @@ export const serviceDetails: ServiceDetail[] = [
       ],
     },
     highlight: {
-      portrait: pending("อาจารย์ดำรงชัยในชุดจีนสีแดง ถือแจกันกระเบื้อง"),
+      portrait: { src: saeKiMasterVase, alt: "อาจารย์ดำรงชัยในชุดจีนสีแดง ถือโถกระเบื้องลายอักษรมงคล" },
       background: pending(""),
       title: "แซกีช่วยปรับฮวงจุ้ยชีวิต",
       subtitle: "เคล็ดลับความรุ่งเรืองของจีนกว่า 1,000 ปี",
@@ -82,7 +86,7 @@ export const serviceDetails: ServiceDetail[] = [
       background: pending(""),
       columns: [
         [
-          { title: "ต้นไม้", body: "เขียวชะอุ่มตลอดทั้งปี", photo: pending("ต้นไม้ใหญ่ใบเขียวชะอุ่ม") },
+          { title: "ต้นไม้", body: "เขียวชะอุ่มตลอดทั้งปี", photo: { src: saeKiTree, alt: "ต้นไม้ใหญ่ใบเขียวชะอุ่ม แสงแดดลอดผ่านกิ่งไม้" } },
           { title: "ดิน 5 สี", body: "อุดมสมบูรณ์ จากพื้นที่โดยตรง ไม่มีการถมทับ", photo: pending("หน้าดินธรรมชาติ") },
         ],
         [
