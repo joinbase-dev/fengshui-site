@@ -1,3 +1,4 @@
+import { SiteHeader } from "@/components/sections/SiteHeader";
 import { Hero } from "@/components/sections/Hero";
 import { Consultation } from "@/components/sections/Consultation";
 import { Footer } from "@/components/sections/Footer";
@@ -18,6 +19,7 @@ const structuredData = {
 export default function Home() {
   return (
     <>
+      <SiteHeader currentHref="/" />
       <main id="main">
         <Hero />
         <Consultation />

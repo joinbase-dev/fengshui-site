@@ -18,7 +18,7 @@ export function ServiceLocation({ location }: ServiceLocationProps) {
         <PhotoFill photo={location.background} sizes="100vw" className="blur-photo" />
       )}
 
-      <div className="relative mb-10 flex flex-col gap-4 md:mb-12 xl:mb-0 xl:w-location-title xl:shrink-0 xl:gap-8 xl:pt-6">
+      <div className="reveal relative mb-10 flex flex-col gap-4 md:mb-12 xl:mb-0 xl:w-location-title xl:shrink-0 xl:gap-8 xl:pt-6">
         <h2 id="service-location-title" className="text-title-sm font-bold text-gray-900 xl:text-title">
           {location.titleLines.map((line) => (
             <span key={line} className="block">
@@ -35,7 +35,7 @@ export function ServiceLocation({ location }: ServiceLocationProps) {
         </p>
       </div>
 
-      <div className="relative grid gap-4 drop-shadow-tile sm:grid-cols-2 xl:flex-1">
+      <div className="reveal-group relative grid gap-4 sm:grid-cols-2 xl:flex-1">
         {location.columns.map((column, columnIndex) => (
           <ul key={columnIndex} className="flex flex-col gap-4">
             {column.map((tile, tileIndex) => {
@@ -45,7 +45,7 @@ export function ServiceLocation({ location }: ServiceLocationProps) {
               return (
                 <li
                   key={tile.title}
-                  className={`relative flex flex-col justify-end overflow-hidden rounded-sm ${
+                  className={`relative flex flex-col justify-end overflow-hidden rounded-sm shadow-tile ${
                     tall ? "h-64 sm:h-80 md:h-100 xl:h-120" : "h-64 md:h-80 xl:h-95"
                   } ${columnIndex === 1 ? "xl:rounded-r-none" : ""}`}
                 >

@@ -19,7 +19,7 @@ export function ServiceIntro({ title, intro }: ServiceIntroProps) {
         <Image src={emblem} alt="" fill sizes="531px" className="object-contain" />
       </div>
 
-      <div className="relative mx-auto flex max-w-intro flex-col items-center gap-6 text-center md:gap-8">
+      <div className="reveal-group relative mx-auto flex max-w-intro flex-col items-center gap-6 text-center md:gap-8">
         <h1 id="service-title" className="text-display-sm font-bold text-gray-900 xl:text-display">
           {title}
         </h1>

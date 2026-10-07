@@ -5,7 +5,7 @@ import { SocialIcon } from "@/components/ui/SocialIcon";
 import logo from "@/public/images/logo.png";
 
 const focusRing =
-  "rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
+  "rounded-sm transition-opacity duration-200 ease-refined hover:opacity-75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 
 export function Footer() {
   return (

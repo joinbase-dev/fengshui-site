@@ -78,7 +78,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
     <>
       <SiteHeader currentHref={path} />
       <main id="main">
-        <PhotoBand photo={service.heroPhoto} preload />
+        <PhotoBand photo={service.heroPhoto} preload settle />
         <ServiceIntro title={service.title} intro={service.intro} />
         <ServiceHighlight highlight={service.highlight} />
         <ServiceLocation location={service.location} />

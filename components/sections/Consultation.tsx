@@ -17,7 +17,7 @@ export function Consultation() {
           <Image src={emblem} alt="" fill sizes="576px" className="object-contain" />
         </div>
 
-        <div className="relative rounded-md border border-white bg-white/30 px-4 py-10 sm:px-5 shadow-card backdrop-blur-card md:px-6 md:py-16">
+        <div className="reveal relative rounded-md border border-white bg-white/30 px-4 py-10 sm:px-5 shadow-card backdrop-blur-card md:px-6 md:py-16">
           <div className="mx-auto flex max-w-form flex-col items-center gap-10">
             <div className="flex flex-col items-center gap-4 text-center">
               <h2

@@ -20,7 +20,7 @@ export function ServiceList() {
     >
       {/* The design's row is 1184px (3 × 316 + 2 × 118), 32px wider than the padded box. */}
       <h2 className="sr-only">{services.heading}</h2>
-      <ul className="grid gap-8 md:grid-cols-3 md:gap-6 lg:gap-10 xl:-mr-8 xl:gap-29.5">
+      <ul className="reveal-group grid gap-8 md:grid-cols-3 md:gap-6 lg:gap-10 xl:-mr-8 xl:gap-29.5">
         {services.items.map((item) => (
           <li key={item.title} className="flex flex-col gap-4">
             <div className="flex flex-col gap-3">

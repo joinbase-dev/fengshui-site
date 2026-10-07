@@ -10,7 +10,7 @@ type SiteHeaderProps = {
 };
 
 const linkStyle =
-  "inline-flex min-h-11 items-center rounded-xs text-nav font-bold text-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
+  "inline-flex min-h-11 items-center rounded-xs text-nav font-bold text-gray-900 transition-colors duration-200 ease-refined hover:text-brand aria-[current=page]:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
 
 function MenuIcon() {
   return (
@@ -22,7 +22,8 @@ function MenuIcon() {
 
 // Desktop layout from Figma (header/desktop): logo, four text links and the CTA.
 // Below lg the links and CTA move into a <details> disclosure, so the menu needs no
-// client JavaScript.
+// client JavaScript. The header sticks to the top; its glass bar (.header-glass in
+// globals.css) appears on scroll through a CSS scroll timeline, also without JS.
 export function SiteHeader({ currentHref }: SiteHeaderProps) {
   const links = header.nav.map((item) => (
     <li key={item.label}>
@@ -37,8 +38,10 @@ export function SiteHeader({ currentHref }: SiteHeaderProps) {
   ));
 
   return (
-    <header className="relative z-20 px-5 py-3 md:px-10 md:py-4 xl:px-30 xl:py-6">
-      <div className="mx-auto flex max-w-card items-center justify-between gap-6">
+    // The header box spans the full width but only the bar takes pointer events, so the
+    // transparent margin around the floating bar never blocks the page underneath.
+    <header className="pointer-events-none sticky top-0 z-30 px-5 py-3 md:px-10 md:py-4 xl:px-30 xl:py-6">
+      <div className="header-glass pointer-events-auto relative mx-auto flex max-w-card items-center justify-between gap-6">
         <Link
           href="/"
           className="shrink-0 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
@@ -61,7 +64,7 @@ export function SiteHeader({ currentHref }: SiteHeaderProps) {
             <MenuIcon />
             <span className="sr-only">{header.menuLabel}</span>
           </summary>
-          <div className="absolute inset-x-5 top-full rounded-md border border-border bg-white p-5 shadow-card md:inset-x-10">
+          <div className="glass-panel absolute inset-x-0 top-full mt-4 rounded-lg p-5">
             <nav aria-label={header.navLabel}>
               <ul className="flex flex-col gap-1">{links}</ul>
             </nav>

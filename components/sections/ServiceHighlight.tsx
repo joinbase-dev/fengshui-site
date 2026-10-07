@@ -25,7 +25,7 @@ export function ServiceHighlight({ highlight }: ServiceHighlightProps) {
     >
       {highlight.background.src && <PhotoFill photo={highlight.background} sizes="100vw" />}
 
-      <div className="relative mx-auto flex max-w-card flex-col items-center gap-10 lg:flex-row lg:items-end lg:gap-12 xl:gap-20">
+      <div className="reveal-group relative mx-auto flex max-w-card flex-col items-center gap-10 lg:flex-row lg:items-end lg:gap-12 xl:gap-20">
         <div className="relative aspect-[470/620] w-full max-w-sm shrink-0 overflow-hidden rounded-sm shadow-portrait sm:max-w-md lg:w-[39%] lg:max-w-portrait">
           <PhotoFill photo={highlight.portrait} sizes="(min-width: 1024px) 470px, 448px" />
         </div>

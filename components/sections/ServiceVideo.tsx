@@ -13,7 +13,7 @@ export function ServiceVideo({ video }: ServiceVideoProps) {
       aria-labelledby="service-video-title"
       className="bg-linear-to-b from-cream-400 to-white px-5 py-12 md:px-10 md:py-16 xl:px-30 xl:py-26"
     >
-      <div className="mx-auto flex max-w-card flex-col items-center gap-8 md:gap-12">
+      <div className="reveal-group mx-auto flex max-w-card flex-col items-center gap-8 md:gap-12">
         <div className="flex max-w-form flex-col items-center gap-4 text-center">
           <h2 id="service-video-title" className="text-title-sm font-bold text-balance text-gray-900 lg:text-title">
             {video.title}
@@ -21,7 +21,7 @@ export function ServiceVideo({ video }: ServiceVideoProps) {
           <p className="text-body-2 text-balance text-gray-800">{video.body}</p>
         </div>
 
-        <div className="relative aspect-video w-full overflow-hidden rounded-sm bg-gray-100 drop-shadow-video">
+        <div className="relative aspect-video w-full overflow-hidden rounded-sm bg-gray-100 shadow-video">
           {video.youtubeId ? (
             <VideoPlayer youtubeId={video.youtubeId} title={video.title} playLabel={videoLabels.play} />
           ) : (
