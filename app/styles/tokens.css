@@ -22,10 +22,9 @@
   --color-footer: var(--color-red-800);
   --color-red-500: #eb5d5b; /* Primary/Red/500 */
 
-  /* Sukhumvit Set in the design; Noto Sans Thai is the web-licensable stand-in. */
-  --font-sans: var(--font-noto-thai), ui-sans-serif, system-ui, sans-serif;
-  /* Lato in the design. Lato has no Thai glyphs, so Thai falls through to Noto Sans Thai. */
-  --font-lato: var(--font-lato-latin), var(--font-noto-thai), ui-sans-serif, sans-serif;
+  /* Epilogue for everything. It has no Thai glyphs, so Thai text (and anything else
+     Epilogue lacks) falls through to Noto Sans Thai. */
+  --font-sans: var(--font-epilogue), var(--font-noto-thai), ui-sans-serif, system-ui, sans-serif;
 
   --text-hero: 56px;
   --text-hero--line-height: 66px;

@@ -18,14 +18,14 @@ export function Hero() {
       <div className="mx-auto max-w-page">
         <div className="grid gap-y-10 md:grid-cols-[minmax(0,601fr)_minmax(0,640fr)] md:gap-x-6 xl:gap-x-[39px]">
           <div className="flex flex-col items-start gap-6 md:pb-16 xl:pb-27">
-            <h1 id="hero-title" className="enter font-lato text-hero-sm font-bold text-ink xl:text-hero">
+            <h1 id="hero-title" className="enter text-hero-sm font-bold text-ink xl:text-hero">
               {hero.titleLines.map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </h1>
-            <p className="enter max-w-hero-copy font-lato text-lead-sm text-ink [--i:1] xl:text-lead">{hero.body}</p>
+            <p className="enter max-w-hero-copy text-lead-sm text-ink [--i:1] xl:text-lead">{hero.body}</p>
             <a href={`#${consultation.id}`} className={`enter [--i:2] ${primaryButton}`}>
               {hero.cta}
             </a>

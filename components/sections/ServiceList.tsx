@@ -25,11 +25,11 @@ export function ServiceList() {
           <li key={item.title} className="flex flex-col gap-4">
             <div className="flex flex-col gap-3">
               <CloudIcon />
-              <h3 className="font-lato text-service-sm font-semibold text-white xl:text-service">
+              <h3 className="text-service-sm font-semibold text-white xl:text-service">
                 {item.title}
               </h3>
             </div>
-            <p className="font-lato text-service-body-sm text-white xl:text-service-body">{item.body}</p>
+            <p className="text-service-body-sm text-white xl:text-service-body">{item.body}</p>
           </li>
         ))}
       </ul>

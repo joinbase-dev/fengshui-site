@@ -8,7 +8,7 @@ to ask for before starting.
 | Change in the design | Where it goes |
 | --- | --- |
 | Colours, type scale, radii, shadows, widths, motion timing | `app/styles/tokens.css` (Tailwind `@theme`) |
-| Fonts | `app/layout.tsx` (`next/font`), mapped to `--font-sans` / `--font-lato` in `tokens.css` |
+| Fonts | `app/layout.tsx` (`next/font`), mapped to `--font-sans` in `tokens.css` |
 | Header glass, menu panel, scroll and load-in motion | `app/styles/motion.css` |
 | Copy, links, nav, social accounts | `content/site.ts` (site-wide), `content/services.ts` (service pages) |
 | Which sections a page shows, and their order | `app/page.tsx`, `app/services/[slug]/page.tsx` |
@@ -50,8 +50,9 @@ CI runs lint, typecheck and build on every pull request.
   (desktop, tablet, mobile). Breakpoints that are not drawn get derived and flagged.
 - Images at 2× their largest displayed size, exported from the source rather than
   screenshots.
-- Fonts: the family names and whether they are licensed for the web. Sukhumvit Set is
-  not, which is why Noto Sans Thai stands in for it today.
+- Fonts: the site uses Epilogue, with Noto Sans Thai for Thai text because Epilogue has
+  no Thai glyphs. If the design uses a different Thai face, check that it is licensed for
+  the web (Sukhumvit Set, used in the first design, is not).
 - Final copy for every block that still has lorem ipsum.
 - Hover, focus, error and empty states, if the design has them.
 - Anything new that needs data: social account URLs, the form's destination, video IDs.
