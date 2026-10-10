@@ -20,9 +20,7 @@ export function ServiceBooking() {
       <div className="reveal-group mx-auto mt-12 flex max-w-193.75 flex-col gap-8 md:flex-row md:items-start md:gap-17.5 lg:mt-17.5">
         <figure className="flex shrink-0 flex-col gap-6">
           <div className="relative size-48.75 overflow-hidden border-2 border-red-800">
-            {portrait.src && (
-              <Image src={portrait.src} alt={portrait.alt} fill sizes="195px" className="object-cover object-[50%_20%]" />
-            )}
+            <Image src={portrait.src} alt={portrait.alt} fill sizes="195px" className="object-cover object-[50%_20%]" />
           </div>
           <figcaption className="text-detail-body text-black">
             <span className="block font-bold">{serviceBooking.name}</span>

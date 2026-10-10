@@ -4,18 +4,14 @@
 
 import type { StaticImageData } from "next/image";
 
+// An empty alt marks the photo as decorative.
 export type PhotoAsset = {
-  // null renders the design's grey image slot until the photo is exported.
-  src: StaticImageData | null;
-  alt: string;
-};
-
-// A tile in the hero gallery. Tiles are square crops, so any photo shape works;
-// an empty alt marks the photo as decorative.
-export type GalleryPhoto = {
   src: StaticImageData;
   alt: string;
 };
+
+// A tile in the hero gallery. Tiles are square crops, so any photo shape works.
+export type GalleryPhoto = PhotoAsset;
 
 // The copy under the hero, in page order. Lines are the design's line breaks; on
 // narrow screens they run together and wrap.
@@ -27,39 +23,6 @@ export type ServiceBodyBlock =
   | { type: "text"; lines: string[] }
   // A plain-text heading followed by dashed items.
   | { type: "list"; title: string; items: string[] };
-
-export type ServiceHighlightContent = {
-  portrait: PhotoAsset;
-  background: PhotoAsset;
-  title: string;
-  subtitle: string;
-  body: string;
-  benefits: string[];
-  cta: string;
-};
-
-export type ServiceLocationContent = {
-  titleLines: string[];
-  quoteLines: string[];
-  background: PhotoAsset;
-  // Two columns of two tiles; the design alternates tall and short tiles.
-  columns: { title: string; body: string; photo: PhotoAsset }[][];
-};
-
-export type ServiceVideoContent = {
-  title: string;
-  body: string;
-  // YouTube video id; the frame shows the design's empty player until it is set.
-  youtubeId: string | null;
-};
-
-// Optional blocks for a service whose design adds sections to the template. They
-// render after the body copy, in order. None of the current services uses them.
-export type ServiceSection =
-  | ({ type: "highlight" } & ServiceHighlightContent)
-  | ({ type: "location" } & ServiceLocationContent)
-  | ({ type: "video" } & ServiceVideoContent)
-  | { type: "photoBand"; photo: PhotoAsset };
 
 export type ServiceDetail = {
   slug: string;
@@ -73,5 +36,4 @@ export type ServiceDetail = {
   // columns than narrow ones, so put the strongest photos in the first columns.
   heroGallery: GalleryPhoto[][];
   body: ServiceBodyBlock[];
-  sections?: ServiceSection[];
 };

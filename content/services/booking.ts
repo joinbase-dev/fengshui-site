@@ -2,7 +2,7 @@
 // services. Its button goes to the LINE account, the site's only booking channel.
 
 import type { PhotoAsset } from "./types";
-import masterVase from "@/public/images/services/sae-ki-master-vase.jpg";
+import masterPortrait from "@/public/images/services/master-portrait.jpg";
 
 export const serviceBooking = {
   title: "จองคิว/ปรึกษา อ.ดำรงชัย",
@@ -15,7 +15,7 @@ export const serviceBooking = {
   ],
   cta: "จองคิวด่วน",
   portrait: {
-    src: masterVase,
+    src: masterPortrait,
     alt: "อาจารย์ดำรงชัยในชุดจีนสีแดง ถือโถกระเบื้องลายอักษรมงคล",
   } satisfies PhotoAsset,
   name: "อาจารย์ดำรงชัย",

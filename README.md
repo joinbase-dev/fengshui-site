@@ -37,7 +37,7 @@ Every `/services/<slug>` page renders `components/templates/ServiceDetailTemplat
 405:2008) from one data file in `content/services/`: the title beside a looping photo gallery, the
 service's copy as `body` blocks (`lead`, `highlight`, `text`, `list`; see `content/services/types.ts`),
 the shared booking block (`content/services/booking.ts`), and the photo strip and footer shared with
-Home. A service whose design adds sections can list them in `sections`.
+Home.
 
 - **Add a service:** copy one of the data files, change its slug and content, and add it to the
   list in `content/services/index.ts`. The route, sitemap and metadata pick it up.
