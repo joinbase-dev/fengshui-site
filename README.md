@@ -11,21 +11,43 @@ npm run dev        # http://localhost:3000
 npm run lint
 npm run typecheck
 npm run build
+npm run screenshots # needs a running server; see docs/redesign.md
 ```
 
 ## Structure
 
 ```
-app/                     layout (fonts, metadata), page, robots, sitemap, manifest, icons, OG image
-components/sections/     Hero, ServiceList, Consultation, Footer
-components/ui/           ConsultationForm (the only Client Component), SocialIcon, button styles
-content/site.ts          all page copy and links
+app/                     layout (fonts, metadata), pages, robots, sitemap, manifest, icons, OG image
+app/styles/tokens.css    design tokens (colours, type scale, radii, shadows, widths, motion timing)
+app/styles/motion.css    header glass, menu panel, CSS-only motion
+app/styles/services.css  service-page tokens and the looping hero gallery
+components/sections/     page sections (Hero, Consultation, Footer, service page sections, …)
+components/templates/    ServiceDetailTemplate (every /services/[slug] page)
+components/ui/           shared pieces (ConsultationForm, VideoPlayer, button styles, …)
+content/                 all copy and links: site.ts (site-wide), services/ (one file per service page)
 lib/consultation/        form schema + validation, server action, delivery adapter
 lib/site-url.ts          production URL and indexability
-public/images/           design assets exported from Figma
+public/images/           design assets
+scripts/screenshots.mjs  screenshots at every test width + horizontal-scroll check
 ```
 
-Design tokens (colours, type scale, radii, shadows) live in `app/globals.css` under `@theme`.
+## Service pages
+
+Every `/services/<slug>` page renders `components/templates/ServiceDetailTemplate.tsx` (Figma
+405:2008) from one data file in `content/services/`: the title beside a looping photo gallery, the
+service's copy as `body` blocks (`lead`, `highlight`, `text`, `list`; see `content/services/types.ts`),
+the shared booking block (`content/services/booking.ts`), and the photo strip and footer shared with
+Home.
+
+- **Add a service:** copy one of the data files, change its slug and content, and add it to the
+  list in `content/services/index.ts`. The route, sitemap and metadata pick it up.
+- **Replace the hero gallery placeholders:** put the photos in `public/images/services/<slug>/`,
+  import them in the service's data file, and set `heroGallery` to columns of
+  `{ src, alt }`, left to right (wider screens reveal more columns, up to four). Give every column
+  at least four photos so the loop never shows a gap. Tiles are square crops of the photos; export
+  them at least 520px on the short side. Use `alt: ""` for purely atmospheric photos.
+
+Starting a redesign? See [docs/redesign.md](docs/redesign.md).
 
 ## Consultation form
 

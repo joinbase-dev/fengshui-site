@@ -1,0 +1,88 @@
+/* Announcement ticker, menu panel and the CSS-only motion utilities (.enter, .reveal,
+   .reveal-group). All motion is off under prefers-reduced-motion. */
+
+/* Announcement strip: the design repeats the notice in a clipped row, read here as a
+   ticker. The track holds two copies and slides by one copy's width (half the track),
+   so the loop is seamless. Under reduced motion it is one still, wrapping line. */
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: marquee var(--duration-marquee) linear infinite;
+  }
+
+  .marquee:hover .marquee-track,
+  .marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    width: auto;
+  }
+
+  .marquee-track > [aria-hidden] {
+    display: none;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  details[open] > .menu-panel {
+    animation: rise var(--duration-hover) var(--ease-refined);
+  }
+
+  /* Load-in for content already on screen: fade and a 12px rise, staggered by --i. */
+  .enter {
+    animation: rise var(--duration-enter) var(--ease-refined) both;
+    animation-delay: calc(var(--i, 0) * 120ms);
+  }
+
+  /* Scroll reveal: progress follows the element entering the viewport, so content
+     that is already visible never waits. Children of .reveal-group stagger by
+     shifting their range. No timeline support means no animation, never hidden text. */
+  @supports (animation-timeline: view()) {
+    .reveal,
+    .reveal-group > * {
+      animation: reveal linear both;
+      animation-timing-function: var(--ease-refined);
+      animation-timeline: view();
+      animation-range: entry calc(5% + var(--i, 0) * 10%) entry calc(55% + var(--i, 0) * 10%);
+    }
+
+    .reveal-group > :nth-child(2) {
+      --i: 1;
+    }
+
+    .reveal-group > :nth-child(3) {
+      --i: 2;
+    }
+
+    .reveal-group > :nth-child(4) {
+      --i: 3;
+    }
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
