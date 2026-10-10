@@ -115,6 +115,7 @@
   --container-intro: 916px;
   --container-portrait: 470px;
   --container-location-title: 320px;
+  --container-tiktok: 720px; /* TikTok profile embed max width */
 
   /* Motion: one easing for the whole site (durations below, on :root). */
   --ease-refined: cubic-bezier(0.22, 1, 0.36, 1);

@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { Hero } from "@/components/sections/Hero";
+import { TikTokFeed } from "@/components/sections/TikTokFeed";
 import { Consultation } from "@/components/sections/Consultation";
 import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -22,6 +23,7 @@ export default function Home() {
       <SiteHeader currentHref="/" />
       <main id="main">
         <Hero />
+        <TikTokFeed />
         <Consultation />
       </main>
       <Footer />
