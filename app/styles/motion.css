@@ -1,4 +1,4 @@
-/* Announcement ticker, menu panel and the CSS-only motion utilities (.enter, .settle, .reveal,
+/* Announcement ticker, menu panel and the CSS-only motion utilities (.enter, .reveal,
    .reveal-group). All motion is off under prefers-reduced-motion. */
 
 /* Announcement strip: the design repeats the notice in a clipped row, read here as a
@@ -47,11 +47,6 @@
     animation-delay: calc(var(--i, 0) * 120ms);
   }
 
-  /* A slow settle for full-bleed photos; transform only, so it never delays LCP. */
-  .settle {
-    animation: settle var(--duration-settle) var(--ease-refined) both;
-  }
-
   /* Scroll reveal: progress follows the element entering the viewport, so content
      that is already visible never waits. Children of .reveal-group stagger by
      shifting their range. No timeline support means no animation, never hidden text. */
@@ -89,11 +84,5 @@
   from {
     opacity: 0;
     transform: translateY(24px);
-  }
-}
-
-@keyframes settle {
-  from {
-    transform: scale(1.04);
   }
 }
