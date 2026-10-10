@@ -1,0 +1,46 @@
+/* Hero gallery on the service pages (components/sections/ServiceHeroGallery.tsx).
+   Each column holds its photo list twice, stacked, and slides by exactly one list
+   (-50%), so the loop restarts on an identical frame with no jump. Columns
+   alternate direction and run at slightly different speeds; negative delays start
+   them at different points so they never line up. Only transform animates. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-gallery-track {
+    animation: hero-gallery-scroll var(--gallery-duration, 70s) linear infinite;
+    will-change: transform;
+  }
+
+  .hero-gallery-column:nth-child(1) .hero-gallery-track {
+    --gallery-duration: 70s;
+  }
+
+  .hero-gallery-column:nth-child(2) .hero-gallery-track {
+    --gallery-duration: 84s;
+    animation-direction: reverse;
+    animation-delay: -30s;
+  }
+
+  .hero-gallery-column:nth-child(3) .hero-gallery-track {
+    --gallery-duration: 76s;
+    animation-delay: -18s;
+  }
+
+  .hero-gallery-column:nth-child(4) .hero-gallery-track {
+    --gallery-duration: 90s;
+    animation-direction: reverse;
+    animation-delay: -52s;
+  }
+
+  /* The pause control (WCAG 2.2.2) is a checkbox, so pausing needs no JavaScript. */
+  .hero-gallery:has(.hero-gallery-pause:checked) .hero-gallery-track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes hero-gallery-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}

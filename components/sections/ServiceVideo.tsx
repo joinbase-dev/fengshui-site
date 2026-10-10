@@ -1,10 +1,10 @@
-import type { ServiceDetail } from "@/content/services";
+import type { ServiceVideoContent } from "@/content/services";
 import { video as videoLabels } from "@/content/site";
 import { PlayIcon } from "@/components/ui/PlayIcon";
 import { VideoPlayer } from "@/components/ui/VideoPlayer";
 
 type ServiceVideoProps = {
-  video: ServiceDetail["video"];
+  video: ServiceVideoContent;
 };
 
 export function ServiceVideo({ video }: ServiceVideoProps) {

@@ -10,7 +10,7 @@ to ask for before starting.
 | Colours, type scale, radii, shadows, widths, motion timing | `app/styles/tokens.css` (Tailwind `@theme`) |
 | Fonts | `app/layout.tsx` (`next/font`), mapped to `--font-sans` in `tokens.css` |
 | Header glass, menu panel, scroll and load-in motion | `app/styles/motion.css` |
-| Copy, links, nav, social accounts | `content/site.ts` (site-wide), `content/services.ts` (service pages) |
+| Copy, links, nav, social accounts | `content/site.ts` (site-wide), `content/services/` (service pages, one file per service) |
 | Which sections a page shows, and their order | `app/page.tsx`, `app/services/[slug]/page.tsx` |
 | A section's layout | `components/sections/<Section>.tsx` |
 | Buttons and other shared pieces | `components/ui/` |

@@ -20,14 +20,31 @@ npm run screenshots # needs a running server; see docs/redesign.md
 app/                     layout (fonts, metadata), pages, robots, sitemap, manifest, icons, OG image
 app/styles/tokens.css    design tokens (colours, type scale, radii, shadows, widths, motion timing)
 app/styles/motion.css    header glass, menu panel, CSS-only motion
+app/styles/hero-gallery.css  looping hero gallery on the service pages
 components/sections/     page sections (Hero, Consultation, Footer, service page sections, …)
+components/templates/    ServiceDetailTemplate (every /services/[slug] page)
 components/ui/           shared pieces (ConsultationForm, VideoPlayer, button styles, …)
-content/                 all copy and links: site.ts (site-wide), services.ts (service pages)
+content/                 all copy and links: site.ts (site-wide), services/ (one file per service page)
 lib/consultation/        form schema + validation, server action, delivery adapter
 lib/site-url.ts          production URL and indexability
 public/images/           design assets
 scripts/screenshots.mjs  screenshots at every test width + horizontal-scroll check
 ```
+
+## Service pages
+
+Every `/services/<slug>` page renders `components/templates/ServiceDetailTemplate.tsx` from one
+data file in `content/services/`: hero gallery, title and intro, the page's own sections in order
+(`highlight`, `location`, `video`, `photoBand`; see `content/services/types.ts`), the consultation
+form and an optional closing gallery.
+
+- **Add a service:** copy one of the data files, change its slug and content, and add it to the
+  list in `content/services/index.ts`. The route, sitemap and metadata pick it up.
+- **Replace the hero gallery placeholders:** put the photos in `public/images/services/<slug>/`,
+  import them in the service's data file, and set `heroGallery` to columns of
+  `{ src, alt }`, left to right (desktop shows four columns, tablet three, phones two). Give every
+  column at least four photos so the loop never shows a gap. Use `alt: ""` for purely atmospheric
+  photos. Photos keep their own proportions; export them about 960px wide.
 
 Starting a redesign? See [docs/redesign.md](docs/redesign.md).
 

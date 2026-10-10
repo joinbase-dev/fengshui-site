@@ -1,8 +1,8 @@
-import type { ServiceDetail } from "@/content/services";
+import type { ServiceLocationContent } from "@/content/services";
 import { PhotoFill } from "@/components/ui/PhotoFill";
 
 type ServiceLocationProps = {
-  location: ServiceDetail["location"];
+  location: ServiceLocationContent;
 };
 
 // Figma "8": the title column sits on the 1200px content edge and the tile grid runs

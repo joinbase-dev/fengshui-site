@@ -1,4 +1,4 @@
-import type { ServiceDetail } from "@/content/services";
+import type { ServiceHighlightContent } from "@/content/services";
 import { consultation } from "@/content/site";
 import { lightButton } from "@/components/ui/button-styles";
 import { PhotoFill } from "@/components/ui/PhotoFill";
@@ -12,7 +12,7 @@ function CheckIcon() {
 }
 
 type ServiceHighlightProps = {
-  highlight: ServiceDetail["highlight"];
+  highlight: ServiceHighlightContent;
 };
 
 // Figma "feature_29": a portrait card beside a dark glass card on a red photo
