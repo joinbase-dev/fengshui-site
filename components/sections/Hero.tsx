@@ -1,62 +1,51 @@
 import Image from "next/image";
-import { hero, consultation } from "@/content/site";
-import { primaryButton } from "@/components/ui/button-styles";
-import emblem from "@/public/images/emblem.png";
-import portrait from "@/public/images/sinsae-damrongchai.png";
-import { ServiceList } from "./ServiceList";
+import { hero, lineBooking } from "@/content/site";
+import { ctaButton } from "@/components/ui/button-styles";
+import { LineChatIcon } from "@/components/ui/LineChatIcon";
+import emblem from "@/public/images/home/hero-emblem.png";
+import heroImage from "@/public/images/home/hero.png";
 
-// Geometry from the Figma frame (hero image 640×592): the portrait sits at
-// x 91, y 8.66, 457×519; the image starts 30px above the copy and the service
-// list overlaps its bottom 84px. Percentages keep that composition at every size.
+// Figma Hero (405:2242), 1440 wide: 100px padding around a 1080px row of copy and the
+// 541×394 photo cluster, with the faded club emblem cut off by the right edge (the
+// exported image is already faded and cropped). Below lg (derived, not drawn) the photo stacks under the copy.
 export function Hero() {
   return (
     <section
-      id="top"
       aria-labelledby="hero-title"
-      className="mx-auto max-w-hero px-5 pt-6 pb-4 md:px-10 md:pt-8 md:pb-12 xl:px-20 xl:pt-12 xl:pb-30"
+      className="relative overflow-hidden px-5 py-12 md:px-10 md:py-16 lg:py-25"
     >
-      <div className="mx-auto max-w-page">
-        <div className="grid gap-y-10 md:grid-cols-[minmax(0,601fr)_minmax(0,640fr)] md:gap-x-6 xl:gap-x-[39px]">
-          <div className="flex flex-col items-start gap-6 md:pb-16 xl:pb-27">
-            <h1 id="hero-title" className="enter text-hero-sm font-bold text-ink xl:text-hero">
+      <Image
+        src={emblem}
+        alt=""
+        sizes="488px"
+        className="pointer-events-none absolute top-1/2 right-0 hidden w-122 -translate-y-1/2 lg:block"
+      />
+      <div className="relative mx-auto flex max-w-home flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
+        <div className="flex flex-col items-start gap-10">
+          <div className="flex flex-col gap-4 font-semibold text-black">
+            <h1 id="hero-title" className="enter max-w-139.25 text-home-display-sm lg:text-home-display">
               {hero.titleLines.map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </h1>
-            <p className="enter max-w-hero-copy text-lead-sm text-ink [--i:1] xl:text-lead">{hero.body}</p>
-            <a href={`#${consultation.id}`} className={`enter [--i:2] ${primaryButton}`}>
-              {hero.cta}
-            </a>
+            <p className="enter text-home-lead-sm [--i:1] lg:text-home-lead">{hero.subtitle}</p>
           </div>
-
-          <div className="flow-root md:self-end">
-            <div className="relative mx-auto -mb-[13.125%] aspect-[640/592] max-w-[480px] md:-mt-[4.6875%] md:max-w-none">
-              <Image
-                src={emblem}
-                alt=""
-                fill
-                sizes="(min-width: 1440px) 640px, (min-width: 768px) 50vw, min(calc(100vw - 40px), 480px)"
-                preload
-                fetchPriority="high"
-                className="object-contain"
-              />
-              <div className="enter absolute top-[1.46%] left-[14.22%] aspect-[457/519] w-[71.41%] [--i:2]">
-                <Image
-                  src={portrait}
-                  alt={hero.imageAlt}
-                  fill
-                  sizes="(min-width: 1440px) 457px, (min-width: 768px) 36vw, min(71vw, 343px)"
-                  loading="eager"
-                  className="object-contain"
-                />
-              </div>
-            </div>
-          </div>
+          <a href={lineBooking} target="_blank" rel="noopener noreferrer" className={`enter [--i:2] ${ctaButton}`}>
+            <LineChatIcon className="size-7" />
+            {hero.cta}
+          </a>
         </div>
 
-        <ServiceList />
+        <Image
+          src={heroImage}
+          alt={hero.imageAlt}
+          sizes="(min-width: 1024px) 541px, min(calc(100vw - 40px), 541px)"
+          preload
+          fetchPriority="high"
+          className="mx-auto w-full max-w-135.25 shrink-0 lg:mx-0"
+        />
       </div>
     </section>
   );

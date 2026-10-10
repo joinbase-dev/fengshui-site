@@ -1,9 +1,12 @@
-/* Design tokens from the Figma file (Fengshui Club - Website): homepage node 358:403,
-   service detail page node 389:518. Every colour, type size, radius, shadow, width and
+/* Design tokens from the Figma file (Fengshui Club - Website): new Home node 403:514,
+   service detail page node 389:518 (still the first design). Every colour, type size, radius, shadow, width and
    motion timing the components use lives here, so a new design starts in this file. */
 @theme {
   --color-*: initial;
   --color-white: #ffffff;
+  --color-black: #2d2d2d; /* Black: text on the new Home */
+  --color-olive: #798f43; /* TikTok card avatar, service icon gradient */
+  --color-line: #06c755; /* LINE brand green, header booking link */
   --color-cream: #fffbfa; /* Primary/Base/0 */
   --color-cream-300: #f7f2f0; /* Primary/Base/300 */
   --color-cream-400: #f1ece9; /* Primary/Base/400 */
@@ -25,6 +28,36 @@
   /* Epilogue for everything. It has no Thai glyphs, so Thai text (and anything else
      Epilogue lacks) falls through to Noto Sans Thai. */
   --font-sans: var(--font-epilogue), var(--font-noto-thai), ui-sans-serif, system-ui, sans-serif;
+
+  /* New Home (Epilogue). The -sm sizes are derived for phones; the design is desktop only. */
+  --text-home-display: 80px;
+  --text-home-display--line-height: 90px;
+  --text-home-display-sm: 48px;
+  --text-home-display-sm--line-height: 58px;
+  --text-home-lead: 24px;
+  --text-home-lead--line-height: 1.25;
+  --text-home-lead-sm: 18px;
+  --text-home-lead-sm--line-height: 1.4;
+  --text-home-h2: 32px; /* H2 */
+  --text-home-h2--line-height: 42px;
+  --text-home-h2-sm: 26px;
+  --text-home-h2-sm--line-height: 36px;
+  --text-home-h3: 24px; /* service card title, scaled down from H2 at Ohm's request */
+  --text-home-h3--line-height: 32px;
+  --text-home-body: 20px;
+  --text-home-body--line-height: 27px;
+  --text-home-body-sm: 16px;
+  --text-home-body-sm--line-height: 24px;
+  --text-home-card: 20px;
+  --text-home-card--line-height: 30px;
+  --text-home-card-sm: 16px;
+  --text-home-card-sm--line-height: 24px;
+  --text-home-nav: 17px;
+  --text-home-nav--line-height: 28px;
+  --text-home-tagline: 16px;
+  --text-home-tagline--line-height: 27px;
+  --text-button-2: 16px; /* Thai/Button/Button2 */
+  --text-button-2--line-height: 1.5;
 
   --text-hero: 56px;
   --text-hero--line-height: 66px;
@@ -104,9 +137,13 @@
   --blur-card: 2px;
   --blur-glass: 8px;
   --blur-photo: 3px;
+  --shadow-chip: 2px 4px 9px 0px rgb(0 0 0 / 0.12);
 
   --leading-label: 22px; /* Figma field: 22 label + 8 gap + 44 input = 74 */
 
+  --container-home: 1080px; /* new Home content width */
+  --container-home-card: 315px; /* TikTok card */
+  --container-home-service: 250px; /* service card copy */
   --container-hero: 1440px;
   --container-hero-copy: 566px;
   --container-page: 1280px;
@@ -115,6 +152,7 @@
   --container-intro: 916px;
   --container-portrait: 470px;
   --container-location-title: 320px;
+  --container-tiktok: 720px; /* TikTok profile embed max width */
 
   /* Motion: one easing for the whole site (durations below, on :root). */
   --ease-refined: cubic-bezier(0.22, 1, 0.36, 1);
@@ -124,4 +162,23 @@
   --duration-hover: 200ms;
   --duration-enter: 900ms;
   --duration-settle: 1600ms;
+  --duration-marquee: 40s; /* one loop of the announcement strip */
+}
+
+/* Gradients from the new Home. Figma lists the CTA's stops out of order (60%, 22%, 85%);
+   they are sorted here, which is how Figma renders them. */
+@utility bg-gradient-cta {
+  background-image: linear-gradient(252.35deg, #c01815 22.11%, #ac0805 60.37%, #ea3835 84.95%);
+}
+
+@utility bg-gradient-olive {
+  background-image: linear-gradient(265.52deg, var(--color-olive) 13.99%, #c4e96b 105.34%);
+}
+
+@utility bg-gradient-red {
+  background-image: linear-gradient(268.24deg, var(--color-red-800) 1.45%, #ea3835 98.55%);
+}
+
+@utility bg-gradient-gold {
+  background-image: linear-gradient(261.89deg, #daa955 16.06%, #f0cd71 99.88%);
 }
