@@ -31,17 +31,18 @@ export const services = {
   id: "services",
   // Not shown in the design; gives the list a heading for screen readers.
   heading: "บริการของเรา",
-  // Only sae-ki has its own page so far; the other two have no link until theirs exist.
   items: [
     {
       icon: "home",
       title: "ฮวงจุ้ยบ้าน/สถานที่",
       body: "จัดวางพลังของบ้านและสถานที่ ให้สอดคล้องกับทิศมงคลและธาตุประจำตัว เปิดทางรับทรัพย์ เสริมสุขภาพและความสัมพันธ์",
+      href: "/services/feng-shui-home",
     },
     {
       icon: "eye",
       title: "ดูดวงชะตา 3 ศาสตร์",
       body: "วิเคราะห์ลักษณะใบหน้าและองค์ประกอบบนเรือนหน้า อ่านนิสัย วาสนา และโชคชะตาที่ซ่อนอยู่ พร้อมแนวทางเสริมราศีให้โดดเด่น",
+      href: "/services/destiny-physiognomy",
     },
     {
       icon: "seedling",
@@ -90,10 +91,10 @@ export const consultation = {
 } as const;
 
 // Menu shared by the header and footer (Figma navbar 405:2274 and footer 406:5435).
-// The house and 3-sciences services have no pages yet, so they point at the services row.
+// The first two pages come from the service-page template in PR #6.
 const serviceNav = [
-  { label: "ฮวงจุ้ยบ้าน/สถานที่", href: "/#services" },
-  { label: "ดูดวงชะตา 3 ศาสตร์", href: "/#services" },
+  { label: "ฮวงจุ้ยบ้าน/สถานที่", href: "/services/feng-shui-home" },
+  { label: "ดูดวงชะตา 3 ศาสตร์", href: "/services/destiny-physiognomy" },
   { label: "แซกีเสริมดวง", href: "/services/sae-ki" },
 ] as const;
 
