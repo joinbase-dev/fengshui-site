@@ -1,0 +1,63 @@
+/* Service pages: tokens the shared template adds (Figma 405:2008) and the hero
+   gallery's motion (components/sections/ServiceHeroGallery.tsx). */
+@theme {
+  --color-divider: #cccccc; /* rule above the booking block */
+
+  /* Type measured from the frame at 1440. The -sm sizes are derived for phones; the
+     frame is desktop only. */
+  --text-detail-title: 64px;
+  --text-detail-title--line-height: 90px;
+  --text-detail-title-sm: 44px;
+  --text-detail-title-sm--line-height: 56px;
+  --text-detail-lead: 24px;
+  --text-detail-lead--line-height: 37px;
+  --text-detail-lead--letter-spacing: 0.55px;
+  --text-detail-lead-sm: 20px;
+  --text-detail-lead-sm--line-height: 32px;
+  --text-detail-lead-sm--letter-spacing: 0.4px;
+  --text-detail-body: 16px;
+  --text-detail-body--line-height: 26px;
+  --text-detail-booking: 16px;
+  --text-detail-booking--line-height: 27px;
+  --text-detail-booking--letter-spacing: 0.4px;
+}
+
+/* Each gallery column holds its tile list twice, stacked, and slides by exactly one
+   list (-50%), so the loop restarts on an identical frame with no jump. Columns
+   alternate direction and run at slightly different speeds, so the stagger drifts
+   slowly. Only transform animates. With reduced motion the columns stand still in
+   the design's staggered layout. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-gallery-track {
+    animation: hero-gallery-scroll var(--gallery-duration, 80s) linear infinite;
+    will-change: transform;
+  }
+
+  .hero-gallery-column:nth-child(2) .hero-gallery-track {
+    --gallery-duration: 96s;
+    animation-direction: reverse;
+  }
+
+  .hero-gallery-column:nth-child(3) .hero-gallery-track {
+    --gallery-duration: 88s;
+  }
+
+  .hero-gallery-column:nth-child(4) .hero-gallery-track {
+    --gallery-duration: 104s;
+    animation-direction: reverse;
+  }
+
+  /* The pause control (WCAG 2.2.2) is a checkbox, so pausing needs no JavaScript. */
+  .hero-gallery:has(.hero-gallery-pause:checked) .hero-gallery-track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes hero-gallery-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}

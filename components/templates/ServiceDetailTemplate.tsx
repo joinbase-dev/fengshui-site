@@ -1,12 +1,12 @@
 import { SiteHeader } from "@/components/sections/SiteHeader";
-import { ServiceHeroGallery } from "@/components/sections/ServiceHeroGallery";
-import { ServiceIntro } from "@/components/sections/ServiceIntro";
+import { ServiceHero } from "@/components/sections/ServiceHero";
+import { ServiceBody } from "@/components/sections/ServiceBody";
 import { ServiceHighlight } from "@/components/sections/ServiceHighlight";
 import { ServiceLocation } from "@/components/sections/ServiceLocation";
 import { ServiceVideo } from "@/components/sections/ServiceVideo";
 import { PhotoBand } from "@/components/sections/PhotoBand";
-import { Consultation } from "@/components/sections/Consultation";
-import { PhotoGallery } from "@/components/sections/PhotoGallery";
+import { ServiceBooking } from "@/components/sections/ServiceBooking";
+import { Gallery } from "@/components/sections/Gallery";
 import { Footer } from "@/components/sections/Footer";
 import type { ServiceDetail, ServiceSection } from "@/content/services";
 
@@ -27,21 +27,21 @@ type ServiceDetailTemplateProps = {
   service: ServiceDetail;
 };
 
-// Every service page: the looping hero gallery, the title and intro, the service's
-// own sections in data order, then the consultation form that the header and
-// section buttons link to (so it is on every page), and an optional closing gallery.
+// Every service page (Figma 405:2008): the title beside the looping gallery, the
+// service's copy, any extra sections its data lists, the shared booking block, and
+// the photo strip and footer shared with Home.
 export function ServiceDetailTemplate({ service }: ServiceDetailTemplateProps) {
   return (
     <>
       <SiteHeader currentHref={`/services/${service.slug}`} />
       <main id="main">
-        <ServiceHeroGallery columns={service.heroGallery} />
-        <ServiceIntro title={service.title} intro={service.intro} />
-        {service.sections.map((section, index) => (
+        <ServiceHero titleLines={service.titleLines} gallery={service.heroGallery} />
+        <ServiceBody blocks={service.body} />
+        {service.sections?.map((section, index) => (
           <Section key={`${section.type}-${index}`} section={section} />
         ))}
-        <Consultation />
-        {service.closingGallery && <PhotoGallery photos={service.closingGallery} />}
+        <ServiceBooking />
+        <Gallery />
       </main>
       <Footer />
     </>

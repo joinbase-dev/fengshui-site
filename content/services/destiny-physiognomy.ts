@@ -1,16 +1,25 @@
-// Personal Destiny & Physiognomy (Figma node 406:2959). The frame could not be read
-// yet, so the page has only its title (the homepage service list's wording) and
-// the placeholder gallery. Add the intro and sections from the frame.
+// ดูดวงชะตา 3 ศาสตร์ (Figma 406:2959). Its frame has not been read yet: the title and
+// the opening line are the wording of this service's card on the new Home design.
+// Replace the body with the frame's copy.
 
 import { placeholderGallery } from "./placeholders";
 import type { ServiceDetail } from "./types";
 
 export const destinyPhysiognomy: ServiceDetail = {
   slug: "destiny-physiognomy",
-  title: "ดูโหงวเฮ้งจากใบหน้า",
-  metaTitle: "ดูโหงวเฮ้งจากใบหน้า | คลับฮวงจุ้ยแห่งประเทศไทย",
-  metaDescription: "ดูดวงชะตาและโหงวเฮ้งจากใบหน้า กับอาจารย์ดำรงชัย คลับฮวงจุ้ยแห่งประเทศไทย รับคำปรึกษาฟรีกับผู้เชี่ยวชาญ",
+  title: "ดูดวงชะตา 3 ศาสตร์",
+  titleLines: ["ดูดวงชะตา", "3 ศาสตร์"],
+  metaTitle: "ดูดวงชะตา 3 ศาสตร์ | คลับฮวงจุ้ยแห่งประเทศไทย",
+  metaDescription:
+    "วิเคราะห์ลักษณะใบหน้าและองค์ประกอบบนเรือนหน้า อ่านนิสัย วาสนา และโชคชะตาที่ซ่อนอยู่ พร้อมแนวทางเสริมราศีให้โดดเด่น กับอาจารย์ดำรงชัย",
   heroGallery: placeholderGallery(1),
-  intro: { paragraphs: [] },
-  sections: [],
+  body: [
+    {
+      type: "lead",
+      lines: [
+        "วิเคราะห์ลักษณะใบหน้าและองค์ประกอบบนเรือนหน้า อ่านนิสัย วาสนา และโชคชะตาที่ซ่อนอยู่",
+        "พร้อมแนวทางเสริมราศีให้โดดเด่น",
+      ],
+    },
+  ],
 };

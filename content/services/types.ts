@@ -1,6 +1,6 @@
 // Shape of a service detail page. Every service renders through one template
-// (components/templates/ServiceDetailTemplate.tsx); a new service is a new data
-// file in this folder plus one line in index.ts.
+// (components/templates/ServiceDetailTemplate.tsx, Figma 405:2008); a new service is
+// a new data file in this folder plus one line in index.ts.
 
 import type { StaticImageData } from "next/image";
 
@@ -10,12 +10,23 @@ export type PhotoAsset = {
   alt: string;
 };
 
-// A photo in the hero gallery. Gallery photos keep their own proportions, so
-// they need a real file; an empty alt marks the photo as decorative.
+// A tile in the hero gallery. Tiles are square crops, so any photo shape works;
+// an empty alt marks the photo as decorative.
 export type GalleryPhoto = {
   src: StaticImageData;
   alt: string;
 };
+
+// The copy under the hero, in page order. Lines are the design's line breaks; on
+// narrow screens they run together and wrap.
+export type ServiceBodyBlock =
+  // Large opening statement.
+  | { type: "lead"; lines: string[] }
+  // White text on a red band.
+  | { type: "highlight"; text: string }
+  | { type: "text"; lines: string[] }
+  // A plain-text heading followed by dashed items.
+  | { type: "list"; title: string; items: string[] };
 
 export type ServiceHighlightContent = {
   portrait: PhotoAsset;
@@ -42,8 +53,8 @@ export type ServiceVideoContent = {
   youtubeId: string | null;
 };
 
-// Optional blocks between the intro and the consultation form, in page order.
-// A page lists only the blocks its design has.
+// Optional blocks for a service whose design adds sections to the template. They
+// render after the body copy, in order. None of the current services uses them.
 export type ServiceSection =
   | ({ type: "highlight" } & ServiceHighlightContent)
   | ({ type: "location" } & ServiceLocationContent)
@@ -52,17 +63,15 @@ export type ServiceSection =
 
 export type ServiceDetail = {
   slug: string;
+  // Full name, for metadata and structured data.
   title: string;
+  // The hero heading, one entry per line as the design breaks it.
+  titleLines: string[];
   metaTitle: string;
   metaDescription: string;
-  // Columns of the looping hero gallery, left to right. Desktop shows four,
-  // tablet three, phones two, so put the strongest photos in the first columns.
+  // Columns of the looping hero gallery, left to right. Wide screens show more
+  // columns than narrow ones, so put the strongest photos in the first columns.
   heroGallery: GalleryPhoto[][];
-  intro: {
-    tagline?: string;
-    paragraphs: string[];
-  };
-  sections: ServiceSection[];
-  // Photos under the consultation form.
-  closingGallery?: PhotoAsset[];
+  body: ServiceBodyBlock[];
+  sections?: ServiceSection[];
 };

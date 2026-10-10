@@ -5,32 +5,30 @@ type ServiceHeroGalleryProps = {
   columns: GalleryPhoto[][];
 };
 
-// Desktop shows four columns, tablet three, phones two. Hidden columns are
-// display:none, so their lazy photos are never fetched.
-const columnVisibility = ["", "", "hidden md:block", "hidden lg:block"];
+// Figma 405:2008 staggers the columns: at rest each starts this far above the band
+// (94, 120 and 66px at 1440; the fourth column only shows on very wide screens).
+const columnOffsets = ["-mt-23.5", "-mt-30", "-mt-16.5", "-mt-26"];
 
-const columnSizes = "(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw";
+// 258px square tiles 32px apart at desktop; derived smaller sizes below lg.
+const tileSizes = "(min-width: 1024px) 258px, (min-width: 768px) 200px, 150px";
 
-function PhotoList({ photos, column, duplicate }: { photos: GalleryPhoto[]; column: number; duplicate: boolean }) {
+function TileList({ photos, duplicate }: { photos: GalleryPhoto[]; duplicate: boolean }) {
   return (
-    <ul aria-hidden={duplicate || undefined} className="flex flex-col gap-2 pb-2 md:gap-3 md:pb-3 xl:gap-4 xl:pb-4">
-      {photos.map((photo, index) => {
-        // The first photo of each phone column is in the first frame; it is the LCP.
-        const lead = !duplicate && index === 0 && column < 2;
-        return (
-          <li key={index}>
-            <Image
-              src={photo.src}
-              alt={duplicate ? "" : photo.alt}
-              sizes={columnSizes}
-              preload={lead}
-              fetchPriority={lead ? "high" : undefined}
-              placeholder="blur"
-              className="block h-auto w-full rounded-sm"
-            />
-          </li>
-        );
-      })}
+    <ul aria-hidden={duplicate || undefined} className="flex flex-col gap-3 pb-3 md:gap-5 md:pb-5 lg:gap-8 lg:pb-8">
+      {photos.map((photo, index) => (
+        <li key={index} className="relative aspect-square overflow-hidden bg-border">
+          <Image
+            src={photo.src}
+            alt={duplicate ? "" : photo.alt}
+            fill
+            sizes={tileSizes}
+            // The first two tiles of each column are in the first frame.
+            loading={!duplicate && index < 2 ? "eager" : "lazy"}
+            placeholder="blur"
+            className="object-cover"
+          />
+        </li>
+      ))}
     </ul>
   );
 }
@@ -51,31 +49,29 @@ function ResumeIcon() {
   );
 }
 
-// Columns of photos drifting slowly up and down in a seamless loop, clipped to the
-// band (hero-gallery.css). Each column renders its list twice so the loop has no
-// gap; the copy is hidden from assistive technology. With reduced motion the
-// gallery stands still and the pause control is not shown.
+// Columns of square photos drifting slowly up and down in a seamless loop, clipped
+// to its parent (motion in app/styles/services.css). Each column renders its list
+// twice so the loop has no gap; the copy is hidden from assistive technology. Wider
+// screens reveal more columns. With reduced motion the gallery stands still and the
+// pause control is not shown.
 //
-// Each column's list must be at least as tall as the band, so give every column
-// four or more photos.
+// Each column's list must be taller than the band plus its offset, so give every
+// column four or more photos.
 export function ServiceHeroGallery({ columns }: ServiceHeroGalleryProps) {
   return (
-    <div className="hero-gallery relative h-100 overflow-hidden bg-cream md:h-140 lg:h-150 xl:h-180">
-      <div className="flex h-full gap-2 md:gap-3 xl:gap-4">
-        {columns.slice(0, columnVisibility.length).map((photos, column) => (
-          <div key={column} className={`hero-gallery-column min-w-0 flex-1 ${columnVisibility[column]}`}>
+    <div className="hero-gallery absolute inset-0 overflow-hidden">
+      <div className="flex gap-3 md:gap-5 lg:gap-8">
+        {columns.slice(0, columnOffsets.length).map((photos, column) => (
+          <div key={column} className={`hero-gallery-column w-37.5 shrink-0 md:w-50 lg:w-64.5 ${columnOffsets[column]}`}>
             <div className="hero-gallery-track">
-              <PhotoList photos={photos} column={column} duplicate={false} />
-              <PhotoList photos={photos} column={column} duplicate />
+              <TileList photos={photos} duplicate={false} />
+              <TileList photos={photos} duplicate />
             </div>
           </div>
         ))}
       </div>
 
-      {/* Fades the band into the white intro below, as the single hero photo did. */}
-      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-white to-transparent md:h-32" />
-
-      <label className="glass-panel group absolute right-5 bottom-5 flex size-11 cursor-pointer items-center justify-center rounded-full text-gray-900 has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-brand motion-reduce:hidden md:right-10 md:bottom-8 xl:right-30">
+      <label className="group absolute right-5 bottom-5 flex size-11 cursor-pointer items-center justify-center rounded-full bg-white/90 text-black shadow-base has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-brand motion-reduce:hidden">
         <input type="checkbox" className="hero-gallery-pause sr-only" />
         <PauseIcon />
         <ResumeIcon />
