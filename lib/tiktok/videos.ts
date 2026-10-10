@@ -2,8 +2,9 @@
 // https://developers.tiktok.com/doc/display-api-overview
 //
 // Needs a TikTok developer app (Login Kit + Display API, scopes user.info.basic and
-// video.list) and a refresh token from the account owner; see docs/tiktok.md. Until
-// those are set, getLatestVideos returns null and Home falls back to the profile embed.
+// video.list) and a refresh token approved by the account owner; see docs/tiktok.md.
+// Until those are set, getLatestVideos returns null and Home falls back to the links
+// listed in content/tiktok.ts (lib/tiktok/oembed.ts), then to the profile embed.
 //
 // Home revalidates hourly (app/page.tsx), which keeps the signed cover image URLs,
 // valid for a few hours, fresh.

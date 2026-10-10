@@ -1,5 +1,6 @@
-// TikTok account shown on the site. Home lists its latest videos (lib/tiktok), so
-// nothing here changes when new clips are posted.
+// TikTok account shown on the site. Home shows its latest videos through the Display
+// API once the account owner has approved it (docs/tiktok.md); until then it shows the
+// videos listed below.
 
 const username = "aj.damrongchai";
 
@@ -8,6 +9,9 @@ export const tiktok = {
   profileUrl: `https://www.tiktok.com/@${username}`,
   // How many of the latest videos Home shows (two rows of three in the design).
   count: 6,
+  // Video links shown on Home while the Display API is not set up, newest first.
+  // Paste from TikTok's Share → Copy link; replace them to change the row.
+  videos: [] as readonly string[],
   section: {
     id: "tiktok",
     title: "เคล็ดลับ จากอาจารย์ดำรงชัย",

@@ -1,15 +1,17 @@
 import { tiktok } from "@/content/tiktok";
 import { getLatestVideos } from "@/lib/tiktok/videos";
+import { getListedVideos } from "@/lib/tiktok/oembed";
 import { TikTokCard } from "@/components/ui/TikTokCard";
 import { TikTokProfileEmbed } from "@/components/ui/TikTokProfileEmbed";
 
 // Figma Tiktok section (405:1813): the heading over two rows of three 315px cards,
-// spread across 1080px and 60px apart. The cards are the account's latest videos from the
-// Display API (lib/tiktok, docs/tiktok.md); until that is set up, TikTok's own profile embed stands
-// in so the section still shows the latest clips.
+// spread across 1080px and 60px apart. The cards are the account's latest videos from
+// the Display API, else the links listed in content/tiktok.ts (docs/tiktok.md). With
+// neither, TikTok's own profile embed stands in so the section still shows clips.
 export async function TikTokFeed() {
   const { section } = tiktok;
-  const feed = await getLatestVideos(tiktok.count);
+  const feed =
+    (await getLatestVideos(tiktok.count)) ?? (await getListedVideos(tiktok.videos, tiktok.count));
 
   return (
     <section

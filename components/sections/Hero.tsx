@@ -2,12 +2,12 @@ import Image from "next/image";
 import { hero, lineBooking } from "@/content/site";
 import { ctaButton } from "@/components/ui/button-styles";
 import { LineChatIcon } from "@/components/ui/LineChatIcon";
-import emblem from "@/public/images/emblem.png";
+import emblem from "@/public/images/home/hero-emblem.png";
 import heroImage from "@/public/images/home/hero.png";
 
 // Figma Hero (405:2242), 1440 wide: 100px padding around a 1080px row of copy and the
-// 541×394 photo cluster, with the club emblem at 29% opacity hanging 128px off the
-// right edge. Below lg (derived, not drawn) the photo stacks under the copy.
+// 541×394 photo cluster, with the faded club emblem cut off by the right edge (the
+// exported image is already faded and cropped). Below lg (derived, not drawn) the photo stacks under the copy.
 export function Hero() {
   return (
     <section
@@ -17,8 +17,8 @@ export function Hero() {
       <Image
         src={emblem}
         alt=""
-        sizes="616px"
-        className="pointer-events-none absolute top-1/2 -right-32 hidden w-154 max-w-none -translate-y-1/2 opacity-29 lg:block"
+        sizes="488px"
+        className="pointer-events-none absolute top-1/2 right-0 hidden w-122 -translate-y-1/2 lg:block"
       />
       <div className="relative mx-auto flex max-w-home flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
         <div className="flex flex-col items-start gap-10">
