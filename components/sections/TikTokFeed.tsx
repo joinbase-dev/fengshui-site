@@ -1,17 +1,13 @@
 import { tiktok } from "@/content/tiktok";
-import { getLatestVideos } from "@/lib/tiktok/videos";
-import { getListedVideos } from "@/lib/tiktok/oembed";
-import { TikTokCard } from "@/components/ui/TikTokCard";
-import { TikTokProfileEmbed } from "@/components/ui/TikTokProfileEmbed";
+import { TikTokEmbed } from "@/components/ui/TikTokEmbed";
 
-// Figma Tiktok section (405:1813): the heading over two rows of three 315px cards,
-// spread across 1080px and 60px apart. The cards are the account's latest videos from
-// the Display API, else the links listed in content/tiktok.ts (docs/tiktok.md). With
-// neither, TikTok's own profile embed stands in so the section still shows clips.
-export async function TikTokFeed() {
+// Figma Tiktok section (405:1813): the heading over the account's videos. Ohm chose
+// TikTok's own creator profile embed over the design's six cards; it lists the
+// latest videos by itself, in one request instead of one per video. The embed sizes
+// itself between 288px and 720px wide; min-h-140 (560px) reserves roughly its
+// rendered height so the page below does not jump while it loads.
+export function TikTokFeed() {
   const { section } = tiktok;
-  const feed =
-    (await getLatestVideos(tiktok.count)) ?? (await getListedVideos(tiktok.videos, tiktok.count));
 
   return (
     <section
@@ -24,38 +20,29 @@ export async function TikTokFeed() {
           {section.title}
         </h2>
 
-        {feed ? (
-          <ul className="grid w-full grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 md:gap-x-6 lg:grid-cols-[repeat(3,var(--container-home-card))] lg:justify-between lg:gap-y-15">
-            {feed.videos.map((video) => (
-              <li key={video.id}>
-                <TikTokCard
-                  video={video}
-                  authorName={section.authorName}
-                  avatar={feed.avatar}
-                  opensOnTikTok={section.opensOnTikTok}
-                />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <>
-            {/* The embed sizes itself between 288px and 720px wide. min-h-140 (560px)
-                reserves roughly its rendered height so the page below does not jump. */}
-            <TikTokProfileEmbed
-              username={tiktok.username}
-              profileUrl={tiktok.profileUrl}
-              className="min-h-140 w-full max-w-tiktok"
-            />
-            <a
-              href={tiktok.profileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-body-2 text-red-900 underline underline-offset-4"
-            >
-              {section.profileLink}
-            </a>
-          </>
-        )}
+        <TikTokEmbed className="min-h-140 w-full max-w-tiktok">
+          <blockquote
+            className="tiktok-embed m-0"
+            cite={tiktok.profileUrl}
+            data-unique-id={tiktok.username}
+            data-embed-type="creator"
+          >
+            <section>
+              <a href={`${tiktok.profileUrl}?refer=creator_embed`} target="_blank" rel="noopener noreferrer">
+                @{tiktok.username}
+              </a>
+            </section>
+          </blockquote>
+        </TikTokEmbed>
+
+        <a
+          href={tiktok.profileUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-xs text-body-2 text-red-900 underline underline-offset-4 transition-colors duration-200 ease-refined hover:text-brand hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+        >
+          {section.profileLink}
+        </a>
       </div>
     </section>
   );

@@ -42,6 +42,8 @@
   --text-home-h2--line-height: 42px;
   --text-home-h2-sm: 26px;
   --text-home-h2-sm--line-height: 36px;
+  --text-home-h3: 24px; /* service card title, scaled down from H2 at Ohm's request */
+  --text-home-h3--line-height: 32px;
   --text-home-body: 20px;
   --text-home-body--line-height: 27px;
   --text-home-body-sm: 16px;

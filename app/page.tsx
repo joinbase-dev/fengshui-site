@@ -9,10 +9,6 @@ import { JsonLd } from "@/components/ui/JsonLd";
 import { site } from "@/content/site";
 import { siteUrl } from "@/lib/site-url";
 
-// Static, regenerated at most hourly so the TikTok row picks up new videos and fresh
-// cover image URLs (see lib/tiktok/videos.ts).
-export const revalidate = 3600;
-
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",

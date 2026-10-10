@@ -9,41 +9,51 @@ const circle: Record<ServiceIconName, string> = {
   seedling: "bg-gradient-gold",
 };
 
-// Figma section service (403:1258): three cards 125px apart (1160px in all, so the
-// row starts at xl; narrower screens stack them), each a 130px gradient
-// circle, a 32px title with an arrow and 250px of centred copy. A card with its own
-// page links there; the link covers the whole card.
+// Shared timing for the card's hover: transform and colour only, and no movement
+// under reduced motion.
+const ease = "transition duration-200 ease-refined";
+
+// Figma section service (403:1258), scaled down at Ohm's request: a 112px gradient
+// circle (130 in Figma), a 24px title (32) and 16px copy (20), with tighter spacing.
+// Three across from lg, stacked below. Each card links to its service page; the link
+// covers the whole card, and hover or keyboard focus lifts the circle, reddens the
+// title and nudges the arrow.
 export function Services() {
   return (
     <section
       id={services.id}
       aria-labelledby="services-title"
-      className="scroll-mt-6 px-5 py-20 md:px-10 lg:py-45"
+      className="scroll-mt-6 px-5 py-16 md:px-10 lg:py-24"
     >
       <h2 id="services-title" className="sr-only">
         {services.heading}
       </h2>
-      <ul className="reveal-group mx-auto flex w-fit flex-col items-center gap-16 xl:flex-row xl:items-start xl:gap-31.25">
+      <ul className="reveal-group mx-auto grid max-w-home gap-12 lg:grid-cols-3 lg:gap-10">
         {services.items.map((item) => (
-          <li key={item.title} className="relative flex flex-col items-center gap-10 text-center text-black lg:gap-14">
-            <div className={`flex size-32.5 items-center justify-center rounded-full text-white ${circle[item.icon]}`}>
-              <ServiceIcon name={item.icon} />
+          <li
+            key={item.title}
+            className="group relative mx-auto flex max-w-72 flex-col items-center gap-6 text-center text-black lg:gap-8"
+          >
+            <div
+              className={`flex size-24 items-center justify-center rounded-full text-white ${ease} lg:size-28 ${circle[item.icon]} motion-safe:group-hover:-translate-y-1 motion-safe:group-has-focus-visible:-translate-y-1`}
+            >
+              <ServiceIcon name={item.icon} className="size-12 lg:size-14" />
             </div>
-            <div className="flex flex-col items-center gap-4.75">
-              <h3 className="flex items-center gap-4.75 text-home-h2-sm font-semibold whitespace-nowrap lg:text-home-h2">
-                {item.href ? (
-                  <Link
-                    href={item.href}
-                    className="rounded-sm after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
-                  >
-                    {item.title}
-                  </Link>
-                ) : (
-                  item.title
-                )}
-                <ArrowRightIcon />
+            <div className="flex flex-col items-center gap-3">
+              <h3
+                className={`flex items-center gap-2 text-home-card font-semibold whitespace-nowrap ${ease} group-hover:text-brand group-has-focus-visible:text-brand lg:text-home-h3`}
+              >
+                <Link
+                  href={item.href}
+                  className="rounded-sm after:absolute after:inset-0 after:rounded-lg focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-8 focus-visible:after:outline-brand"
+                >
+                  {item.title}
+                </Link>
+                <ArrowRightIcon
+                  className={`${ease} motion-safe:group-hover:translate-x-1 motion-safe:group-has-focus-visible:translate-x-1`}
+                />
               </h3>
-              <p className="max-w-home-service text-home-body-sm lg:text-home-body">{item.body}</p>
+              <p className="text-home-body-sm">{item.body}</p>
             </div>
           </li>
         ))}

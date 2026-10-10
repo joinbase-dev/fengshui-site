@@ -50,7 +50,7 @@ export const services = {
       body: "แก้กรรมปรับดวงชะตาตาม หลักศาสตร์โหราศาสตร์จีน เสริมลาภและทรัพย์",
       href: "/services/sae-ki",
     },
-  ] satisfies { icon: ServiceIcon; title: string; body: string; href?: string }[],
+  ] satisfies { icon: ServiceIcon; title: string; body: string; href: string }[],
 } as const;
 
 export const gallery = {
