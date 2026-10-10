@@ -78,6 +78,7 @@
   --container-page: 1280px;
   --container-card: 1200px;
   --container-form: 670px;
+  --container-tiktok: 720px; /* TikTok profile embed max width */
 }
 
 html {

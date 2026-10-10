@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
+import { TikTokFeed } from "@/components/sections/TikTokFeed";
 import { Consultation } from "@/components/sections/Consultation";
 import { Footer } from "@/components/sections/Footer";
 import { site } from "@/content/site";
@@ -19,6 +20,7 @@ export default function Home() {
     <>
       <main id="main">
         <Hero />
+        <TikTokFeed />
         <Consultation />
       </main>
       <Footer />

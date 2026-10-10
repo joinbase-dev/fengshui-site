@@ -1,3 +1,5 @@
+import { tiktok } from "@/content/tiktok";
+
 // Page copy, kept apart from layout so copy changes do not touch components.
 // Text marked "placeholder copy" is lorem ipsum from the design and must be
 // replaced before launch.
@@ -72,11 +74,11 @@ export const footer = {
     "ศาสตร์แห่งพลังชีวิต ที่ผสานภูมิปัญญาและพลังจักรวาล",
     "เพื่อเสริมความมั่งคั่ง สมดุล และความสุขในทุกจังหวะชีวิต",
   ],
-  // Account URLs are placeholders until the real profiles are confirmed.
+  // Account URLs other than TikTok are placeholders until the real profiles are confirmed.
   social: [
     { platform: "facebook", label: "Facebook", href: "https://www.facebook.com/" },
     { platform: "youtube", label: "YouTube", href: "https://www.youtube.com/" },
-    { platform: "tiktok", label: "TikTok", href: "https://www.tiktok.com/" },
+    { platform: "tiktok", label: "TikTok", href: tiktok.profileUrl },
     { platform: "line", label: "LINE", href: "https://line.me/" },
   ] satisfies { platform: SocialPlatform; label: string; href: string }[],
   // Only the home and contact anchors exist on this page; the other targets
