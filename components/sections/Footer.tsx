@@ -23,10 +23,10 @@ export function Footer() {
               className="[filter:drop-shadow(0_1px_1.5px_rgb(0_0_0/0.3))_drop-shadow(0_4px_4px_rgb(0_0_0/0.15))]"
             />
             <div className="flex flex-col gap-2">
-              <p className="text-body-1 font-bold">
+              <p className="text-home-body">
                 {site.name} <span className="whitespace-nowrap">{site.nameEn}</span>
               </p>
-              <p className="text-caption font-medium">
+              <p className="text-home-tagline">
                 {footer.taglineLines.map((line) => (
                   <span key={line} className="block">
                     {line}
@@ -58,7 +58,7 @@ export function Footer() {
                   <li key={item.label}>
                     <Link
                       href={item.href}
-                      className={`inline-flex min-h-11 items-center text-nav font-bold ${focusRing}`}
+                      className={`inline-flex min-h-11 items-center text-home-nav ${focusRing}`}
                     >
                       {item.label}
                     </Link>

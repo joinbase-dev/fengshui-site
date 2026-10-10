@@ -4,14 +4,6 @@
 
 html {
   scroll-behavior: smooth;
-  /* Keeps in-page anchors clear of the sticky header. */
-  scroll-padding-top: 4.5rem;
-}
-
-@media (width >= 64rem) {
-  html {
-    scroll-padding-top: 6.5rem;
-  }
 }
 
 body {
