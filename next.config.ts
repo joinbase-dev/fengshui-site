@@ -5,13 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     // YouTube poster frames for the service page video.
-    remotePatterns: [
-      { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },
-      // TikTok video covers and avatars from the Display API (signed CDN URLs).
-      { protocol: "https", hostname: "**.tiktokcdn.com" },
-      { protocol: "https", hostname: "**.tiktokcdn-us.com" },
-      { protocol: "https", hostname: "**.tiktokcdn-eu.com" },
-    ],
+    remotePatterns: [{ protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" }],
   },
   async headers() {
     return [

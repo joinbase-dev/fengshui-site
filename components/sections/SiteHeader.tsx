@@ -51,7 +51,7 @@ export function SiteHeader({ currentHref }: SiteHeaderProps) {
       <div className="mx-auto flex max-w-home items-center justify-between gap-6">
         <Link
           href="/"
-          className="shrink-0 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          className="shrink-0 rounded-sm transition-opacity duration-200 ease-refined hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
         >
           {/* The design crops the round logo to 62×57. */}
           <Image src={logo} alt={header.homeLabel} width={64} height={64} sizes="64px" className="h-14.25 w-15.5 object-cover" />

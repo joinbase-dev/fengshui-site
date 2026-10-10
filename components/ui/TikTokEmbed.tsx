@@ -1,23 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 const EMBED_SCRIPT = "https://www.tiktok.com/embed.js";
 
 type Props = {
-  username: string;
-  profileUrl: string;
+  // blockquote.tiktok-embed markup that embed.js turns into TikTok's players.
+  children: ReactNode;
   className?: string;
 };
 
 /**
- * TikTok's official creator profile embed. It lists the account's latest
- * videos and every video opens on TikTok, so no API key or app review is needed.
- *
- * embed.js is third-party and heavy, so it is only fetched once the embed is
- * about to scroll into view; until then the reserved box keeps layout stable.
+ * Renders TikTok's official embeds once they are about to scroll into view.
+ * embed.js is third-party and heavy, so neither it nor the blockquotes load
+ * before then; until that point the reserved box keeps the layout stable.
  */
-export function TikTokProfileEmbed({ username, profileUrl, className }: Props) {
+export function TikTokEmbed({ children, className }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [near, setNear] = useState(false);
 
@@ -50,20 +48,7 @@ export function TikTokProfileEmbed({ username, profileUrl, className }: Props) {
 
   return (
     <div ref={ref} className={className}>
-      {near && (
-        <blockquote
-          className="tiktok-embed m-0"
-          cite={profileUrl}
-          data-unique-id={username}
-          data-embed-type="creator"
-        >
-          <section>
-            <a href={`${profileUrl}?refer=creator_embed`} target="_blank" rel="noopener noreferrer">
-              @{username}
-            </a>
-          </section>
-        </blockquote>
-      )}
+      {near && children}
     </div>
   );
 }
