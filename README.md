@@ -11,21 +11,25 @@ npm run dev        # http://localhost:3000
 npm run lint
 npm run typecheck
 npm run build
+npm run screenshots # needs a running server; see docs/redesign.md
 ```
 
 ## Structure
 
 ```
-app/                     layout (fonts, metadata), page, robots, sitemap, manifest, icons, OG image
-components/sections/     Hero, ServiceList, Consultation, Footer
-components/ui/           ConsultationForm (the only Client Component), SocialIcon, button styles
-content/site.ts          all page copy and links
+app/                     layout (fonts, metadata), pages, robots, sitemap, manifest, icons, OG image
+app/styles/tokens.css    design tokens (colours, type scale, radii, shadows, widths, motion timing)
+app/styles/motion.css    header glass, menu panel, CSS-only motion
+components/sections/     page sections (Hero, Consultation, Footer, service page sections, …)
+components/ui/           shared pieces (ConsultationForm, VideoPlayer, button styles, …)
+content/                 all copy and links: site.ts (site-wide), services.ts (service pages)
 lib/consultation/        form schema + validation, server action, delivery adapter
 lib/site-url.ts          production URL and indexability
-public/images/           design assets exported from Figma
+public/images/           design assets
+scripts/screenshots.mjs  screenshots at every test width + horizontal-scroll check
 ```
 
-Design tokens (colours, type scale, radii, shadows) live in `app/globals.css` under `@theme`.
+Starting a redesign? See [docs/redesign.md](docs/redesign.md).
 
 ## Consultation form
 

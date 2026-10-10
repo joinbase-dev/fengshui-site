@@ -22,7 +22,7 @@ export function Consultation() {
             <div className="flex flex-col items-center gap-4 text-center">
               <h2
                 id="consultation-title"
-                className="font-lato text-title-sm font-bold text-balance text-gray-900 lg:text-title"
+                className="text-title-sm font-bold text-balance text-gray-900 lg:text-title"
               >
                 {consultation.title}
               </h2>

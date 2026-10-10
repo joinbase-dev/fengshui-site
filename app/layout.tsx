@@ -1,23 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Lato, Noto_Sans_Thai } from "next/font/google";
+import { Epilogue, Noto_Sans_Thai } from "next/font/google";
 import { site } from "@/content/site";
 import { isProduction, siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
-// Only the Thai subset is preloaded; the Latin subset still loads on demand for the
-// few Latin strings set in this face (footer, form).
-const notoThai = Noto_Sans_Thai({
-  subsets: ["thai"],
-  variable: "--font-noto-thai",
+// Epilogue is the site font. It has no Thai glyphs, so Thai text falls through to
+// Noto Sans Thai (see --font-sans in app/styles/tokens.css). Both are variable fonts,
+// so every weight comes from one file per subset.
+const epilogue = Epilogue({
+  subsets: ["latin"],
+  variable: "--font-epilogue",
   display: "swap",
 });
 
-const lato = Lato({
-  subsets: ["latin"],
-  // Lato only ever renders Latin body copy at 400; bold Lato text in the design is Thai,
-  // which falls through to Noto Sans Thai.
-  weight: "400",
-  variable: "--font-lato-latin",
+const notoThai = Noto_Sans_Thai({
+  subsets: ["thai"],
+  variable: "--font-noto-thai",
   display: "swap",
 });
 
@@ -48,7 +46,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="th" className={`${notoThai.variable} ${lato.variable}`}>
+    <html lang="th" className={`${epilogue.variable} ${notoThai.variable}`}>
       <body className="font-sans antialiased">
         <a
           href="#main"
