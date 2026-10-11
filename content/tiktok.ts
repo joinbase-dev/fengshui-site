@@ -1,5 +1,5 @@
-// TikTok account shown on the site. Home links to the profile rather than embedding
-// it: TikTok's embed answered with "overload-protect triggered" on the live site.
+// TikTok account shown on the site. Home embeds its creator profile, which always
+// lists the latest videos; the card below stands in when TikTok fails to serve it.
 
 import masterPortrait from "@/public/images/services/master-portrait.jpg";
 
@@ -11,7 +11,7 @@ export const tiktok = {
   section: {
     id: "tiktok",
     title: "เคล็ดลับ จากอาจารย์ดำรงชัย",
-    // Not in the design: the profile card that replaces TikTok's embed.
+    // Not in the design: the fallback profile card.
     name: "อาจารย์ดำรงชัย",
     handle: `@${username}`,
     cta: "ดูคลิปทั้งหมดบน TikTok",
