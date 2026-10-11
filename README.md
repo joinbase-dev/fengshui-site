@@ -41,11 +41,11 @@ Home.
 
 - **Add a service:** copy one of the data files, change its slug and content, and add it to the
   list in `content/services/index.ts`. The route, sitemap and metadata pick it up.
-- **Replace the hero gallery placeholders:** put the photos in `public/images/services/<slug>/`,
-  import them in the service's data file, and set `heroGallery` to columns of
-  `{ src, alt }`, left to right (wider screens reveal more columns, up to four). Give every column
-  at least four photos so the loop never shows a gap. Tiles are square crops of the photos; export
-  them at least 520px on the short side. Use `alt: ""` for purely atmospheric photos.
+- **Change the hero gallery photos:** put them in `public/images/services/<slug>/` as WebP
+  (square crops, 640px, are enough for the 258px tiles at 2x), import them in the service's data
+  file, and list them in `galleryColumns([...])` as `{ src, alt }`. It fills four columns of three
+  tiles, wrapping round when there are fewer than twelve photos; nine or more avoid repeats on a
+  laptop screen. Use `alt: ""` for purely atmospheric photos.
 
 Starting a redesign? See [docs/redesign.md](docs/redesign.md).
 

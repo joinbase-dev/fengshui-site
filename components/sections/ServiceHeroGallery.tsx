@@ -55,8 +55,8 @@ function ResumeIcon() {
 // screens reveal more columns. With reduced motion the gallery stands still and the
 // pause control is not shown.
 //
-// Each column's list must be taller than the band plus its offset, so give every
-// column four or more photos.
+// Each column's list must be taller than the band plus its offset: three tiles
+// are, at every breakpoint (content/services/gallery.ts lays them out).
 export function ServiceHeroGallery({ columns }: ServiceHeroGalleryProps) {
   return (
     <div className="hero-gallery absolute inset-0 overflow-hidden">

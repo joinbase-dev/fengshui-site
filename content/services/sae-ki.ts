@@ -3,8 +3,15 @@
 // opening, the highlight card as a red band and text, and the four qualities of the
 // site as the list. Replace it with the frame's copy.
 
-import { placeholderGallery } from "./placeholders";
+import { galleryColumns } from "./gallery";
 import type { ServiceDetail } from "./types";
+import photo01 from "@/public/images/services/sae-ki/01.webp";
+import photo02 from "@/public/images/services/sae-ki/02.webp";
+import photo03 from "@/public/images/services/sae-ki/03.webp";
+import photo04 from "@/public/images/services/sae-ki/04.webp";
+import photo05 from "@/public/images/services/sae-ki/05.webp";
+import photo06 from "@/public/images/services/sae-ki/06.webp";
+import photo07 from "@/public/images/services/sae-ki/07.webp";
 
 export const saeKi: ServiceDetail = {
   slug: "sae-ki",
@@ -13,7 +20,15 @@ export const saeKi: ServiceDetail = {
   metaTitle: "แซกีเสริมดวง | คลับฮวงจุ้ยแห่งประเทศไทย",
   metaDescription:
     "แซกีเสริมดวง เปลี่ยนดวง แก้กรรม ศาสตร์แขนงหนึ่งของฮวงจุ้ยที่เสริมพลังชีวิตและลดพลังปะทะ กับอาจารย์ดำรงชัย",
-  heroGallery: placeholderGallery(2),
+  heroGallery: galleryColumns([
+    { src: photo01, alt: "ผู้ร่วมพิธีหน้าศาลเจ้า" },
+    { src: photo02, alt: "ผู้ร่วมพิธีแซกีในศาลเจ้า" },
+    { src: photo03, alt: "ห่อผ้าแดงวางเรียงบนแท่นหน้าป้ายหิน มีภูเขาเป็นฉากหลัง" },
+    { src: photo04, alt: "ผู้ร่วมพิธีไหว้ในศาลเจ้าสีแดง" },
+    { src: photo05, alt: "การเตรียมพิธีแซกีกลางแจ้ง" },
+    { src: photo06, alt: "อาจารย์ดำรงชัยกับผู้ร่วมพิธีในศาลเจ้า" },
+    { src: photo07, alt: "อาจารย์ดำรงชัยในชุดจีนสีแดงถือโถกระเบื้องลายอักษรมงคล" },
+  ]),
   body: [
     { type: "lead", lines: ["เปลี่ยนดวง แก้กรรม"] },
     {

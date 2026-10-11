@@ -29,21 +29,21 @@
    the design's staggered layout. */
 @media (prefers-reduced-motion: no-preference) {
   .hero-gallery-track {
-    animation: hero-gallery-scroll var(--gallery-duration, 80s) linear infinite;
+    animation: hero-gallery-scroll var(--gallery-duration, 60s) linear infinite;
     will-change: transform;
   }
 
   .hero-gallery-column:nth-child(2) .hero-gallery-track {
-    --gallery-duration: 96s;
+    --gallery-duration: 72s;
     animation-direction: reverse;
   }
 
   .hero-gallery-column:nth-child(3) .hero-gallery-track {
-    --gallery-duration: 88s;
+    --gallery-duration: 66s;
   }
 
   .hero-gallery-column:nth-child(4) .hero-gallery-track {
-    --gallery-duration: 104s;
+    --gallery-duration: 78s;
     animation-direction: reverse;
   }
 
