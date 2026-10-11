@@ -14,11 +14,12 @@ function Notice({ hidden = false }: { hidden?: boolean }) {
 
 // Figma section-announce (403:1346): the notice between two 2px red rules, repeated
 // in a clipped row. It scrolls as a ticker (see .marquee in motion.css); the
-// second copy is hidden from screen readers.
+// second copy is hidden from screen readers. Ohm asked for the band to run the
+// full page width rather than the 1080px content row.
 export function Announcement() {
   return (
-    <section aria-label="ประกาศ" className="px-5 py-8 md:px-10">
-      <div className="marquee mx-auto max-w-home overflow-hidden border-y-2 border-red-800 py-8">
+    <section aria-label="ประกาศ" className="py-8">
+      <div className="marquee overflow-hidden border-y-2 border-red-800 py-8 motion-reduce:px-5 md:motion-reduce:px-10">
         <div className="marquee-track">
           <Notice />
           <Notice hidden />
