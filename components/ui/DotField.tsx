@@ -6,11 +6,11 @@ type DotFieldProps = {
   className?: string;
 };
 
-// Grid spacing and dot radius of the design's "dot svg animation" (415:1658), in CSS
-// pixels. The same values draw the CSS fallback grid (.dot-field in
+// Grid spacing and dot radius of the design's "dot svg animation" (1:793): dots 2.58px
+// across, 23.22px apart, in CSS pixels. The same values draw the CSS fallback grid (.dot-field in
 // app/styles/motion.css), so the swap to the canvas does not shift.
-const spacing = 23;
-const radius = 1.5;
+const spacing = 23.22;
+const radius = 1.29;
 // How far the pointer reaches, how far it pushes a dot at most, and how much a dot
 // grows right under it.
 const reach = 110;

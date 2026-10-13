@@ -18,8 +18,7 @@ to ask for before starting.
 | Images | `public/images/` (service photos in `public/images/services/`) |
 
 The page is a list of sections, and sections read their copy from `content/`. A new
-section (for example the TikTok feed) is a new file in `components/sections/` plus one
-line in the page that shows it.
+section is a new file in `components/sections/` plus one line in the page that shows it.
 
 ## Order of work
 

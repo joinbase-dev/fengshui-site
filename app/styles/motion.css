@@ -4,10 +4,10 @@
 
 /* The dotted panel beside the service list (components/ui/DotField.tsx) as plain CSS:
    what shows before the canvas is ready, without JavaScript and with reduced motion.
-   One dot per 23px tile, with a dot on the centre lines, like the canvas. */
+   One dot per 23.22px tile, with a dot on the centre lines, like the canvas. */
 .dot-field {
-  background-image: radial-gradient(circle, currentColor 1.5px, transparent 2px);
-  background-size: 23px 23px;
+  background-image: radial-gradient(circle, currentColor 1.29px, transparent 1.79px);
+  background-size: 23.22px 23.22px;
   background-position: center;
 }
 

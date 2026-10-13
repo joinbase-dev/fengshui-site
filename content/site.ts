@@ -1,4 +1,9 @@
+import type { PhotoAsset } from "@/content/services";
 import { tiktok } from "@/content/tiktok";
+import heroDesk from "@/public/images/services/destiny-physiognomy/07.webp";
+import heroStage from "@/public/images/services/destiny-physiognomy/01.webp";
+import heroTemple from "@/public/images/home/gallery-temple.jpg";
+import heroPortrait from "@/public/images/services/master-portrait.jpg";
 
 // Page copy, kept apart from layout so copy changes do not touch components.
 
@@ -16,33 +21,41 @@ export const lineBooking = "https://line.me/R/ti/p/@fengshuiclubth";
 
 export const hero = {
   id: "about",
-  // One line each, as the design breaks it; Thai has no spaces to wrap on reliably.
-  titleLines: ["ดูดวงชะตา", "เสริมดวง", "ฮวงจุ้ยบ้าน"],
-  subtitle: "โดย อาจารย์ดำรงชัย คลับฮวงจุ้ยประเทศไทย",
-  cta: "จองคิวด่วน",
-  imageAlt: "อาจารย์ดำรงชัยในชุดจีนสีแดงถือหลอแกฮวงจุ้ย ล้อมด้วยภาพอาจารย์กับผู้มาขอคำปรึกษา",
+  label: "คลับฮวงจุ้ยแห่งประเทศไทย",
+  // The heading's second part is set white on a red band.
+  title: "ศาสตร์แห่งฮวงจุ้ยและโหราศาสตร์จีน",
+  titleHighlight: "จากประสบการณ์กว่า 35 ปี ของอาจารย์ดำรงชัย",
+  intro:
+    "คลับฮวงจุ้ยแห่งประเทศไทย ก่อตั้งโดยอาจารย์ดำรงชัย แท่นศรีเจริญ ผู้เชี่ยวชาญด้านฮวงจุ้ย โหราศาสตร์จีน โหราศาสตร์ไทย และศาสตร์โหงวเฮ้ง มุ่งนำองค์ความรู้และประสบการณ์มาประยุกต์ใช้ เพื่อให้คำปรึกษาด้านที่อยู่อาศัย ธุรกิจ และการวางแผนชีวิตอย่างเหมาะสม",
+  // The design's photos could not be exported from Figma; these are the same photos
+  // from the site's own image set.
+  photos: [
+    { src: heroDesk, alt: "อาจารย์ดำรงชัยกับลูกค้าสองท่านในสำนักงาน" },
+    { src: heroStage, alt: "อาจารย์ดำรงชัยบรรยายเรื่องโหงวเฮ้งบนเวที" },
+    { src: heroTemple, alt: "อาจารย์ดำรงชัยในเสื้อสีแดงที่ศาลเจ้า" },
+    { src: heroPortrait, alt: "อาจารย์ดำรงชัยในชุดจีนสีแดง ถือโถกระเบื้องลายอักษรมงคล" },
+  ] satisfies PhotoAsset[],
 } as const;
+
+// Every "ปรึกษาอาจารย์ดำรงชัย" link: the red text link with the arrow, and the navbar's.
+export const consultCta = "ปรึกษาอาจารย์ดำรงชัย";
 
 export const announcement =
   "เนื่องจากมีผู้สนใจติดต่อเข้ามาเป็นจำนวนมาก กรุณาติดต่อจองคิวผ่าน Line @Fengshuiclubth ช่องทางเดียวเท่านั้น";
 
-// Figma service-section (415:1658). The cards come from content/services/.
+// Figma service-section (1:782). The cards come from content/services/.
 export const services = {
   id: "services",
   label: "บริการทั้งหมด",
-  // The design's statement in the dotted panel is lorem ipsum; until the real line
-  // arrives this is the club's tagline from the footer.
-  statement: "ศาสตร์แห่งพลังชีวิต ที่ผสานภูมิปัญญาและพลังจักรวาล เพื่อเสริมความมั่งคั่ง สมดุล และความสุขในทุกจังหวะชีวิต",
+  // The dotted panel's statement, one entry per line as the design breaks it.
+  statementLines: ["ศาสตร์แห่งความสมดุล", "เสริมสิริมงคลในทุกมิติ", "เพื่อชีวิตที่มั่นคงและรุ่งเรือง"],
 } as const;
 
+// Figma activities album (1:798). The design's frames are still empty, so the album
+// shows empty frames until the photos arrive.
 export const gallery = {
   id: "activities",
   label: "รวมภาพกิจกรรม",
-  photos: [
-    { name: "temple", alt: "อาจารย์ดำรงชัยในเสื้อสีแดงอธิบายแผนผังหลอแกให้ผู้มาปรึกษาที่ศาลเจ้า" },
-    { name: "compass", alt: "นิ้วชี้ตำแหน่งบนแผ่นหลอแกฮวงจุ้ยที่มีอักษรจีน" },
-    { name: "workshop", alt: "ผู้เข้าร่วมยืนล้อมดูแผ่นหลอแกขนาดใหญ่บนพื้น" },
-  ],
 } as const;
 
 export const consultation = {
@@ -72,21 +85,17 @@ export const consultation = {
   },
 } as const;
 
-// In-page menu shared by the header and footer (Figma 415:1610 navbar). Each item
-// jumps to a section of the single page. The design does not show where
-// "เคล็ดลับดวงดี" goes; it points at the TikTok section until that is settled.
-const sectionNav = [
-  { label: "รู้จักอาจารย์ดำรงชัย", href: `#${hero.id}` },
-  { label: "บริการทั้งหมด", href: `#${services.id}` },
-  { label: "เคล็ดลับดวงดี", href: `#${tiktok.section.id}` },
-] as const;
-
+// Navbar (Figma 1:752): each item jumps to a section of the single page.
 export const header = {
   homeLabel: "หน้าแรก คลับฮวงจุ้ยแห่งประเทศไทย",
   menuLabel: "เมนู",
   navLabel: "เมนูหลัก",
-  nav: sectionNav,
-  cta: { label: "จองคิวด่วน", href: lineBooking },
+  nav: [
+    { label: "คลับฮวงจุ้ยแห่งประเทศไทย", href: `#${hero.id}` },
+    { label: "บริการทั้งหมด", href: `#${services.id}` },
+    { label: "รวมภาพกิจกรรม", href: `#${gallery.id}` },
+  ],
+  cta: { label: consultCta, href: lineBooking },
 } as const;
 
 export const video = {
@@ -96,18 +105,28 @@ export const video = {
 
 export type SocialPlatform = "facebook" | "youtube" | "tiktok" | "line";
 
+// The club's social accounts. Facebook and Instagram are placeholders until the real
+// profiles are confirmed.
+export const social = {
+  line: { label: "LINE", href: lineBooking },
+  tiktok: { label: "TikTok", href: tiktok.profileUrl },
+  facebook: { label: "Facebook", href: "https://www.facebook.com/" },
+  instagram: { label: "Instagram", href: "https://www.instagram.com/" },
+} as const;
+
+// Footer (Figma 1:807). The design's paragraph is lorem ipsum; until the real copy
+// arrives it is the club's tagline.
 export const footer = {
+  title: site.name,
   taglineLines: [
     "ศาสตร์แห่งพลังชีวิต ที่ผสานภูมิปัญญาและพลังจักรวาล",
     "เพื่อเสริมความมั่งคั่ง สมดุล และความสุขในทุกจังหวะชีวิต",
   ],
-  // Facebook and YouTube are placeholders until the real profiles are confirmed.
+  socialLabel: "โซเชียลมีเดีย",
+  // The design's spelling of each name.
   social: [
-    { platform: "facebook", label: "Facebook", href: "https://www.facebook.com/" },
-    { platform: "youtube", label: "YouTube", href: "https://www.youtube.com/" },
-    { platform: "tiktok", label: "TikTok", href: tiktok.profileUrl },
-    { platform: "line", label: "LINE", href: lineBooking },
-  ] satisfies { platform: SocialPlatform; label: string; href: string }[],
-  nav: [{ label: "หน้าแรก", href: "#main" }, ...sectionNav],
-  copyright: "©2025 FengShui Club Thailand. All rights reserved.",
+    { label: "Facebook", href: social.facebook.href },
+    { label: "Instagram", href: social.instagram.href },
+    { label: "Tiktok", href: social.tiktok.href },
+  ],
 } as const;

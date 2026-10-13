@@ -34,10 +34,11 @@ scripts/screenshots.mjs  screenshots at every test width + horizontal-scroll che
 ## One page, with service overlays
 
 The site is a single static page (`app/page.tsx`); the menu jumps to its sections by id. Each card
-in the service list opens that service's overlay in place (Figma 423:3681): a native modal
-`<dialog>` (`components/ui/ServiceDialog.tsx`) holding the title beside the infinite image loop,
-the service's copy as `body` blocks (`lead`, `highlight`, `text`, `list`; see
-`content/services/types.ts`) and the shared booking block (`content/services/booking.ts`).
+in the service list opens that service's overlay in place (Figma 1:3286): a native modal
+`<dialog>` (`components/ui/ServiceDialog.tsx`) drawn as a drawer on the right, holding the title,
+byline and contact icons, the infinite image loop, the service's copy as `body` blocks (`lead`,
+`highlight`, `text`, `list`; see `content/services/types.ts`, all set as plain paragraphs) and the
+consult link.
 
 - **Addresses:** the open overlay is in the URL as `/?service=<slug>`, so it can be shared and
   closes with back, Escape, the close button or a click outside (`lib/service-overlay.ts`). The old
@@ -47,10 +48,12 @@ the service's copy as `body` blocks (`lead`, `highlight`, `text`, `list`; see
   data pick it up.
 - **Change the image loop photos:** put them in `public/images/services/<slug>/` as WebP
   (square crops, 640px, are enough for the 258px tiles at 2x), import them in the service's data
-  file, and list them in `galleryColumns([...])` as `{ src, alt }`. It fills four columns of three
-  tiles, wrapping round when there are fewer than twelve photos; nine or more avoid repeats on a
-  laptop screen. Use `alt: ""` for purely atmospheric photos. A service with `heroGallery: []`
-  shows its title without the loop.
+  file, and list them in `galleryColumns([...])` as `{ src, alt }`. It fills three columns of
+  three tiles, wrapping round when there are fewer than nine photos. Use `alt: ""` for purely
+  atmospheric photos. A service with `heroGallery: []` leaves the loop out.
+- **Fill the photo albums:** the hero album's four photos are `hero.photos` in `content/site.ts`;
+  the activities album (`components/sections/Gallery.tsx`) shows empty frames until it is given
+  `photos` the same way.
 
 Starting a redesign? See [docs/redesign.md](docs/redesign.md).
 

@@ -1,9 +1,7 @@
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { Hero } from "@/components/sections/Hero";
-import { Announcement } from "@/components/sections/Announcement";
 import { Services } from "@/components/sections/Services";
 import { ServiceOverlay } from "@/components/sections/ServiceOverlay";
-import { TikTokFeed } from "@/components/sections/TikTokFeed";
 import { Gallery } from "@/components/sections/Gallery";
 import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -30,7 +28,7 @@ const structuredData = {
 };
 
 // The whole site is this one static page: sections in the order of the design (Figma
-// 415:1610), each reached from the menu by its id. A service card opens that
+// 1:751), each reached from the menu by its id. A service card opens that
 // service's overlay in place; the overlays are rendered here, closed, after the page.
 export default function Home() {
   return (
@@ -38,9 +36,7 @@ export default function Home() {
       <SiteHeader />
       <main id="main">
         <Hero />
-        <Announcement />
         <Services />
-        <TikTokFeed />
         <Gallery />
       </main>
       <Footer />

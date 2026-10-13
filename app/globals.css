@@ -2,13 +2,16 @@
 @import "./styles/tokens.css";
 @import "./styles/motion.css";
 @import "./styles/service-overlay.css";
+@import "./styles/photo-album.css";
 
 html {
   scroll-behavior: smooth;
 }
 
+/* The page fades from blush at the top to white at the bottom (Figma 1:751). The body's
+   background paints the canvas, so the gradient spans the whole page, not the screen. */
 body {
-  background: var(--color-paper);
+  background: linear-gradient(var(--color-blush), var(--color-white));
   color: var(--color-ink);
 }
 

@@ -17,8 +17,8 @@ import photo07 from "@/public/images/services/sae-ki/07.webp";
 export const saeKi: ServiceDetail = {
   slug: "sae-ki",
   title: "แซกีเสริมดวง แก้กรรม",
-  titleLines: ["แซกีเสริมดวง", "แก้กรรม"],
-  summary: "เปลี่ยนดวง แก้กรรม",
+  summaryLines: ["แซกีช่วยปรับฮวงจุ้ยและชะตาชีวิต", "เคล็ดลับความรุ่งเรืองของคนจีนกว่า 1,000 ปี"],
+  byline: "แซกีเสริมดวง แก้กรรม โดย อ.ดำรงชัย",
   description:
     "แซกีเสริมดวง เปลี่ยนดวง แก้กรรม ศาสตร์แขนงหนึ่งของฮวงจุ้ยที่เสริมพลังชีวิตและลดพลังปะทะ กับอาจารย์ดำรงชัย",
   heroGallery: galleryColumns([

@@ -17,8 +17,8 @@ import photo09 from "@/public/images/services/destiny-physiognomy/09.webp";
 export const destinyPhysiognomy: ServiceDetail = {
   slug: "destiny-physiognomy",
   title: "Personal โหวงเฮ้ง",
-  titleLines: ["Personal", "โหวงเฮ้ง"],
-  summary: "วิเคราะห์ลักษณะใบหน้าและองค์ประกอบบนเรือนหน้า",
+  summaryLines: ["ให้คำปรึกษาดวงชะตาส่วนบุคคล เข้าใจพื้นดวง", "ค้นหาจังหวะชีวิต และวิเคราะห์โหงวเฮ้งเฉพาะบุคคล"],
+  byline: "Personal โหวงเฮ้ง โดย อ.ดำรงชัย",
   description:
     "วิเคราะห์ลักษณะใบหน้าและองค์ประกอบบนเรือนหน้า อ่านนิสัย วาสนา และโชคชะตาที่ซ่อนอยู่ พร้อมแนวทางเสริมราศีให้โดดเด่น กับอาจารย์ดำรงชัย",
   heroGallery: galleryColumns([

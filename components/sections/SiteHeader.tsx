@@ -5,7 +5,7 @@ import { LineChatIcon } from "@/components/ui/LineChatIcon";
 import logo from "@/public/images/logo.png";
 
 const linkStyle =
-  "inline-flex min-h-11 items-center gap-2 rounded-xs text-home-nav text-black transition-colors duration-200 ease-refined hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
+  "inline-flex min-h-11 items-center gap-2 rounded-xs text-menu font-medium text-black transition-colors duration-200 ease-refined hover:text-red-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-800";
 
 function MenuIcon() {
   return (
@@ -15,31 +15,31 @@ function MenuIcon() {
   );
 }
 
-// Figma navbar (405:2274; 415:1610 keeps its shape): the logo, three links to sections
-// of the page and the LINE booking link, 1080px wide. Below lg the links move into a
-// <details> disclosure, so the menu needs no client JavaScript.
+// Figma Navbar (1:752): the logo, then three links to sections of the page and, 64px
+// further, the LINE consult link, across the 1280px content width. It sits on the page
+// gradient. Below lg the links move into a <details> disclosure, so the menu needs no
+// client JavaScript.
 export function SiteHeader() {
-  const items = (
-    <>
-      {header.nav.map((item) => (
-        <li key={item.label}>
-          <a href={item.href} className={linkStyle}>
-            {item.label}
-          </a>
-        </li>
-      ))}
-      <li>
-        <a href={header.cta.href} target="_blank" rel="noopener noreferrer" className={linkStyle}>
-          <LineChatIcon className="size-8 text-line" />
-          {header.cta.label}
-        </a>
-      </li>
-    </>
+  const links = header.nav.map((item) => (
+    <li key={item.label}>
+      <a href={item.href} className={linkStyle}>
+        {item.label}
+      </a>
+    </li>
+  ));
+  // 24px list gap plus 40px: the 64px the design leaves before the consult link.
+  const cta = (spaced: boolean) => (
+    <li className={spaced ? "ml-10" : undefined}>
+      <a href={header.cta.href} target="_blank" rel="noopener noreferrer" className={linkStyle}>
+        <LineChatIcon className="size-8 text-line" />
+        {header.cta.label}
+      </a>
+    </li>
   );
 
   return (
-    <header className="relative z-30 bg-paper px-5 py-4 md:px-10">
-      <div className="mx-auto flex max-w-home items-center justify-between gap-6">
+    <header className="relative z-30 px-5 py-4 md:px-10 lg:px-20">
+      <div className="mx-auto flex max-w-wide items-center justify-between gap-6">
         <Link
           href="/"
           className="shrink-0 rounded-sm transition-opacity duration-200 ease-refined hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
@@ -49,7 +49,10 @@ export function SiteHeader() {
         </Link>
 
         <nav aria-label={header.navLabel} className="hidden lg:block">
-          <ul className="flex items-center gap-6">{items}</ul>
+          <ul className="flex items-center gap-6">
+            {links}
+            {cta(true)}
+          </ul>
         </nav>
 
         <details className="group lg:hidden">
@@ -57,8 +60,11 @@ export function SiteHeader() {
             <MenuIcon />
             <span className="sr-only">{header.menuLabel}</span>
           </summary>
-          <nav aria-label={header.navLabel} className="menu-panel absolute inset-x-0 top-full border-y border-border bg-paper px-5 py-3 md:px-10">
-            <ul className="flex flex-col gap-1">{items}</ul>
+          <nav aria-label={header.navLabel} className="menu-panel absolute inset-x-0 top-full border-y border-rule bg-blush px-5 py-3 md:px-10">
+            <ul className="flex flex-col gap-1">
+              {links}
+              {cta(false)}
+            </ul>
           </nav>
         </details>
       </div>
