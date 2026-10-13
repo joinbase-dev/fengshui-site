@@ -1,6 +1,6 @@
-// Shape of a service detail page. Every service renders through one template
-// (components/templates/ServiceDetailTemplate.tsx, Figma 405:2008); a new service is
-// a new data file in this folder plus one line in index.ts.
+// Shape of a service. Each one is a card in the home page's service list and the
+// overlay that card opens (components/sections/ServiceOverlay.tsx); a new service is a
+// new data file in this folder plus one line in index.ts.
 
 import type { StaticImageData } from "next/image";
 
@@ -25,15 +25,20 @@ export type ServiceBodyBlock =
   | { type: "list"; title: string; items: string[] };
 
 export type ServiceDetail = {
+  // Names the overlay in the address bar (/?service=<slug>), so keep it stable once
+  // shared. The old /services/<slug> pages redirect there (next.config.ts).
   slug: string;
-  // Full name, for metadata and structured data.
+  // Full name: the card title, the overlay heading and structured data.
   title: string;
-  // The hero heading, one entry per line as the design breaks it.
+  // The overlay heading, one entry per line as the design breaks it.
   titleLines: string[];
-  metaTitle: string;
-  metaDescription: string;
-  // Columns of the looping hero gallery, left to right. Wide screens show more
-  // columns than narrow ones, so put the strongest photos in the first columns.
+  // The one line under the title on the service card.
+  summary: string;
+  // For structured data.
+  description: string;
+  // Columns of the looping gallery, left to right. Wide screens show more columns than
+  // narrow ones, so put the strongest photos in the first columns. Empty until the
+  // service has photos; the overlay then leaves the gallery out.
   heroGallery: GalleryPhoto[][];
   body: ServiceBodyBlock[];
 };

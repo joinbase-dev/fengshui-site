@@ -4,13 +4,8 @@ import { header } from "@/content/site";
 import { LineChatIcon } from "@/components/ui/LineChatIcon";
 import logo from "@/public/images/logo.png";
 
-type SiteHeaderProps = {
-  // The page this header is on, marked with aria-current in the menu.
-  currentHref: string;
-};
-
 const linkStyle =
-  "inline-flex min-h-11 items-center gap-2 rounded-xs text-home-nav text-black transition-colors duration-200 ease-refined hover:text-brand aria-[current=page]:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
+  "inline-flex min-h-11 items-center gap-2 rounded-xs text-home-nav text-black transition-colors duration-200 ease-refined hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
 
 function MenuIcon() {
   return (
@@ -20,21 +15,17 @@ function MenuIcon() {
   );
 }
 
-// Figma navbar (405:2274): a white bar with the logo, three service links and the
-// LINE booking link, 1080px wide. Below lg the links move into a <details>
-// disclosure, so the menu needs no client JavaScript.
-export function SiteHeader({ currentHref }: SiteHeaderProps) {
+// Figma navbar (405:2274; 415:1610 keeps its shape): the logo, three links to sections
+// of the page and the LINE booking link, 1080px wide. Below lg the links move into a
+// <details> disclosure, so the menu needs no client JavaScript.
+export function SiteHeader() {
   const items = (
     <>
       {header.nav.map((item) => (
         <li key={item.label}>
-          <Link
-            href={item.href}
-            aria-current={item.href === currentHref ? "page" : undefined}
-            className={linkStyle}
-          >
+          <a href={item.href} className={linkStyle}>
             {item.label}
-          </Link>
+          </a>
         </li>
       ))}
       <li>
@@ -47,7 +38,7 @@ export function SiteHeader({ currentHref }: SiteHeaderProps) {
   );
 
   return (
-    <header className="relative z-30 bg-white px-5 py-4 md:px-10">
+    <header className="relative z-30 bg-paper px-5 py-4 md:px-10">
       <div className="mx-auto flex max-w-home items-center justify-between gap-6">
         <Link
           href="/"
@@ -66,7 +57,7 @@ export function SiteHeader({ currentHref }: SiteHeaderProps) {
             <MenuIcon />
             <span className="sr-only">{header.menuLabel}</span>
           </summary>
-          <nav aria-label={header.navLabel} className="menu-panel absolute inset-x-0 top-full border-y border-border bg-white px-5 py-3 md:px-10">
+          <nav aria-label={header.navLabel} className="menu-panel absolute inset-x-0 top-full border-y border-border bg-paper px-5 py-3 md:px-10">
             <ul className="flex flex-col gap-1">{items}</ul>
           </nav>
         </details>

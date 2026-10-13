@@ -2,10 +2,12 @@ import { SiteHeader } from "@/components/sections/SiteHeader";
 import { Hero } from "@/components/sections/Hero";
 import { Announcement } from "@/components/sections/Announcement";
 import { Services } from "@/components/sections/Services";
+import { ServiceOverlay } from "@/components/sections/ServiceOverlay";
 import { TikTokFeed } from "@/components/sections/TikTokFeed";
 import { Gallery } from "@/components/sections/Gallery";
 import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/ui/JsonLd";
+import { serviceDetails } from "@/content/services";
 import { site } from "@/content/site";
 import { siteUrl } from "@/lib/site-url";
 
@@ -17,12 +19,23 @@ const structuredData = {
   description: site.description,
   url: siteUrl,
   logo: `${siteUrl}/images/logo.png`,
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "บริการ",
+    itemListElement: serviceDetails.map((service) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name: service.title, description: service.description },
+    })),
+  },
 };
 
+// The whole site is this one static page: sections in the order of the design (Figma
+// 415:1610), each reached from the menu by its id. A service card opens that
+// service's overlay in place; the overlays are rendered here, closed, after the page.
 export default function Home() {
   return (
     <>
-      <SiteHeader currentHref="/" />
+      <SiteHeader />
       <main id="main">
         <Hero />
         <Announcement />
@@ -31,6 +44,9 @@ export default function Home() {
         <Gallery />
       </main>
       <Footer />
+      {serviceDetails.map((service) => (
+        <ServiceOverlay key={service.slug} service={service} />
+      ))}
       <JsonLd data={structuredData} />
     </>
   );

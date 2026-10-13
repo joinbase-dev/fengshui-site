@@ -15,6 +15,7 @@ export const site = {
 export const lineBooking = "https://line.me/R/ti/p/@fengshuiclubth";
 
 export const hero = {
+  id: "about",
   // One line each, as the design breaks it; Thai has no spaces to wrap on reliably.
   titleLines: ["ดูดวงชะตา", "เสริมดวง", "ฮวงจุ้ยบ้าน"],
   subtitle: "โดย อาจารย์ดำรงชัย คลับฮวงจุ้ยประเทศไทย",
@@ -25,37 +26,18 @@ export const hero = {
 export const announcement =
   "เนื่องจากมีผู้สนใจติดต่อเข้ามาเป็นจำนวนมาก กรุณาติดต่อจองคิวผ่าน Line @Fengshuiclubth ช่องทางเดียวเท่านั้น";
 
-export type ServiceIcon = "home" | "eye" | "seedling";
-
+// Figma service-section (415:1658). The cards come from content/services/.
 export const services = {
   id: "services",
-  // Not shown in the design; gives the list a heading for screen readers.
-  heading: "บริการของเรา",
-  items: [
-    {
-      icon: "home",
-      title: "ฮวงจุ้ยบ้าน/สถานที่",
-      body: "จัดวางพลังของบ้านและสถานที่ ให้สอดคล้องกับทิศมงคลและธาตุประจำตัว เปิดทางรับทรัพย์ เสริมสุขภาพและความสัมพันธ์",
-      href: "/services/feng-shui-home",
-    },
-    {
-      icon: "eye",
-      title: "ดูดวงชะตา 3 ศาสตร์",
-      body: "วิเคราะห์ลักษณะใบหน้าและองค์ประกอบบนเรือนหน้า อ่านนิสัย วาสนา และโชคชะตาที่ซ่อนอยู่ พร้อมแนวทางเสริมราศีให้โดดเด่น",
-      href: "/services/destiny-physiognomy",
-    },
-    {
-      icon: "seedling",
-      title: "แซกีเสริมดวง",
-      body: "แก้กรรมปรับดวงชะตาตาม หลักศาสตร์โหราศาสตร์จีน เสริมลาภและทรัพย์",
-      href: "/services/sae-ki",
-    },
-  ] satisfies { icon: ServiceIcon; title: string; body: string; href: string }[],
+  label: "บริการทั้งหมด",
+  // The design's statement in the dotted panel is lorem ipsum; until the real line
+  // arrives this is the club's tagline from the footer.
+  statement: "ศาสตร์แห่งพลังชีวิต ที่ผสานภูมิปัญญาและพลังจักรวาล เพื่อเสริมความมั่งคั่ง สมดุล และความสุขในทุกจังหวะชีวิต",
 } as const;
 
 export const gallery = {
-  // Not shown in the design; names the photo strip for screen readers.
-  label: "ภาพบรรยากาศ",
+  id: "activities",
+  label: "รวมภาพกิจกรรม",
   photos: [
     { name: "temple", alt: "อาจารย์ดำรงชัยในเสื้อสีแดงอธิบายแผนผังหลอแกให้ผู้มาปรึกษาที่ศาลเจ้า" },
     { name: "compass", alt: "นิ้วชี้ตำแหน่งบนแผ่นหลอแกฮวงจุ้ยที่มีอักษรจีน" },
@@ -90,19 +72,20 @@ export const consultation = {
   },
 } as const;
 
-// Menu shared by the header and footer (Figma navbar 405:2274 and footer 406:5435).
-// The first two pages come from the service-page template in PR #6.
-const serviceNav = [
-  { label: "ฮวงจุ้ยบ้าน/สถานที่", href: "/services/feng-shui-home" },
-  { label: "ดูดวงชะตา 3 ศาสตร์", href: "/services/destiny-physiognomy" },
-  { label: "แซกีเสริมดวง", href: "/services/sae-ki" },
+// In-page menu shared by the header and footer (Figma 415:1610 navbar). Each item
+// jumps to a section of the single page. The design does not show where
+// "เคล็ดลับดวงดี" goes; it points at the TikTok section until that is settled.
+const sectionNav = [
+  { label: "รู้จักอาจารย์ดำรงชัย", href: `#${hero.id}` },
+  { label: "บริการทั้งหมด", href: `#${services.id}` },
+  { label: "เคล็ดลับดวงดี", href: `#${tiktok.section.id}` },
 ] as const;
 
 export const header = {
   homeLabel: "หน้าแรก คลับฮวงจุ้ยแห่งประเทศไทย",
   menuLabel: "เมนู",
   navLabel: "เมนูหลัก",
-  nav: serviceNav,
+  nav: sectionNav,
   cta: { label: "จองคิวด่วน", href: lineBooking },
 } as const;
 
@@ -125,6 +108,6 @@ export const footer = {
     { platform: "tiktok", label: "TikTok", href: tiktok.profileUrl },
     { platform: "line", label: "LINE", href: lineBooking },
   ] satisfies { platform: SocialPlatform; label: string; href: string }[],
-  nav: [{ label: "หน้าแรก", href: "/" }, ...serviceNav],
+  nav: [{ label: "หน้าแรก", href: "#main" }, ...sectionNav],
   copyright: "©2025 FengShui Club Thailand. All rights reserved.",
 } as const;

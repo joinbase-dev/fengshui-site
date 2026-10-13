@@ -1,0 +1,143 @@
+/* Service overlays: the tokens their content adds (Figma 405:2008), the dialog's
+   motion (components/ui/ServiceDialog.tsx) and the infinite image loop's motion
+   (components/ui/InfiniteImageLoop.tsx). */
+@theme {
+  --color-divider: #cccccc; /* rule above the booking block */
+
+  /* Type measured from the frame at 1440. The -sm sizes are derived for phones; the
+     frame is desktop only. */
+  --text-detail-title: 64px;
+  --text-detail-title--line-height: 90px;
+  --text-detail-title-sm: 44px;
+  --text-detail-title-sm--line-height: 56px;
+  --text-detail-lead: 24px;
+  --text-detail-lead--line-height: 37px;
+  --text-detail-lead--letter-spacing: 0.55px;
+  --text-detail-lead-sm: 20px;
+  --text-detail-lead-sm--line-height: 32px;
+  --text-detail-lead-sm--letter-spacing: 0.4px;
+  --text-detail-body: 16px;
+  --text-detail-body--line-height: 26px;
+  --text-detail-booking: 16px;
+  --text-detail-booking--line-height: 27px;
+  --text-detail-booking--letter-spacing: 0.4px;
+}
+
+/* The dialog fills the screen, transparent, and scrolls; the panel inside it is the
+   sheet, starting a little below the top so the page shows behind it. The page under
+   an open dialog does not scroll. */
+.service-dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 24px 0 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.service-dialog-panel {
+  min-height: calc(100dvh - 24px);
+}
+
+@media (min-width: 768px) {
+  .service-dialog {
+    padding-top: 40px;
+  }
+
+  .service-dialog-panel {
+    min-height: calc(100dvh - 40px);
+  }
+}
+
+.service-dialog::backdrop {
+  background: rgb(45 45 45 / 0.6);
+}
+
+html:has(.service-dialog[open]) {
+  overflow: hidden;
+}
+
+/* Opening slides the sheet up and fades the backdrop in; closing reverses it. Only
+   opacity and transform animate. Under reduced motion it appears and disappears. */
+@media (prefers-reduced-motion: no-preference) {
+  .service-dialog,
+  .service-dialog::backdrop {
+    transition:
+      opacity var(--duration-overlay) var(--ease-refined),
+      overlay var(--duration-overlay) allow-discrete,
+      display var(--duration-overlay) allow-discrete;
+    opacity: 0;
+  }
+
+  .service-dialog-panel {
+    transition: transform var(--duration-overlay) var(--ease-refined);
+    transform: translate3d(0, 48px, 0);
+  }
+
+  .service-dialog[open],
+  .service-dialog[open]::backdrop {
+    opacity: 1;
+  }
+
+  .service-dialog[open] .service-dialog-panel {
+    transform: none;
+  }
+
+  @starting-style {
+    .service-dialog[open],
+    .service-dialog[open]::backdrop {
+      opacity: 0;
+    }
+
+    .service-dialog[open] .service-dialog-panel {
+      transform: translate3d(0, 48px, 0);
+    }
+  }
+}
+
+/* Each gallery column holds its tile list twice, stacked, and slides by exactly one
+   list (-50%), so the loop restarts on an identical frame with no jump. Columns
+   alternate direction and run at slightly different speeds, so the stagger drifts
+   slowly. Only transform animates. With reduced motion the columns stand still in
+   the design's staggered layout. */
+@media (prefers-reduced-motion: no-preference) {
+  .image-loop-track {
+    animation: image-loop-scroll var(--loop-duration, 60s) linear infinite;
+    will-change: transform;
+  }
+
+  .image-loop-column:nth-child(2) .image-loop-track {
+    --loop-duration: 72s;
+    animation-direction: reverse;
+  }
+
+  .image-loop-column:nth-child(3) .image-loop-track {
+    --loop-duration: 66s;
+  }
+
+  .image-loop-column:nth-child(4) .image-loop-track {
+    --loop-duration: 78s;
+    animation-direction: reverse;
+  }
+
+  /* The pause control (WCAG 2.2.2) is a checkbox, so pausing needs no JavaScript. */
+  .image-loop:has(.image-loop-pause:checked) .image-loop-track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes image-loop-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}

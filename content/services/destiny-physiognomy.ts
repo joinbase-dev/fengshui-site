@@ -1,6 +1,6 @@
-// ดูดวงชะตา 3 ศาสตร์ (Figma 406:2959). Its frame has not been read yet: the title and
-// the opening line are the wording of this service's card on the new Home design.
-// Replace the body with the frame's copy.
+// Personal โหวงเฮ้ง: the name is from the single-page design's service list (Figma
+// 415:1610). Its detail frame (406:2959) has not been read yet, so the opening line is
+// this service's card copy from the previous Home. Replace the body with the frame's copy.
 
 import { galleryColumns } from "./gallery";
 import type { ServiceDetail } from "./types";
@@ -16,10 +16,10 @@ import photo09 from "@/public/images/services/destiny-physiognomy/09.webp";
 
 export const destinyPhysiognomy: ServiceDetail = {
   slug: "destiny-physiognomy",
-  title: "ดูดวงชะตา 3 ศาสตร์",
-  titleLines: ["ดูดวงชะตา", "3 ศาสตร์"],
-  metaTitle: "ดูดวงชะตา 3 ศาสตร์ | คลับฮวงจุ้ยแห่งประเทศไทย",
-  metaDescription:
+  title: "Personal โหวงเฮ้ง",
+  titleLines: ["Personal", "โหวงเฮ้ง"],
+  summary: "วิเคราะห์ลักษณะใบหน้าและองค์ประกอบบนเรือนหน้า",
+  description:
     "วิเคราะห์ลักษณะใบหน้าและองค์ประกอบบนเรือนหน้า อ่านนิสัย วาสนา และโชคชะตาที่ซ่อนอยู่ พร้อมแนวทางเสริมราศีให้โดดเด่น กับอาจารย์ดำรงชัย",
   heroGallery: galleryColumns([
     { src: photo01, alt: "อาจารย์ดำรงชัยบรรยายเรื่องโหงวเฮ้งบนเวที" },

@@ -17,35 +17,40 @@ npm run screenshots # needs a running server; see docs/redesign.md
 ## Structure
 
 ```
-app/                     layout (fonts, metadata), pages, robots, sitemap, manifest, icons, OG image
+app/                     layout (fonts, metadata), the page, robots, sitemap, manifest, icons, OG image
 app/styles/tokens.css    design tokens (colours, type scale, radii, shadows, widths, motion timing)
 app/styles/motion.css    header glass, menu panel, CSS-only motion
-app/styles/services.css  service-page tokens and the looping hero gallery
-components/sections/     page sections (Hero, Consultation, Footer, service page sections, …)
-components/templates/    ServiceDetailTemplate (every /services/[slug] page)
-components/ui/           shared pieces (ConsultationForm, VideoPlayer, button styles, …)
+app/styles/service-overlay.css  service overlay tokens, the dialog's motion and the image loop
+components/sections/     page sections (Hero, Services, ServiceOverlay and its parts, Footer, …)
+components/ui/           shared pieces (InfiniteImageLoop, ServiceDialog, DotField, button styles, …)
 content/                 all copy and links: site.ts (site-wide), services/ (one file per service page)
 lib/consultation/        form schema + validation, server action, delivery adapter
+lib/service-overlay.ts   which service overlay is open (the ?service= address)
 lib/site-url.ts          production URL and indexability
 public/images/           design assets
 scripts/screenshots.mjs  screenshots at every test width + horizontal-scroll check
 ```
 
-## Service pages
+## One page, with service overlays
 
-Every `/services/<slug>` page renders `components/templates/ServiceDetailTemplate.tsx` (Figma
-405:2008) from one data file in `content/services/`: the title beside a looping photo gallery, the
-service's copy as `body` blocks (`lead`, `highlight`, `text`, `list`; see `content/services/types.ts`),
-the shared booking block (`content/services/booking.ts`), and the photo strip and footer shared with
-Home.
+The site is a single static page (`app/page.tsx`); the menu jumps to its sections by id. Each card
+in the service list opens that service's overlay in place (Figma 423:3681): a native modal
+`<dialog>` (`components/ui/ServiceDialog.tsx`) holding the title beside the infinite image loop,
+the service's copy as `body` blocks (`lead`, `highlight`, `text`, `list`; see
+`content/services/types.ts`) and the shared booking block (`content/services/booking.ts`).
 
-- **Add a service:** copy one of the data files, change its slug and content, and add it to the
-  list in `content/services/index.ts`. The route, sitemap and metadata pick it up.
-- **Change the hero gallery photos:** put them in `public/images/services/<slug>/` as WebP
+- **Addresses:** the open overlay is in the URL as `/?service=<slug>`, so it can be shared and
+  closes with back, Escape, the close button or a click outside (`lib/service-overlay.ts`). The old
+  `/services/<slug>` pages redirect there (`next.config.ts`).
+- **Add a service:** copy one of the data files in `content/services/`, change its slug and content,
+  and add it to the list in `content/services/index.ts`. The card, its overlay and the structured
+  data pick it up.
+- **Change the image loop photos:** put them in `public/images/services/<slug>/` as WebP
   (square crops, 640px, are enough for the 258px tiles at 2x), import them in the service's data
   file, and list them in `galleryColumns([...])` as `{ src, alt }`. It fills four columns of three
   tiles, wrapping round when there are fewer than twelve photos; nine or more avoid repeats on a
-  laptop screen. Use `alt: ""` for purely atmospheric photos.
+  laptop screen. Use `alt: ""` for purely atmospheric photos. A service with `heroGallery: []`
+  shows its title without the loop.
 
 Starting a redesign? See [docs/redesign.md](docs/redesign.md).
 

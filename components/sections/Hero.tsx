@@ -11,8 +11,9 @@ import heroImage from "@/public/images/home/hero.png";
 export function Hero() {
   return (
     <section
+      id={hero.id}
       aria-labelledby="hero-title"
-      className="relative overflow-hidden px-5 py-12 md:px-10 md:py-16 lg:py-25"
+      className="relative scroll-mt-6 overflow-hidden px-5 py-12 md:px-10 md:py-16 lg:py-25"
     >
       <Image
         src={emblem}

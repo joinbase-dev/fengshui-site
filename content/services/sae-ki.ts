@@ -1,4 +1,5 @@
-// แซกีเสริมดวง (Figma 406:3086). Its frame has not been read yet, so the copy from the
+// แซกีเสริมดวง แก้กรรม: the name is from the single-page design's service list (Figma
+// 415:1610); detail frame 406:3086. Its frame has not been read yet, so the copy from the
 // first sae-ki design (389:518) is laid into the shared template: the intro as the
 // opening, the highlight card as a red band and text, and the four qualities of the
 // site as the list. Replace it with the frame's copy.
@@ -15,10 +16,10 @@ import photo07 from "@/public/images/services/sae-ki/07.webp";
 
 export const saeKi: ServiceDetail = {
   slug: "sae-ki",
-  title: "แซกีเสริมดวง",
-  titleLines: ["แซกีเสริมดวง"],
-  metaTitle: "แซกีเสริมดวง | คลับฮวงจุ้ยแห่งประเทศไทย",
-  metaDescription:
+  title: "แซกีเสริมดวง แก้กรรม",
+  titleLines: ["แซกีเสริมดวง", "แก้กรรม"],
+  summary: "เปลี่ยนดวง แก้กรรม",
+  description:
     "แซกีเสริมดวง เปลี่ยนดวง แก้กรรม ศาสตร์แขนงหนึ่งของฮวงจุ้ยที่เสริมพลังชีวิตและลดพลังปะทะ กับอาจารย์ดำรงชัย",
   heroGallery: galleryColumns([
     { src: photo01, alt: "ผู้ร่วมพิธีหน้าศาลเจ้า" },

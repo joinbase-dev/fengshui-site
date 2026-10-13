@@ -23,6 +23,14 @@
   --color-red-800: #ac0805; /* Primary/Red/800 */
   --color-red-700: #c91815; /* Primary/Red/700 */
   --color-footer: var(--color-red-800);
+
+  /* Single-page design (415:1610). Sampled from Ohm's screenshot of the service
+     section, not read from Figma variables; check against the file when it can be read. */
+  --color-paper: #fcf5ec; /* page background */
+  --color-sand: #e9decd; /* service card hover */
+  --color-rule: #9e9b95; /* service list lines */
+  --color-crimson: #9e2217; /* section label dot, service card arrow */
+  --color-dot: rgb(158 34 23 / 0.55); /* dotted panel */
   --color-red-500: #eb5d5b; /* Primary/Red/500 */
 
   /* Epilogue for everything. It has no Thai glyphs, so Thai text (and anything else
@@ -56,6 +64,20 @@
   --text-home-nav--line-height: 28px;
   --text-home-tagline: 16px;
   --text-home-tagline--line-height: 27px;
+  /* Single-page service section (415:1658), measured from Ohm's screenshot. The
+     -sm sizes are derived for phones. */
+  --text-label: 18px; /* section label beside the red dot */
+  --text-label--line-height: 21px;
+  --text-service-title: 24px; /* card number and title */
+  --text-service-title--line-height: 36px;
+  --text-service-title-sm: 20px;
+  --text-service-title-sm--line-height: 30px;
+  --text-service-summary: 16px;
+  --text-service-summary--line-height: 26px;
+  --text-statement: 32px; /* the dotted panel's statement */
+  --text-statement--line-height: 42px;
+  --text-statement-sm: 24px;
+  --text-statement-sm--line-height: 34px;
   --text-button-2: 16px; /* Thai/Button/Button2 */
   --text-button-2--line-height: 1.5;
 
@@ -139,6 +161,7 @@
   --leading-label: 22px; /* Figma field: 22 label + 8 gap + 44 input = 74 */
 
   --container-home: 1080px; /* new Home content width */
+  --container-wide: 1280px; /* single-page content width (1440 frame, 80px margins) */
   --container-home-card: 315px; /* TikTok card */
   --container-home-service: 250px; /* service card copy */
   --container-hero: 1440px;
@@ -160,6 +183,7 @@
   --duration-enter: 900ms;
   --duration-settle: 1600ms;
   --duration-marquee: 40s; /* one loop of the announcement strip */
+  --duration-overlay: 400ms; /* service overlay opening and closing */
 }
 
 /* Gradients from the new Home. Figma lists the CTA's stops out of order (60%, 22%, 85%);

@@ -1,5 +1,19 @@
-/* Announcement ticker, menu panel and the CSS-only motion utilities (.enter, .reveal,
-   .reveal-group). All motion is off under prefers-reduced-motion. */
+/* Announcement ticker, menu panel, the dotted panel's still grid and the CSS-only
+   motion utilities (.enter, .reveal, .reveal-group). All motion is off under
+   prefers-reduced-motion. */
+
+/* The dotted panel beside the service list (components/ui/DotField.tsx) as plain CSS:
+   what shows before the canvas is ready, without JavaScript and with reduced motion.
+   One dot per 23px tile, with a dot on the centre lines, like the canvas. */
+.dot-field {
+  background-image: radial-gradient(circle, currentColor 1.5px, transparent 2px);
+  background-size: 23px 23px;
+  background-position: center;
+}
+
+.dot-field[data-ready] {
+  background-image: none;
+}
 
 /* Announcement strip: the design repeats the notice in a clipped row, read here as a
    ticker. The track holds two copies and slides by one copy's width (half the track),

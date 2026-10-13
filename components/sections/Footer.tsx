@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { footer, site } from "@/content/site";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 import logo from "@/public/images/logo.png";
@@ -56,12 +55,9 @@ export function Footer() {
               <ul className="-my-2.5 flex flex-wrap gap-x-8">
                 {footer.nav.map((item) => (
                   <li key={item.label}>
-                    <Link
-                      href={item.href}
-                      className={`inline-flex min-h-11 items-center text-home-nav ${focusRing}`}
-                    >
+                    <a href={item.href} className={`inline-flex min-h-11 items-center text-home-nav ${focusRing}`}>
                       {item.label}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>

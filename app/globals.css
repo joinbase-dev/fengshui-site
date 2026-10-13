@@ -1,14 +1,14 @@
 @import "tailwindcss";
 @import "./styles/tokens.css";
 @import "./styles/motion.css";
-@import "./styles/services.css";
+@import "./styles/service-overlay.css";
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background: var(--color-white);
+  background: var(--color-paper);
   color: var(--color-ink);
 }
 

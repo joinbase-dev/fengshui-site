@@ -10,7 +10,7 @@ const sources = { temple, compass, workshop };
 // with a 1px white border, full bleed. Below that width each keeps the 480×498 shape.
 export function Gallery() {
   return (
-    <section aria-label={gallery.label} className="grid grid-cols-3">
+    <section id={gallery.id} aria-label={gallery.label} className="grid scroll-mt-6 grid-cols-3">
       {gallery.photos.map((photo) => (
         <div key={photo.name} className="relative aspect-[480/498] max-h-124.5 w-full overflow-hidden border border-white bg-border">
           <Image

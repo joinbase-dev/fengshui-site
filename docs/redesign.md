@@ -10,13 +10,14 @@ to ask for before starting.
 | Colours, type scale, radii, shadows, widths, motion timing | `app/styles/tokens.css` (Tailwind `@theme`) |
 | Fonts | `app/layout.tsx` (`next/font`), mapped to `--font-sans` in `tokens.css` |
 | Header glass, menu panel, scroll and load-in motion | `app/styles/motion.css` |
-| Copy, links, nav, social accounts | `content/site.ts` (site-wide), `content/services/` (service pages, one file per service) |
-| Which sections a page shows, and their order | `app/page.tsx`, `app/services/[slug]/page.tsx` |
+| Copy, links, nav, social accounts | `content/site.ts` (site-wide), `content/services/` (one file per service: its card and overlay) |
+| Which sections the page shows, and their order | `app/page.tsx` (the only page) |
+| What a service overlay shows | `components/sections/ServiceOverlay.tsx` |
 | A section's layout | `components/sections/<Section>.tsx` |
 | Buttons and other shared pieces | `components/ui/` |
 | Images | `public/images/` (service photos in `public/images/services/`) |
 
-Pages are a list of sections, and sections read their copy from `content/`. A new
+The page is a list of sections, and sections read their copy from `content/`. A new
 section (for example the TikTok feed) is a new file in `components/sections/` plus one
 line in the page that shows it.
 
