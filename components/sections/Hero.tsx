@@ -1,51 +1,45 @@
 import Image from "next/image";
-import { hero, lineBooking } from "@/content/site";
-import { ctaButton } from "@/components/ui/button-styles";
-import { LineChatIcon } from "@/components/ui/LineChatIcon";
-import emblem from "@/public/images/home/hero-emblem.png";
-import heroImage from "@/public/images/home/hero.png";
+import { hero } from "@/content/site";
+import { ConsultLink } from "@/components/ui/ConsultLink";
+import { AlbumSlideshow } from "@/components/ui/AlbumSlideshow";
+import { heroAlbumPhotos } from "@/content/photos";
+import emblem from "@/public/images/emblem.png";
 
-// Figma Hero (405:2242), 1440 wide: 100px padding around a 1080px row of copy and the
-// 541×394 photo cluster, with the faded club emblem cut off by the right edge (the
-// exported image is already faded and cropped). Below lg (derived, not drawn) the photo stacks under the copy.
+// Figma Hero-section (1:766), 1440 wide with 80px margins: the club label, the heading
+// with its second half on a red band, the introduction and the consult link, then the
+// photo album over the faded club emblem, which opens on the hero's four photos and
+// then changes one every two seconds. Below lg (derived, not drawn) the type steps
+// down and the album scales with the width.
 export function Hero() {
   return (
     <section
+      id={hero.id}
       aria-labelledby="hero-title"
-      className="relative overflow-hidden px-5 py-12 md:px-10 md:py-16 lg:py-25"
+      className="scroll-mt-6 overflow-hidden px-5 pt-10 pb-12 md:px-10 md:py-16 lg:px-20 lg:py-22.5"
     >
-      <Image
-        src={emblem}
-        alt=""
-        sizes="488px"
-        className="pointer-events-none absolute top-1/2 right-0 hidden w-122 -translate-y-1/2 lg:block"
-      />
-      <div className="relative mx-auto flex max-w-home flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
-        <div className="flex flex-col items-start gap-10">
-          <div className="flex flex-col gap-4 font-semibold text-black">
-            <h1 id="hero-title" className="enter max-w-139.25 text-home-display-sm lg:text-home-display">
-              {hero.titleLines.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </h1>
-            <p className="enter text-home-lead-sm [--i:1] lg:text-home-lead">{hero.subtitle}</p>
-          </div>
-          <a href={lineBooking} target="_blank" rel="noopener noreferrer" className={`enter [--i:2] ${ctaButton}`}>
-            <LineChatIcon className="size-7" />
-            {hero.cta}
-          </a>
+      <div className="mx-auto max-w-wide">
+        <div className="flex flex-col items-start gap-6 font-medium text-black lg:gap-8">
+          <p className="enter flex items-center gap-2 text-eyebrow">
+            <span aria-hidden="true" className="size-4.5 shrink-0 rounded-full bg-red-800" />
+            {hero.label}
+          </p>
+          <h1 id="hero-title" className="enter text-intro-sm [--i:1] md:text-intro">
+            {hero.title}{" "}
+            <span className="box-decoration-clone bg-red-800 px-1.5 py-3 text-white">{hero.titleHighlight}</span>
+          </h1>
+          <p className="enter text-intro-sm [--i:2] md:text-intro">{hero.intro}</p>
+          <ConsultLink className="enter [--i:3]" />
         </div>
 
-        <Image
-          src={heroImage}
-          alt={hero.imageAlt}
-          sizes="(min-width: 1024px) 541px, min(calc(100vw - 40px), 541px)"
-          preload
-          fetchPriority="high"
-          className="mx-auto w-full max-w-135.25 shrink-0 lg:mx-0"
-        />
+        <div className="relative mt-10 max-w-album md:mt-12 lg:mt-16">
+          <Image
+            src={emblem}
+            alt=""
+            sizes="(min-width: 1406px) 723px, 58vw"
+            className="hero-emblem pointer-events-none absolute max-w-none opacity-25"
+          />
+          <AlbumSlideshow photos={heroAlbumPhotos} priority className="relative" />
+        </div>
       </div>
     </section>
   );

@@ -1,14 +1,7 @@
 import type { MetadataRoute } from "next";
-import { serviceDetails } from "@/content/services";
 import { siteUrl } from "@/lib/site-url";
 
+// One page: the services open as overlays on it rather than as pages of their own.
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    { url: siteUrl, changeFrequency: "monthly", priority: 1 },
-    ...serviceDetails.map((service) => ({
-      url: `${siteUrl}/services/${service.slug}`,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    })),
-  ];
+  return [{ url: siteUrl, changeFrequency: "monthly", priority: 1 }];
 }

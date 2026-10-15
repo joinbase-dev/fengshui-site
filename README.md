@@ -1,7 +1,7 @@
 # Fengshui Club Thailand: landing page
 
-Next.js (App Router) + TypeScript + Tailwind CSS. Built from the Figma frame
-`Fengshui Club - Website` › `fengshui` (node 358:403), which is the source of truth.
+Next.js (App Router) + TypeScript + Tailwind CSS. Built from the Figma file `fengshui`
+(3AyPR0DX2jx237hXQdb98h: page node 1:751, service overlay node 1:3286), which is the source of truth.
 
 ## Commands
 
@@ -17,50 +17,49 @@ npm run screenshots # needs a running server; see docs/redesign.md
 ## Structure
 
 ```
-app/                     layout (fonts, metadata), pages, robots, sitemap, manifest, icons, OG image
-app/styles/tokens.css    design tokens (colours, type scale, radii, shadows, widths, motion timing)
-app/styles/motion.css    header glass, menu panel, CSS-only motion
-app/styles/services.css  service-page tokens and the looping hero gallery
-components/sections/     page sections (Hero, Consultation, Footer, service page sections, …)
-components/templates/    ServiceDetailTemplate (every /services/[slug] page)
-components/ui/           shared pieces (ConsultationForm, VideoPlayer, button styles, …)
+app/                     layout (fonts, metadata), the page, robots, sitemap, manifest, icons, OG image
+app/styles/tokens.css    design tokens (colours, type scale, radii, widths, motion timing)
+app/styles/motion.css    menu panel and entrance motion
+app/styles/photo-album.css  the tilted photo frames of the hero and activities albums
+app/styles/services.css  the services list's hover preview
+app/styles/service-overlay.css  the dialog's slide-in motion and the image loop
+components/sections/     page sections (Hero, Services, ServiceOverlay and its parts, Footer, …)
+components/ui/           shared pieces (InfiniteImageLoop, ServiceDialog, DotField, AlbumSlideshow, …)
 content/                 all copy and links: site.ts (site-wide), services/ (one file per service page)
-lib/consultation/        form schema + validation, server action, delivery adapter
+lib/service-overlay.ts   which service overlay is open (the ?service= address)
 lib/site-url.ts          production URL and indexability
 public/images/           design assets
 scripts/screenshots.mjs  screenshots at every test width + horizontal-scroll check
 ```
 
-## Service pages
+## One page, with service overlays
 
-Every `/services/<slug>` page renders `components/templates/ServiceDetailTemplate.tsx` (Figma
-405:2008) from one data file in `content/services/`: the title beside a looping photo gallery, the
-service's copy as `body` blocks (`lead`, `highlight`, `text`, `list`; see `content/services/types.ts`),
-the shared booking block (`content/services/booking.ts`), and the photo strip and footer shared with
-Home.
+The site is a single static page (`app/page.tsx`); the menu jumps to its sections by id. Each card
+in the service list opens that service's overlay in place (Figma 1:3286): a native modal
+`<dialog>` (`components/ui/ServiceDialog.tsx`) drawn as a drawer on the right, holding the title,
+byline and contact icons, the infinite image loop, the service's copy as `body` blocks (`lead`,
+`highlight`, `text`, `list`; see `content/services/types.ts`, all set as plain paragraphs) and the
+consult link.
 
-- **Add a service:** copy one of the data files, change its slug and content, and add it to the
-  list in `content/services/index.ts`. The route, sitemap and metadata pick it up.
-- **Replace the hero gallery placeholders:** put the photos in `public/images/services/<slug>/`,
-  import them in the service's data file, and set `heroGallery` to columns of
-  `{ src, alt }`, left to right (wider screens reveal more columns, up to four). Give every column
-  at least four photos so the loop never shows a gap. Tiles are square crops of the photos; export
-  them at least 520px on the short side. Use `alt: ""` for purely atmospheric photos.
+- **Addresses:** the open overlay is in the URL as `/?service=<slug>`, so it can be shared and
+  closes with back, Escape, the close button or a click outside (`lib/service-overlay.ts`). The old
+  `/services/<slug>` pages redirect there (`next.config.ts`).
+- **Add a service:** copy one of the data files in `content/services/`, change its slug and content,
+  and add it to the list in `content/services/index.ts`. The card, its overlay and the structured
+  data pick it up.
+- **Change the image loop photos:** put them in `public/images/services/<slug>/` as WebP
+  (square crops, 640px, are enough for the 258px tiles at 2x), import them in the service's data
+  file, and list them in `galleryColumns([...])` as `{ src, alt }`. It fills three columns of
+  three tiles, wrapping round when there are fewer than nine photos. Use `alt: ""` for purely
+  atmospheric photos. A service with `heroGallery: []` leaves the loop out.
+- **Photo albums:** both albums are slideshows that change one frame every two seconds
+  (`content/photos.ts`). The hero opens on `hero.photos` in `content/site.ts`, then mixes in the
+  rest; the activities album starts from a random four of `gallery.photos` plus every service
+  photo that has `alt` text. Add photos to either list to grow them.
+- **Service hover preview:** on wide screens with a mouse, hovering a service shows the first three
+  photos of its `heroGallery` in place of the statement; a service with no photos keeps the statement.
 
 Starting a redesign? See [docs/redesign.md](docs/redesign.md).
-
-## Consultation form
-
-The form posts to a Server Action (`lib/consultation/submit.ts`) that validates on the server and
-hands the request to `deliverConsultation` in `lib/consultation/deliver.ts`. That function is the
-only thing to change when connecting a CRM, email service or form provider. By default it POSTs
-JSON to `CONSULTATION_WEBHOOK_URL`:
-
-```json
-{ "name": "…", "birthDate": "1985-03-14", "email": "…", "phone": "…", "submittedAt": "ISO-8601" }
-```
-
-Without that variable the form shows an error message instead of pretending to succeed.
 
 ## Environment variables
 
@@ -69,5 +68,4 @@ See `.env.example`.
 | Variable | Purpose |
 | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Canonical domain for metadata, sitemap, OG. Falls back to Vercel's production URL. |
-| `CONSULTATION_WEBHOOK_URL` | Where form submissions are sent. |
 | `SITE_INDEXABLE` | `true` to allow indexing outside Vercel. On Vercel only the production deployment is indexable. |

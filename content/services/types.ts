@@ -1,6 +1,6 @@
-// Shape of a service detail page. Every service renders through one template
-// (components/templates/ServiceDetailTemplate.tsx, Figma 405:2008); a new service is
-// a new data file in this folder plus one line in index.ts.
+// Shape of a service. Each one is a card in the home page's service list and the
+// overlay that card opens (components/sections/ServiceOverlay.tsx); a new service is a
+// new data file in this folder plus one line in index.ts.
 
 import type { StaticImageData } from "next/image";
 
@@ -10,11 +10,12 @@ export type PhotoAsset = {
   alt: string;
 };
 
-// A tile in the hero gallery. Tiles are square crops, so any photo shape works.
+// A tile in the overlay's image loop. Tiles are square crops, so any photo shape works.
 export type GalleryPhoto = PhotoAsset;
 
-// The copy under the hero, in page order. Lines are the design's line breaks; on
-// narrow screens they run together and wrap.
+// The overlay's copy, in order. The single-page overlay (Figma 1:3286) sets all of it
+// as plain paragraphs; the block types are kept from the old service pages so their
+// copy carries over unchanged.
 export type ServiceBodyBlock =
   // Large opening statement.
   | { type: "lead"; lines: string[] }
@@ -25,15 +26,19 @@ export type ServiceBodyBlock =
   | { type: "list"; title: string; items: string[] };
 
 export type ServiceDetail = {
+  // Names the overlay in the address bar (/?service=<slug>), so keep it stable once
+  // shared. The old /services/<slug> pages redirect there (next.config.ts).
   slug: string;
-  // Full name, for metadata and structured data.
+  // Full name: the card title, the overlay heading and structured data.
   title: string;
-  // The hero heading, one entry per line as the design breaks it.
-  titleLines: string[];
-  metaTitle: string;
-  metaDescription: string;
-  // Columns of the looping hero gallery, left to right. Wide screens show more
-  // columns than narrow ones, so put the strongest photos in the first columns.
+  // The lines under the title on the service card, as the design breaks them.
+  summaryLines: string[];
+  // The line under the overlay heading, beside the contact icons.
+  byline: string;
+  // For structured data.
+  description: string;
+  // Columns of the overlay's image loop, left to right; the middle one is the most
+  // visible. Empty until the service has photos; the overlay then leaves the loop out.
   heroGallery: GalleryPhoto[][];
   body: ServiceBodyBlock[];
 };

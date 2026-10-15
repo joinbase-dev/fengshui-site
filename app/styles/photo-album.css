@@ -1,0 +1,101 @@
+/* The "dynamic album" (components/ui/AlbumSlideshow.tsx; Figma 1:777): four 409×450
+   frames placed and tilted as drawn in the 1246×631 album. Lengths are shares of the
+   album, so the arrangement scales as one piece. Phones (derived, not drawn) lay the
+   four out two by two further down, so each photo stays a usable size. */
+.photo-album {
+  aspect-ratio: 1246 / 631;
+}
+
+.photo-album-frame {
+  width: 32.825%; /* 409 / 1246 */
+  rotate: var(--tilt);
+}
+
+.photo-album-frame:nth-child(1) {
+  left: 3.115%;
+  top: 8.978%;
+  --tilt: -0.46deg;
+}
+
+.photo-album-frame:nth-child(2) {
+  left: 23.861%;
+  top: 17.944%;
+  --tilt: -4.71deg;
+}
+
+.photo-album-frame:nth-child(3) {
+  left: 43.721%;
+  top: 8.494%;
+  --tilt: 0.45deg;
+}
+
+.photo-album-frame:nth-child(4) {
+  left: 60.94%;
+  top: 16.676%;
+  --tilt: 2.95deg;
+}
+
+@media (max-width: 767px) {
+  .photo-album {
+    aspect-ratio: 1 / 1.08;
+  }
+
+  .photo-album-frame {
+    width: 50%;
+  }
+
+  .photo-album-frame:nth-child(1) {
+    left: 1%;
+    top: 1.9%;
+    --tilt: -2deg;
+  }
+
+  .photo-album-frame:nth-child(2) {
+    left: 48%;
+    top: 5.6%;
+    --tilt: 3deg;
+  }
+
+  .photo-album-frame:nth-child(3) {
+    left: 3%;
+    top: 43.5%;
+    --tilt: 1.5deg;
+  }
+
+  .photo-album-frame:nth-child(4) {
+    left: 46%;
+    top: 46.3%;
+    --tilt: -2.5deg;
+  }
+}
+
+/* On a pointer that hovers, the frame under it straightens, lifts and comes to the
+   front. Only transforms animate. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .photo-album-frame {
+    transition:
+      rotate var(--duration-lift) var(--ease-refined),
+      translate var(--duration-lift) var(--ease-refined);
+  }
+
+  .photo-album-frame:hover {
+    z-index: 1;
+    rotate: 0deg;
+    translate: 0 -12px;
+  }
+}
+
+/* The album slideshow (components/ui/AlbumSlideshow.tsx): a frame's next photo
+   fades in over the current one. */
+.album-slide {
+  transition: opacity var(--duration-slide) var(--ease-refined);
+}
+
+/* The club emblem faded behind the hero album (Figma 1:767): 723×668 at 25% opacity,
+   centred a little right of and above the album's middle. */
+.hero-emblem {
+  left: 51.4%;
+  top: 43.6%;
+  width: 58.03%; /* 723 / 1246 */
+  translate: -50% -50%;
+}

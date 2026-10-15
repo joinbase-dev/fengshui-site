@@ -1,5 +1,7 @@
-// Interface text on the service pages that is not in the design.
+// Interface text around the services.
 export const serviceUi = {
-  // Screen-reader name of the hero gallery's pause control.
-  pauseGallery: "หยุดภาพเคลื่อนไหว",
+  // The overlay's close button, as the design labels it.
+  close: "ปิดหน้าต่าง",
+  // Not in the design: screen-reader name of the overlay's contact icons.
+  contact: "ช่องทางติดต่อ",
 } as const;

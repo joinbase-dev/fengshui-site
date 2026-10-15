@@ -1,44 +1,77 @@
-/* Announcement ticker, menu panel and the CSS-only motion utilities (.enter, .reveal,
-   .reveal-group). All motion is off under prefers-reduced-motion. */
+/* The dotted panel's still grid, the full-screen menu and the hero's load-in. All
+   motion is off under prefers-reduced-motion. */
 
-/* Announcement strip: the design repeats the notice in a clipped row, read here as a
-   ticker. The track holds two copies and slides by one copy's width (half the track),
-   so the loop is seamless. Under reduced motion it is one still, wrapping line. */
-.marquee-track {
-  display: flex;
-  width: max-content;
+/* The dotted panel beside the service list (components/ui/DotField.tsx) as plain CSS:
+   what shows before the canvas is ready, without JavaScript and with reduced motion.
+   One dot per 23.22px tile, with a dot on the centre lines, like the canvas. */
+.dot-field {
+  background-image: radial-gradient(circle, currentColor 1.29px, transparent 1.79px);
+  background-size: 23.22px 23.22px;
+  background-position: center;
+}
+
+.dot-field[data-ready] {
+  background-image: none;
+}
+
+/* The full-screen menu below lg (components/ui/MobileMenu.tsx): a blush sheet over the
+   whole screen that scrolls on its own if it has to, with the page under it locked. */
+.menu-dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--color-blush);
+  color: inherit;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.menu-dialog::backdrop {
+  background: transparent;
+}
+
+html:has(.menu-dialog[open]) {
+  overflow: hidden;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .marquee-track {
-    animation: marquee var(--duration-marquee) linear infinite;
+  /* The sheet fades in, then its rows rise into place one after another; it fades out
+     whole, a little quicker. */
+  .menu-dialog {
+    opacity: 0;
+    transition:
+      opacity var(--duration-overlay-out) var(--ease-refined),
+      overlay var(--duration-overlay-out) allow-discrete,
+      display var(--duration-overlay-out) allow-discrete;
   }
 
-  .marquee:hover .marquee-track,
-  .marquee:focus-within .marquee-track {
-    animation-play-state: paused;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    width: auto;
+  .menu-dialog[open] {
+    opacity: 1;
+    transition-duration: var(--duration-lift);
   }
 
-  .marquee-track > [aria-hidden] {
-    display: none;
+  .menu-dialog[open] .menu-item {
+    transition:
+      opacity var(--duration-overlay-in) var(--ease-refined),
+      translate var(--duration-overlay-in) var(--ease-drawer-in);
+    transition-delay: calc(80ms + var(--i, 0) * 60ms);
   }
-}
 
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
+  @starting-style {
+    .menu-dialog[open] {
+      opacity: 0;
+    }
 
-@media (prefers-reduced-motion: no-preference) {
-  details[open] > .menu-panel {
-    animation: rise var(--duration-hover) var(--ease-refined);
+    .menu-dialog[open] .menu-item {
+      opacity: 0;
+      translate: 0 12px;
+    }
   }
 
   /* Load-in for content already on screen: fade and a 12px rise, staggered by --i. */
@@ -46,43 +79,11 @@
     animation: rise var(--duration-enter) var(--ease-refined) both;
     animation-delay: calc(var(--i, 0) * 120ms);
   }
-
-  /* Scroll reveal: progress follows the element entering the viewport, so content
-     that is already visible never waits. Children of .reveal-group stagger by
-     shifting their range. No timeline support means no animation, never hidden text. */
-  @supports (animation-timeline: view()) {
-    .reveal,
-    .reveal-group > * {
-      animation: reveal linear both;
-      animation-timing-function: var(--ease-refined);
-      animation-timeline: view();
-      animation-range: entry calc(5% + var(--i, 0) * 10%) entry calc(55% + var(--i, 0) * 10%);
-    }
-
-    .reveal-group > :nth-child(2) {
-      --i: 1;
-    }
-
-    .reveal-group > :nth-child(3) {
-      --i: 2;
-    }
-
-    .reveal-group > :nth-child(4) {
-      --i: 3;
-    }
-  }
 }
 
 @keyframes rise {
   from {
     opacity: 0;
     transform: translateY(12px);
-  }
-}
-
-@keyframes reveal {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
   }
 }
