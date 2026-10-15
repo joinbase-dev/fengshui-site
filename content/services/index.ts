@@ -10,6 +10,5 @@ import type { ServiceDetail } from "./types";
 
 export type * from "./types";
 export { serviceUi } from "./ui";
-export { serviceBooking } from "./booking";
 
 export const serviceDetails: ServiceDetail[] = [fengShuiHome, destinyPhysiognomy, saeKi, auspiciousTiming];

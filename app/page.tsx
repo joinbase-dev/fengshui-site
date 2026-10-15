@@ -6,7 +6,7 @@ import { Gallery } from "@/components/sections/Gallery";
 import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { serviceDetails } from "@/content/services";
-import { site } from "@/content/site";
+import { address, site, social } from "@/content/site";
 import { siteUrl } from "@/lib/site-url";
 
 const structuredData = {
@@ -17,6 +17,14 @@ const structuredData = {
   description: site.description,
   url: siteUrl,
   logo: `${siteUrl}/images/logo.png`,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: address.street,
+    addressLocality: address.city,
+    postalCode: address.postalCode,
+    addressCountry: "TH",
+  },
+  sameAs: [social.facebook.href, social.instagram.href, social.tiktok.href],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "บริการ",

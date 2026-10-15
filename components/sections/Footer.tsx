@@ -1,7 +1,7 @@
 import { footer } from "@/content/site";
 
 // Figma footer (1:807): a rule across the content width, then the club's name and
-// tagline beside its social links, set as plain text. 80px margins and 90px above and
+// address beside its social links, set as plain text. 80px margins and 90px above and
 // below at 1440; below md (derived) the links move under the name.
 export function Footer() {
   return (
@@ -9,14 +9,7 @@ export function Footer() {
       <div className="mx-auto flex max-w-wide flex-col gap-10 border-t border-rule pt-10 text-black md:flex-row md:items-start md:justify-between lg:gap-16 lg:pt-16">
         <div className="flex flex-col gap-4">
           <p className="text-footer-title font-medium">{footer.title}</p>
-          <p className="max-w-80 text-footer">
-            {footer.taglineLines.map((line, index) => (
-              <span key={line}>
-                {index > 0 && " "}
-                {line}
-              </span>
-            ))}
-          </p>
+          <address className="max-w-80 text-footer not-italic">{footer.address}</address>
         </div>
         <ul aria-label={footer.socialLabel} className="-mx-2 flex flex-wrap gap-x-4 md:-my-2.5">
           {footer.social.map((item) => (

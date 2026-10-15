@@ -3,16 +3,19 @@
 @import "./styles/motion.css";
 @import "./styles/service-overlay.css";
 @import "./styles/photo-album.css";
+@import "./styles/services.css";
 
+/* The scrollbar keeps its space while an overlay locks the page, so nothing shifts. */
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 /* The page fades from blush at the top to white at the bottom (Figma 1:751). The body's
    background paints the canvas, so the gradient spans the whole page, not the screen. */
 body {
   background: linear-gradient(var(--color-blush), var(--color-white));
-  color: var(--color-ink);
+  color: var(--color-black);
 }
 
 @media (prefers-reduced-motion: reduce) {

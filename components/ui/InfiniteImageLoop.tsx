@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { serviceUi, type GalleryPhoto } from "@/content/services";
+import type { GalleryPhoto } from "@/content/services";
 
 type InfiniteImageLoopProps = {
   columns: GalleryPhoto[][];
@@ -36,28 +36,12 @@ function TileList({ photos, duplicate }: { photos: GalleryPhoto[]; duplicate: bo
   );
 }
 
-function PauseIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" className="group-has-checked:hidden">
-      <path d="M7 5v10M13 5v10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function ResumeIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" className="hidden group-has-checked:block">
-      <path d="M7 4.5v11l9-5.5-9-5.5z" fill="currentColor" />
-    </svg>
-  );
-}
-
 // The "infinite image loop" from the design: three columns of square photos drifting
 // slowly up and down in a seamless loop, centred on the middle column and clipped to
 // its parent, which cuts into the outer two (motion in app/styles/service-overlay.css).
 // Each column renders its list twice so the loop has no gap; the copy is hidden from
-// assistive technology. With reduced motion the gallery stands still and the pause
-// control is not shown.
+// assistive technology. A pointer resting on it holds it still, and with reduced
+// motion it stands still.
 //
 // Each column's list must be taller than the band plus its offset: three tiles
 // are, at every breakpoint (content/services/gallery.ts lays them out).
@@ -74,13 +58,6 @@ export function InfiniteImageLoop({ columns }: InfiniteImageLoopProps) {
           </div>
         ))}
       </div>
-
-      <label className="group absolute right-3 bottom-3 flex size-11 cursor-pointer items-center justify-center rounded-full bg-white/90 text-black shadow-base has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-brand motion-reduce:hidden">
-        <input type="checkbox" className="image-loop-pause sr-only" />
-        <PauseIcon />
-        <ResumeIcon />
-        <span className="sr-only">{serviceUi.pauseGallery}</span>
-      </label>
     </div>
   );
 }

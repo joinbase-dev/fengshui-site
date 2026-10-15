@@ -1,9 +1,18 @@
 import { gallery } from "@/content/site";
-import { PhotoAlbum } from "@/components/ui/PhotoAlbum";
+import { serviceDetails, type PhotoAsset } from "@/content/services";
+import { AlbumSlideshow } from "@/components/ui/AlbumSlideshow";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
+// Every photo the site has besides the hero's, once each: the activity photos, then
+// the services' (a photo repeated in a service's image loop carries an empty alt).
+const photos: PhotoAsset[] = [
+  ...gallery.photos,
+  ...serviceDetails.flatMap((service) => service.heroGallery.flat().filter((photo) => photo.alt !== "")),
+];
+
 // Figma activities section (1:798): the section label over the same photo album as the
-// hero. The design's frames are still empty, and so are these until the photos arrive.
+// hero. The design's frames are still empty, so at Ohm's request the album runs a
+// random slideshow of the site's photos until the activity photos arrive.
 export function Gallery() {
   return (
     <section
@@ -13,7 +22,7 @@ export function Gallery() {
     >
       <div className="mx-auto max-w-wide">
         <SectionLabel id="activities-title">{gallery.label}</SectionLabel>
-        <PhotoAlbum className="mt-8" />
+        <AlbumSlideshow photos={photos} className="mt-8" />
       </div>
     </section>
   );

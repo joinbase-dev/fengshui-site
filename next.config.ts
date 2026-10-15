@@ -7,8 +7,6 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
-    // YouTube poster frames for the service page video.
-    remotePatterns: [{ protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" }],
   },
   // The services used to be pages of their own; their old addresses now open the same
   // service's overlay on the single page.

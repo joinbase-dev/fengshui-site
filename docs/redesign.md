@@ -55,4 +55,4 @@ CI runs lint, typecheck and build on every pull request.
   the web (Sukhumvit Set, used in the first design, is not).
 - Final copy for every block that still has lorem ipsum.
 - Hover, focus, error and empty states, if the design has them.
-- Anything new that needs data: social account URLs, the form's destination, video IDs.
+- Anything new that needs data, such as social account URLs.

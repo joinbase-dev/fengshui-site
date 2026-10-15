@@ -1,10 +1,13 @@
-/* The "dynamic album" (components/ui/PhotoAlbum.tsx; Figma 1:777). Each frame is
-   409×450 with the photo 14px in, placed and tilted as drawn in the 1246×631 album.
-   Lengths are shares of the album's width (padding percentages resolve against it
-   too), so the arrangement scales as one piece. */
+/* The "dynamic album" (components/ui/PhotoAlbum.tsx; Figma 1:777): four 409×450
+   frames placed and tilted as drawn in the 1246×631 album. Lengths are shares of the
+   album, so the arrangement scales as one piece. Phones (derived, not drawn) lay the
+   four out two by two further down, so each photo stays a usable size. */
+.photo-album {
+  aspect-ratio: 1246 / 631;
+}
+
 .photo-album-frame {
   width: 32.825%; /* 409 / 1246 */
-  padding: 1.124%; /* 14 / 1246 */
   rotate: var(--tilt);
 }
 
@@ -32,13 +35,47 @@
   --tilt: 2.95deg;
 }
 
+@media (max-width: 767px) {
+  .photo-album {
+    aspect-ratio: 1 / 1.08;
+  }
+
+  .photo-album-frame {
+    width: 50%;
+  }
+
+  .photo-album-frame:nth-child(1) {
+    left: 1%;
+    top: 1.9%;
+    --tilt: -2deg;
+  }
+
+  .photo-album-frame:nth-child(2) {
+    left: 48%;
+    top: 5.6%;
+    --tilt: 3deg;
+  }
+
+  .photo-album-frame:nth-child(3) {
+    left: 3%;
+    top: 43.5%;
+    --tilt: 1.5deg;
+  }
+
+  .photo-album-frame:nth-child(4) {
+    left: 46%;
+    top: 46.3%;
+    --tilt: -2.5deg;
+  }
+}
+
 /* On a pointer that hovers, the frame under it straightens, lifts and comes to the
    front. Only transforms animate. */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .photo-album-frame {
     transition:
-      rotate var(--duration-overlay) var(--ease-refined),
-      translate var(--duration-overlay) var(--ease-refined);
+      rotate var(--duration-lift) var(--ease-refined),
+      translate var(--duration-lift) var(--ease-refined);
   }
 
   .photo-album-frame:hover {
@@ -46,6 +83,12 @@
     rotate: 0deg;
     translate: 0 -12px;
   }
+}
+
+/* The activities slideshow (components/ui/AlbumSlideshow.tsx): a frame's next photo
+   fades in over the current one. */
+.album-slide {
+  transition: opacity var(--duration-slide) var(--ease-refined);
 }
 
 /* The club emblem faded behind the hero album (Figma 1:767): 723×668 at 25% opacity,

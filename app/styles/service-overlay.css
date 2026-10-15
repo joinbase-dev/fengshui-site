@@ -2,8 +2,8 @@
    infinite image loop's (components/ui/InfiniteImageLoop.tsx). */
 
 /* The dialog fills the screen, transparent; the panel inside it is the drawer, full
-   height on the right, and scrolls on its own. The design leaves the page beside it
-   undimmed. The page under an open dialog does not scroll. */
+   height on the right on every screen size, and scrolls on its own. The design leaves
+   the page beside it undimmed. The page under an open dialog does not scroll. */
 .service-dialog {
   position: fixed;
   inset: 0;
@@ -27,27 +27,52 @@ html:has(.service-dialog[open]) {
   overflow: hidden;
 }
 
-/* Opening slides the drawer in from the right; closing slides it back out. Only
-   transform animates. Under reduced motion it appears and disappears. */
+/* Opening: the drawer glides in from the right and settles, then its content fades in
+   a beat behind it, so the panel arrives before the text does. Closing is quicker and
+   accelerates away. Only transform and opacity animate; the drawer is on its own
+   compositor layer while it moves. Under reduced motion it appears and disappears. */
 @media (prefers-reduced-motion: no-preference) {
   .service-dialog {
     transition:
-      overlay var(--duration-overlay) allow-discrete,
-      display var(--duration-overlay) allow-discrete;
+      overlay var(--duration-overlay-out) allow-discrete,
+      display var(--duration-overlay-out) allow-discrete;
   }
 
   .service-dialog-panel {
-    transition: transform var(--duration-overlay) var(--ease-refined);
     transform: translate3d(100%, 0, 0);
+    transition: transform var(--duration-overlay-out) var(--ease-drawer-out);
+    will-change: transform;
+  }
+
+  .service-dialog-content {
+    opacity: 0;
+    transform: translate3d(32px, 0, 0);
+    transition:
+      opacity var(--duration-overlay-out) var(--ease-drawer-out),
+      transform var(--duration-overlay-out) var(--ease-drawer-out);
   }
 
   .service-dialog[open] .service-dialog-panel {
     transform: none;
+    transition: transform var(--duration-overlay-in) var(--ease-drawer-in);
+  }
+
+  .service-dialog[open] .service-dialog-content {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity var(--duration-overlay-in) var(--ease-refined) 120ms,
+      transform var(--duration-overlay-in) var(--ease-drawer-in) 120ms;
   }
 
   @starting-style {
     .service-dialog[open] .service-dialog-panel {
       transform: translate3d(100%, 0, 0);
+    }
+
+    .service-dialog[open] .service-dialog-content {
+      opacity: 0;
+      transform: translate3d(32px, 0, 0);
     }
   }
 }
@@ -55,8 +80,8 @@ html:has(.service-dialog[open]) {
 /* Each gallery column holds its tile list twice, stacked, and slides by exactly one
    list (-50%), so the loop restarts on an identical frame with no jump. Columns
    alternate direction and run at slightly different speeds, so the stagger drifts
-   slowly. Only transform animates. With reduced motion the columns stand still in
-   the design's staggered layout. */
+   slowly. Only transform animates. A pointer resting on the loop holds it still. With
+   reduced motion the columns stand still in the design's staggered layout. */
 @media (prefers-reduced-motion: no-preference) {
   .image-loop-track {
     animation: image-loop-scroll var(--loop-duration, 60s) linear infinite;
@@ -72,8 +97,7 @@ html:has(.service-dialog[open]) {
     --loop-duration: 66s;
   }
 
-  /* The pause control (WCAG 2.2.2) is a checkbox, so pausing needs no JavaScript. */
-  .image-loop:has(.image-loop-pause:checked) .image-loop-track {
+  .image-loop:hover .image-loop-track {
     animation-play-state: paused;
   }
 }
