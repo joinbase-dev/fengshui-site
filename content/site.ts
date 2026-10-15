@@ -63,6 +63,7 @@ export const gallery = {
 export const header = {
   homeLabel: "หน้าแรก คลับฮวงจุ้ยแห่งประเทศไทย",
   menuLabel: "เมนู",
+  closeLabel: "ปิดเมนู",
   navLabel: "เมนูหลัก",
   nav: [
     { label: "คลับฮวงจุ้ยแห่งประเทศไทย", href: `#${hero.id}` },

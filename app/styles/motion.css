@@ -1,5 +1,5 @@
-/* The dotted panel's still grid, the menu panel and the hero's load-in. All motion is
-   off under prefers-reduced-motion. */
+/* The dotted panel's still grid, the full-screen menu and the hero's load-in. All
+   motion is off under prefers-reduced-motion. */
 
 /* The dotted panel beside the service list (components/ui/DotField.tsx) as plain CSS:
    what shows before the canvas is ready, without JavaScript and with reduced motion.
@@ -14,9 +14,64 @@
   background-image: none;
 }
 
+/* The full-screen menu below lg (components/ui/MobileMenu.tsx): a blush sheet over the
+   whole screen that scrolls on its own if it has to, with the page under it locked. */
+.menu-dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--color-blush);
+  color: inherit;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.menu-dialog::backdrop {
+  background: transparent;
+}
+
+html:has(.menu-dialog[open]) {
+  overflow: hidden;
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  details[open] > .menu-panel {
-    animation: rise var(--duration-hover) var(--ease-refined);
+  /* The sheet fades in, then its rows rise into place one after another; it fades out
+     whole, a little quicker. */
+  .menu-dialog {
+    opacity: 0;
+    transition:
+      opacity var(--duration-overlay-out) var(--ease-refined),
+      overlay var(--duration-overlay-out) allow-discrete,
+      display var(--duration-overlay-out) allow-discrete;
+  }
+
+  .menu-dialog[open] {
+    opacity: 1;
+    transition-duration: var(--duration-lift);
+  }
+
+  .menu-dialog[open] .menu-item {
+    transition:
+      opacity var(--duration-overlay-in) var(--ease-refined),
+      translate var(--duration-overlay-in) var(--ease-drawer-in);
+    transition-delay: calc(80ms + var(--i, 0) * 60ms);
+  }
+
+  @starting-style {
+    .menu-dialog[open] {
+      opacity: 0;
+    }
+
+    .menu-dialog[open] .menu-item {
+      opacity: 0;
+      translate: 0 12px;
+    }
   }
 
   /* Load-in for content already on screen: fade and a 12px rise, staggered by --i. */

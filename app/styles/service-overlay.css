@@ -2,14 +2,17 @@
    infinite image loop's (components/ui/InfiniteImageLoop.tsx). */
 
 /* The dialog fills the screen, transparent; the panel inside it is the drawer, full
-   height on the right on every screen size, and scrolls on its own. The design leaves
-   the page beside it undimmed. The page under an open dialog does not scroll. */
+   height on the right, and scrolls on its own. From lg up the design leaves the page
+   beside it undimmed; below lg the drawer takes the whole width, so no strip of page
+   shows beside it. The dialog is pinned to all four edges rather than given a viewport
+   height, so it follows mobile browser bars as they show and hide. The page under an
+   open dialog does not scroll. */
 .service-dialog {
   position: fixed;
   inset: 0;
   width: 100%;
   max-width: none;
-  height: 100dvh;
+  height: auto;
   max-height: none;
   margin: 0;
   padding: 0;
@@ -80,8 +83,8 @@ html:has(.service-dialog[open]) {
 /* Each gallery column holds its tile list twice, stacked, and slides by exactly one
    list (-50%), so the loop restarts on an identical frame with no jump. Columns
    alternate direction and run at slightly different speeds, so the stagger drifts
-   slowly. Only transform animates. A pointer resting on the loop holds it still. With
-   reduced motion the columns stand still in the design's staggered layout. */
+   slowly. Only transform animates. With reduced motion the columns stand still in the
+   design's staggered layout. */
 @media (prefers-reduced-motion: no-preference) {
   .image-loop-track {
     animation: image-loop-scroll var(--loop-duration, 60s) linear infinite;
@@ -95,10 +98,6 @@ html:has(.service-dialog[open]) {
 
   .image-loop-column:nth-child(3) .image-loop-track {
     --loop-duration: 66s;
-  }
-
-  .image-loop:hover .image-loop-track {
-    animation-play-state: paused;
   }
 }
 

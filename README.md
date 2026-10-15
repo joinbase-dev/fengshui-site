@@ -24,7 +24,7 @@ app/styles/photo-album.css  the tilted photo frames of the hero and activities a
 app/styles/services.css  the services list's hover preview
 app/styles/service-overlay.css  the dialog's slide-in motion and the image loop
 components/sections/     page sections (Hero, Services, ServiceOverlay and its parts, Footer, …)
-components/ui/           shared pieces (InfiniteImageLoop, ServiceDialog, DotField, PhotoAlbum, AlbumSlideshow, …)
+components/ui/           shared pieces (InfiniteImageLoop, ServiceDialog, DotField, AlbumSlideshow, …)
 content/                 all copy and links: site.ts (site-wide), services/ (one file per service page)
 lib/service-overlay.ts   which service overlay is open (the ?service= address)
 lib/site-url.ts          production URL and indexability
@@ -52,9 +52,10 @@ consult link.
   file, and list them in `galleryColumns([...])` as `{ src, alt }`. It fills three columns of
   three tiles, wrapping round when there are fewer than nine photos. Use `alt: ""` for purely
   atmospheric photos. A service with `heroGallery: []` leaves the loop out.
-- **Photo albums:** the hero album's four photos are `hero.photos` in `content/site.ts`. The
-  activities album is a slideshow of `gallery.photos` plus every service photo that has `alt` text,
-  starting from a random four; add photos to either list to grow it.
+- **Photo albums:** both albums are slideshows that change one frame every two seconds
+  (`content/photos.ts`). The hero opens on `hero.photos` in `content/site.ts`, then mixes in the
+  rest; the activities album starts from a random four of `gallery.photos` plus every service
+  photo that has `alt` text. Add photos to either list to grow them.
 - **Service hover preview:** on wide screens with a mouse, hovering a service shows the first three
   photos of its `heroGallery` in place of the statement; a service with no photos keeps the statement.
 

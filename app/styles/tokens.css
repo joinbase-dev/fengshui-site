@@ -71,7 +71,7 @@
   --duration-enter: 900ms;
   --duration-overlay-in: 560ms;
   --duration-overlay-out: 320ms;
-  --duration-slide: 1200ms; /* one crossfade in the activities slideshow */
+  --duration-slide: 800ms; /* one crossfade in the album slideshows */
   /* Opening slides decelerate into place; closing accelerates away. */
   --ease-drawer-in: cubic-bezier(0.32, 0.72, 0, 1);
   --ease-drawer-out: cubic-bezier(0.4, 0, 1, 1);

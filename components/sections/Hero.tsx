@@ -1,12 +1,14 @@
 import Image from "next/image";
 import { hero } from "@/content/site";
 import { ConsultLink } from "@/components/ui/ConsultLink";
-import { PhotoAlbum } from "@/components/ui/PhotoAlbum";
+import { AlbumSlideshow } from "@/components/ui/AlbumSlideshow";
+import { heroAlbumPhotos } from "@/content/photos";
 import emblem from "@/public/images/emblem.png";
 
 // Figma Hero-section (1:766), 1440 wide with 80px margins: the club label, the heading
 // with its second half on a red band, the introduction and the consult link, then the
-// photo album over the faded club emblem. Below lg (derived, not drawn) the type steps
+// photo album over the faded club emblem, which opens on the hero's four photos and
+// then changes one every two seconds. Below lg (derived, not drawn) the type steps
 // down and the album scales with the width.
 export function Hero() {
   return (
@@ -36,7 +38,7 @@ export function Hero() {
             sizes="(min-width: 1406px) 723px, 58vw"
             className="hero-emblem pointer-events-none absolute max-w-none opacity-25"
           />
-          <PhotoAlbum photos={hero.photos} className="relative" />
+          <AlbumSlideshow photos={heroAlbumPhotos} priority className="relative" />
         </div>
       </div>
     </section>

@@ -40,14 +40,13 @@ function TileList({ photos, duplicate }: { photos: GalleryPhoto[]; duplicate: bo
 // slowly up and down in a seamless loop, centred on the middle column and clipped to
 // its parent, which cuts into the outer two (motion in app/styles/service-overlay.css).
 // Each column renders its list twice so the loop has no gap; the copy is hidden from
-// assistive technology. A pointer resting on it holds it still, and with reduced
-// motion it stands still.
+// assistive technology. With reduced motion it stands still.
 //
 // Each column's list must be taller than the band plus its offset: three tiles
 // are, at every breakpoint (content/services/gallery.ts lays them out).
 export function InfiniteImageLoop({ columns }: InfiniteImageLoopProps) {
   return (
-    <div className="image-loop absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden">
       <div className="flex justify-center gap-5 md:gap-8">
         {columns.slice(0, columnOffsets.length).map((photos, column) => (
           <div key={column} className={`image-loop-column w-40 shrink-0 md:w-64.5 ${columnOffsets[column]}`}>

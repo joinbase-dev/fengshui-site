@@ -15,7 +15,7 @@ type ServiceDialogProps = {
 // The overlay shell: a native modal <dialog>, which brings the focus trap, Escape to
 // close, an inert page behind it and focus back on the card that opened it. The panel
 // is a drawer on the right (Figma 1:3286) that scrolls on its own, with the page
-// visible beside it. It opens when the address bar names its service
+// visible beside it from lg up and full width below. It opens when the address bar names its service
 // (lib/service-overlay.ts), and closing it in any way (button, Escape, a click beside
 // the panel, back) clears that. The content is rendered on the server and stays in the
 // HTML; while closed it is display: none, so its lazy images and the image loop cost
@@ -64,7 +64,7 @@ export function ServiceDialog({ slug, labelledBy, closeLabel, children }: Servic
       onClick={handleClick}
       className="service-dialog"
     >
-      <div ref={panelRef} className="service-dialog-panel relative ml-auto h-full w-full max-w-drawer overflow-y-auto overscroll-contain bg-sand">
+      <div ref={panelRef} className="service-dialog-panel relative ml-auto h-full w-full overflow-y-auto overscroll-contain bg-sand lg:max-w-drawer">
         <form method="dialog" className="absolute top-6 right-3 md:right-6">
           <button
             type="submit"

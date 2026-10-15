@@ -1,4 +1,4 @@
-/* The "dynamic album" (components/ui/PhotoAlbum.tsx; Figma 1:777): four 409×450
+/* The "dynamic album" (components/ui/AlbumSlideshow.tsx; Figma 1:777): four 409×450
    frames placed and tilted as drawn in the 1246×631 album. Lengths are shares of the
    album, so the arrangement scales as one piece. Phones (derived, not drawn) lay the
    four out two by two further down, so each photo stays a usable size. */
@@ -85,7 +85,7 @@
   }
 }
 
-/* The activities slideshow (components/ui/AlbumSlideshow.tsx): a frame's next photo
+/* The album slideshow (components/ui/AlbumSlideshow.tsx): a frame's next photo
    fades in over the current one. */
 .album-slide {
   transition: opacity var(--duration-slide) var(--ease-refined);
