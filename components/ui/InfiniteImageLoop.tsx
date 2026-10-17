@@ -2,8 +2,12 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 import type { GalleryPhoto } from "@/content/services";
 
+type Loading = "lazy" | "eager";
+
 type InfiniteImageLoopProps = {
   columns: GalleryPhoto[][];
+  // Lazy in an overlay, which starts closed; eager on a service's page.
+  loading?: Loading;
 };
 
 // The two columns are staggered: at rest the second starts further above the band
@@ -16,7 +20,7 @@ const columnOffsets = ["-mt-8 md:-mt-15.75", "-mt-20 md:-mt-42"];
 // entries long; the loop's markup is repeated across every overlay on the page.
 const tileSize = 301;
 
-function TileList({ photos, duplicate }: { photos: GalleryPhoto[]; duplicate: boolean }) {
+function TileList({ photos, duplicate, loading }: { photos: GalleryPhoto[]; duplicate: boolean; loading: Loading }) {
   return (
     <ul aria-hidden={duplicate || undefined} className="flex flex-col gap-5 pb-5 md:gap-9.5 md:pb-9.5">
       {photos.map((photo, index) => (
@@ -26,9 +30,9 @@ function TileList({ photos, duplicate }: { photos: GalleryPhoto[]; duplicate: bo
             alt={duplicate ? "" : photo.alt}
             width={tileSize}
             height={tileSize}
-            // Lazy even in the first frame: the loop lives in a closed overlay, and
-            // only lazy images wait until it is shown.
-            loading="lazy"
+            // In an overlay, lazy even in the first frame: only lazy images wait until
+            // the closed overlay is shown.
+            loading={loading}
             className="size-full object-cover"
           />
         </li>
@@ -47,7 +51,7 @@ function TileList({ photos, duplicate }: { photos: GalleryPhoto[]; duplicate: bo
 //
 // Each column's list must be taller than the band plus its offset: two tiles are, at
 // every breakpoint (content/services/gallery.ts lays out at least two).
-export function InfiniteImageLoop({ columns }: InfiniteImageLoopProps) {
+export function InfiniteImageLoop({ columns, loading = "lazy" }: InfiniteImageLoopProps) {
   return (
     <div className="absolute inset-0 overflow-hidden">
       <div className="grid grid-cols-2 gap-5 md:gap-9.5">
@@ -58,8 +62,8 @@ export function InfiniteImageLoop({ columns }: InfiniteImageLoopProps) {
             className={`image-loop-column ${columnOffsets[column]}`}
           >
             <div className="image-loop-track">
-              <TileList photos={photos} duplicate={false} />
-              <TileList photos={photos} duplicate />
+              <TileList photos={photos} duplicate={false} loading={loading} />
+              <TileList photos={photos} duplicate loading={loading} />
             </div>
           </div>
         ))}

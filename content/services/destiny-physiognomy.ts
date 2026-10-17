@@ -1,4 +1,4 @@
-// Personal โหวงเฮ้ง. Overlay copy transcribed from Ohm's mock-up (2026-10-17).
+// Personal โหงวเฮ้ง. Overlay copy transcribed from Ohm's mock-up (2026-10-17).
 
 import { galleryColumns } from "./gallery";
 import type { ServiceDetail } from "./types";
@@ -14,11 +14,14 @@ import photo09 from "@/public/images/services/destiny-physiognomy/09.webp";
 
 export const destinyPhysiognomy: ServiceDetail = {
   slug: "destiny-physiognomy",
-  title: "Personal โหวงเฮ้ง",
+  title: "Personal โหงวเฮ้ง",
   summaryLines: ["ให้คำปรึกษาดวงชะตาส่วนบุคคล เข้าใจพื้นดวง", "ค้นหาจังหวะชีวิต และวิเคราะห์โหงวเฮ้งเฉพาะบุคคล"],
-  byline: "Personal โหวงเฮ้ง โดย อ.ดำรงชัย",
-  description:
-    "ค้นพบศักยภาพและโอกาสในชีวิต ผ่านศาสตร์แห่งการวิเคราะห์ใบหน้า ลักษณะใบหน้าแต่ละส่วนสะท้อนถึงบุคลิกภาพ จุดเด่น และแนวโน้มของชีวิต",
+  byline: "Personal โหงวเฮ้ง โดย อ.ดำรงชัย",
+  seo: {
+    title: "ดูโหงวเฮ้ง วิเคราะห์ใบหน้าเฉพาะบุคคล",
+    description:
+      "วิเคราะห์โหงวเฮ้งใบหน้าเฉพาะบุคคลกับอาจารย์ดำรงชัย สำรวจบุคลิกภาพ จุดเด่น และแนวโน้มชีวิตผ่านศาสตร์จีน พร้อมคำแนะนำด้านการงาน ธุรกิจ และความสัมพันธ์",
+  },
   heroGallery: galleryColumns([
     { src: photo01, alt: "อาจารย์ดำรงชัยบรรยายเรื่องโหงวเฮ้งบนเวที" },
     { src: photo02, alt: "อาจารย์ดำรงชัยกับผู้มาดูโหงวเฮ้งที่ถือแผ่นภาพการดูโหงวเฮ้ง" },
