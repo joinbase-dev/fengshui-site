@@ -5,12 +5,13 @@ import { InfiniteImageLoop } from "@/components/ui/InfiniteImageLoop";
 type ServiceBodyProps = {
   gallery: ServiceDetail["heroGallery"];
   blocks: ServiceDetail["body"];
+  cta: ServiceDetail["cta"];
 };
 
 // The rest of a service overlay (Figma 1:3306): the infinite image loop, the service's
-// copy as plain 18px paragraphs 24px apart, then the consult link 32px below. A service
-// without photos leaves the loop out.
-export function ServiceBody({ gallery, blocks }: ServiceBodyProps) {
+// copy as plain 18px paragraphs 24px apart, then the consult link (with the service's
+// own wording, if it has one) 32px below. A service without photos leaves the loop out.
+export function ServiceBody({ gallery, blocks, cta }: ServiceBodyProps) {
   return (
     <div className="flex flex-col items-start gap-8">
       <div className="flex w-full flex-col gap-6 text-copy-sm text-black md:text-copy">
@@ -43,7 +44,7 @@ export function ServiceBody({ gallery, blocks }: ServiceBodyProps) {
           }
         })}
       </div>
-      <ConsultLink />
+      <ConsultLink label={cta} />
     </div>
   );
 }

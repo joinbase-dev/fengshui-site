@@ -37,8 +37,11 @@ export type ServiceDetail = {
   byline: string;
   // For structured data.
   description: string;
-  // Columns of the overlay's image loop, left to right; the middle one is the most
-  // visible. Empty until the service has photos; the overlay then leaves the loop out.
+  // The two columns of the overlay's image loop, left to right (gallery.ts lays them
+  // out). Empty until the service has photos; the overlay then leaves the loop out.
   heroGallery: GalleryPhoto[][];
   body: ServiceBodyBlock[];
+  // The red link at the end of the overlay, when it is not "ปรึกษาอาจารย์ดำรงชัย". It
+  // still opens the club's LINE account, the only booking channel.
+  cta?: string;
 };

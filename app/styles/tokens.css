@@ -8,11 +8,17 @@
   --color-red-800: #ac0805; /* labels' dot, links, service card arrow */
   --color-red-900: #870200; /* red links on hover */
   --color-line: #06c755; /* LINE brand green, navbar consult link */
-  --color-blush: #fcedda; /* top of the page gradient, which fades to white */
+  --color-blush: #fdedda; /* page background, phone menu sheet */
   --color-sand: #ecddcb; /* service card hover, service overlay */
   --color-rule: rgb(45 45 45 / 0.6); /* service list, overlay and footer lines */
   --color-dot: rgb(172 8 5 / 0.5); /* dotted panel: red-800 at 50% */
-  --color-clover: #83aa23; /* clover in the dotted panel */
+  /* The metallic gold of the photo frames and the sphere in the dotted panel, dark to
+     light (the design's frame-pic gradient). */
+  --color-gold-900: #78562c;
+  --color-gold-700: #9a7a4b;
+  --color-gold-500: #bc9d6a;
+  --color-gold-300: #ddc189;
+  --color-gold-100: #ffe4a8;
   --color-frame-empty: #e7e6e6; /* photo frame before its photo loads */
 
   /* Epilogue for everything. It has no Thai glyphs, so Thai text (and anything else
@@ -69,8 +75,8 @@
   --duration-hover: 200ms;
   --duration-lift: 400ms; /* album frames and photo stacks moving on hover */
   --duration-enter: 900ms;
-  --duration-overlay-in: 560ms;
-  --duration-overlay-out: 320ms;
+  --duration-overlay-in: 460ms;
+  --duration-overlay-out: 380ms;
   --duration-slide: 800ms; /* one crossfade in the album slideshows */
   /* Opening slides decelerate into place; closing accelerates away. */
   --ease-drawer-in: cubic-bezier(0.32, 0.72, 0, 1);

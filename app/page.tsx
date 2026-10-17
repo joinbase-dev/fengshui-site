@@ -6,7 +6,7 @@ import { Gallery } from "@/components/sections/Gallery";
 import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { serviceDetails } from "@/content/services";
-import { address, site, social } from "@/content/site";
+import { address, contact, site, social } from "@/content/site";
 import { siteUrl } from "@/lib/site-url";
 
 const structuredData = {
@@ -17,6 +17,8 @@ const structuredData = {
   description: site.description,
   url: siteUrl,
   logo: `${siteUrl}/images/logo.png`,
+  email: contact.email,
+  telephone: contact.phoneInternational,
   address: {
     "@type": "PostalAddress",
     streetAddress: address.street,

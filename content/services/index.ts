@@ -2,7 +2,7 @@
 // data file next to these and add it here; the list, its overlay and the structured
 // data pick it up.
 
-import { auspiciousTiming } from "./auspicious-timing";
+import { courses } from "./courses";
 import { destinyPhysiognomy } from "./destiny-physiognomy";
 import { fengShuiHome } from "./feng-shui-home";
 import { saeKi } from "./sae-ki";
@@ -11,4 +11,4 @@ import type { ServiceDetail } from "./types";
 export type * from "./types";
 export { serviceUi } from "./ui";
 
-export const serviceDetails: ServiceDetail[] = [fengShuiHome, destinyPhysiognomy, saeKi, auspiciousTiming];
+export const serviceDetails: ServiceDetail[] = [fengShuiHome, destinyPhysiognomy, saeKi, courses];

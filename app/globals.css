@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./styles/tokens.css";
 @import "./styles/motion.css";
+@import "./styles/gold.css";
 @import "./styles/service-overlay.css";
 @import "./styles/photo-album.css";
 @import "./styles/services.css";
@@ -11,10 +12,9 @@ html {
   scrollbar-gutter: stable;
 }
 
-/* The page fades from blush at the top to white at the bottom (Figma 1:751). The body's
-   background paints the canvas, so the gradient spans the whole page, not the screen. */
+/* One flat blush behind the whole page (Ohm, 2026-10-17). */
 body {
-  background: linear-gradient(var(--color-blush), var(--color-white));
+  background: var(--color-blush);
   color: var(--color-black);
 }
 
