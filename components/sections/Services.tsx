@@ -26,7 +26,7 @@ function Lines({ lines }: { lines: readonly string[] }) {
 function Statement({ className = "" }: { className?: string }) {
   return (
     <p
-      className={`absolute top-[17.546%] right-[9.365%] left-[6%] text-right text-statement-xs font-semibold sm:left-[17.778%] sm:text-statement-sm xl:text-statement ${className}`}
+      className={`gold-sphere-statement absolute top-[17.546%] right-[9.365%] left-[6%] text-right font-semibold ${className}`}
     >
       {services.statementLines.map((line) => (
         <span key={line} className="block">
@@ -109,7 +109,7 @@ export function Services() {
                     <Statement className="text-black" />
                   </div>
                   <div aria-hidden="true" className="gold-sphere-inside absolute inset-0">
-                    <Statement className="gold-sphere-text text-white" />
+                    <Statement className="text-white" />
                   </div>
                 </GoldSphere>
               </div>

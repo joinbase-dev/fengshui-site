@@ -8,9 +8,9 @@ type GoldSphereProps = {
   children: ReactNode;
 };
 
-// The services panel's gold sphere and small ball (Figma Ellipses 436 and 437). The
-// sphere drifts slowly across the panel and turns back at its edges, and the text over
-// it turns white where the two overlap. All of the motion is a CSS animation (two
+// The services panel's gold sphere (Figma Ellipse 436; the small ball beside it was
+// dropped at Ohm's request, 2026-10-17). The sphere drifts slowly across the panel and
+// turns back at its edges, and the text over it turns white where the two overlap. All of the motion is a CSS animation (two
 // registered custom properties, app/styles/services.css), so React never re-renders;
 // this component only pauses it while the panel is off screen. With reduced motion
 // the sphere rests where the design draws it.
@@ -30,10 +30,6 @@ export function GoldSphere({ children }: GoldSphereProps) {
   return (
     <div ref={stageRef} className="gold-sphere-stage absolute inset-0">
       <span aria-hidden="true" className="gold-sphere absolute top-0 left-0 rounded-full bg-gold-sphere" />
-      <span
-        aria-hidden="true"
-        className="absolute top-[69.044%] left-[69.365%] aspect-square w-[6.508%] rounded-full bg-gold-sphere"
-      />
       {children}
     </div>
   );

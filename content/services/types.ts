@@ -13,16 +13,13 @@ export type PhotoAsset = {
 // A tile in the overlay's image loop. Tiles are square crops, so any photo shape works.
 export type GalleryPhoto = PhotoAsset;
 
-// The overlay's copy, in order. The single-page overlay (Figma 1:3286) sets all of it
-// as plain paragraphs; the block types are kept from the old service pages so their
-// copy carries over unchanged.
+// The overlay's copy, in order (Ohm's overlay mock-ups, 2026-10-17). Each entry of
+// `lines` is a line as the design breaks it; on phones they run together and wrap.
 export type ServiceBodyBlock =
-  // Large opening statement.
-  | { type: "lead"; lines: string[] }
-  // White text on a red band.
-  | { type: "highlight"; text: string }
+  // The bold opening line, set close above the text it introduces.
+  | { type: "heading"; lines: string[] }
   | { type: "text"; lines: string[] }
-  // A plain-text heading followed by dashed items.
+  // A plain-text heading followed by bulleted items.
   | { type: "list"; title: string; items: string[] };
 
 export type ServiceDetail = {

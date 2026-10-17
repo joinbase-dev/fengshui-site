@@ -49,14 +49,11 @@
   mask-image: radial-gradient(circle at var(--sphere-centre), #000 var(--sphere-rim-in), transparent var(--sphere-rim-out));
 }
 
-/* White on the sphere's pale centre is too faint to read, so the white letters carry a
-   close halo of the darkest frame gold, which only exists where they cross the
-   sphere. */
-.gold-sphere-text {
-  text-shadow:
-    0 0 1px var(--color-gold-900),
-    0 0 3px rgb(120 86 44 / 0.5),
-    0 0 8px rgb(120 86 44 / 0.4);
+/* The statement is sized to the panel, as in the design (40px type, 54px lines in the
+   630px panel), so at every width its longest line spans about 70% of the panel. */
+.gold-sphere-statement {
+  font-size: 6.349cqw; /* 40 / 630 */
+  line-height: 1.35; /* 54 / 40 */
 }
 
 @media (prefers-reduced-motion: no-preference) {
