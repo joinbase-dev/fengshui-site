@@ -34,10 +34,6 @@ export function useOpenService(): string | null {
   return useSyncExternalStore(subscribe, readOpenService, () => null);
 }
 
-export function serviceHref(slug: string): string {
-  return `/?${param}=${encodeURIComponent(slug)}`;
-}
-
 export function openService(slug: string) {
   if (readOpenService() === slug) return;
   const url = new URL(window.location.href);

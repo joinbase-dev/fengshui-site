@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Epilogue, Noto_Sans_Thai } from "next/font/google";
-import { site } from "@/content/site";
+import { seo } from "@/content/seo";
 import { isProduction, siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
@@ -19,24 +19,13 @@ const notoThai = Noto_Sans_Thai({
   display: "swap",
 });
 
+// Site-wide defaults. Each page sets its own title, description, canonical URL and
+// share previews (lib/metadata.ts); only production may be indexed.
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: site.title,
-  description: site.description,
-  alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    locale: "th_TH",
-    url: "/",
-    siteName: site.nameEn,
-    title: site.title,
-    description: site.description,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: site.title,
-    description: site.description,
-  },
+  title: { default: seo.home.title, template: seo.titleTemplate },
+  description: seo.home.description,
+  applicationName: seo.siteName,
   robots: isProduction ? { index: true, follow: true } : { index: false, follow: false },
 };
 

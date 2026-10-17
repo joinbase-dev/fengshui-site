@@ -8,12 +8,10 @@ import galleryWorkshop from "@/public/images/home/gallery-workshop.jpg";
 
 // Page copy, kept apart from layout so copy changes do not touch components.
 
+// Titles and descriptions for search engines are in content/seo.ts.
 export const site = {
   name: "คลับฮวงจุ้ยแห่งประเทศไทย",
   nameEn: "Fengshui Club Thailand",
-  title: "คลับฮวงจุ้ยแห่งประเทศไทย | Fengshui Club Thailand",
-  description:
-    "ดูดวงชะตา เสริมดวง ฮวงจุ้ยบ้าน โดยอาจารย์ดำรงชัย คลับฮวงจุ้ยแห่งประเทศไทย ศาสตร์แห่งพลังชีวิต เพื่อเสริมความมั่งคั่ง สมดุล และความสุข",
 } as const;
 
 // The club's LINE official account (@Fengshuiclubth), its only booking channel: every
@@ -59,16 +57,16 @@ export const gallery = {
   ] satisfies PhotoAsset[],
 } as const;
 
-// Navbar (Figma 1:752): each item jumps to a section of the single page.
+// Navbar (Figma 1:752): each item jumps to a section of the home page, from any page.
 export const header = {
   homeLabel: "หน้าแรก คลับฮวงจุ้ยแห่งประเทศไทย",
   menuLabel: "เมนู",
   closeLabel: "ปิดเมนู",
   navLabel: "เมนูหลัก",
   nav: [
-    { label: "คลับฮวงจุ้ยแห่งประเทศไทย", href: `#${hero.id}` },
-    { label: "บริการทั้งหมด", href: `#${services.id}` },
-    { label: "รวมภาพกิจกรรม", href: `#${gallery.id}` },
+    { label: "คลับฮวงจุ้ยแห่งประเทศไทย", href: `/#${hero.id}` },
+    { label: "บริการทั้งหมด", href: `/#${services.id}` },
+    { label: "รวมภาพกิจกรรม", href: `/#${gallery.id}` },
   ],
   cta: { label: consultCta, href: lineBooking },
 } as const;

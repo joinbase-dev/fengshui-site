@@ -16,19 +16,21 @@ type ServiceBodyProps = {
   gallery: ServiceDetail["heroGallery"];
   blocks: ServiceDetail["body"];
   cta: ServiceDetail["cta"];
+  // Eager on the service's page, where the loop is on screen from the start.
+  galleryLoading?: "lazy" | "eager";
 };
 
-// The rest of a service overlay (Figma 1:3306, Ohm's mock-ups of 2026-10-17): the
+// The rest of a service overlay and page (Figma 1:3306, Ohm's mock-ups of 2026-10-17): the
 // infinite image loop, the service's copy (a bold opening line, then 18px paragraphs
 // and bulleted lists 24px apart), then the consult link (with the service's
 // own wording, if it has one) 32px below. A service without photos leaves the loop out.
-export function ServiceBody({ gallery, blocks, cta }: ServiceBodyProps) {
+export function ServiceBody({ gallery, blocks, cta, galleryLoading = "lazy" }: ServiceBodyProps) {
   return (
     <div className="flex flex-col items-start gap-8">
       <div className="flex w-full flex-col gap-6 text-copy-sm text-black md:text-copy">
         {gallery.length > 0 && (
           <div className="relative h-55 md:h-81.25">
-            <InfiniteImageLoop columns={gallery} />
+            <InfiniteImageLoop columns={gallery} loading={galleryLoading} />
           </div>
         )}
         {blocks.map((block, index) => {
