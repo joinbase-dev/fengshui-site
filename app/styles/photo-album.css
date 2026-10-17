@@ -69,6 +69,92 @@
   }
 }
 
+/* The activities album (Figma 1:802): the same four frames, then a fifth and sixth,
+   smaller, laid over the lower half, in a 1246×680 album that holds all six. */
+.photo-album-activities {
+  aspect-ratio: 1246 / 680;
+}
+
+.photo-album-activities .photo-album-frame:nth-child(1) {
+  top: 8.329%;
+}
+
+.photo-album-activities .photo-album-frame:nth-child(2) {
+  top: 16.65%;
+}
+
+.photo-album-activities .photo-album-frame:nth-child(3) {
+  top: 7.882%;
+}
+
+.photo-album-activities .photo-album-frame:nth-child(4) {
+  top: 15.474%;
+}
+
+.photo-album-activities .photo-album-frame:nth-child(5) {
+  left: 47.277%;
+  top: 39.428%;
+  width: 29.252%; /* 364.48 / 1246 */
+  --tilt: 2.95deg;
+}
+
+.photo-album-activities .photo-album-frame:nth-child(6) {
+  left: 8.744%;
+  top: 50.616%;
+  width: 23.065%; /* 287.39 / 1246 */
+  --tilt: 2.95deg;
+}
+
+/* Phones (derived): three staggered rows of two, each frame a different size and
+   overlapping its neighbour, so the six stay an album rather than a grid. */
+@media (max-width: 767px) {
+  .photo-album-activities {
+    aspect-ratio: 100 / 150;
+  }
+
+  .photo-album-activities .photo-album-frame:nth-child(1) {
+    left: 0%;
+    top: 0%;
+    width: 54%;
+    --tilt: -2deg;
+  }
+
+  .photo-album-activities .photo-album-frame:nth-child(2) {
+    left: 50%;
+    top: 4%;
+    width: 47%;
+    --tilt: 3deg;
+  }
+
+  .photo-album-activities .photo-album-frame:nth-child(3) {
+    left: 4%;
+    top: 37%;
+    width: 46%;
+    --tilt: 2deg;
+  }
+
+  .photo-album-activities .photo-album-frame:nth-child(4) {
+    left: 45%;
+    top: 34.5%;
+    width: 53%;
+    --tilt: -2.5deg;
+  }
+
+  .photo-album-activities .photo-album-frame:nth-child(5) {
+    left: 1%;
+    top: 68%;
+    width: 52%;
+    --tilt: -1.5deg;
+  }
+
+  .photo-album-activities .photo-album-frame:nth-child(6) {
+    left: 51%;
+    top: 70%;
+    width: 46%;
+    --tilt: 2.5deg;
+  }
+}
+
 /* On a pointer that hovers, the frame under it straightens, lifts and comes to the
    front. Only transforms animate. */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
@@ -91,11 +177,21 @@
   transition: opacity var(--duration-slide) var(--ease-refined);
 }
 
-/* The club emblem faded behind the hero album (Figma 1:767): 723×668 at 25% opacity,
-   centred a little right of and above the album's middle. */
+/* The club emblem faded behind an album: 723×668 at 25% opacity. Behind the hero's
+   (Figma 1:767) it sits a little right of and above the album's middle; behind the
+   activities album (1:802), at its middle. */
+.hero-emblem,
+.activities-emblem {
+  width: 58.03%; /* 723 / 1246 */
+  translate: -50% -50%;
+}
+
 .hero-emblem {
   left: 51.4%;
   top: 43.6%;
-  width: 58.03%; /* 723 / 1246 */
-  translate: -50% -50%;
+}
+
+.activities-emblem {
+  left: 50.04%;
+  top: 49.41%;
 }

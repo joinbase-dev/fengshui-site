@@ -6,17 +6,18 @@ import type { PhotoAsset } from "@/content/services";
 import { PhotoFrame } from "@/components/ui/PhotoFrame";
 
 type AlbumSlideshowProps = {
-  // At least five photos, so a frame always has a new one to change to.
+  // At least one more photo than frames, so a frame always has a new one to change to.
   photos: PhotoAsset[];
-  // Start from a random four rather than the first four, which the server renders.
+  // How many frames the album lays out (app/styles/photo-album.css places each one).
+  frames?: number;
+  // Start from a random set rather than the first photos, which the server renders.
   shuffleStart?: boolean;
-  // The album is the page's largest content on load (the hero's): its first four
-  // photos load first.
+  // The album is the page's largest content on load (the hero's): its first photos
+  // load first.
   priority?: boolean;
   className?: string;
 };
 
-const frames = 4;
 // How often one of the frames changes its photo.
 const interval = 2000;
 // A frame is 381/1246 of the album (the content width up to 1246px); half on phones.
@@ -76,13 +77,19 @@ function SlideFrame({ photo, priority }: { photo: PhotoAsset; priority: boolean 
   );
 }
 
-// The design's "dynamic album" (Figma 1:777) as a slideshow: four white frames laid
+// The design's "dynamic album" (Figma 1:777 and 1:802) as a slideshow: gold frames laid
 // overlapping and tilted (app/styles/photo-album.css), one of which crossfades to
 // another photo every two seconds, frames and photos both in a shuffled order, never
 // showing a photo twice at once. It runs only while the album is on screen and the
 // tab is visible, and not at all with reduced motion.
-export function AlbumSlideshow({ photos, shuffleStart = false, priority = false, className = "" }: AlbumSlideshowProps) {
-  // The server renders the first four; the browser may shuffle once it has the page.
+export function AlbumSlideshow({
+  photos,
+  frames = 4,
+  shuffleStart = false,
+  priority = false,
+  className = "",
+}: AlbumSlideshowProps) {
+  // The server renders the first photos; the browser may shuffle once it has the page.
   const [shown, setShown] = useState(() => photos.slice(0, frames));
   const albumRef = useRef<HTMLDivElement>(null);
 
@@ -98,8 +105,8 @@ export function AlbumSlideshow({ photos, shuffleStart = false, priority = false,
     let timer = 0;
     let onScreen = false;
 
-    // A random first four are picked while the album is still well below the screen,
-    // before its lazy images start loading, so the server's four are not fetched for
+    // A random first set is picked while the album is still well below the screen,
+    // before its lazy images start loading, so the server's photos are not fetched for
     // nothing.
     const approach = new IntersectionObserver(
       ([entry]) => {
@@ -145,7 +152,7 @@ export function AlbumSlideshow({ photos, shuffleStart = false, priority = false,
       running.disconnect();
       document.removeEventListener("visibilitychange", sync);
     };
-  }, [photos, shuffleStart]);
+  }, [photos, frames, shuffleStart]);
 
   return (
     <div ref={albumRef} className={`photo-album relative w-full max-w-album ${className}`}>

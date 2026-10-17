@@ -1,0 +1,28 @@
+/* The design's metallic gold, in two shapes. Both are flat gradients with no glow, so
+   they read as polished metal rather than light. */
+
+/* A photo frame's border (Figma frame-pic, 1:802): the gold radial gradient centred a
+   little right of the middle and stretched to the frame, so the dark tones sit under
+   the photo and the visible border runs from deep to pale gold. */
+@utility bg-gold-frame {
+  background: radial-gradient(
+    85% 79% at 58% 52%,
+    var(--color-gold-900) 0%,
+    var(--color-gold-700) 25%,
+    var(--color-gold-500) 50%,
+    var(--color-gold-300) 75%,
+    var(--color-gold-100) 100%
+  );
+}
+
+/* The sphere in the services panel (Figma Ellipse 436): lit from just above its centre,
+   darkening towards the rim. */
+@utility bg-gold-sphere {
+  background: radial-gradient(
+    circle at 49% 38%,
+    var(--color-gold-100) 0%,
+    var(--color-gold-300) 28%,
+    var(--color-gold-500) 62%,
+    var(--color-gold-700) 100%
+  );
+}

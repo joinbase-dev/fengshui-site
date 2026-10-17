@@ -2,8 +2,8 @@ import Image from "next/image";
 import { services } from "@/content/site";
 import { serviceDetails } from "@/content/services";
 import { ArrowUpRightIcon } from "@/components/ui/ArrowUpRightIcon";
-import { Clover } from "@/components/ui/Clover";
 import { DotField } from "@/components/ui/DotField";
+import { GoldSphere } from "@/components/ui/GoldSphere";
 import { PhotoFrame } from "@/components/ui/PhotoFrame";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { ServiceLink } from "@/components/ui/ServiceLink";
@@ -21,6 +21,22 @@ function Lines({ lines }: { lines: readonly string[] }) {
   ));
 }
 
+// The panel's statement, one line per entry. Drawn twice: dark, and white where the
+// sphere passes behind it.
+function Statement({ className = "" }: { className?: string }) {
+  return (
+    <p
+      className={`gold-sphere-statement absolute top-[17.546%] right-[9.365%] left-[6%] text-right font-semibold ${className}`}
+    >
+      {services.statementLines.map((line) => (
+        <span key={line} className="block">
+          {line}
+        </span>
+      ))}
+    </p>
+  );
+}
+
 // Figma service-section (1:782), 1280px wide at 1440: the numbered service list
 // (650px) beside the dotted panel (630×701), ruled above, below and between. Each card
 // opens its service's overlay. Hover, keyboard focus and touch screens show the card's
@@ -29,10 +45,10 @@ function Lines({ lines }: { lines: readonly string[] }) {
 // at least 164px tall, as the design's one-line card is. Below xl (derived, not drawn)
 // the panel sits under the list.
 //
-// The panel's dots, clover and statement are placed as shares of the 630×701 frame,
-// so the panel keeps the design's composition at any width. On wide screens with a
-// pointer, hovering or focusing a card swaps the clover and statement for a stack of
-// three of that service's photos (Ohm's mock-up, 2026-10-15), in pure CSS
+// The panel's dots, gold sphere and statement are placed as shares of the 630×701
+// frame, so the panel keeps the design's composition at any width. On wide screens
+// with a pointer, hovering or focusing a card swaps the sphere and statement for a
+// stack of three of that service's photos (Ohm's mock-up, 2026-10-15), in pure CSS
 // (app/styles/services.css). Services without photos keep the statement.
 export function Services() {
   return (
@@ -88,14 +104,14 @@ export function Services() {
             <div className="relative aspect-[630/701] w-full max-w-157.5">
               <DotField className="absolute top-[4.422%] left-[4.603%] h-[84.879%] w-[92.063%]" />
               <div className="service-statement pointer-events-none absolute inset-0">
-                <Clover className="absolute top-[22.825%] left-[26.825%] w-[47.302%]" />
-                <p className="absolute top-[17.546%] right-[9.365%] left-[6%] text-right text-statement-xs font-semibold text-black sm:left-[17.778%] sm:text-statement-sm xl:text-statement">
-                  {services.statementLines.map((line) => (
-                    <span key={line} className="block">
-                      {line}
-                    </span>
-                  ))}
-                </p>
+                <GoldSphere>
+                  <div className="gold-sphere-outside absolute inset-0">
+                    <Statement className="text-black" />
+                  </div>
+                  <div aria-hidden="true" className="gold-sphere-inside absolute inset-0">
+                    <Statement className="text-white" />
+                  </div>
+                </GoldSphere>
               </div>
               {/* One stack per service, in list order, so the nth card shows the nth stack. */}
               <div aria-hidden="true" className="service-previews">

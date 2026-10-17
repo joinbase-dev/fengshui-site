@@ -16,7 +16,7 @@ export function ServiceOverlay({ service }: ServiceOverlayProps) {
     <ServiceDialog slug={service.slug} labelledBy={titleId} closeLabel={serviceUi.close}>
       <div className="service-dialog-content flex flex-col gap-6 px-5 pt-16 pb-16 md:px-8">
         <ServiceHero titleId={titleId} title={service.title} byline={service.byline} />
-        <ServiceBody gallery={service.heroGallery} blocks={service.body} />
+        <ServiceBody gallery={service.heroGallery} blocks={service.body} cta={service.cta} />
       </div>
     </ServiceDialog>
   );

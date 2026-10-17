@@ -19,21 +19,32 @@
   border: 0;
   background: transparent;
   color: inherit;
-  overflow: hidden;
+  /* clip, not hidden: a hidden dialog is still a scroll container, and opening it
+     focuses the close button while the drawer is still off to the right, which
+     scrolled the dialog to the button and cancelled the slide. */
+  overflow: clip;
 }
 
 .service-dialog::backdrop {
   background: transparent;
 }
 
+/* While a closed drawer slides away it still covers the screen; clicks go through it
+   to the page. */
+.service-dialog:not([open]) {
+  pointer-events: none;
+}
+
 html:has(.service-dialog[open]) {
   overflow: hidden;
 }
 
-/* Opening: the drawer glides in from the right and settles, then its content fades in
-   a beat behind it, so the panel arrives before the text does. Closing is quicker and
-   accelerates away. Only transform and opacity animate; the drawer is on its own
-   compositor layer while it moves. Under reduced motion it appears and disappears. */
+/* Opening: the drawer glides in from the right and decelerates into place (ease-out),
+   then its content fades in a beat behind it, so the panel arrives before the text
+   does. Closing slides it back out to the right, accelerating away (ease-in); the
+   dialog stays rendered until the slide ends. Only transform and opacity animate; the
+   drawer is on its own compositor layer while it moves. Under reduced motion it
+   appears and disappears. */
 @media (prefers-reduced-motion: no-preference) {
   .service-dialog {
     transition:
@@ -87,17 +98,13 @@ html:has(.service-dialog[open]) {
    design's staggered layout. */
 @media (prefers-reduced-motion: no-preference) {
   .image-loop-track {
-    animation: image-loop-scroll var(--loop-duration, 60s) linear infinite;
+    animation: image-loop-scroll calc(var(--loop-tiles, 3) * var(--loop-tile-time, 20s)) linear infinite;
     will-change: transform;
   }
 
   .image-loop-column:nth-child(2) .image-loop-track {
-    --loop-duration: 72s;
+    --loop-tile-time: 23s;
     animation-direction: reverse;
-  }
-
-  .image-loop-column:nth-child(3) .image-loop-track {
-    --loop-duration: 66s;
   }
 }
 

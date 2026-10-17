@@ -88,13 +88,24 @@ export const address = {
   postalCode: "10120",
 } as const;
 
-// Footer (Figma 1:807): the club's name over its address.
+// The club's email and phone (Figma footer 1:807), shown in the footer and given to
+// search engines.
+export const contact = {
+  email: "fengshuiclubth@gmail.com",
+  phone: "096-098-8228",
+  phoneInternational: "+66960988228",
+} as const;
+
+// Footer (Figma 1:807): the club's name over its address, email and phone.
 export const footer = {
   title: site.name,
   address: `${address.street} ${address.city} ${address.postalCode}`,
+  emailLabel: "อีเมล",
+  phoneLabel: "โทรศัพท์",
   socialLabel: "โซเชียลมีเดีย",
   // The design's spelling of each name.
   social: [
+    { label: "LINE", href: social.line.href },
     { label: "Facebook", href: social.facebook.href },
     { label: "Instagram", href: social.instagram.href },
     { label: "Tiktok", href: social.tiktok.href },

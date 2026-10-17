@@ -12,6 +12,10 @@ type ServiceDialogProps = {
   children: ReactNode;
 };
 
+// How long after opening a click beside the panel is taken as the rest of the click
+// that opened it, not a request to close.
+const doubleClickGuard = 500;
+
 // The overlay shell: a native modal <dialog>, which brings the focus trap, Escape to
 // close, an inert page behind it and focus back on the card that opened it. The panel
 // is a drawer on the right (Figma 1:3286) that scrolls on its own, with the page
@@ -26,6 +30,9 @@ export function ServiceDialog({ slug, labelledBy, closeLabel, children }: Servic
   // Whether the last press started outside the panel, so a drag that ends there (say,
   // selecting text) does not close it.
   const pressedOutside = useRef(false);
+  // When the overlay last opened, so the second click of a double click on a card,
+  // which lands beside the panel, does not close it again.
+  const openedAt = useRef(0);
   const isOpen = useOpenService() === slug;
 
   useEffect(() => {
@@ -33,6 +40,7 @@ export function ServiceDialog({ slug, labelledBy, closeLabel, children }: Servic
     if (!dialog) return;
     if (isOpen && !dialog.open) {
       dialog.showModal();
+      openedAt.current = performance.now();
       panelRef.current?.scrollTo(0, 0);
     } else if (!isOpen && dialog.open) {
       dialog.close();
@@ -52,6 +60,7 @@ export function ServiceDialog({ slug, labelledBy, closeLabel, children }: Servic
   }
 
   function handleClick(event: MouseEvent<HTMLDialogElement>) {
+    if (performance.now() - openedAt.current < doubleClickGuard) return;
     if (pressedOutside.current && event.target === event.currentTarget) event.currentTarget.close();
   }
 

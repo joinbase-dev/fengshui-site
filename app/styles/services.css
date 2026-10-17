@@ -1,5 +1,95 @@
+/* The services panel's gold sphere (components/ui/GoldSphere.tsx; Figma Ellipse 436,
+   368px across in the 630×701 panel). Two registered numbers, --sphere-x and
+   --sphere-y, run from 0 (touching the left or top edge) to 1 (the right or bottom)
+   and back, each on its own period, so the path rarely repeats; easing them in and
+   out makes the sphere slow as it nears an edge and turn back without a jolt. The
+   sphere's position and the masks that split the statement into a dark part outside
+   it and a white part inside (each on a layer the size of the stage, so the masks
+   share its coordinates) are all computed from those two numbers, so they move
+   together, and only the stage animates. Their initial values are where the design
+   draws the sphere, which is where it rests with reduced motion. */
+@property --sphere-x {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.42; /* 110 / (630 - 368) */
+}
+
+@property --sphere-y {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.471; /* 157 / (701 - 368) */
+}
+
+.gold-sphere-stage {
+  container-type: size;
+  --sphere-size: 58.413cqw; /* 368 / 630 */
+  --sphere-left: calc(var(--sphere-x) * (100cqw - var(--sphere-size)));
+  --sphere-top: calc(var(--sphere-y) * (100cqh - var(--sphere-size)));
+  --sphere-centre: calc(var(--sphere-left) + var(--sphere-size) / 2) calc(var(--sphere-top) + var(--sphere-size) / 2);
+  /* The masks' edge is half a pixel either side of the rim, so it stays smooth. */
+  --sphere-rim-in: calc(var(--sphere-size) / 2 - 0.5px);
+  --sphere-rim-out: calc(var(--sphere-size) / 2 + 0.5px);
+}
+
+.gold-sphere {
+  width: var(--sphere-size);
+  aspect-ratio: 1;
+  translate: var(--sphere-left) var(--sphere-top);
+}
+
+.gold-sphere-outside {
+  mask-image: radial-gradient(
+    circle at var(--sphere-centre),
+    transparent var(--sphere-rim-in),
+    #000 var(--sphere-rim-out)
+  );
+}
+
+.gold-sphere-inside {
+  mask-image: radial-gradient(circle at var(--sphere-centre), #000 var(--sphere-rim-in), transparent var(--sphere-rim-out));
+}
+
+/* The statement is sized to the panel, as in the design (40px type, 54px lines in the
+   630px panel), so at every width its longest line spans about 70% of the panel. */
+.gold-sphere-statement {
+  font-size: 6.349cqw; /* 40 / 630 */
+  line-height: 1.35; /* 54 / 40 */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gold-sphere-stage {
+    animation:
+      sphere-x 26s cubic-bezier(0.37, 0, 0.63, 1) -11s infinite alternate,
+      sphere-y 19s cubic-bezier(0.37, 0, 0.63, 1) -9s infinite alternate;
+  }
+
+  .gold-sphere-stage[data-paused] {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes sphere-x {
+  from {
+    --sphere-x: 0;
+  }
+
+  to {
+    --sphere-x: 1;
+  }
+}
+
+@keyframes sphere-y {
+  from {
+    --sphere-y: 0;
+  }
+
+  to {
+    --sphere-y: 1;
+  }
+}
+
 /* The service section's hover preview (components/sections/Services.tsx): hovering or
-   focusing a card fades the panel's clover and statement and fans out a stack of three
+   focusing a card fades the panel's sphere and statement and fans out a stack of three
    of that service's photos over the dots, as in Ohm's mock-up. Only on wide screens
    with a pointer, where the panel sits beside the list; elsewhere the stacks are not
    rendered, so their photos never load. Only opacity and transforms animate. */
