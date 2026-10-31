@@ -29,8 +29,12 @@ export type ServiceDetail = {
   slug: string;
   // Full name: the card title, the overlay and page heading, and structured data.
   title: string;
-  // The lines under the title on the service card, as the design breaks them.
+  // The lines under the title in the service pages' "other services" list.
   summaryLines: string[];
+  // The service's card on the home page (Figma 19:1781): the Chinese eyebrow over the
+  // title (when the design gives one), the summary as the design breaks its lines, and
+  // the photo on the card's right, cropped as the design crops it.
+  card: { eyebrow?: string; lines: string[]; photo: PhotoAsset };
   // The line under the overlay heading, beside the contact icons.
   byline: string;
   // The service page's title (before " | คลับฮวงจุ้ยแห่งประเทศไทย", so under about 35

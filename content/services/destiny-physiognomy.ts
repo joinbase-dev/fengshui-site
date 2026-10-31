@@ -2,6 +2,7 @@
 
 import { galleryColumns } from "./gallery";
 import type { ServiceDetail } from "./types";
+import cardPhoto from "@/public/images/home/v3/card-destiny-physiognomy.webp";
 import photo01 from "@/public/images/services/destiny-physiognomy/01.webp";
 import photo02 from "@/public/images/services/destiny-physiognomy/02.webp";
 import photo03 from "@/public/images/services/destiny-physiognomy/03.webp";
@@ -16,6 +17,7 @@ export const destinyPhysiognomy: ServiceDetail = {
   slug: "destiny-physiognomy",
   title: "Personal โหงวเฮ้ง",
   summaryLines: ["ให้คำปรึกษาดวงชะตาส่วนบุคคล เข้าใจพื้นดวง", "ค้นหาจังหวะชีวิต และวิเคราะห์โหงวเฮ้งเฉพาะบุคคล"],
+  card: { eyebrow: "風水", lines: ["เข้าใจพื้นดวง ค้นหาจังหวะชีวิต", "และวิเคราะห์โหงวเฮ้งเฉพาะบุคคล"], photo: { src: cardPhoto, alt: "ลูกค้าถือแผ่นภาพการดูโหงวเฮ้งคู่กับอาจารย์ดำรงชัยในสำนักงาน" } },
   byline: "Personal โหงวเฮ้ง โดย อ.ดำรงชัย",
   seo: {
     title: "ดูโหงวเฮ้ง วิเคราะห์ใบหน้าเฉพาะบุคคล",

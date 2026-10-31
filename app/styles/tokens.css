@@ -63,6 +63,60 @@
 
   /* Motion: one easing for the whole site (durations below, on :root). */
   --ease-refined: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ---- Home page v3 (Figma 19:1781, Ohm's fengshui-tokens.css, 2026-10-31) ----
+     The home page uses only these; the service pages keep the tokens above until
+     they are redesigned. Names follow the handoff's semantic roles. */
+  --color-brand-red: #ac0805; /* surface/text/border brand red */
+  --color-brand-red-dark: #870200; /* surface brand red dark: red buttons on hover */
+  --color-brand-gold: #fae4c0; /* hero subtitle */
+  --color-ink: #000000; /* text neutral black */
+  --color-ink-secondary: #626266; /* text neutral secondary (darkened for contrast) */
+  --color-hairline: #e9e9e9; /* border neutral */
+  --color-muted: #626266; /* border neutral muted: the profile card's edge */
+  --color-mint: #e9f5f0; /* surface neutral mint: the footer call to action */
+  --color-placeholder: #dfe2eb; /* surface neutral placeholder: photo before it loads */
+  /* LINE actions: the handoff's darker green (white label passes AA); #04c755 is the
+     brand primitive, kept as --color-line above. */
+  --color-line-action: #007833;
+  --color-profile-overlay: rgb(0 0 0 / 0.5); /* the founder card, alpha kept at 0.5 */
+
+  --font-thai: var(--font-noto-thai), ui-sans-serif, system-ui, sans-serif;
+  /* The Chinese eyebrows (風水, 生肖). The design names Inter Light, which has no Chinese
+     glyphs, so the system's Chinese face draws them; nothing is downloaded for them. */
+  --font-cjk: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+
+  /* Type (handoff table). Headings scale from the mobile size at 360px to the desktop
+     size at 1440px; body sizes are fixed. Line heights are the design's ratios. */
+  --text-h1: clamp(2.5rem, 2rem + 2.222vw, 4rem); /* 40/54 -> 64/86 */
+  --text-h1--line-height: 1.344;
+  --text-h2: clamp(1.875rem, 1.667rem + 0.926vw, 2.5rem); /* 30/42 -> 40/56 */
+  --text-h2--line-height: 1.4;
+  --text-h3: clamp(1.25rem, 1.167rem + 0.37vw, 1.5rem); /* 20/30 -> 24/36 */
+  --text-h3--line-height: 1.5;
+  --text-hero-sub: clamp(1.125rem, 1rem + 0.556vw, 1.5rem); /* derived 18/27 -> 24/36 */
+  --text-hero-sub--line-height: 1.5;
+  --text-body-lg: clamp(1rem, 0.958rem + 0.185vw, 1.125rem); /* 16/26 -> 18/30 */
+  --text-body-lg--line-height: 1.667;
+  --text-body: 1rem; /* 16/26 */
+  --text-body--line-height: 1.625;
+  --text-action: 1rem; /* CTA label 16/24 */
+  --text-action--line-height: 1.5;
+  --text-kicker: 0.875rem; /* eyebrow 14/22 */
+  --text-kicker--line-height: 1.375rem;
+  --text-checklist: 1rem; /* 16/28 */
+  --text-checklist--line-height: 1.75;
+
+  --radius-panel: 12px; /* footer call to action, LINE buttons */
+  --radius-profile: 16px; /* founder card */
+
+  --shadow-portrait: 0 16px 100px 0 #000000;
+  --shadow-profile: 8px 16px 46px 0 rgb(0 0 0 / 0.4);
+  --shadow-cta: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.06);
+  --shadow-button: 0 1px 2px 0 rgb(16 24 40 / 0.05);
+
+  --container-content: 1140px; /* sections (1440 frame, 150px margins) */
+  --container-founder: 1200px; /* founder portrait and card */
 }
 
 :root {

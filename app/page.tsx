@@ -1,9 +1,11 @@
-import { SiteHeader } from "@/components/sections/SiteHeader";
-import { Hero } from "@/components/sections/Hero";
-import { Services } from "@/components/sections/Services";
+import { HomeHeader } from "@/components/sections/HomeHeader";
+import { HomeHero } from "@/components/sections/HomeHero";
+import { ServiceCards } from "@/components/sections/ServiceCards";
+import { Founder } from "@/components/sections/Founder";
+import { ConsultSteps } from "@/components/sections/ConsultSteps";
+import { Activities } from "@/components/sections/Activities";
+import { HomeFooter } from "@/components/sections/HomeFooter";
 import { ServiceOverlay } from "@/components/sections/ServiceOverlay";
-import { Gallery } from "@/components/sections/Gallery";
-import { Footer } from "@/components/sections/Footer";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { serviceDetails } from "@/content/services";
 import { seo, shareImage } from "@/content/seo";
@@ -18,24 +20,28 @@ export const metadata = pageMetadata({
   image: shareImage.home,
 });
 
-// The home page: sections in the order of the design (Figma 1:751), each reached from
-// the menu by its id. A service card opens that service's overlay in place; the
-// overlays are rendered here, closed, after the page. Each service also has a page of
-// its own (app/services/[slug]), which the card links to for search engines and new tabs.
+// The home page (Figma 19:1781, "Web v.3"), set in Noto Sans Thai on white. A service
+// card, a service in the navbar or in the footer's quick links opens that service's
+// overlay in place; the overlays are rendered here, closed, after the page. Each service
+// also has a page of its own (app/services/[slug]), which those links point to for
+// search engines and new tabs. The design's partner-logo strip is left out until the
+// club confirms its partners (its logos are template stand-ins).
 export default function Home() {
   return (
-    <>
-      <SiteHeader />
+    <div className="home-page bg-white font-thai text-ink">
+      <HomeHeader />
       <main id="main">
-        <Hero />
-        <Services />
-        <Gallery />
+        <HomeHero />
+        <ServiceCards />
+        <Founder />
+        <ConsultSteps />
+        <Activities />
       </main>
-      <Footer />
+      <HomeFooter />
       {serviceDetails.map((service) => (
         <ServiceOverlay key={service.slug} service={service} />
       ))}
       <JsonLd data={homeStructuredData(serviceDetails)} />
-    </>
+    </div>
   );
 }

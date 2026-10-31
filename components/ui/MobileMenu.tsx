@@ -2,25 +2,44 @@
 
 import { useEffect, useRef, type MouseEvent, type ReactNode } from "react";
 import { ConsultLink } from "@/components/ui/ConsultLink";
+import { ServiceLink } from "@/components/ui/ServiceLink";
 
 type MenuLink = { label: string; href: string };
+// A row that opens a service's overlay instead of following a link.
+type MenuItem = MenuLink & { service?: string };
 
 type MobileMenuProps = {
   // The header's logo link, repeated at the same spot inside the menu.
   logo: ReactNode;
-  links: readonly MenuLink[];
+  links: readonly MenuItem[];
   social: readonly MenuLink[];
   socialLabel: string;
   menuLabel: string;
   closeLabel: string;
   navLabel: string;
+  // Extra classes for the menu button, for headers set on a dark hero.
+  triggerClassName?: string;
 };
 
 // Each menu row's place in the load-in stagger (--i in app/styles/motion.css).
-const stagger = ["[--i:0]", "[--i:1]", "[--i:2]", "[--i:3]", "[--i:4]", "[--i:5]"];
+const stagger = ["[--i:0]", "[--i:1]", "[--i:2]", "[--i:3]", "[--i:4]", "[--i:5]", "[--i:6]", "[--i:7]"];
 
 const iconButton =
   "flex size-11 items-center justify-center rounded-sm text-black transition-colors duration-200 ease-refined hover:text-red-800 focus-visible:outline-2 focus-visible:outline-red-800";
+
+const rowStyle =
+  "group flex min-h-11 items-baseline gap-4 py-5 text-service-title-sm font-medium text-black transition-colors duration-200 ease-refined hover:text-red-800 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-red-800 md:gap-6 md:py-7 md:text-service-title";
+
+function RowContent({ index, label }: { index: number; label: string }) {
+  return (
+    <>
+      <span className="text-eyebrow text-red-800 tabular-nums">{String(index + 1).padStart(2, "0")}</span>
+      <span className="transition-transform duration-200 ease-refined group-hover:translate-x-1 group-focus-visible:translate-x-1">
+        {label}
+      </span>
+    </>
+  );
+}
 
 function MenuIcon() {
   return (
@@ -43,7 +62,16 @@ function CloseIcon() {
 // logo and a close button where the header has them, the section links large and
 // numbered between thin rules, the consult link, and the social links at the foot.
 // Following any link closes it. Motion in app/styles/motion.css.
-export function MobileMenu({ logo, links, social, socialLabel, menuLabel, closeLabel, navLabel }: MobileMenuProps) {
+export function MobileMenu({
+  logo,
+  links,
+  social,
+  socialLabel,
+  menuLabel,
+  closeLabel,
+  navLabel,
+  triggerClassName = "",
+}: MobileMenuProps) {
   const ref = useRef<HTMLDialogElement>(null);
 
   // The sheet is for narrow screens; widening to the full navbar closes it.
@@ -64,7 +92,7 @@ export function MobileMenu({ logo, links, social, socialLabel, menuLabel, closeL
 
   return (
     <>
-      <button type="button" aria-haspopup="dialog" onClick={() => ref.current?.showModal()} className={iconButton}>
+      <button type="button" aria-haspopup="dialog" onClick={() => ref.current?.showModal()} className={`${iconButton} ${triggerClassName}`}>
         <MenuIcon />
         <span className="sr-only">{menuLabel}</span>
       </button>
@@ -82,16 +110,16 @@ export function MobileMenu({ logo, links, social, socialLabel, menuLabel, closeL
           <nav aria-label={navLabel} className="mt-10 md:mt-16">
             <ol className="border-t border-rule">
               {links.map((link, index) => (
-                <li key={link.href} className={`menu-item border-b border-rule ${stagger[index]}`}>
-                  <a
-                    href={link.href}
-                    className="group flex min-h-11 items-baseline gap-4 py-5 text-service-title-sm font-medium text-black transition-colors duration-200 ease-refined hover:text-red-800 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-red-800 md:gap-6 md:py-7 md:text-service-title"
-                  >
-                    <span className="text-eyebrow text-red-800 tabular-nums">{String(index + 1).padStart(2, "0")}</span>
-                    <span className="transition-transform duration-200 ease-refined group-hover:translate-x-1 group-focus-visible:translate-x-1">
-                      {link.label}
-                    </span>
-                  </a>
+                <li key={link.service ?? link.href} className={`menu-item border-b border-rule ${stagger[index]}`}>
+                  {link.service ? (
+                    <ServiceLink slug={link.service} aria-haspopup="dialog" className={rowStyle}>
+                      <RowContent index={index} label={link.label} />
+                    </ServiceLink>
+                  ) : (
+                    <a href={link.href} className={rowStyle}>
+                      <RowContent index={index} label={link.label} />
+                    </a>
+                  )}
                 </li>
               ))}
             </ol>
