@@ -1,6 +1,14 @@
 import { serviceDetails, type PhotoAsset } from "@/content/services";
 import { address, contact, gallery, lineBooking, site } from "@/content/site";
 import portrait from "@/public/images/home/hero/04-portrait.webp";
+import aven from "@/public/images/home/v3/partners/aven.webp";
+import circle from "@/public/images/home/v3/partners/circle.webp";
+import codelab from "@/public/images/home/v3/partners/codelab.webp";
+import foxhub from "@/public/images/home/v3/partners/foxhub.webp";
+import hexlab from "@/public/images/home/v3/partners/hexlab.webp";
+import hexa from "@/public/images/home/v3/partners/hexa.webp";
+import kyan from "@/public/images/home/v3/partners/kyan.webp";
+import lightai from "@/public/images/home/v3/partners/lightai.webp";
 
 // Copy of the home page (Figma 19:1781, "Web v.3"), kept apart from layout so copy
 // changes do not touch components. The services' cards read their own copy from
@@ -25,6 +33,22 @@ export const homeHero = {
   // The design spells it so here (the footer keeps "Fengshui").
   subtitle: "FengShui Club Thailand",
 } as const;
+
+// Figma Partners strip (19:1803). These are the design's mock-up logos, shown at Ohm's
+// request (2026-10-31) until the club's real partners and their permission arrive.
+export const partners = {
+  label: "พาร์ทเนอร์",
+  logos: [
+    { src: aven, alt: "aven" },
+    { src: circle, alt: "circle" },
+    { src: codelab, alt: "CodeLab" },
+    { src: foxhub, alt: "FoxHub" },
+    { src: hexlab, alt: "HexLab" },
+    { src: hexa, alt: "hexa" },
+    { src: kyan, alt: "kyan" },
+    { src: lightai, alt: "LightAI" },
+  ] satisfies PhotoAsset[],
+};
 
 export const homeServices = {
   id: "services",

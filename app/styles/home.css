@@ -93,3 +93,23 @@
 body:has(.home-page) {
   background: var(--color-white);
 }
+
+/* Partner logos (Figma 19:1804): 120×44, 68px apart; smaller on phones. Each logo
+   carries the gap after it, so the two copies tile seamlessly. */
+.partner-track {
+  display: flex;
+  width: max-content;
+}
+
+.partner-logo {
+  width: clamp(5.5rem, 8.33vw, 7.5rem);
+  aspect-ratio: 120 / 44;
+  margin-right: clamp(2.5rem, 4.72vw, 4.25rem);
+  flex: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .partner-track {
+    animation: activity-drift 40s linear infinite;
+  }
+}

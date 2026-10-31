@@ -1,5 +1,6 @@
 import { HomeHeader } from "@/components/sections/HomeHeader";
 import { HomeHero } from "@/components/sections/HomeHero";
+import { Partners } from "@/components/sections/Partners";
 import { ServiceCards } from "@/components/sections/ServiceCards";
 import { Founder } from "@/components/sections/Founder";
 import { ConsultSteps } from "@/components/sections/ConsultSteps";
@@ -24,14 +25,15 @@ export const metadata = pageMetadata({
 // card, a service in the navbar or in the footer's quick links opens that service's
 // overlay in place; the overlays are rendered here, closed, after the page. Each service
 // also has a page of its own (app/services/[slug]), which those links point to for
-// search engines and new tabs. The design's partner-logo strip is left out until the
-// club confirms its partners (its logos are template stand-ins).
+// search engines and new tabs. The partner strip shows the design's mock-up logos until the
+// club's real partners arrive.
 export default function Home() {
   return (
     <div className="home-page bg-white font-thai text-ink">
       <HomeHeader />
       <main id="main">
         <HomeHero />
+        <Partners />
         <ServiceCards />
         <Founder />
         <ConsultSteps />
