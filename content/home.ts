@@ -117,7 +117,9 @@ export const activities = {
 export const homeFooter = {
   // The wide banner (Figma 37:3090).
   ctaTitle: ["ปรึกษา", "อ.ดำรงชัย"],
-  ctaText: "ติดต่อแจ้งเรื่องที่ต้องการปรึกษา พร้อมเลือกวันและเวลา",
+  // The banner's heading on phones (Figma 48:3296).
+  ctaTitleCompact: "จองคิวปรึกษา",
+  ctaText: ["ติดต่อแจ้งเรื่องที่ต้องการปรึกษา", "พร้อมเลือกวันและเวลา"],
   name: site.name,
   nameEn: site.nameEn,
   address: `${address.street} ${address.city} ${address.postalCode}`,

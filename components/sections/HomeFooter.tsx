@@ -29,30 +29,42 @@ const socialLinks: { name: SocialName; label: string; href: string }[] = [
 // club's emblem screened over its left end (one image, as the design layers them),
 // อ.ดำรงชัย cut out and standing in front of the emblem, cropped by the banner's foot,
 // then the heading and line of text and, at the right, the LINE button. From md to xl
-// (derived) the button goes under the text; on phones (derived) the portrait stands
-// centred on top and the text and button follow, centred. The design's emblem carries the club's name as
-// part of the picture; here the name is real text under the emblem. Email and phone,
-// which the design leaves out, stay under the address. Below md (derived) everything
-// stacks.
+// (derived) the button goes under the text. On phones (Figma 48:3296, 342 wide) the
+// heading reads จองคิวปรึกษา, centred over the line of text and the button, and the
+// portrait stands below them in front of the faint emblem, cut off by the banner's
+// foot. The design's emblem carries the club's name as part of the picture; here the
+// name is real text under the emblem. Email and phone, which the design leaves out,
+// stay under the address. Below md everything stacks.
 export function HomeFooter() {
   return (
     <footer className="bg-warm px-5 pt-16 md:px-10 md:pt-20 xl:pt-25">
       <div className="mx-auto flex max-w-content flex-col gap-10 md:gap-16">
-        <div className="relative isolate flex flex-col items-center overflow-hidden rounded-banner bg-banner px-6 pb-8 text-center md:min-h-51.5 md:items-start md:py-10 md:pr-10 md:pl-60 md:text-left lg:pl-76 xl:flex-row xl:items-center xl:justify-between xl:py-0 xl:pr-16 xl:pl-83.5">
+        <div className="relative isolate flex flex-col items-center overflow-hidden rounded-banner bg-banner px-6 pt-8 text-center md:min-h-51.5 md:items-start md:py-10 md:pr-10 md:pl-60 md:text-left lg:pl-76 xl:flex-row xl:items-center xl:justify-between xl:py-0 xl:pr-16 xl:pl-83.5">
           <Image src={bannerBackground} alt="" fill sizes="(min-width: 1280px) 1140px, 100vw" quality={80} className="-z-10 object-cover object-left" />
-          <div className="relative h-52 w-48 shrink-0 overflow-hidden md:absolute md:top-0 md:-left-2.75 md:h-full md:w-66.5 md:overflow-visible">
+          <Image
+            src={emblem}
+            alt=""
+            sizes="455px"
+            className="absolute top-52.5 left-1/2 -z-10 h-auto w-113.75 max-w-none -translate-x-1/2 opacity-20 mix-blend-screen md:hidden"
+          />
+          <div className="relative order-last mt-3.5 h-74.75 w-66.5 shrink-0 overflow-hidden md:absolute md:top-0 md:-left-2.75 md:order-none md:mt-0 md:h-full md:overflow-visible">
             <Image
               src={bannerPortrait}
               alt=""
               sizes="266px"
-              className="absolute top-3 left-0 h-auto w-full md:-top-5"
+              className="absolute top-0 left-0 h-auto w-full md:-top-5"
             />
           </div>
-          <div className="flex flex-col items-center gap-3 pt-2 md:items-start md:pt-0">
-            <h2 className="text-h2 font-semibold text-ink"><Phrases parts={homeFooter.ctaTitle} /></h2>
-            <p className="text-body text-ink-secondary">{homeFooter.ctaText}</p>
+          <div className="flex flex-col items-center md:items-start md:gap-3">
+            <h2 className="text-h2 font-semibold text-ink">
+              <span className="md:hidden">{homeFooter.ctaTitleCompact}</span>
+              <span className="hidden md:inline">
+                <Phrases parts={homeFooter.ctaTitle} />
+              </span>
+            </h2>
+            <p className="text-body text-ink-secondary"><Phrases parts={homeFooter.ctaText} /></p>
           </div>
-          <LineButton className="mt-6 w-full shrink-0 sm:w-auto xl:mt-0" />
+          <LineButton className="mt-4 shrink-0 md:mt-6 xl:mt-0" />
         </div>
 
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
