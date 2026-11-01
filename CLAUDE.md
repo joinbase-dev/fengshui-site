@@ -127,6 +127,33 @@ Before finishing any section, ask: "Would this look the same on a hundred other 
 
 Feng shui is a cultural practice; use its symbols (bagua, five elements, Chinese characters) only as the design and copy use them, and never as decorative filler.
 
+## Design Authority & Taste Skill
+
+The project includes the third-party `design-taste-frontend` skill (Taste Skill) in `.claude/skills/design-taste-frontend/`. For Fengshui Club Thailand it is a frontend quality and craftsmanship assistant, **not** an independent art director.
+
+**Sources of truth, in order:**
+
+1. **Figma** is the primary source of truth for layout, composition, branding and visual design.
+2. **`fengshui-tokens.css`** is the source of truth for colours. (Shared project file, `fengshui-site-review/home-v3/` in the project folder; implemented in `app/styles/tokens.css`.)
+3. **`fengshui-handoff.md`** is the source of truth for typography and design specifications. (Shared project file, same folder.)
+
+**Rules when using Taste Skill:**
+
+4. When using Taste Skill's art-direction tools (for example `scripts/draw.mjs`), always pass `--keep palette,type`.
+5. Do not enforce Taste Skill's aesthetic bans (for example cream palettes, eyebrow labels) when they conflict with the approved brand identity.
+6. Do not generate a new art direction or redesign approved Figma layouts.
+7. Use Taste Skill primarily for:
+   - UI craftsmanship and implementation quality
+   - Responsive refinement
+   - Typography rendering and spacing precision
+   - Motion and micro-interaction quality
+   - Accessibility and contrast
+   - Visual consistency
+   - Detecting generic AI-generated UI patterns
+   - Browser-based visual QA
+8. Fix clear implementation defects autonomously, but propose subjective design changes before implementing them.
+9. Preserve all existing functionality, especially the Service Detail Overlays and navigation.
+
 ## Workflow
 
 1. Read the relevant part of the design and this file before starting.
