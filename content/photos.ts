@@ -2,10 +2,10 @@ import { gallery, hero } from "@/content/site";
 import { serviceDetails, type PhotoAsset } from "@/content/services";
 
 // Every photo the site has besides the hero's, once each: the activity photos, then
-// the services' (a photo repeated in a service's image loop carries an empty alt).
+// the services' (each once).
 const otherPhotos: PhotoAsset[] = [
   ...gallery.photos,
-  ...serviceDetails.flatMap((service) => service.heroGallery.flat().filter((photo) => photo.alt !== "")),
+  ...serviceDetails.flatMap((service) => service.gallery),
 ];
 
 // What each album's slideshow draws from. The hero opens on its own four photos and

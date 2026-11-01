@@ -1,6 +1,5 @@
 import { HomeHeader } from "@/components/sections/HomeHeader";
 import { HomeHero } from "@/components/sections/HomeHero";
-import { Partners } from "@/components/sections/Partners";
 import { ServiceCards } from "@/components/sections/ServiceCards";
 import { Founder } from "@/components/sections/Founder";
 import { ConsultSteps } from "@/components/sections/ConsultSteps";
@@ -21,7 +20,7 @@ export const metadata = pageMetadata({
   image: shareImage.home,
 });
 
-// The home page (Figma 19:1781, "Web v.3"), set in Noto Sans Thai on white. A service
+// The home page (Figma 19:1781, "Web v.3"), set in Noto Sans Thai on warm grey. A service
 // card, a service in the navbar or in the footer's quick links opens that service's
 // overlay in place; the overlays are rendered here, closed, after the page. Each service
 // also has a page of its own (app/services/[slug]), which those links point to for
@@ -29,11 +28,10 @@ export const metadata = pageMetadata({
 // club's real partners arrive.
 export default function Home() {
   return (
-    <div className="home-page bg-white font-thai text-ink">
+    <div className="home-page bg-warm font-thai text-ink">
       <HomeHeader />
       <main id="main">
         <HomeHero />
-        <Partners />
         <ServiceCards />
         <Founder />
         <ConsultSteps />

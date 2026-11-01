@@ -1,6 +1,5 @@
 // ฮวงจุ้ยบ้านและสถานที่. Overlay copy transcribed from Ohm's mock-up (2026-10-17).
 
-import { galleryColumns } from "./gallery";
 import type { ServiceDetail } from "./types";
 import cardPhoto from "@/public/images/home/v3/card-feng-shui-home.webp";
 import photo01 from "@/public/images/services/feng-shui-home/01.webp";
@@ -12,6 +11,15 @@ import photo06 from "@/public/images/services/feng-shui-home/06.webp";
 import photo07 from "@/public/images/services/feng-shui-home/07.webp";
 import photo08 from "@/public/images/services/feng-shui-home/08.webp";
 import photo09 from "@/public/images/services/feng-shui-home/09.webp";
+import full01 from "@/public/images/services/feng-shui-home/carousel/01.webp";
+import full02 from "@/public/images/services/feng-shui-home/carousel/02.webp";
+import full03 from "@/public/images/services/feng-shui-home/carousel/03.webp";
+import full04 from "@/public/images/services/feng-shui-home/carousel/04.webp";
+import full05 from "@/public/images/services/feng-shui-home/carousel/05.webp";
+import full06 from "@/public/images/services/feng-shui-home/carousel/06.webp";
+import full07 from "@/public/images/services/feng-shui-home/carousel/07.webp";
+import full08 from "@/public/images/services/feng-shui-home/carousel/08.webp";
+import full09 from "@/public/images/services/feng-shui-home/carousel/09.webp";
 
 export const fengShuiHome: ServiceDetail = {
   slug: "feng-shui-home",
@@ -24,19 +32,19 @@ export const fengShuiHome: ServiceDetail = {
     description:
       "ปรึกษาฮวงจุ้ยบ้าน ที่อยู่อาศัย สำนักงาน และพื้นที่ธุรกิจกับอาจารย์ดำรงชัย พิจารณาชัยภูมิ ทิศทาง และการจัดวางพื้นที่ตามหลักศาสตร์ฮวงจุ้ยจีน",
   },
-  heroGallery: galleryColumns([
-    { src: photo01, alt: "อาจารย์ดำรงชัยถือเข็มทิศฮวงจุ้ยหน้าอาคาร LADAWAN" },
-    { src: photo02, alt: "อาจารย์ดำรงชัยกับเจ้าของบ้านหน้าบ้าน" },
-    { src: photo03, alt: "อาจารย์ดำรงชัยกับลูกค้าหน้าร้าน HOT POT" },
-    { src: photo04, alt: "อาจารย์ดำรงชัยกับลูกค้าหน้าร้าน Ghee Gelato House" },
-    { src: photo05, alt: "อาจารย์ดำรงชัยในชุดจีนสีแดงถือเข็มทิศฮวงจุ้ยในงานตรุษจีน" },
-    { src: photo06, alt: "อาจารย์ดำรงชัยดูชัยภูมิบนที่ดินที่กำลังก่อสร้าง" },
-    { src: photo07, alt: "อาจารย์ดำรงชัยในสำนักงาน eUnite" },
-    { src: photo08, alt: "อาจารย์ดำรงชัยกับลูกค้าหน้าบ้าน" },
-    { src: photo09, alt: "อาจารย์ดำรงชัยหน้าโครงการ Baan 365" },
-  ]),
+  gallery: [
+    { src: photo01, full: full01, alt: "อาจารย์ดำรงชัยถือเข็มทิศฮวงจุ้ยหน้าอาคาร LADAWAN" },
+    { src: photo02, full: full02, alt: "อาจารย์ดำรงชัยกับเจ้าของบ้านหน้าบ้าน" },
+    { src: photo03, full: full03, alt: "อาจารย์ดำรงชัยกับลูกค้าหน้าร้าน HOT POT" },
+    { src: photo04, full: full04, alt: "อาจารย์ดำรงชัยกับลูกค้าหน้าร้าน Ghee Gelato House" },
+    { src: photo05, full: full05, alt: "อาจารย์ดำรงชัยในชุดจีนสีแดงถือเข็มทิศฮวงจุ้ยในงานตรุษจีน" },
+    { src: photo06, full: full06, alt: "อาจารย์ดำรงชัยดูชัยภูมิบนที่ดินที่กำลังก่อสร้าง" },
+    { src: photo07, full: full07, alt: "อาจารย์ดำรงชัยในสำนักงาน eUnite" },
+    { src: photo08, full: full08, alt: "อาจารย์ดำรงชัยกับลูกค้าหน้าบ้าน" },
+    { src: photo09, full: full09, alt: "อาจารย์ดำรงชัยหน้าโครงการ Baan 365" },
+  ],
   body: [
-    { type: "heading", lines: ["ปรับสมดุลพื้นที่อยู่อาศัยและธุรกิจ ตามหลักศาสตร์ฮวงจุ้ยจีน"] },
+    { type: "heading", lines: ["ปรับสมดุลพื้นที่อยู่อาศัยและธุรกิจ", "ตามหลักศาสตร์ฮวงจุ้ยจีน"] },
     {
       type: "text",
       lines: [

@@ -10,7 +10,7 @@ export function Activities() {
     <section
       id={activities.id}
       aria-labelledby="activities-title"
-      className="scroll-mt-6 overflow-hidden bg-white py-16 md:py-20 xl:py-25"
+      className="scroll-mt-6 overflow-hidden bg-warm py-16 md:py-20 xl:py-25"
     >
       <h2 id="activities-title" className="px-5 text-center text-h2 font-semibold text-ink">
         {activities.title}

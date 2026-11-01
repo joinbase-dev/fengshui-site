@@ -11,8 +11,12 @@ export type PhotoAsset = {
   alt: string;
 };
 
-// A tile in the overlay's image loop. Tiles are square crops, so any photo shape works.
-export type GalleryPhoto = PhotoAsset;
+// One of a service's photos: a square crop (src, for the card slideshow and the
+// activity strip) and the whole photo (full, at most 1280×720, for the overlay's
+// carousel), which shows uncropped.
+export type GalleryPhoto = PhotoAsset & {
+  full: StaticImageData;
+};
 
 // The overlay's copy, in order (Ohm's overlay mock-ups, 2026-10-17). Each entry of
 // `lines` is a line as the design breaks it; on phones they run together and wrap.
@@ -41,9 +45,9 @@ export type ServiceDetail = {
   // characters) and description (under about 155), for search results and share
   // previews. Write them from the page's own copy.
   seo: { title: string; description: string };
-  // The two columns of the overlay's image loop, left to right (gallery.ts lays them
-  // out). Empty until the service has photos; the overlay then leaves the loop out.
-  heroGallery: GalleryPhoto[][];
+  // The service's photos, in the order of the overlay's carousel. Empty until the
+  // service has photos; the overlay then leaves the carousel out.
+  gallery: GalleryPhoto[];
   body: ServiceBodyBlock[];
   // The red link at the end of the overlay, when it is not "ปรึกษาอาจารย์ดำรงชัย". It
   // still opens the club's LINE account, the only booking channel.

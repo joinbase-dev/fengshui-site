@@ -75,6 +75,10 @@
   --color-hairline: #e9e9e9; /* border neutral */
   --color-muted: #626266; /* border neutral muted: the profile card's edge */
   --color-mint: #e9f5f0; /* surface neutral mint: the footer call to action */
+  --color-overlay-ground: #c4ad96; /* the overlay panel while its photo loads */
+  --color-overlay-rule: #a9a8a8; /* Gray/600: the overlay's copy box */
+  --color-banner: #d9c8b6; /* the wide banner while its photo loads */
+  --color-warm: #f1ece9; /* surface neutral warm: the page under the hero (Figma, 2026-11-01) */
   --color-placeholder: #dfe2eb; /* surface neutral placeholder: photo before it loads */
   /* LINE actions: the handoff's darker green (white label passes AA); #04c755 is the
      brand primitive, kept as --color-line above. */
@@ -109,11 +113,14 @@
 
   --radius-panel: 12px; /* footer call to action, LINE buttons */
   --radius-profile: 16px; /* founder card */
+  --radius-banner: 24px; /* footer wide banner */
 
   --shadow-portrait: 0 16px 100px 0 #000000;
   --shadow-profile: 8px 16px 46px 0 rgb(0 0 0 / 0.4);
   --shadow-cta: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.06);
   --shadow-button: 0 1px 2px 0 rgb(16 24 40 / 0.05);
+  --shadow-overlay-box: 0 1px 4px 0 rgb(12 12 13 / 0.1), 0 1px 4px 0 rgb(12 12 13 / 0.05); /* Drop Shadow/200 */
+  --shadow-card: 0 1px 4px 0 rgb(12 12 13 / 0.05), 0 1px 4px 0 rgb(12 12 13 / 0.1); /* service card on phones */
 
   --container-content: 1140px; /* sections (1440 frame, 150px margins) */
   --container-founder: 1200px; /* founder portrait and card */

@@ -1,18 +1,34 @@
 /* Home page v3 (Figma 19:1781): what Tailwind classes cannot say on their own. Values
    are the design's; tokens are in tokens.css. */
 
-/* The hero is 800px tall in the 1440 frame and keeps that proportion down to 560px. */
+/* The hero is 800px tall in the 1440 frame and keeps that proportion down to 560px.
+   The 390 frame (31:1572) is 800px tall too; on phones it fills the screen, between
+   560px and 800px. */
 .home-hero {
   min-height: clamp(35rem, 55.56vw, 50rem);
 }
 
-/* The emblem is 640×592 in the 1440 frame, centred 37px below the middle. */
+@media (width < 48rem) {
+  .home-hero {
+    min-height: clamp(35rem, 100svh, 50rem);
+  }
+}
+
+/* The emblem is 640×592 in the 1440 frame, centred 37px below the middle; 383px wide
+   and centred in the 390 frame. */
 .home-hero-emblem {
   width: clamp(20rem, 44.44vw, 40rem);
   height: auto;
   left: 50%;
   top: calc(50% + 2.57vw);
   transform: translate(-50%, -50%);
+}
+
+@media (width < 48rem) {
+  .home-hero-emblem {
+    width: min(98vw, 30rem);
+    top: 50%;
+  }
 }
 
 /* The design's text shadow on the hero heading and subtitle. */
@@ -88,23 +104,23 @@
   }
 }
 
-/* The home page is white to its edges, overscroll included (the rest of the site keeps
-   the blush). */
+/* Under the hero the home page is warm grey to its edges, overscroll included (the
+   rest of the site keeps the blush). */
 body:has(.home-page) {
-  background: var(--color-white);
+  background: var(--color-warm);
 }
 
-/* Partner logos (Figma 19:1804): 120×44, 68px apart; smaller on phones. Each logo
-   carries the gap after it, so the two copies tile seamlessly. */
+/* Partner logos (Figma 39:3155, and 39:3169 on phones): 120×44, 68px apart at every
+   width. Each logo carries the gap after it, so the two copies tile seamlessly. */
 .partner-track {
   display: flex;
   width: max-content;
 }
 
 .partner-logo {
-  width: clamp(5.5rem, 8.33vw, 7.5rem);
-  aspect-ratio: 120 / 44;
-  margin-right: clamp(2.5rem, 4.72vw, 4.25rem);
+  width: 7.5rem;
+  height: 2.75rem;
+  margin-right: 4.25rem;
   flex: none;
 }
 

@@ -62,7 +62,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <div className="mt-4 grid gap-16 xl:grid-cols-[var(--container-drawer)_1fr] xl:items-start">
             <article aria-labelledby={titleId} className="flex flex-col gap-6 bg-sand px-5 py-10 md:px-8 md:py-16">
               <ServiceHero titleId={titleId} title={service.title} byline={service.byline} headingLevel="h1" />
-              <ServiceBody gallery={service.heroGallery} blocks={service.body} cta={service.cta} galleryLoading="eager" />
+              <ServiceBody service={service} variant="page" />
             </article>
             <OtherServices current={service.slug} />
           </div>

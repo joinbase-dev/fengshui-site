@@ -104,7 +104,7 @@ export const consultSteps = {
 
 // The nth photo (from 1) of a service, in the order of its data file.
 function servicePhoto(slug: string, n: number): PhotoAsset {
-  const photos = serviceDetails.find((service) => service.slug === slug)?.heroGallery.flat().filter((photo) => photo.alt !== "");
+  const photos = serviceDetails.find((service) => service.slug === slug)?.gallery;
   const photo = photos?.[n - 1];
   if (!photo) throw new Error(`No photo ${n} for service ${slug}`);
   return photo;
@@ -130,8 +130,9 @@ export const activities = {
 };
 
 export const homeFooter = {
-  ctaTitle: ["ต้องการปรึกษา", "อ.ดำรงชัย ?"],
-  ctaText: "ติดต่อแจ้งเรื่องที่ต้องการปรึกษา พร้อมเลือกวันและเวลาเลย",
+  // The wide banner (Figma 37:3090).
+  ctaTitle: ["ปรึกษา", "อ.ดำรงชัย"],
+  ctaText: "ติดต่อแจ้งเรื่องที่ต้องการปรึกษา พร้อมเลือกวันและเวลา",
   name: site.name,
   nameEn: site.nameEn,
   address: `${address.street} ${address.city} ${address.postalCode}`,
