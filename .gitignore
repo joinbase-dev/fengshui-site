@@ -43,3 +43,6 @@ next-env.d.ts
 
 # visual check output (npm run screenshots)
 /screenshots/
+
+# Taste Skill working files (draw/inspect output)
+/.taste-skill/

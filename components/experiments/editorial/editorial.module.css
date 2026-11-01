@@ -1,0 +1,738 @@
+/* Editorial experiment (/experiments/editorial). Scoped to this route on purpose: its
+   palette and type are a proposal, so they stay out of app/styles/tokens.css. Five
+   type steps, one button shape, one pair of page margins. Motion is transform and
+   opacity only, and stops under prefers-reduced-motion. */
+
+.root {
+  /* Lacquer: a near-black red-brown ground, bone ink, the brand's gold on the one
+     action and the brand's red as the one field. */
+  --ground: #1d0d09;
+  --surface: #2a130e;
+  --ink: #eee9e2;
+  --muted: #cbb59b;
+  --gold: #fae4c0; /* fengshui-tokens.css brand gold */
+  --gold-hover: #ffefd3;
+  --red: #ac0805; /* fengshui-tokens.css brand red */
+  --on-photo: #ffffff;
+
+  --step-small: 0.875rem; /* 14 */
+  --step-body: clamp(1.125rem, 1.05rem + 0.2vw, 1.25rem); /* 18 to 20 */
+  --step-lead: clamp(1.25rem, 1.05rem + 0.75vw, 1.75rem); /* 20 to 28 */
+  --step-head: clamp(2.25rem, 1.2rem + 3.4vw, 4.25rem); /* 36 to 68 */
+  --step-display: clamp(2.75rem, 0.9rem + 6.4vw, 6.5rem); /* 44 to 104 */
+
+  --margin: clamp(1.25rem, 5vw, 6rem);
+  --gap: clamp(1rem, 1.6vw, 1.5rem);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-trirong), var(--font-noto-thai), serif;
+  font-size: var(--step-body);
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-x: clip;
+}
+
+:global(body):has(.root) {
+  /* The page ground behind overscroll and any gap: the experiment's lacquer. */
+  background: #1d0d09;
+}
+
+.root a:focus-visible,
+.root button:focus-visible,
+.root input:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.frame {
+  padding-inline: max(var(--margin), env(safe-area-inset-left)) max(var(--margin), env(safe-area-inset-right));
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gap);
+}
+
+/* The one button: gold, square, 52px tall. */
+.button {
+  display: inline-flex;
+  min-height: 52px;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 1.5rem;
+  background: var(--gold);
+  color: var(--ground);
+  font-size: var(--step-body);
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background-color 200ms var(--ease);
+}
+.button svg {
+  width: 1.1em;
+  height: 1.1em;
+  transition: transform 300ms var(--ease);
+}
+.button:hover {
+  background: var(--gold-hover);
+}
+.button:hover svg,
+.button:focus-visible svg {
+  transform: translate(2px, -2px);
+}
+
+/* ---------- Hero: the photograph is the headline ---------- */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Phones: a 4:5 crop around him, the bar on its sky, the type below on the ground. */
+.heroMedia {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  margin-inline: calc(-1 * max(var(--margin), env(safe-area-inset-left))) calc(-1 * max(var(--margin), env(safe-area-inset-right)));
+  overflow: clip;
+  background: #c9c6c0;
+}
+
+.heroPhoto {
+  object-fit: cover;
+  object-position: 67% 60%;
+  animation:
+    settle 2400ms var(--ease) both,
+    drift 32s 2400ms ease-in-out infinite alternate;
+}
+
+@media (min-width: 40rem) {
+  .heroMedia {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+.bar {
+  position: absolute;
+  inset: 0 max(var(--margin), env(safe-area-inset-right)) auto max(var(--margin), env(safe-area-inset-left));
+}
+
+@media (min-width: 64rem) {
+  .hero {
+    display: flex;
+    min-height: max(100svh, 40rem);
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--on-photo);
+  }
+  .heroMedia {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    margin: 0;
+    aspect-ratio: auto;
+  }
+  .heroPhoto {
+    /* Keep the man and the steel in view; the sky takes the top. */
+    object-position: 62% 70%;
+  }
+  .bar {
+    position: static;
+  }
+  /* A neutral scrim under the lower text only: the sky above stays clean. */
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    /* taste-skill-ignore: the one neutral scrim over a photograph that the house rules allow */
+    background: linear-gradient(to top, rgb(0 0 0 / 0.72) 0%, rgb(0 0 0 / 0.38) 34%, rgb(0 0 0 / 0) 58%); /* taste-skill-ignore */
+  }
+}
+
+.bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--gap);
+  padding-top: max(1.25rem, env(safe-area-inset-top));
+  /* Dark ink on the pale sky. */
+  color: var(--ground);
+  font-size: var(--step-small);
+  line-height: 1.45;
+}
+
+.letterhead {
+  display: flex;
+  min-height: 44px;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: inherit;
+  text-decoration: none;
+}
+.letterhead img {
+  width: 44px;
+  height: 44px;
+}
+.letterhead span {
+  display: block;
+}
+.letterheadEn {
+  opacity: 0.75;
+}
+@media (max-width: 29.99rem) {
+  .letterheadEn,
+  .nav li:nth-child(3) {
+    display: none;
+  }
+}
+
+.nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav li + li::before {
+  content: ",\00a0";
+}
+.nav li {
+  display: flex;
+}
+.nav a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: flex-start;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.3em;
+  transition: text-decoration-color 200ms var(--ease);
+}
+.nav a:hover,
+.nav a:focus-visible {
+  text-decoration-color: currentColor;
+}
+
+.heroFoot {
+  row-gap: 1.5rem;
+  align-items: end;
+  padding-top: 2rem;
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
+}
+@media (min-width: 64rem) {
+  .heroFoot {
+    padding-top: 0;
+  }
+}
+
+.heroTitle {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: var(--step-display);
+  font-weight: 400;
+  /* Thai tone marks stack above the line: 1.18 is the tightest that keeps them clear. */
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.heroTitle span {
+  display: block;
+  white-space: nowrap;
+}
+
+.heroAside {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+.heroSentence {
+  max-width: 30ch;
+  margin: 0;
+  font-size: var(--step-body);
+  line-height: 1.6;
+}
+
+.heroCaption {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--step-small);
+}
+
+.enter {
+  animation: rise 900ms var(--ease) both;
+  animation-delay: calc(240ms + var(--i, 0) * 110ms);
+}
+
+@media (min-width: 64rem) {
+  .heroTitle {
+    grid-column: 1 / 8;
+  }
+  .heroAside {
+    grid-column: 9 / -1;
+    align-items: flex-end;
+    text-align: right;
+  }
+  .heroCaption {
+    grid-column: 1 / 8;
+    margin-top: -0.5rem;
+    color: rgb(255 255 255 / 0.8);
+  }
+}
+
+/* ---------- Intro: the founder, on plain ground ---------- */
+
+.intro {
+  padding-block: clamp(5rem, 10vw, 10rem) clamp(2rem, 4vw, 4rem);
+  row-gap: 2.5rem;
+}
+
+.introPhoto {
+  grid-column: 1 / -1;
+  width: 78%;
+  margin: 0;
+}
+.introPhoto img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.caption {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: var(--step-small);
+  line-height: 1.5;
+}
+
+.introText {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+.introTitle span {
+  display: block;
+  white-space: nowrap;
+}
+.introTitle {
+  margin: 0;
+  font-size: var(--step-head);
+  font-weight: 300;
+  line-height: 1.22;
+  text-wrap: balance;
+}
+.introLead {
+  max-width: 36em;
+  margin: 0;
+  font-size: var(--step-lead);
+  line-height: 1.75;
+}
+.fact {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0 0;
+}
+.factValue {
+  font-size: var(--step-head);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--gold);
+}
+.factNote {
+  color: var(--muted);
+  font-size: var(--step-small);
+}
+
+@media (min-width: 48rem) {
+  .introPhoto {
+    grid-column: 1 / 6;
+    width: auto;
+  }
+  .introText {
+    grid-column: 7 / -1;
+    padding-top: clamp(4rem, 9vw, 9rem);
+  }
+}
+@media (min-width: 64rem) {
+  .introPhoto {
+    grid-column: 2 / 6;
+  }
+  .introText {
+    grid-column: 7 / 12;
+  }
+}
+
+/* ---------- Services: a statement, the list pushed right, one print beside it ---------- */
+
+.services {
+  padding-block: clamp(4rem, 8vw, 8rem) clamp(5rem, 10vw, 10rem);
+  scroll-margin-top: 1rem;
+}
+
+.servicesTitle {
+  margin: 0;
+  font-size: var(--step-head);
+  font-weight: 300;
+  line-height: 1.2;
+}
+.servicesTitle span {
+  display: block;
+}
+@media (min-width: 48rem) {
+  .servicesTitle span:first-child {
+    padding-left: 3vw;
+  }
+}
+
+.servicesBody {
+  margin-top: clamp(3rem, 6.5vw, 6rem);
+}
+
+/* Desktop: one 4:5 print, held beside the list as it scrolls, that changes to the
+   service under the pointer or the keyboard focus. Phones show each row's own print. */
+.print {
+  display: none;
+  position: sticky;
+  top: 12vh;
+  grid-column: 1 / 5;
+  grid-row: 1;
+  align-self: start;
+  margin: 0;
+}
+.printItem {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 700ms var(--ease);
+}
+.printItem img {
+  transform: scale(1.03);
+  transition: transform 1400ms var(--ease);
+}
+.printItem:first-child {
+  position: relative;
+}
+.printPicture {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--surface);
+}
+.printPicture img {
+  object-fit: cover;
+}
+
+.tableName {
+  display: none;
+  grid-column: 7;
+  grid-row: 1;
+  align-self: start;
+  margin: 0;
+  padding-top: 1.6rem;
+  color: var(--muted);
+  font-size: var(--step-small);
+}
+
+.list {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 7vw, 4.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Phones: the prints alternate width and side, so the list still reads as placed. */
+.rowPhoto {
+  position: relative;
+  width: 100%;
+  margin: 0 0 1.25rem;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--surface);
+}
+.rowPhoto img {
+  object-fit: cover;
+}
+.list > li:nth-child(3n + 2) .rowPhoto {
+  width: 72%;
+}
+.list > li:nth-child(3n) .rowPhoto {
+  width: 60%;
+  margin-left: auto;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 1rem;
+  row-gap: 0.25rem;
+  margin: 0 -1rem;
+  padding: 1rem;
+  color: inherit;
+  text-decoration: none;
+  transition: background-color 300ms var(--ease);
+}
+.row:hover,
+.row:focus-visible {
+  background: var(--surface);
+}
+.root .row:focus-visible {
+  outline-offset: 0;
+}
+.rowKind {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: var(--step-small);
+}
+.rowTitle {
+  margin: 0;
+  font-size: var(--step-lead);
+  font-weight: 500;
+  line-height: 1.4;
+  transition: color 300ms var(--ease);
+}
+.row:hover .rowTitle,
+.row:focus-visible .rowTitle {
+  color: var(--gold);
+}
+.rowArrow {
+  grid-row: 2;
+  grid-column: 2;
+  align-self: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--gold);
+  transition: transform 300ms var(--ease);
+}
+.row:hover .rowArrow,
+.row:focus-visible .rowArrow {
+  transform: translate(3px, -3px);
+}
+.rowSummary {
+  grid-column: 1 / -1;
+  margin: 0;
+  max-width: 34em;
+  font-size: var(--step-body);
+  line-height: 1.7;
+}
+
+@media (min-width: 64rem) {
+  .print,
+  .tableName {
+    display: block;
+  }
+  .list {
+    grid-column: 8 / -1;
+    grid-row: 1;
+    gap: 1.5rem;
+  }
+  .rowPhoto {
+    display: none;
+  }
+  .row {
+    margin: 0 -1.25rem;
+    padding: 1.25rem;
+  }
+
+  /* Which print shows: the first, until a row is hovered or focused. */
+  .servicesBody:not(:has(.row:hover, .row:focus-visible)) .printItem:first-child,
+  .servicesBody:has(.list > li:nth-child(1) .row:is(:hover, :focus-visible)) .printItem:nth-child(1),
+  .servicesBody:has(.list > li:nth-child(2) .row:is(:hover, :focus-visible)) .printItem:nth-child(2),
+  .servicesBody:has(.list > li:nth-child(3) .row:is(:hover, :focus-visible)) .printItem:nth-child(3),
+  .servicesBody:has(.list > li:nth-child(4) .row:is(:hover, :focus-visible)) .printItem:nth-child(4),
+  .servicesBody:has(.list > li:nth-child(5) .row:is(:hover, :focus-visible)) .printItem:nth-child(5),
+  .servicesBody:has(.list > li:nth-child(6) .row:is(:hover, :focus-visible)) .printItem:nth-child(6) {
+    opacity: 1;
+  }
+  .servicesBody:not(:has(.row:hover, .row:focus-visible)) .printItem:first-child img,
+  .servicesBody:has(.list > li:nth-child(1) .row:is(:hover, :focus-visible)) .printItem:nth-child(1) img,
+  .servicesBody:has(.list > li:nth-child(2) .row:is(:hover, :focus-visible)) .printItem:nth-child(2) img,
+  .servicesBody:has(.list > li:nth-child(3) .row:is(:hover, :focus-visible)) .printItem:nth-child(3) img,
+  .servicesBody:has(.list > li:nth-child(4) .row:is(:hover, :focus-visible)) .printItem:nth-child(4) img,
+  .servicesBody:has(.list > li:nth-child(5) .row:is(:hover, :focus-visible)) .printItem:nth-child(5) img,
+  .servicesBody:has(.list > li:nth-child(6) .row:is(:hover, :focus-visible)) .printItem:nth-child(6) img {
+    transform: scale(1);
+  }
+}
+
+/* ---------- The live thing: the clash-year band, the page's one field of red ---------- */
+
+.clash {
+  margin-top: clamp(5rem, 10vw, 9rem);
+  padding: clamp(2rem, 5vw, 4.5rem) clamp(1.25rem, 5vw, 4.5rem);
+  background: var(--red);
+  color: #ffffff;
+  scroll-margin-top: 1rem;
+  row-gap: 2rem;
+}
+.clashText {
+  grid-column: 1 / -1;
+}
+.clashTitle {
+  margin: 0 0 1rem;
+  font-size: var(--step-lead);
+  font-weight: 500;
+  line-height: 1.4;
+}
+.clashSummary {
+  margin: 0;
+  max-width: 32em;
+}
+.clashForm {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.clashLabel {
+  font-size: var(--step-small);
+}
+.clashInput {
+  width: 100%;
+  max-width: 14rem;
+  min-height: 52px;
+  padding: 0 1rem;
+  border: 0;
+  border-radius: 0;
+  background: #ffffff;
+  color: var(--ground);
+  font: inherit;
+  font-size: var(--step-lead);
+}
+.clashHint {
+  font-size: var(--step-small);
+  opacity: 0.9;
+}
+.clashResult {
+  display: block;
+  min-height: 3.5em;
+  margin-top: 1rem;
+}
+.clashAnswer {
+  display: block;
+  font-size: var(--step-lead);
+  font-weight: 500;
+  line-height: 1.4;
+}
+.clashLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  margin-top: 0.5rem;
+}
+.clashLinks a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+.root .clash a:focus-visible,
+.root .clash input:focus-visible {
+  outline-color: #ffffff;
+}
+
+@media (min-width: 64rem) {
+  .clashText {
+    grid-column: 1 / 7;
+  }
+  .clashForm {
+    grid-column: 8 / -1;
+  }
+}
+
+/* ---------- End note ---------- */
+
+.end {
+  padding-block: 2.5rem max(2.5rem, env(safe-area-inset-bottom));
+  background: var(--surface);
+  color: var(--muted);
+  font-size: var(--step-small);
+}
+.end p {
+  margin: 0;
+}
+.end a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--ink);
+  text-underline-offset: 0.3em;
+}
+
+/* ---------- Motion ---------- */
+
+@keyframes settle {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes drift {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05) translateX(-1%);
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Sections rise once as they enter (RevealOnScroll.tsx). The hidden state applies only
+   once script has run, so nothing waits on it. Rows in a list follow each other. */
+@media (prefers-reduced-motion: no-preference) {
+  .root[data-scripted] [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 700ms var(--ease),
+      transform 900ms var(--ease);
+    transition-delay: calc(var(--i, 0) * 80ms);
+  }
+  .root[data-scripted] [data-reveal][data-revealed] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroPhoto,
+  .enter {
+    animation: none;
+  }
+  .printItem,
+  .printItem img,
+  .row,
+  .rowTitle,
+  .rowArrow,
+  .button svg {
+    transition: none;
+  }
+  .printItem img {
+    transform: none;
+  }
+}
