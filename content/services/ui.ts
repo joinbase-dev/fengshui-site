@@ -8,4 +8,13 @@ export const serviceUi = {
   breadcrumbLabel: "ตำแหน่งของหน้านี้",
   home: "หน้าแรก",
   otherServices: "บริการอื่น",
+  // Not in the design: screen-reader text of the overlay's photo carousel.
+  carousel: {
+    // Followed by the service's name.
+    label: "ภาพบริการ",
+    previous: "ภาพก่อนหน้า",
+    next: "ภาพถัดไป",
+    // {current} and {total} are filled in.
+    position: "ภาพที่ {current} จาก {total}",
+  },
 } as const;

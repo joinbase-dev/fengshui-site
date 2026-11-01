@@ -65,7 +65,7 @@ export function Services() {
             {serviceDetails.map((service, index) => (
               <li
                 key={service.slug}
-                data-preview={service.heroGallery.length > 0 || undefined}
+                data-preview={service.gallery.length > 0 || undefined}
                 className="border-b border-rule last:border-b-0"
               >
                 <ServiceLink
@@ -117,8 +117,7 @@ export function Services() {
               <div aria-hidden="true" className="service-previews">
                 {serviceDetails.map((service) => (
                   <div key={service.slug} className="service-preview">
-                    {service.heroGallery
-                      .flat()
+                    {service.gallery
                       .slice(0, 3)
                       .reverse()
                       .map((photo, index) => (

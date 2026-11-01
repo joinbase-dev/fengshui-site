@@ -11,8 +11,12 @@ export type PhotoAsset = {
   alt: string;
 };
 
-// A tile in the overlay's image loop. Tiles are square crops, so any photo shape works.
-export type GalleryPhoto = PhotoAsset;
+// One of a service's photos: a square crop (src, for the card slideshow and the
+// activity strip) and the whole photo (full, from Ohm's original at most 1600 wide
+// and 1200 tall, for the overlay's carousel), which shows uncropped.
+export type GalleryPhoto = PhotoAsset & {
+  full: StaticImageData;
+};
 
 // The overlay's copy, in order (Ohm's overlay mock-ups, 2026-10-17). Each entry of
 // `lines` is a line as the design breaks it; on phones they run together and wrap.
@@ -29,17 +33,23 @@ export type ServiceDetail = {
   slug: string;
   // Full name: the card title, the overlay and page heading, and structured data.
   title: string;
-  // The lines under the title on the service card, as the design breaks them.
+  // The lines under the title in the service pages' "other services" list.
   summaryLines: string[];
+  // The service's card on the home page (Figma 19:1781): the Chinese eyebrow over the
+  // title (when the design gives one), the summary as the design breaks its lines, and
+  // the photo on the card's right, cropped as the design crops it. On phones the photo
+  // sits under the copy, wide (342×191), so it has its own crop (phonePhoto), taken
+  // from the same original around the same subject.
+  card: { eyebrow?: string; lines: string[]; photo: PhotoAsset; phonePhoto: StaticImageData };
   // The line under the overlay heading, beside the contact icons.
   byline: string;
   // The service page's title (before " | คลับฮวงจุ้ยแห่งประเทศไทย", so under about 35
   // characters) and description (under about 155), for search results and share
   // previews. Write them from the page's own copy.
   seo: { title: string; description: string };
-  // The two columns of the overlay's image loop, left to right (gallery.ts lays them
-  // out). Empty until the service has photos; the overlay then leaves the loop out.
-  heroGallery: GalleryPhoto[][];
+  // The service's photos, in the order of the overlay's carousel. Empty until the
+  // service has photos; the overlay then leaves the carousel out.
+  gallery: GalleryPhoto[];
   body: ServiceBodyBlock[];
   // The red link at the end of the overlay, when it is not "ปรึกษาอาจารย์ดำรงชัย". It
   // still opens the club's LINE account, the only booking channel.

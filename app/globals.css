@@ -5,6 +5,7 @@
 @import "./styles/service-overlay.css";
 @import "./styles/photo-album.css";
 @import "./styles/services.css";
+@import "./styles/home.css";
 
 /* The scrollbar keeps its space while an overlay locks the page, so nothing shifts. */
 html {

@@ -13,8 +13,10 @@ const epilogue = Epilogue({
   display: "swap",
 });
 
+// The home page sets everything in Noto Sans Thai, Latin included, so it loads both
+// subsets.
 const notoThai = Noto_Sans_Thai({
-  subsets: ["thai"],
+  subsets: ["thai", "latin"],
   variable: "--font-noto-thai",
   display: "swap",
 });

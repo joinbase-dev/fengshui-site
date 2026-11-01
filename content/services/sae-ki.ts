@@ -1,7 +1,8 @@
 // แซกีเสริมดวง แก้กรรม. Overlay copy transcribed from Ohm's mock-up (2026-10-17).
 
-import { galleryColumns } from "./gallery";
 import type { ServiceDetail } from "./types";
+import cardPhoto from "@/public/images/home/v3/card-sae-ki.webp";
+import cardPhonePhoto from "@/public/images/home/v3/card-sae-ki-phone.webp";
 import photo01 from "@/public/images/services/sae-ki/01.webp";
 import photo02 from "@/public/images/services/sae-ki/02.webp";
 import photo03 from "@/public/images/services/sae-ki/03.webp";
@@ -9,28 +10,36 @@ import photo04 from "@/public/images/services/sae-ki/04.webp";
 import photo05 from "@/public/images/services/sae-ki/05.webp";
 import photo06 from "@/public/images/services/sae-ki/06.webp";
 import photo07 from "@/public/images/services/sae-ki/07.webp";
+import full01 from "@/public/images/services/sae-ki/carousel/01.webp";
+import full02 from "@/public/images/services/sae-ki/carousel/02.webp";
+import full03 from "@/public/images/services/sae-ki/carousel/03.webp";
+import full04 from "@/public/images/services/sae-ki/carousel/04.webp";
+import full05 from "@/public/images/services/sae-ki/carousel/05.webp";
+import full06 from "@/public/images/services/sae-ki/carousel/06.webp";
+import full07 from "@/public/images/services/sae-ki/carousel/07.webp";
 
 export const saeKi: ServiceDetail = {
   slug: "sae-ki",
   title: "แซกีเสริมดวง แก้กรรม",
   summaryLines: ["แซกีช่วยปรับฮวงจุ้ยและชะตาชีวิต", "เคล็ดลับความรุ่งเรืองของคนจีนกว่า 1,000 ปี"],
+  card: { eyebrow: "生肖", lines: ["แซกีช่วยปรับฮวงจุ้ยและชะตาชีวิต", "เคล็ดลับความรุ่งเรืองของคนจีนกว่า 1,000 ปี"], photo: { src: cardPhoto, alt: "อาจารย์ดำรงชัยอธิบายแผ่นศิลาจารึกสีทองกลางแจ้ง โดยมีผู้ช่วยกางร่มให้" }, phonePhoto: cardPhonePhoto },
   byline: "แซกีเสริมดวง แก้กรรม",
   seo: {
     title: "แซกีเสริมดวง แก้กรรม โดย อ.ดำรงชัย",
     description:
       "ทำแซกีเสริมดวงกับอาจารย์ดำรงชัย เคล็ดลับความรุ่งเรืองของคนจีนกว่า 1,000 ปี เสริมดวงชะตา โชคลาภ และความมั่นคง สำหรับช่วงดวงชงหรือเมื่อต้องการเปิดรับโอกาสใหม่",
   },
-  heroGallery: galleryColumns([
-    { src: photo01, alt: "ผู้ร่วมพิธีหน้าศาลเจ้า" },
-    { src: photo02, alt: "ผู้ร่วมพิธีแซกีในศาลเจ้า" },
-    { src: photo03, alt: "ห่อผ้าแดงวางเรียงบนแท่นหน้าป้ายหิน มีภูเขาเป็นฉากหลัง" },
-    { src: photo04, alt: "ผู้ร่วมพิธีไหว้ในศาลเจ้าสีแดง" },
-    { src: photo05, alt: "การเตรียมพิธีแซกีกลางแจ้ง" },
-    { src: photo06, alt: "อาจารย์ดำรงชัยกับผู้ร่วมพิธีในศาลเจ้า" },
-    { src: photo07, alt: "อาจารย์ดำรงชัยในชุดจีนสีแดงถือโถกระเบื้องลายอักษรมงคล" },
-  ]),
+  gallery: [
+    { src: photo01, full: full01, alt: "ผู้ร่วมพิธีหน้าศาลเจ้า" },
+    { src: photo02, full: full02, alt: "ผู้ร่วมพิธีแซกีในศาลเจ้า" },
+    { src: photo03, full: full03, alt: "ห่อผ้าแดงวางเรียงบนแท่นหน้าป้ายหิน มีภูเขาเป็นฉากหลัง" },
+    { src: photo04, full: full04, alt: "ผู้ร่วมพิธีไหว้ในศาลเจ้าสีแดง" },
+    { src: photo05, full: full05, alt: "การเตรียมพิธีแซกีกลางแจ้ง" },
+    { src: photo06, full: full06, alt: "อาจารย์ดำรงชัยกับผู้ร่วมพิธีในศาลเจ้า" },
+    { src: photo07, full: full07, alt: "อาจารย์ดำรงชัยในชุดจีนสีแดงถือโถกระเบื้องลายอักษรมงคล" },
+  ],
   body: [
-    { type: "heading", lines: ["เสริมพลังดวงชะตาเปิดทางรับสิ่งดีๆ เคล็ดลับความรุ่งเรืองของจีนกว่า 1,000 ปี"] },
+    { type: "heading", lines: ["เสริมพลังดวงชะตาเปิดทางรับสิ่งดีๆ", "เคล็ดลับความรุ่งเรืองของจีนกว่า 1,000 ปี"] },
     { type: "text", lines: ["เสริมพลังดวงชะตา เสริมโชคลาภ ความมั่นคงและความสุข"] },
     {
       type: "list",

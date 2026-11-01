@@ -1,10 +1,10 @@
 /* Service overlays: the dialog's motion (components/ui/ServiceDialog.tsx) and the
-   infinite image loop's (components/ui/InfiniteImageLoop.tsx). */
+   photo carousel's (components/ui/ImageCarousel.tsx). */
 
 /* The dialog fills the screen, transparent; the panel inside it is the drawer, full
-   height on the right, and scrolls on its own. From lg up the design leaves the page
-   beside it undimmed; below lg the drawer takes the whole width, so no strip of page
-   shows beside it. The dialog is pinned to all four edges rather than given a viewport
+   height on the right, and scrolls on its own. From lg up the page beside it is dimmed
+   to 40% black (Figma 37:2814); below lg the drawer takes the whole width, so no strip
+   of page shows beside it. The dialog is pinned to all four edges rather than given a viewport
    height, so it follows mobile browser bars as they show and hide. The page under an
    open dialog does not scroll. */
 .service-dialog {
@@ -26,7 +26,7 @@
 }
 
 .service-dialog::backdrop {
-  background: transparent;
+  background: rgb(0 0 0 / 0.4);
 }
 
 /* While a closed drawer slides away it still covers the screen; clicks go through it
@@ -50,6 +50,20 @@ html:has(.service-dialog[open]) {
     transition:
       overlay var(--duration-overlay-out) allow-discrete,
       display var(--duration-overlay-out) allow-discrete;
+  }
+
+  .service-dialog::backdrop {
+    opacity: 0;
+    transition:
+      opacity var(--duration-overlay-out) var(--ease-drawer-out),
+      overlay var(--duration-overlay-out) allow-discrete,
+      display var(--duration-overlay-out) allow-discrete;
+  }
+
+  .service-dialog[open]::backdrop {
+    opacity: 1;
+    transition-duration: var(--duration-overlay-in);
+    transition-timing-function: var(--ease-refined);
   }
 
   .service-dialog-panel {
@@ -80,6 +94,10 @@ html:has(.service-dialog[open]) {
   }
 
   @starting-style {
+    .service-dialog[open]::backdrop {
+      opacity: 0;
+    }
+
     .service-dialog[open] .service-dialog-panel {
       transform: translate3d(100%, 0, 0);
     }
@@ -91,28 +109,15 @@ html:has(.service-dialog[open]) {
   }
 }
 
-/* Each gallery column holds its tile list twice, stacked, and slides by exactly one
-   list (-50%), so the loop restarts on an identical frame with no jump. Columns
-   alternate direction and run at slightly different speeds, so the stagger drifts
-   slowly. Only transform animates. With reduced motion the columns stand still in the
-   design's staggered layout. */
+/* The overlay's photo carousel (components/ui/ImageCarousel.tsx) slides from photo to
+   photo; it follows the finger without delay while dragged. Only transform animates.
+   Under reduced motion the photos change in place. */
 @media (prefers-reduced-motion: no-preference) {
-  .image-loop-track {
-    animation: image-loop-scroll calc(var(--loop-tiles, 3) * var(--loop-tile-time, 20s)) linear infinite;
-    will-change: transform;
+  .image-carousel-track {
+    transition: transform 450ms var(--ease-refined);
   }
 
-  .image-loop-column:nth-child(2) .image-loop-track {
-    --loop-tile-time: 23s;
-    animation-direction: reverse;
-  }
-}
-
-@keyframes image-loop-scroll {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(0, -50%, 0);
+  .image-carousel-track[data-dragging] {
+    transition: none;
   }
 }
