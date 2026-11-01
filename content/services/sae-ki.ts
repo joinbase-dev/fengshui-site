@@ -2,6 +2,7 @@
 
 import type { ServiceDetail } from "./types";
 import cardPhoto from "@/public/images/home/v3/card-sae-ki.webp";
+import cardPhonePhoto from "@/public/images/home/v3/card-sae-ki-phone.webp";
 import photo01 from "@/public/images/services/sae-ki/01.webp";
 import photo02 from "@/public/images/services/sae-ki/02.webp";
 import photo03 from "@/public/images/services/sae-ki/03.webp";
@@ -21,7 +22,7 @@ export const saeKi: ServiceDetail = {
   slug: "sae-ki",
   title: "แซกีเสริมดวง แก้กรรม",
   summaryLines: ["แซกีช่วยปรับฮวงจุ้ยและชะตาชีวิต", "เคล็ดลับความรุ่งเรืองของคนจีนกว่า 1,000 ปี"],
-  card: { eyebrow: "生肖", lines: ["แซกีช่วยปรับฮวงจุ้ยและชะตาชีวิต", "เคล็ดลับความรุ่งเรืองของคนจีนกว่า 1,000 ปี"], photo: { src: cardPhoto, alt: "อาจารย์ดำรงชัยอธิบายแผ่นศิลาจารึกสีทองกลางแจ้ง โดยมีผู้ช่วยกางร่มให้" } },
+  card: { eyebrow: "生肖", lines: ["แซกีช่วยปรับฮวงจุ้ยและชะตาชีวิต", "เคล็ดลับความรุ่งเรืองของคนจีนกว่า 1,000 ปี"], photo: { src: cardPhoto, alt: "อาจารย์ดำรงชัยอธิบายแผ่นศิลาจารึกสีทองกลางแจ้ง โดยมีผู้ช่วยกางร่มให้" }, phonePhoto: cardPhonePhoto },
   byline: "แซกีเสริมดวง แก้กรรม",
   seo: {
     title: "แซกีเสริมดวง แก้กรรม โดย อ.ดำรงชัย",

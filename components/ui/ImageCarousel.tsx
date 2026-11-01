@@ -25,7 +25,7 @@ function fill(template: string, current: number, total: number) {
 // The service's photos, one at a time (Figma 37:2955: 638×341, 8px corners, the dots
 // 16px above the foot, white for the photo showing and half white for the others).
 // Each photo shows whole, centred over a blurred, darkened copy of itself that fills
-// the frame, so portrait and landscape photos keep their proportions in the same frame
+// the frame (a tiny version, since it is blurred anyway), so portrait and landscape photos keep their proportions in the same frame
 // and nothing of them is cropped. The frame never changes size, so changing photo
 // never moves the text below.
 //
@@ -125,7 +125,7 @@ export function ImageCarousel({ photos, label, labels, sizes, loading = "lazy" }
                     src={photo.full}
                     alt=""
                     fill
-                    sizes={sizes}
+                    sizes="64px"
                     loading={loading}
                     draggable={false}
                     className="scale-110 object-cover blur-xl brightness-75"
@@ -135,6 +135,7 @@ export function ImageCarousel({ photos, label, labels, sizes, loading = "lazy" }
                     alt={photo.alt}
                     fill
                     sizes={sizes}
+                    quality={85}
                     loading={loading}
                     draggable={false}
                     className="object-contain"

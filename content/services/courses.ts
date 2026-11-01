@@ -4,6 +4,7 @@
 
 import type { ServiceDetail } from "./types";
 import cardPhoto from "@/public/images/home/v3/card-courses.webp";
+import cardPhonePhoto from "@/public/images/home/v3/card-courses-phone.webp";
 import photo01 from "@/public/images/services/courses/01.webp";
 import photo02 from "@/public/images/services/courses/02.webp";
 import photo03 from "@/public/images/services/courses/03.webp";
@@ -28,7 +29,7 @@ export const courses: ServiceDetail = {
   slug: "courses",
   title: "คอร์สเรียนจาก อ.ดำรงชัย",
   summaryLines: summary,
-  card: { lines: ["รวมคอร์สเรียนและ Workshop", "เรียนจบพร้อมใช้งานได้จริง"], photo: { src: cardPhoto, alt: "ผู้เรียนคอร์สการดูโหงวเฮ้งถ่ายภาพหมู่กับอาจารย์ดำรงชัยหน้าจอนำเสนอ" } },
+  card: { lines: ["รวมคอร์สเรียนและ Workshop", "เรียนจบพร้อมใช้งานได้จริง"], photo: { src: cardPhoto, alt: "ผู้เรียนคอร์สการดูโหงวเฮ้งถ่ายภาพหมู่กับอาจารย์ดำรงชัยหน้าจอนำเสนอ" }, phonePhoto: cardPhonePhoto },
   byline: "คอร์สเรียนจาก อ.ดำรงชัย",
   seo: {
     title: "คอร์สเรียนฮวงจุ้ยและโหงวเฮ้ง",

@@ -12,8 +12,8 @@ export type PhotoAsset = {
 };
 
 // One of a service's photos: a square crop (src, for the card slideshow and the
-// activity strip) and the whole photo (full, at most 1280×720, for the overlay's
-// carousel), which shows uncropped.
+// activity strip) and the whole photo (full, from Ohm's original at most 1600 wide
+// and 1200 tall, for the overlay's carousel), which shows uncropped.
 export type GalleryPhoto = PhotoAsset & {
   full: StaticImageData;
 };
@@ -37,8 +37,10 @@ export type ServiceDetail = {
   summaryLines: string[];
   // The service's card on the home page (Figma 19:1781): the Chinese eyebrow over the
   // title (when the design gives one), the summary as the design breaks its lines, and
-  // the photo on the card's right, cropped as the design crops it.
-  card: { eyebrow?: string; lines: string[]; photo: PhotoAsset };
+  // the photo on the card's right, cropped as the design crops it. On phones the photo
+  // sits under the copy, wide (342×191), so it has its own crop (phonePhoto), taken
+  // from the same original around the same subject.
+  card: { eyebrow?: string; lines: string[]; photo: PhotoAsset; phonePhoto: StaticImageData };
   // The line under the overlay heading, beside the contact icons.
   byline: string;
   // The service page's title (before " | คลับฮวงจุ้ยแห่งประเทศไทย", so under about 35

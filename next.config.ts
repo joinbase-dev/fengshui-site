@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
+    // 85 for service photos, which people look at closely; 70 for blurred backdrops.
+    qualities: [70, 75, 85],
   },
   async headers() {
     return [

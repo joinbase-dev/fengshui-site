@@ -2,6 +2,7 @@
 
 import type { ServiceDetail } from "./types";
 import cardPhoto from "@/public/images/home/v3/card-feng-shui-home.webp";
+import cardPhonePhoto from "@/public/images/home/v3/card-feng-shui-home-phone.webp";
 import photo01 from "@/public/images/services/feng-shui-home/01.webp";
 import photo02 from "@/public/images/services/feng-shui-home/02.webp";
 import photo03 from "@/public/images/services/feng-shui-home/03.webp";
@@ -25,7 +26,7 @@ export const fengShuiHome: ServiceDetail = {
   slug: "feng-shui-home",
   title: "ฮวงจุ้ยบ้านและสถานที่",
   summaryLines: ["ปรับสมดุลพื้นที่อยู่อาศัยและธุรกิจตามหลักศาสตร์ฮวงจุ้ยจีน", "เพื่อความมั่นคง และความเจริญรุ่งเรือง"],
-  card: { eyebrow: "風水", lines: ["ปรับสมดุลพื้นที่อยู่อาศัยและธุรกิจ", "เพื่อความมั่นคง และความเจริญรุ่งเรือง"], photo: { src: cardPhoto, alt: "อาจารย์ดำรงชัยยืนหน้าป้ายโครงการบ้านพักอาศัย BAAN365 ระหว่างดูฮวงจุ้ย" } },
+  card: { eyebrow: "風水", lines: ["ปรับสมดุลพื้นที่อยู่อาศัยและธุรกิจ", "เพื่อความมั่นคง และความเจริญรุ่งเรือง"], photo: { src: cardPhoto, alt: "อาจารย์ดำรงชัยยืนหน้าป้ายโครงการบ้านพักอาศัย BAAN365 ระหว่างดูฮวงจุ้ย" }, phonePhoto: cardPhonePhoto },
   byline: "ดูฮวงจุ้ยบ้านและสถานที่ โดย อ.ดำรงชัย",
   seo: {
     title: "ดูฮวงจุ้ยบ้านและธุรกิจ โดย อ.ดำรงชัย",

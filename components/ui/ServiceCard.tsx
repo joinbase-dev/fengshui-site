@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ServiceDetail } from "@/content/services";
 import { ArrowRightIcon } from "@/components/ui/ArrowRightIcon";
 import { CardSlideshow } from "@/components/ui/CardSlideshow";
@@ -22,9 +23,10 @@ type ServiceCardProps = {
 //
 // On phones (Figma 36:1803, 342 wide): no border but a soft shadow, the copy on white
 // 24px in with the arrow alone at its top right, beside the first line only, and the
-// photo full width under it at the design's 342×191, cropped about its centre.
+// photo full width under it at the design's 342×191 (its own wide crop; the hover
+// slideshow is for mice, so phones never load it).
 export function ServiceCard({ service, moreLabel }: ServiceCardProps) {
-  const { eyebrow, lines, photo } = service.card;
+  const { eyebrow, lines, photo, phonePhoto } = service.card;
   const photos = [photo, ...service.gallery.filter((item) => item.src !== photo.src)];
   return (
     <ServiceLink
@@ -58,7 +60,10 @@ export function ServiceCard({ service, moreLabel }: ServiceCardProps) {
         <ArrowRightIcon className="absolute top-7 right-6 size-4 text-brand-red sm:hidden" />
       </div>
       <div className="relative aspect-[342/191] shrink-0 overflow-hidden bg-placeholder sm:aspect-auto sm:w-54.75 sm:border-l sm:border-hairline">
-        <CardSlideshow photos={photos} sizes="(min-width: 640px) 219px, 100vw" />
+        <Image src={phonePhoto} alt={photo.alt} fill sizes="100vw" quality={85} className="object-cover sm:hidden" />
+        <div className="absolute inset-0 hidden sm:block">
+          <CardSlideshow photos={photos} sizes="219px" />
+        </div>
       </div>
     </ServiceLink>
   );

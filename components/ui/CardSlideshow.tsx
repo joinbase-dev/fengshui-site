@@ -96,6 +96,7 @@ export function CardSlideshow({ photos, sizes }: CardSlideshowProps) {
               alt={slideIndex > 0 ? "" : photo.alt}
               fill
               sizes={sizes}
+              quality={85}
               className="object-cover"
             />
           </div>
