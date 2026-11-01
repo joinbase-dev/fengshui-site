@@ -80,9 +80,9 @@
   --color-banner: #d9c8b6; /* the wide banner while its photo loads */
   --color-warm: #f1ece9; /* surface neutral warm: the page under the hero (Figma, 2026-11-01) */
   --color-placeholder: #dfe2eb; /* surface neutral placeholder: photo before it loads */
-  /* LINE actions: the handoff's darker green (white label passes AA); #04c755 is the
-     brand primitive, kept as --color-line above. */
-  --color-line-action: #007833;
+  /* LINE buttons: the LINE brand green from fengshui-tokens.css, at Ohm's request
+     (2026-11-01). White text on it is about 2.2:1, under AA's 4.5:1. */
+  --color-surface-brand-line: rgb(4 199 85);
   --color-profile-overlay: rgb(0 0 0 / 0.5); /* the founder card, alpha kept at 0.5 */
 
   --font-thai: var(--font-noto-thai), ui-sans-serif, system-ui, sans-serif;

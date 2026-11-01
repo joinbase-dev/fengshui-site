@@ -11,8 +11,8 @@ export function Partners() {
       <div className="partner-track">
         {[false, true].map((isCopy) => (
           <ul key={String(isCopy)} aria-hidden={isCopy || undefined} className="flex shrink-0 items-center">
-            {partners.logos.map((logo) => (
-              <li key={logo.alt} className="partner-logo">
+            {partners.logos.map((logo, index) => (
+              <li key={index} className="partner-logo">
                 <Image src={logo.src} alt={isCopy ? "" : logo.alt} sizes="120px" className="h-full w-full object-contain" />
               </li>
             ))}
