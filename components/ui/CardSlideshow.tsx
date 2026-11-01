@@ -10,21 +10,22 @@ type CardSlideshowProps = {
   sizes: string;
 };
 
-// How long each photo shows while the card is hovered, and how long a slide takes.
-const interval = 1800;
-const slide = 700;
+// How long each photo shows while the card is hovered, and how long a crossfade takes.
+const interval = 1500;
+const fade = 180;
 
-// A service card's photo (Ohm, 2026-10-31): while a mouse rests on the card, or the
-// card has keyboard focus, the service's photos slide in from the right one after
-// another, round and round; leaving the card slides back to its own photo. The other
-// photos load on the first hover only. A copy of the first photo after the last lets
-// the loop wrap without sliding backwards. Still on touch screens and under reduced
-// motion.
+// A service card's photo (Ohm, 2026-10-31; sped up 2026-11-01): as soon as a mouse
+// rests on the card, or the card gets keyboard focus, the next photo of the service
+// fades in, then the rest follow round and round; leaving the card fades back to its
+// own photo. The new photo fades in over the one it replaces, which stays fully drawn
+// underneath, so a photo still loading never shows a gap. The second photo loads with
+// the card (lazily, near the viewport) so the first change is instant; the others load
+// on the first hover. Still on touch screens and under reduced motion.
 export function CardSlideshow({ photos, sizes }: CardSlideshowProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [armed, setArmed] = useState(false);
-  const [index, setIndex] = useState(0);
-  const [animate, setAnimate] = useState(true);
+  // The photo showing and the one it is fading in over.
+  const [{ index, previous }, setSlide] = useState({ index: 0, previous: 0 });
 
   useEffect(() => {
     const card = ref.current?.closest("a");
@@ -32,19 +33,21 @@ export function CardSlideshow({ photos, sizes }: CardSlideshowProps) {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     let timer: number | undefined;
 
+    const show = (next: (current: number) => number) =>
+      setSlide(({ index: current }) => ({ index: next(current), previous: current }));
+    const advance = () => show((current) => (current + 1) % photos.length);
+
     const start = () => {
       if (reduced.matches || timer !== undefined) return;
       setArmed(true);
-      timer = window.setInterval(() => {
-        setAnimate(true);
-        setIndex((current) => current + 1);
-      }, interval);
+      advance();
+      timer = window.setInterval(advance, interval);
     };
     const stop = () => {
+      if (timer === undefined) return;
       window.clearInterval(timer);
       timer = undefined;
-      setAnimate(true);
-      setIndex(0);
+      show(() => 0);
     };
     const onPointerEnter = (event: PointerEvent) => {
       if (event.pointerType === "mouse") start();
@@ -69,37 +72,35 @@ export function CardSlideshow({ photos, sizes }: CardSlideshowProps) {
     };
   }, [photos.length]);
 
-  // On the copy of the first photo, jump back to the real one without a slide.
-  useEffect(() => {
-    if (index < photos.length) return;
-    const timer = window.setTimeout(() => {
-      setAnimate(false);
-      setIndex(0);
-    }, slide);
-    return () => window.clearTimeout(timer);
-  }, [index, photos.length]);
-
-  const [first, ...rest] = photos;
-  const slides = armed ? [...rest, first] : [];
+  // The card's own photo, the next one, and the rest once the card has been hovered.
+  const shown = armed ? photos : photos.slice(0, 2);
 
   return (
     <div ref={ref} className="absolute inset-0 overflow-hidden">
-      <div
-        className="flex h-full"
-        style={{
-          transform: `translateX(-${index * 100}%)`,
-          transition: animate ? `transform ${slide}ms var(--ease-refined)` : "none",
-        }}
-      >
-        <div className="relative h-full w-full shrink-0">
-          <Image src={first.src} alt={first.alt} fill sizes={sizes} className="object-cover" />
-        </div>
-        {slides.map((photo, slideIndex) => (
-          <div key={slideIndex} aria-hidden="true" className="relative h-full w-full shrink-0">
-            <Image src={photo.src} alt="" fill sizes={sizes} className="object-cover" />
+      {shown.map((photo, slideIndex) => {
+        const current = slideIndex === index;
+        const below = slideIndex === previous && !current;
+        return (
+          <div
+            key={slideIndex}
+            aria-hidden={slideIndex > 0 ? true : undefined}
+            className="absolute inset-0"
+            style={{
+              opacity: current || below ? 1 : 0,
+              zIndex: current ? 2 : below ? 1 : 0,
+              transition: current ? `opacity ${fade}ms ease-out` : "none",
+            }}
+          >
+            <Image
+              src={photo.src}
+              alt={slideIndex > 0 ? "" : photo.alt}
+              fill
+              sizes={sizes}
+              className="object-cover"
+            />
           </div>
-        ))}
-      </div>
+        );
+      })}
     </div>
   );
 }
