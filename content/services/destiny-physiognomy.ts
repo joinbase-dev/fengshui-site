@@ -12,6 +12,7 @@ import photo06 from "@/public/images/services/destiny-physiognomy/06.webp";
 import photo07 from "@/public/images/services/destiny-physiognomy/07.webp";
 import photo08 from "@/public/images/services/destiny-physiognomy/08.webp";
 import photo09 from "@/public/images/services/destiny-physiognomy/09.webp";
+import photo10 from "@/public/images/services/destiny-physiognomy/10.webp";
 import full01 from "@/public/images/services/destiny-physiognomy/carousel/01.webp";
 import full02 from "@/public/images/services/destiny-physiognomy/carousel/02.webp";
 import full03 from "@/public/images/services/destiny-physiognomy/carousel/03.webp";
@@ -21,6 +22,7 @@ import full06 from "@/public/images/services/destiny-physiognomy/carousel/06.web
 import full07 from "@/public/images/services/destiny-physiognomy/carousel/07.webp";
 import full08 from "@/public/images/services/destiny-physiognomy/carousel/08.webp";
 import full09 from "@/public/images/services/destiny-physiognomy/carousel/09.webp";
+import full10 from "@/public/images/services/destiny-physiognomy/carousel/10.webp";
 
 export const destinyPhysiognomy: ServiceDetail = {
   slug: "destiny-physiognomy",
@@ -34,15 +36,16 @@ export const destinyPhysiognomy: ServiceDetail = {
       "วิเคราะห์โหงวเฮ้งใบหน้าเฉพาะบุคคลกับอาจารย์ดำรงชัย สำรวจบุคลิกภาพ จุดเด่น และแนวโน้มชีวิตผ่านศาสตร์จีน พร้อมคำแนะนำด้านการงาน ธุรกิจ และความสัมพันธ์",
   },
   gallery: [
-    { src: photo01, full: full01, alt: "อาจารย์ดำรงชัยบรรยายเรื่องโหงวเฮ้งบนเวที" },
-    { src: photo02, full: full02, alt: "อาจารย์ดำรงชัยกับผู้มาดูโหงวเฮ้งที่ถือแผ่นภาพการดูโหงวเฮ้ง" },
-    { src: photo03, full: full03, alt: "ผู้ร่วมงานถือแผ่นภาพการดูโหงวเฮ้งไว้ตรงใบหน้า" },
-    { src: photo04, full: full04, alt: "หนังสือการดูโหงวเฮ้งที่แสดงตำแหน่งต่างๆ บนใบหน้า" },
-    { src: photo05, full: full05, alt: "โปสเตอร์เปิดจองดูดวงชะตา" },
-    { src: photo06, full: full06, alt: "อาจารย์ดำรงชัยกับผู้มาดูโหงวเฮ้งในสำนักงาน" },
-    { src: photo07, full: full07, alt: "อาจารย์ดำรงชัยกับลูกค้าสองท่านในสำนักงาน" },
-    { src: photo08, full: full08, alt: "อาจารย์ดำรงชัยกับลูกค้าที่ถือแผ่นภาพการดูโหงวเฮ้ง" },
-    { src: photo09, full: full09, alt: "ลูกค้าถือแผ่นภาพการดูโหงวเฮ้งข้างอาจารย์ดำรงชัย" },
+    { src: photo01, full: full01, alt: "อาจารย์ดำรงชัยให้คำปรึกษาผู้มาดูโหงวเฮ้งที่ถือแผ่นภาพการดูโหงวเฮ้งไว้ตรงใบหน้า" },
+    { src: photo02, full: full02, alt: "อาจารย์ดำรงชัยบรรยายเรื่องโหงวเฮ้งบนเวที" },
+    { src: photo03, full: full03, alt: "อาจารย์ดำรงชัยกับผู้มาดูโหงวเฮ้งที่ถือแผ่นภาพการดูโหงวเฮ้ง" },
+    { src: photo04, full: full04, alt: "ผู้ร่วมงานถือแผ่นภาพการดูโหงวเฮ้งไว้ตรงใบหน้า" },
+    { src: photo05, full: full05, alt: "หนังสือการดูโหงวเฮ้งที่แสดงตำแหน่งต่างๆ บนใบหน้า" },
+    { src: photo06, full: full06, alt: "โปสเตอร์เปิดจองดูดวงชะตา" },
+    { src: photo07, full: full07, alt: "อาจารย์ดำรงชัยกับผู้มาดูโหงวเฮ้งในสำนักงาน" },
+    { src: photo08, full: full08, alt: "อาจารย์ดำรงชัยกับลูกค้าสองท่านในสำนักงาน" },
+    { src: photo09, full: full09, alt: "อาจารย์ดำรงชัยกับลูกค้าที่ถือแผ่นภาพการดูโหงวเฮ้ง" },
+    { src: photo10, full: full10, alt: "ลูกค้าถือแผ่นภาพการดูโหงวเฮ้งข้างอาจารย์ดำรงชัย" },
   ],
   body: [
     { type: "heading", lines: ["ค้นพบศักยภาพและโอกาสในชีวิต", "ผ่านศาสตร์แห่งการวิเคราะห์ใบหน้า"] },
