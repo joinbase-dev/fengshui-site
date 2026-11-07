@@ -40,7 +40,7 @@ export const homeServices = {
   eyebrowChinese: "三大命理",
   eyebrow: "ศาสตร์หลัก",
   // Phrases a narrow screen must not split (components/ui/Phrases.tsx).
-  title: ["โหราศาสตร์จีนโดย", "อ.ดำรงชัย"],
+  title: ["คลับฮวงจุ้ย", "โดย อ.ดำรงชัย"],
   more: "ดูรายละเอียด",
 } as const;
 
@@ -103,13 +103,13 @@ export const activities = {
   photos: [
     gallery.photos[1],
     servicePhoto("courses", 2),
-    servicePhoto("destiny-physiognomy", 1),
+    servicePhoto("destiny-physiognomy", 2),
     servicePhoto("sae-ki", 2),
     servicePhoto("courses", 3),
     gallery.photos[0],
     servicePhoto("feng-shui-home", 5),
     servicePhoto("sae-ki", 6),
-    servicePhoto("destiny-physiognomy", 7),
+    servicePhoto("destiny-physiognomy", 8),
     servicePhoto("courses", 6),
   ] satisfies PhotoAsset[],
 };
