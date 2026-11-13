@@ -3,40 +3,44 @@ import { founderProfile } from "@/content/home";
 import { CheckIcon } from "@/components/ui/CheckIcon";
 import { LineButton } from "@/components/ui/LineButton";
 import { Phrases } from "@/components/ui/Phrases";
-import founderBackground from "@/public/images/home/v3/founder-bg.webp";
+import founderBackground from "@/public/images/home/v4/founder-bg.webp";
 
-// Figma feature_29 (19:1868): 812px tall at 1440 over the temple-and-dragon backdrop
-// with its dark and red glows. Across 1200px, 80px apart and aligned at the foot: the
-// founder's portrait (470×494, a heavy black shadow) and the smoked-glass card with
-// his name, the club's story, six areas of expertise in two columns and the LINE
-// button. Below xl (derived) the portrait sits above the card.
+// Figma founder section (61:1886, 2026-11-13): 720px tall at 1440. A red temple sky
+// that sinks into golden mist and mountains, darkened at the top where it meets the
+// temple hall above and fading to cream at the foot, where the ink-wash sections start.
+// อ.ดำรงชัย, cut out, stands on the left, cropped by the section's foot; on the right,
+// 120px in and centred, the smoked-red glass card (622 wide, red hairline) with his name,
+// the club's story, six areas of expertise in two columns and the LINE button. From lg
+// the frame scales with the width (--u, app/styles/home.css). Below lg (derived) the
+// portrait stands above the card, which overlaps his waist.
 export function Founder() {
   const { photo } = founderProfile;
   return (
     <section
       id={founderProfile.id}
       aria-labelledby="founder-title"
-      className="relative isolate scroll-mt-6 overflow-hidden bg-ink px-5 py-16 md:px-10 md:py-20 lg:py-39.75"
+      className="founder relative isolate scroll-mt-6 overflow-hidden bg-brand-red-dark"
     >
       <Image
         src={founderBackground}
         alt=""
         fill
         sizes="100vw"
-        quality={70}
-        className="-z-10 object-cover object-[70%_50%]"
+        quality={75}
+        className="-z-10 object-cover object-[100%_16%]"
       />
-      <div className="mx-auto flex max-w-founder flex-col items-center gap-10 xl:flex-row xl:items-end xl:gap-20">
-        <div className="relative aspect-[470/494] w-full max-w-117.5 shrink-0 overflow-hidden rounded-sm bg-placeholder shadow-portrait">
+      <div aria-hidden="true" className="founder-fade-top" />
+      <div aria-hidden="true" className="founder-fade-foot" />
+      <div className="founder-stage">
+        <div className="founder-figure">
           <Image
             src={photo.src}
             alt={photo.alt}
-            fill
-            sizes="(min-width: 510px) 470px, calc(100vw - 40px)"
-            className="object-cover object-[50%_18%]"
+            sizes="(min-width: 1440px) 671px, (min-width: 1024px) 47vw, (min-width: 640px) 26rem, 88vw"
+            className="founder-portrait"
           />
         </div>
-        <div className="flex w-full flex-col items-start gap-8 rounded-profile border border-muted bg-profile-overlay p-6 shadow-profile backdrop-blur-sm md:p-8 xl:flex-1">
+        <div className="founder-card relative flex w-full flex-col items-start gap-8 rounded-profile border border-brand-red bg-founder-card p-6 shadow-profile backdrop-blur-sm md:p-8">
           <div className="flex flex-col gap-4 text-white">
             <h2 id="founder-title" className="text-h2 font-semibold">
               <Phrases parts={founderProfile.name} />

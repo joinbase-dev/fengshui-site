@@ -77,13 +77,24 @@
   --color-mint: #e9f5f0; /* surface neutral mint: the footer call to action */
   --color-overlay-ground: #c4ad96; /* the overlay panel while its photo loads */
   --color-overlay-rule: #a9a8a8; /* Gray/600: the overlay's copy box */
-  --color-banner: #d9c8b6; /* the wide banner while its photo loads */
   --color-warm: #f1ece9; /* surface neutral warm: the page under the hero (Figma, 2026-11-01) */
   --color-placeholder: #dfe2eb; /* surface neutral placeholder: photo before it loads */
   /* LINE buttons: the LINE brand green from fengshui-tokens.css, at Ohm's request
      (2026-11-01). White text on it is about 2.2:1, under AA's 4.5:1. */
   --color-surface-brand-line: rgb(4 199 85);
   --color-profile-overlay: rgb(0 0 0 / 0.5); /* the founder card, alpha kept at 0.5 */
+  /* Red-and-gold sections (Figma 55:3535, 2026-11-13). */
+  --color-gold-dim: #948772; /* dark end of the gold type gradient (from brand-gold) */
+  --color-hero-veil: rgb(135 2 0 / 0.6); /* the hero's dark red veil (Ellipse 433) */
+  --color-hero-shade: rgb(82 0 0 / 0.75); /* shade behind the hero headline */
+  --color-card-active: #800000; /* service card, hover and focus (the design's first card) */
+  --color-card: rgb(0 0 0 / 0.5); /* service card at rest */
+  --color-founder-card: rgb(61 8 5 / 0.62); /* the founder's smoked-red card */
+  --color-banner-title: #fae3bf; /* footer banner heading */
+  --color-banner-text: rgb(245 229 209 / 0.85); /* footer banner line of text */
+  --color-veil: rgb(241 236 233 / 0.5); /* cream veil over the footer's ink wash */
+  --color-fade-red: rgb(77 10 8 / 0.95); /* founder section, top fade from the services */
+  --color-fade-cream: rgb(245 232 214 / 0.95); /* founder section, foot fade to the ink wash */
 
   --font-thai: var(--font-noto-thai), ui-sans-serif, system-ui, sans-serif;
   /* The Chinese eyebrows (風水, 生肖). The design names Inter Light, which has no Chinese
