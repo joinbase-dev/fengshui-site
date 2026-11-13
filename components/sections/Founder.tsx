@@ -37,6 +37,7 @@ export function Founder() {
             src={photo.src}
             alt={photo.alt}
             sizes="(min-width: 1440px) 671px, (min-width: 1024px) 47vw, (min-width: 640px) 26rem, 88vw"
+            quality={90}
             className="founder-portrait"
           />
         </div>

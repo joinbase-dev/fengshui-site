@@ -35,31 +35,12 @@
   line-height: var(--text-h1--line-height);
 }
 
-/* The design's blurred ellipses, drawn as soft radial gradients: a dark red veil over
-   the whole photo, a warm glow (added light) behind the portrait, and a dark shade
-   behind the headline. */
-.home-hero-veil {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: radial-gradient(ellipse 75% 120% at 51% 56%, var(--color-home-hero-veil) 55%, rgb(135 2 0 / 0.4) 100%);
-}
-
-.home-hero-glow,
+/* The design's dark shade behind the headline (a blurred ellipse), drawn as a soft
+   radial gradient. The red veil and warm glow are part of Ohm's background export. */
 .home-hero-shade {
   position: absolute;
   inset: 0;
   pointer-events: none;
-}
-
-.home-hero-glow {
-  background: radial-gradient(
-    ellipse min(45rem, 90vw) min(42rem, 80vw) at 50% 72%,
-    rgb(254 250 232 / 0.42),
-    rgb(254 250 232 / 0.22) 45%,
-    transparent 100%
-  );
-  mix-blend-mode: plus-lighter;
 }
 
 .home-hero-shade {
@@ -134,15 +115,6 @@
     margin-inline: auto;
     padding: 0;
     text-align: left;
-  }
-
-  .home-hero-glow {
-    background: radial-gradient(
-      ellipse calc(700 * var(--u)) calc(660 * var(--u)) at calc(745 * var(--u)) calc(579 * var(--u)),
-      rgb(254 250 232 / 0.42),
-      rgb(254 250 232 / 0.22) 45%,
-      transparent 100%
-    );
   }
 
   .home-hero-shade {
@@ -262,22 +234,6 @@
    rest of the site keeps the blush). */
 body:has(.home-page) {
   background: var(--color-warm);
-}
-
-/* Services (Figma 55:3571): the warm glow over the top edge, added light, as in the
-   design's blurred ellipse centred above the section. */
-.services-glow {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse min(46rem, 110vw) 34rem at 50% -14rem,
-    rgb(254 250 232 / 0.5),
-    rgb(254 250 232 / 0.2) 50%,
-    transparent 100%
-  );
-  mix-blend-mode: plus-lighter;
 }
 
 /* ---- Founder (Figma 61:1886) ----
