@@ -2,14 +2,19 @@
    are the design's; tokens are in tokens.css. */
 
 /* ---- Hero (Figma 61:1813, 2026-11-13) ----
+   The section is as tall as the screen (Ohm, 2026-11-13): the small viewport height, so
+   a phone's browser chrome never covers its foot, and never shorter than the content.
    From lg the design's 1440 frame scales with the width: --u is one design pixel. The
-   frame is 746 tall; the h1, the portrait and the name sit where the design puts them.
-   Below lg (derived) the h1 is centred at the top and the portrait stands on the foot of
-   a section as tall as the screen. */
+   frame is 746 tall and sits in the middle of the screen; the h1, the portrait and the
+   name sit where the design puts them, and the portrait runs on down to the section's
+   foot, which crops it. Below lg (derived) the h1 is centred at the top and the portrait
+   stands on the foot. */
 .home-hero {
   --u: min(1px, 100vw / 1440);
   display: flex;
-  min-height: clamp(35rem, 100svh, 64rem);
+  min-height: 35rem;
+  height: 100vh;
+  height: 100svh;
 }
 
 .home-hero-stage {
@@ -69,15 +74,34 @@
   height: auto;
 }
 
+/* The emblem turns once every 90 seconds, on the compositor (rotate only, no layout);
+   it stays still for people who prefer reduced motion. */
 .home-hero-emblem {
   position: absolute;
   top: -6%;
   left: 50%;
   width: 125%;
+  transform: translateX(-50%);
+}
+
+.home-hero-emblem-spin {
+  width: 100%;
   max-width: none;
   height: auto;
   opacity: 0.6;
-  transform: translateX(-50%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-hero-emblem-spin {
+    animation: home-hero-emblem-turn 90s linear infinite;
+    will-change: rotate;
+  }
+}
+
+@keyframes home-hero-emblem-turn {
+  to {
+    rotate: 1turn;
+  }
 }
 
 .home-hero-name {
@@ -102,24 +126,30 @@
 }
 
 @media (width >= 64rem) {
+  /* Everything in the frame is placed against the section: --x and --y are where the
+     frame's top left corner lies, with the frame (1440 × 746 design pixels) centred in
+     the section's width and height. The section is never taller than the portrait can
+     fill. */
   .home-hero {
+    --x: calc(50% - 720 * var(--u));
+    --y: calc(50% - 373 * var(--u));
     display: block;
-    min-height: 0;
-    height: calc(746 * var(--u));
+    min-height: calc(746 * var(--u));
+    max-height: calc(1190 * var(--u));
   }
 
   .home-hero-stage {
+    position: static;
     display: block;
-    max-width: 1440px;
     height: 100%;
-    margin-inline: auto;
     padding: 0;
     text-align: left;
   }
 
   .home-hero-shade {
     background: radial-gradient(
-      ellipse calc(350 * var(--u)) calc(240 * var(--u)) at calc(280 * var(--u)) calc(310 * var(--u)),
+      ellipse calc(350 * var(--u)) calc(240 * var(--u)) at calc(var(--x) + 280 * var(--u))
+        calc(var(--y) + 310 * var(--u)),
       var(--color-home-hero-shade),
       rgb(82 0 0 / 0.45) 45%,
       transparent 100%
@@ -128,18 +158,20 @@
 
   .home-hero-title {
     position: absolute;
-    top: calc(224 * var(--u));
-    left: calc(103 * var(--u));
+    top: calc(var(--y) + 224 * var(--u));
+    left: calc(var(--x) + 103 * var(--u));
     font-size: calc(64 * var(--u));
     line-height: calc(86 * var(--u));
   }
 
+  /* From its place in the frame down to the section's foot, which crops the portrait. */
   .home-hero-figure {
     position: absolute;
-    top: calc(148 * var(--u));
+    top: calc(var(--y) + 148 * var(--u));
+    bottom: 0;
     left: 50%;
     width: calc(547 * var(--u));
-    height: calc(820 * var(--u));
+    height: auto;
     margin: 0;
     aspect-ratio: auto;
     overflow: visible;
@@ -152,13 +184,25 @@
   }
 
   .home-hero-name {
-    top: calc(615 * var(--u));
+    top: calc(var(--y) + 615 * var(--u));
     right: auto;
     bottom: auto;
-    left: calc(912 * var(--u));
+    left: calc(var(--x) + 912 * var(--u));
     font-size: calc(40 * var(--u));
     line-height: calc(40 * var(--u));
     filter: none;
+  }
+}
+
+/* ---- Ink wash (Figma 67:1630 / 67:1631) ----
+   Under 40rem the phone crop sits at the top at its own size and fades out over its
+   last tenth into the colour of its water, which fills the rest. */
+@media (width < 40rem) {
+  .ink-wash picture img {
+    bottom: auto;
+    height: auto;
+    object-fit: fill;
+    mask-image: linear-gradient(#000 88%, transparent);
   }
 }
 

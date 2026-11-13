@@ -94,6 +94,7 @@
   --color-veil: rgb(241 236 233 / 0.5); /* cream veil over the footer's ink wash */
   --color-fade-red: rgb(77 10 8 / 0.95); /* founder section, top fade from the services */
   --color-fade-cream: rgb(245 232 214 / 0.95); /* founder section, foot fade to the ink wash */
+  --color-ink-wash: #f1eae4; /* the ink wash's still water, under its phone crop */
 
   --font-thai: var(--font-noto-thai), ui-sans-serif, system-ui, sans-serif;
   /* The Chinese eyebrows (風水, 生肖). The design names Inter Light, which has no Chinese

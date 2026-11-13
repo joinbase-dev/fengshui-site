@@ -3,11 +3,14 @@ import { founderProfile } from "@/content/home";
 import { CheckIcon } from "@/components/ui/CheckIcon";
 import { LineButton } from "@/components/ui/LineButton";
 import { Phrases } from "@/components/ui/Phrases";
-import founderBackground from "@/public/images/home/v4/founder-bg.webp";
+import { SectionBackdrop } from "@/components/ui/SectionBackdrop";
+import founderBackground from "@/public/images/home/v4/founder-bg.jpg";
+import founderBackgroundMobile from "@/public/images/home/v4/founder-bg-mobile.jpg";
 
 // Figma founder section (61:1886, 2026-11-13): 720px tall at 1440. A red temple sky
-// that sinks into golden mist and mountains, darkened at the top where it meets the
-// temple hall above and fading to cream at the foot, where the ink-wash sections start.
+// that sinks into golden mist and mountains (Ohm's full-resolution export, 2880 wide,
+// and his phone crop), darkened at the top where it meets the temple hall above and
+// fading to cream at the foot, where the ink-wash sections start.
 // อ.ดำรงชัย, cut out, stands on the left, cropped by the section's foot; on the right,
 // 120px in and centred, the smoked-red glass card (622 wide, red hairline) with his name,
 // the club's story, six areas of expertise in two columns and the LINE button. From lg
@@ -21,14 +24,7 @@ export function Founder() {
       aria-labelledby="founder-title"
       className="founder relative isolate scroll-mt-6 overflow-hidden bg-brand-red-dark"
     >
-      <Image
-        src={founderBackground}
-        alt=""
-        fill
-        sizes="100vw"
-        quality={75}
-        className="-z-10 object-cover object-[100%_16%]"
-      />
+      <SectionBackdrop desktop={founderBackground} mobile={founderBackgroundMobile} />
       <div aria-hidden="true" className="founder-fade-top" />
       <div aria-hidden="true" className="founder-fade-foot" />
       <div className="founder-stage">
