@@ -1,0 +1,59 @@
+/* Terms and payment flow (Figma 91:1749, 95:1788). */
+
+/* The brass L-marks in a card's corners (components/ui/CornerMarks.tsx): 18px arms,
+   1.5px thick, 9px in on the terms document and 11px in on the QR block. */
+.corner-marks {
+  --corner-inset: 9px;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.corner-marks--qr {
+  --corner-inset: 11px;
+}
+
+.corner-marks > span {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 0 solid var(--color-brass);
+}
+
+.corner-marks > [data-corner="tl"] {
+  top: var(--corner-inset);
+  left: var(--corner-inset);
+  border-top-width: 1.5px;
+  border-left-width: 1.5px;
+}
+
+.corner-marks > [data-corner="tr"] {
+  top: var(--corner-inset);
+  right: var(--corner-inset);
+  border-top-width: 1.5px;
+  border-right-width: 1.5px;
+}
+
+.corner-marks > [data-corner="bl"] {
+  bottom: var(--corner-inset);
+  left: var(--corner-inset);
+  border-bottom-width: 1.5px;
+  border-left-width: 1.5px;
+}
+
+.corner-marks > [data-corner="br"] {
+  right: var(--corner-inset);
+  bottom: var(--corner-inset);
+  border-right-width: 1.5px;
+  border-bottom-width: 1.5px;
+}
+
+/* Section anchors land below the top edge with a little air (the contents links). */
+.terms-section {
+  scroll-margin-top: 24px;
+}
+
+/* The page ground runs under the scrollbar's reserved gutter and any overscroll too. */
+body:has(.checkout-page) {
+  background: var(--color-lacquer);
+}
