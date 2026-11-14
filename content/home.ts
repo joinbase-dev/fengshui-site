@@ -101,13 +101,13 @@ export const activities = {
   photos: [
     gallery.photos[1],
     servicePhoto("courses", 2),
-    servicePhoto("destiny-physiognomy", 1),
+    servicePhoto("destiny-physiognomy", 2),
     servicePhoto("sae-ki", 2),
     servicePhoto("courses", 3),
     gallery.photos[0],
     servicePhoto("feng-shui-home", 5),
     servicePhoto("sae-ki", 6),
-    servicePhoto("destiny-physiognomy", 7),
+    servicePhoto("destiny-physiognomy", 8),
     servicePhoto("courses", 6),
   ] satisfies PhotoAsset[],
 };

@@ -3,6 +3,7 @@
 import type { ServiceDetail } from "./types";
 import cardPhoto from "@/public/images/home/v3/card-destiny-physiognomy.webp";
 import cardPhonePhoto from "@/public/images/home/v3/card-destiny-physiognomy-phone.webp";
+import photo00 from "@/public/images/services/destiny-physiognomy/00.webp";
 import photo01 from "@/public/images/services/destiny-physiognomy/01.webp";
 import photo02 from "@/public/images/services/destiny-physiognomy/02.webp";
 import photo03 from "@/public/images/services/destiny-physiognomy/03.webp";
@@ -12,6 +13,7 @@ import photo06 from "@/public/images/services/destiny-physiognomy/06.webp";
 import photo07 from "@/public/images/services/destiny-physiognomy/07.webp";
 import photo08 from "@/public/images/services/destiny-physiognomy/08.webp";
 import photo09 from "@/public/images/services/destiny-physiognomy/09.webp";
+import full00 from "@/public/images/services/destiny-physiognomy/carousel/00.webp";
 import full01 from "@/public/images/services/destiny-physiognomy/carousel/01.webp";
 import full02 from "@/public/images/services/destiny-physiognomy/carousel/02.webp";
 import full03 from "@/public/images/services/destiny-physiognomy/carousel/03.webp";
@@ -26,7 +28,7 @@ export const destinyPhysiognomy: ServiceDetail = {
   slug: "destiny-physiognomy",
   title: "Personal โหงวเฮ้ง",
   summaryLines: ["ให้คำปรึกษาดวงชะตาส่วนบุคคล เข้าใจพื้นดวง", "ค้นหาจังหวะชีวิต และวิเคราะห์โหงวเฮ้งเฉพาะบุคคล"],
-  card: { eyebrow: "風水", lines: ["เข้าใจพื้นดวง ค้นหาจังหวะชีวิต", "และวิเคราะห์โหงวเฮ้งเฉพาะบุคคล"], photo: { src: cardPhoto, alt: "ลูกค้าถือแผ่นภาพการดูโหงวเฮ้งคู่กับอาจารย์ดำรงชัยในสำนักงาน" }, phonePhoto: cardPhonePhoto },
+  card: { eyebrow: "風水", lines: ["เข้าใจพื้นดวง ค้นหาจังหวะชีวิต", "และวิเคราะห์โหงวเฮ้งเฉพาะบุคคล"], photo: { src: cardPhoto, alt: "อาจารย์ดำรงชัยอธิบายการดูโหงวเฮ้งให้ลูกค้าที่ถือแผ่นภาพการดูโหงวเฮ้ง" }, phonePhoto: cardPhonePhoto },
   byline: "Personal โหงวเฮ้ง โดย อ.ดำรงชัย",
   seo: {
     title: "ดูโหงวเฮ้ง วิเคราะห์ใบหน้าเฉพาะบุคคล",
@@ -34,6 +36,7 @@ export const destinyPhysiognomy: ServiceDetail = {
       "วิเคราะห์โหงวเฮ้งใบหน้าเฉพาะบุคคลกับอาจารย์ดำรงชัย สำรวจบุคลิกภาพ จุดเด่น และแนวโน้มชีวิตผ่านศาสตร์จีน พร้อมคำแนะนำด้านการงาน ธุรกิจ และความสัมพันธ์",
   },
   gallery: [
+    { src: photo00, full: full00, alt: "อาจารย์ดำรงชัยอธิบายการดูโหงวเฮ้งให้ลูกค้าที่ถือแผ่นภาพการดูโหงวเฮ้งไว้ตรงใบหน้า" },
     { src: photo01, full: full01, alt: "อาจารย์ดำรงชัยบรรยายเรื่องโหงวเฮ้งบนเวที" },
     { src: photo02, full: full02, alt: "อาจารย์ดำรงชัยกับผู้มาดูโหงวเฮ้งที่ถือแผ่นภาพการดูโหงวเฮ้ง" },
     { src: photo03, full: full03, alt: "ผู้ร่วมงานถือแผ่นภาพการดูโหงวเฮ้งไว้ตรงใบหน้า" },
