@@ -84,7 +84,8 @@
   --color-surface-brand-line: rgb(4 199 85);
   --color-profile-overlay: rgb(0 0 0 / 0.5); /* the founder card, alpha kept at 0.5 */
   /* Red-and-gold sections (Figma 55:3535, 2026-11-13). */
-  --color-gold-dim: #948772; /* dark end of the gold type gradient (from brand-gold) */
+  --color-hero-gold-from: #f1d8b0; /* the hero's gold type, light end (Figma 84:2190) */
+  --color-hero-gold-to: #c49d5c; /* and its deep end */
   --color-hero-shade: rgb(82 0 0 / 0.75); /* shade behind the hero headline */
   --color-card-active: #800000; /* service card, hover and focus (the design's first card) */
   --color-card: rgb(0 0 0 / 0.5); /* service card at rest */

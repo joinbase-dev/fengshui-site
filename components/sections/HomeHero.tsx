@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { homeHero } from "@/content/home";
+import { LineButton } from "@/components/ui/LineButton";
 import { SectionBackdrop } from "@/components/ui/SectionBackdrop";
 import heroBackground from "@/public/images/home/v4/hero-bg.jpg";
 import heroBackgroundMobile from "@/public/images/home/v4/hero-bg-mobile.jpg";
@@ -10,11 +11,12 @@ import emblem from "@/public/images/home/v4/hero-emblem.png";
 // design's red veil and warm glow already in it) and his phone crop (780 wide); a dark
 // shade sits behind the headline. In the middle, อ.ดำรงชัย cut out in front of the club's
 // emblem (Ohm's full-resolution logo, screened at 60% and turning slowly), cropped by the
-// section's foot; the gold h1 at the top left and his name in gold beside him at the
-// lower right. From lg the design's 1440 frame scales with the width and sits in the
-// middle of the screen's height (app/styles/home.css); below lg (derived) the h1 sits
-// centred at the top, the portrait fills the rest of the screen and his name sits over
-// its lower right.
+// section's foot; the gold h1 at the top left with the LINE button under it, and his
+// name in gold beside him at the lower right. Both are outlined in brand red, as the
+// design draws them. From lg the design's 1440 frame scales with the width and sits in the
+// middle of the screen's height (app/styles/home.css); below lg (derived) the h1 and
+// the button sit centred at the top, the portrait stands on the foot with the whole
+// emblem behind him, and his name sits over its lower right.
 export function HomeHero() {
   return (
     <section
@@ -29,13 +31,14 @@ export function HomeHero() {
       />
       <div className="home-hero-stage">
         <div aria-hidden="true" className="home-hero-shade" />
-        <h1 id="hero-title" className="home-hero-title enter gold-text font-bold">
+        <h1 id="hero-title" className="home-hero-title enter font-bold">
           {homeHero.titleLines.map((line) => (
-            <span key={line} className="block">
-              {line}
+            <span key={line} data-text={line} className="home-hero-line">
+              <span className="gold-text">{line}</span>
             </span>
           ))}
         </h1>
+        <LineButton className="home-hero-cta enter [--i:1]" />
         <div className="home-hero-figure">
           <div aria-hidden="true" className="home-hero-emblem">
             <Image
@@ -55,10 +58,10 @@ export function HomeHero() {
             className="home-hero-portrait"
           />
         </div>
-        <p className="home-hero-name enter gold-text font-semibold [--i:1]">
+        <p className="home-hero-name enter font-semibold [--i:2]">
           {homeHero.nameLines.map((line) => (
-            <span key={line} className="block">
-              {line}
+            <span key={line} data-text={line} className="home-hero-line">
+              <span className="gold-text">{line}</span>
             </span>
           ))}
         </p>

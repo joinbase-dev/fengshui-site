@@ -11,8 +11,11 @@
    stands on the foot. */
 .home-hero {
   --u: min(1px, 100vw / 1440);
+  --figure-w: min(108vw, 30rem);
   display: flex;
-  min-height: 35rem;
+  /* Below lg: never shorter than the h1, the button and the whole figure (short or
+     landscape screens scroll a little rather than crop the emblem). */
+  min-height: calc(20rem + var(--figure-w) * 600 / 547);
   height: 100vh;
   height: 100svh;
 }
@@ -27,12 +30,39 @@
   text-align: center;
 }
 
-/* Gold type: the design's gradient, light to dark across the line. */
+/* Gold type: the design's gradient, light to deep across the line. */
 .gold-text {
-  background-image: linear-gradient(101deg, var(--color-brand-gold) 0.85%, var(--color-gold-dim) 93.7%);
+  background-image: linear-gradient(90deg, var(--color-hero-gold-from), var(--color-hero-gold-to));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* The hero's h1 and name are outlined in brand red (Figma 84:2190 / 84:2191, about 5px
+   outside the 64px letters). The outline is the line drawn again behind the gold, with
+   a stroke twice that wide, so only its outer half shows; it comes from data-text, so
+   the words are in the page once and screen readers skip the copy. */
+.home-hero-line {
+  position: relative;
+  display: block;
+  isolation: isolate;
+}
+
+.home-hero-line::before {
+  content: attr(data-text) / "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: var(--color-brand-red);
+  -webkit-text-stroke: 0.16em var(--color-brand-red);
+  pointer-events: none;
+}
+
+/* The LINE button: under the h1, centred below lg, above the figure. */
+.home-hero-cta {
+  position: relative;
+  z-index: 1;
+  margin-top: 1.5rem;
 }
 
 .home-hero-title {
@@ -58,13 +88,16 @@
 }
 
 /* Portrait and emblem. The portrait is cropped below the vase by the section's foot. */
+/* The section's foot crops the portrait. The figure is a size container so the emblem
+   can be placed by its width: centred behind his head and shoulders (55% of the
+   figure's width down), no wider than the screen and no lower than the section's foot,
+   so the whole emblem always shows (Ohm, 2026-11-14). */
 .home-hero-figure {
   position: relative;
-  width: min(108vw, 30rem);
+  width: var(--figure-w);
   margin-top: auto;
   aspect-ratio: 547 / 600;
-  overflow-x: visible;
-  overflow-y: clip;
+  container-type: inline-size;
 }
 
 .home-hero-portrait {
@@ -78,9 +111,9 @@
    it stays still for people who prefer reduced motion. */
 .home-hero-emblem {
   position: absolute;
-  top: -6%;
+  top: calc(55cqw - min(54cqw, 47vw));
   left: 50%;
-  width: 125%;
+  width: min(108cqw, 94vw);
   transform: translateX(-50%);
 }
 
@@ -111,12 +144,11 @@
   font-size: clamp(1.375rem, 1rem + 1.8vw, 2.25rem);
   line-height: 1.05;
   text-align: left;
-  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.45));
 }
 
 @media (width >= 40rem) {
-  .home-hero-figure {
-    width: min(70vw, 34rem);
+  .home-hero {
+    --figure-w: min(70vw, 34rem);
   }
 
   .home-hero-name {
@@ -164,6 +196,14 @@
     line-height: calc(86 * var(--u));
   }
 
+  /* Figma 84:2193: 52px tall, its left edge under the h1's, 413px down the frame. */
+  .home-hero-cta {
+    position: absolute;
+    top: calc(var(--y) + 413 * var(--u));
+    left: calc(var(--x) + 107.5 * var(--u));
+    margin: 0;
+  }
+
   /* From its place in the frame down to the section's foot, which crops the portrait. */
   .home-hero-figure {
     position: absolute;
@@ -190,7 +230,6 @@
     left: calc(var(--x) + 912 * var(--u));
     font-size: calc(40 * var(--u));
     line-height: calc(40 * var(--u));
-    filter: none;
   }
 }
 
