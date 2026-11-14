@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, type MouseEvent, type ReactNode } from "react";
 import { ConsultLink } from "@/components/ui/ConsultLink";
 import { ServiceLink } from "@/components/ui/ServiceLink";
+import panelBackground from "@/public/images/home/v4/panel-bg.jpg";
 
 type MenuLink = { label: string; href: string };
 // A row that opens a service's overlay instead of following a link.
@@ -25,15 +27,15 @@ type MobileMenuProps = {
 const stagger = ["[--i:0]", "[--i:1]", "[--i:2]", "[--i:3]", "[--i:4]", "[--i:5]", "[--i:6]", "[--i:7]"];
 
 const iconButton =
-  "flex size-11 items-center justify-center rounded-sm text-black transition-colors duration-200 ease-refined hover:text-red-800 focus-visible:outline-2 focus-visible:outline-red-800";
+  "flex size-11 items-center justify-center rounded-sm text-white transition-colors duration-200 ease-refined hover:text-brand-gold focus-visible:outline-2 focus-visible:outline-white";
 
 const rowStyle =
-  "group flex min-h-11 items-baseline gap-4 py-5 text-service-title-sm font-medium text-black transition-colors duration-200 ease-refined hover:text-red-800 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-red-800 md:gap-6 md:py-7 md:text-service-title";
+  "group flex min-h-11 items-baseline gap-4 py-5 text-service-title-sm font-medium text-white transition-colors duration-200 ease-refined hover:text-brand-gold focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-white md:gap-6 md:py-7 md:text-service-title";
 
 function RowContent({ index, label }: { index: number; label: string }) {
   return (
     <>
-      <span className="text-eyebrow text-red-800 tabular-nums">{String(index + 1).padStart(2, "0")}</span>
+      <span className="text-eyebrow text-brand-gold tabular-nums">{String(index + 1).padStart(2, "0")}</span>
       <span className="transition-transform duration-200 ease-refined group-hover:translate-x-1 group-focus-visible:translate-x-1">
         {label}
       </span>
@@ -57,7 +59,8 @@ function CloseIcon() {
   );
 }
 
-// The navbar's menu below lg: the hamburger opens a full-screen sheet in a native modal
+// The navbar's menu below lg: the hamburger opens a full-screen sheet, on the red
+// temple panel the overlays use (Ohm 2026-11-14, set in white), in a native modal
 // <dialog> (focus trap, Escape, an inert page, focus back on the button), with the
 // logo and a close button where the header has them, the section links large and
 // numbered between thin rules, the consult link, and the social links at the foot.
@@ -98,6 +101,11 @@ export function MobileMenu({
       </button>
 
       <dialog ref={ref} aria-label={menuLabel} onClick={handleClick} className="menu-dialog">
+        {/* Fixed to the screen, so it stays put if the sheet scrolls. Lazy: it loads only
+            once the menu opens. */}
+        <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10">
+          <Image src={panelBackground} alt="" fill sizes="100vw" quality={90} className="object-cover" />
+        </div>
         <div className="flex min-h-full flex-col px-5 py-4 md:px-10">
           <div className="flex items-center justify-between gap-6">
             {logo}
@@ -108,9 +116,9 @@ export function MobileMenu({
           </div>
 
           <nav aria-label={navLabel} className="mt-10 md:mt-16">
-            <ol className="border-t border-rule">
+            <ol className="border-t border-white/30">
               {links.map((link, index) => (
-                <li key={link.service ?? link.href} className={`menu-item border-b border-rule ${stagger[index]}`}>
+                <li key={link.service ?? link.href} className={`menu-item border-b border-white/30 ${stagger[index]}`}>
                   {link.service ? (
                     <ServiceLink slug={link.service} aria-haspopup="dialog" className={rowStyle}>
                       <RowContent index={index} label={link.label} />
@@ -123,7 +131,7 @@ export function MobileMenu({
                 </li>
               ))}
             </ol>
-            <ConsultLink className={`menu-item mt-8 md:mt-10 ${stagger[links.length]}`} />
+            <ConsultLink tone="light" className={`menu-item mt-8 md:mt-10 ${stagger[links.length]}`} />
           </nav>
 
           <ul aria-label={socialLabel} className={`menu-item -mx-2 mt-auto flex flex-wrap gap-x-4 pt-12 ${stagger[links.length + 1]}`}>
@@ -133,7 +141,7 @@ export function MobileMenu({
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center rounded-xs px-2 text-footer text-black underline-offset-4 transition-colors duration-200 ease-refined hover:text-red-800 hover:underline focus-visible:outline-2 focus-visible:outline-red-800"
+                  className="inline-flex min-h-11 items-center rounded-xs px-2 text-footer text-white underline-offset-4 transition-colors duration-200 ease-refined hover:text-brand-gold hover:underline focus-visible:outline-2 focus-visible:outline-white"
                 >
                   {item.label}
                 </a>

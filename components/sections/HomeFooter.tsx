@@ -9,7 +9,8 @@ import { ServiceLink } from "@/components/ui/ServiceLink";
 import { SocialIcon, type SocialName } from "@/components/ui/SocialIcon";
 import { Phrases } from "@/components/ui/Phrases";
 import emblem from "@/public/images/emblem.png";
-import bannerBackground from "@/public/images/home/v3/banner-bg.webp";
+import bannerBackground from "@/public/images/home/v4/banner-bg.webp";
+import footerBackground from "@/public/images/home/v4/footer-bg.webp";
 import bannerPortrait from "@/public/images/home/v3/banner-portrait.webp";
 
 const textLink =
@@ -23,27 +24,29 @@ const socialLinks: { name: SocialName; label: string; href: string }[] = [
   { name: "line", ...social.line },
 ];
 
-// Figma Footer (19:1939, revised 2026-11-01), on the warm grey: the wide banner
-// (37:3090), then the club's emblem and address beside the quick links (เมนูลัด), then
-// the copyright and the terms link (ข้อกำหนดและเงื่อนไข, the only way into the terms and
-// payment pages) beside the red social icons, across 1140px.
+// Figma Footer (55:3699, 2026-11-13), over an ink-wash landscape of misty mountains and
+// a lake under a cream veil (50%): the wide banner, then the club's emblem and address
+// beside the quick links (เมนูลัด), then the copyright and the terms link
+// (ข้อกำหนดและเงื่อนไข, the only way into the terms and payment pages) beside the red
+// social icons, across 1140px.
 //
-// The banner is 1140×206 with 24px corners: a blurred photo in sand tones with the
-// club's emblem screened over its left end (one image, as the design layers them),
-// อ.ดำรงชัย cut out and standing in front of the emblem, cropped by the banner's foot,
-// then the heading and line of text and, at the right, the LINE button. From md to xl
-// (derived) the button goes under the text. On phones (Figma 48:3296, 342 wide) the
-// heading reads จองคิวปรึกษา, centred over the line of text and the button, and the
-// portrait stands below them in front of the faint emblem, cut off by the banner's
-// foot. The design's emblem carries the club's name as part of the picture; here the
-// name is real text under the emblem. Email and phone, which the design leaves out,
-// stay under the address. Below md everything stacks.
+// The banner is 1140×206 with 24px corners: a red lacquer panel with a carved dragon on
+// the right and lattice on the left, อ.ดำรงชัย cut out at its left end, cropped by the
+// banner's foot, then the heading in pale gold and the line of text in sand and, at the
+// right, the LINE button. From md to xl (derived) the button goes under the text. On
+// phones (Figma 48:3296, 342 wide) the heading reads จองคิวปรึกษา, centred over the line
+// of text and the button, and the portrait stands below them in front of the faint
+// emblem, cut off by the banner's foot. The design's emblem carries the club's name as
+// part of the picture; here the name is real text under the emblem. Email and phone,
+// which the design leaves out, stay under the address. Below md everything stacks.
 export function HomeFooter() {
   return (
-    <footer className="bg-warm px-5 pt-16 md:px-10 md:pt-20 xl:pt-25">
+    <footer className="relative isolate overflow-hidden bg-warm px-5 pt-16 md:px-10 md:pt-20 xl:pt-25">
+      <Image src={footerBackground} alt="" fill sizes="100vw" quality={75} className="-z-10 object-cover object-bottom" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-veil" />
       <div className="mx-auto flex max-w-content flex-col gap-10 md:gap-16">
-        <div className="relative isolate flex flex-col items-center overflow-hidden rounded-banner bg-banner px-6 pt-8 text-center md:min-h-51.5 md:items-start md:py-10 md:pr-10 md:pl-60 md:text-left lg:pl-76 xl:flex-row xl:items-center xl:justify-between xl:py-0 xl:pr-16 xl:pl-83.5">
-          <Image src={bannerBackground} alt="" fill sizes="(min-width: 1280px) 1140px, 100vw" quality={80} className="-z-10 object-cover object-left" />
+        <div className="relative isolate flex flex-col items-center overflow-hidden rounded-banner bg-brand-red-dark px-6 pt-8 text-center md:min-h-51.5 md:items-start md:py-10 md:pr-10 md:pl-60 md:text-left lg:pl-76 xl:flex-row xl:items-center xl:justify-between xl:py-0 xl:pr-16 xl:pl-83.5">
+          <Image src={bannerBackground} alt="" fill sizes="(min-width: 1280px) 1140px, 100vw" quality={80} className="-z-10 object-cover" />
           <Image
             src={emblem}
             alt=""
@@ -59,13 +62,13 @@ export function HomeFooter() {
             />
           </div>
           <div className="flex flex-col items-center md:items-start md:gap-3">
-            <h2 className="text-h2 font-semibold text-ink">
+            <h2 className="text-h2 font-semibold text-banner-title">
               <span className="md:hidden">{homeFooter.ctaTitleCompact}</span>
               <span className="hidden md:inline">
                 <Phrases parts={homeFooter.ctaTitle} />
               </span>
             </h2>
-            <p className="text-body text-ink-secondary"><Phrases parts={homeFooter.ctaText} /></p>
+            <p className="text-body text-banner-text"><Phrases parts={homeFooter.ctaText} /></p>
           </div>
           <LineButton className="mt-4 shrink-0 md:mt-6 xl:mt-0" />
         </div>

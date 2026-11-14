@@ -42,7 +42,7 @@ export function HomeHeader() {
   };
 
   return (
-    <header className="absolute inset-x-0 top-0 z-30 px-5 pt-[max(1rem,env(safe-area-inset-top))] backdrop-blur-[2px] md:px-10 lg:py-6 xl:px-30">
+    <header className="absolute inset-x-0 top-0 z-30 px-5 pt-[max(1rem,env(safe-area-inset-top))] md:px-10 lg:py-6 xl:px-30">
       <nav aria-label={homeHeader.navLabel} className="mx-auto hidden max-w-wide lg:block">
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-8 xl:gap-12">
           <ul className="flex items-center justify-end gap-8 xl:gap-12">
@@ -61,7 +61,7 @@ export function HomeHeader() {
       <div className="flex items-center justify-between gap-6 pb-2 lg:hidden">
         {logo("focus-visible:outline-white")}
         <MobileMenu
-          logo={logo("focus-visible:outline-red-800")}
+          logo={logo("focus-visible:outline-white")}
           links={[
             { label: homeHeader.homeLabel, href: "#top" },
             ...serviceDetails.map((service) => ({ label: service.title, href: "", service: service.slug })),
