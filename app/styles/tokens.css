@@ -95,6 +95,10 @@
   --color-fade-red: rgb(77 10 8 / 0.95); /* founder section, top fade from the services */
   --color-fade-cream: rgb(245 232 214 / 0.95); /* founder section, foot fade to the ink wash */
   --color-ink-wash: #f1eae4; /* the ink wash's still water, under its phone crop */
+  /* Gallery / Framed Photo (Figma 86:1629): the activities' cream mounts and red seals. */
+  --color-mount: #faf5eb; /* the mount around each photo */
+  --color-mount-edge: #b89159; /* its gold hairline; the photo's at 60% */
+  --color-seal: #9e120d; /* the 福 seal; its character is banner-title */
 
   --font-thai: var(--font-noto-thai), ui-sans-serif, system-ui, sans-serif;
   /* The Chinese eyebrows (風水, 生肖). The design names Inter Light, which has no Chinese
@@ -132,6 +136,8 @@
   --shadow-button: 0 1px 2px 0 rgb(16 24 40 / 0.05);
   --shadow-overlay-box: 0 1px 4px 0 rgb(12 12 13 / 0.1), 0 1px 4px 0 rgb(12 12 13 / 0.05); /* Drop Shadow/200 */
   --shadow-card: 0 1px 4px 0 rgb(12 12 13 / 0.05), 0 1px 4px 0 rgb(12 12 13 / 0.1); /* service card on phones */
+  --shadow-mount: 0 8px 10px 0 rgb(89 51 26 / 0.18); /* activities' framed photos */
+  --shadow-mount-lift: 0 14px 20px 0 rgb(89 51 26 / 0.22); /* the same, lifted on hover */
 
   --container-content: 1140px; /* sections (1440 frame, 150px margins) */
   --container-founder: 1200px; /* founder portrait and card */

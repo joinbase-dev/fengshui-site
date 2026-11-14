@@ -206,13 +206,15 @@
   }
 }
 
-/* Activities strip (Figma 19:1938): tiles 285 wide and 257.5 tall at 1440, edge to edge.
-   Each tile is two stacked pills cut from one photo; the pills' ends are quarter
-   ellipses 46px across, so four-pointed white stars open between neighbours. The strip
-   drifts left on a loop (two copies of the tiles, moved by one copy's width). */
+/* Activities strip (Figma Gallery / Marquee, 86:1633, 2026-11-14): photos in cream
+   mounts, 260×215 at 1440 inside 10px of mount and a gold hairline, 32px apart, each
+   with a red 福 seal 8px in from the photo's lower right corner. The strip drifts left
+   on a loop (two copies of the mounts, moved by one copy's width). From 1440 down the
+   mounts shrink with the width, to 200px wide on phones. */
 .activity-strip {
-  --tile-h: clamp(10rem, 17.88vw, 16.09rem);
-  --tile-w: calc(var(--tile-h) * 285 / 257.5);
+  --photo-w: clamp(12.5rem, 18.06vw, 16.25rem);
+  --photo-h: calc(var(--photo-w) * 215 / 260);
+  --mount-gap: clamp(1.25rem, 2.22vw, 2rem);
 }
 
 .activity-track {
@@ -220,46 +222,64 @@
   width: max-content;
 }
 
-.activity-tile {
+/* Each copy ends with a gap, so the loop's seam is spaced like the rest. */
+.activity-copy {
+  display: flex;
+  gap: var(--mount-gap);
+  padding-inline-end: var(--mount-gap);
+}
+
+.activity-mount {
   position: relative;
-  width: var(--tile-w);
-  height: var(--tile-h);
   flex: none;
+  padding: 10px;
+  border: 1px solid var(--color-mount-edge);
+  border-radius: 4px;
+  background: var(--color-mount);
+  box-shadow: var(--shadow-mount);
+  transition:
+    transform var(--duration-lift) var(--ease-refined),
+    box-shadow var(--duration-lift) var(--ease-refined);
 }
 
-.activity-pill {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 50%;
+.activity-photo-frame {
+  position: relative;
+  width: var(--photo-w);
+  height: var(--photo-h);
   overflow: hidden;
-  border-radius: 16.14% / 50%;
+  border: 1px solid rgb(184 145 89 / 0.6);
+  border-radius: 2px;
 }
 
-.activity-pill:first-child {
-  top: 0;
-}
-
-.activity-pill:last-child {
-  bottom: 0;
-}
-
-/* The photo spans the whole tile; each pill shows its half. */
 .activity-photo {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 200%;
   object-fit: cover;
   transition: transform var(--duration-lift) var(--ease-refined);
 }
 
-.activity-pill:last-child .activity-photo {
-  top: -100%;
+.activity-seal {
+  position: absolute;
+  right: 19px;
+  bottom: 19px;
+  display: flex;
+  height: 26px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background: var(--color-seal);
+  color: var(--color-banner-title);
+  font-size: 18px;
+  line-height: normal;
 }
 
-.activity-tile:hover .activity-photo {
-  transform: scale(1.04);
+@media (hover: hover) {
+  .activity-mount:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-mount-lift);
+  }
+
+  .activity-mount:hover .activity-photo {
+    transform: scale(1.04);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
