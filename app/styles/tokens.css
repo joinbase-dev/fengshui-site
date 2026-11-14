@@ -141,6 +141,48 @@
 
   --container-content: 1140px; /* sections (1440 frame, 150px margins) */
   --container-founder: 1200px; /* founder portrait and card */
+
+  /* ---- Terms and payment flow (Figma 91:1749 / 91:1856 / 95:1788 / 95:2193,
+     2026-11-14): red lacquer, parchment and brass. ---- */
+  --color-lacquer: #660d08; /* page ground, headings on parchment */
+  --color-lacquer-deep: #380805; /* gold buttons' label, QR badge */
+  --color-cinnabar: #9e120d; /* current step, important box, payment heading */
+  --color-parchment: #fbf6ec; /* the document and payment card; light text on red */
+  --color-parchment-deep: #f4e8d1; /* the important box */
+  --color-brass: #b89159; /* rules, corner marks, section numbers */
+  --color-brass-light: #e0c285; /* checkbox, finished step, accents on red */
+  --color-gilt-light: #edd194; /* "ถัดไป" gradient, left */
+  --color-gilt-dark: #c79954; /* "ถัดไป" gradient, right */
+  --color-umber: #2b1f1a; /* body text on parchment */
+  --color-umber-soft: #6e5c4f; /* secondary text on parchment */
+  --color-toc: rgb(46 5 5 / 0.45); /* the contents panel */
+
+  --font-serif-thai: var(--font-noto-serif-thai), var(--font-noto-thai), ui-serif, serif;
+  --font-inter: var(--font-inter-latin), ui-sans-serif, system-ui, sans-serif;
+
+  --text-marker: 10px; /* the important box's diamonds on phones */
+  --text-micro: 11px; /* QR badge */
+  --text-fine: 13px; /* step numbers, brand subline, account lines */
+  --text-note: 15px; /* step labels, phone body copy */
+  --text-brand: 17px; /* header brand name */
+  --text-section: 22px; /* a terms section's number and title */
+  --text-section-sm: 18px;
+  --text-doc-title: 40px; /* terms heading */
+  --text-pay-title: 34px; /* payment heading */
+  --text-display-sm: 26px; /* both headings on phones */
+
+  --leading-numeral: 1.2;
+  --leading-label: 1.3;
+  --leading-copy: 1.6;
+  --leading-prose: 1.7;
+
+  --radius-check: 6px; /* checkbox */
+  --radius-button: 10px;
+  --radius-card: 14px; /* contents panel, QR block, phone document */
+  --radius-document: 18px; /* document and payment card on wide screens */
+
+  --shadow-document: 0 24px 60px -12px rgb(38 0 0 / 0.35);
+  --shadow-payment: 0 20px 50px 0 rgb(0 0 0 / 0.35);
 }
 
 :root {

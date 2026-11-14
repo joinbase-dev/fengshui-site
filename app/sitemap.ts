@@ -1,6 +1,7 @@
 import { execFileSync } from "node:child_process";
 import type { MetadataRoute } from "next";
 import { serviceDetails, servicePath } from "@/content/services";
+import { termsPath } from "@/content/terms";
 import { absoluteUrl } from "@/lib/site-url";
 
 // When a page's content last changed: the date of the last commit to its content
@@ -17,7 +18,7 @@ function lastCommitDate(file: string): Date | undefined {
   }
 }
 
-// The home page and each service's page. The home page's ?service= overlay addresses
+// The home page, each service's page and the terms page (its payment step is noindex). The home page's ?service= overlay addresses
 // are left out: they share the home page's canonical URL.
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -28,5 +29,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
+    { url: absoluteUrl(termsPath), lastModified: lastCommitDate("content/terms.ts"), changeFrequency: "yearly", priority: 0.3 },
   ];
 }

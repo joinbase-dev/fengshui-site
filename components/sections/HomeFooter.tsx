@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { termsFooterLink } from "@/content/terms";
 import { homeFooter } from "@/content/home";
 import { social } from "@/content/site";
 import { serviceDetails } from "@/content/services";
@@ -24,8 +26,9 @@ const socialLinks: { name: SocialName; label: string; href: string }[] = [
 
 // Figma Footer (55:3699, 2026-11-13), over an ink-wash landscape of misty mountains and
 // a lake under a cream veil (50%): the wide banner, then the club's emblem and address
-// beside the quick links (เมนูลัด), then the copyright beside the red social icons,
-// across 1140px.
+// beside the quick links (เมนูลัด), then the copyright and the terms link
+// (ข้อกำหนดและเงื่อนไข, the only way into the terms and payment pages) beside the red
+// social icons, across 1140px.
 //
 // The banner is 1140×206 with 24px corners: a red lacquer panel with a carved dragon on
 // the right and lattice on the left, อ.ดำรงชัย cut out at its left end, cropped by the
@@ -126,9 +129,14 @@ export function HomeFooter() {
         </div>
 
         <div className="flex flex-col-reverse gap-4 py-10 sm:flex-row sm:items-center sm:justify-between md:pt-4">
-          <p lang="en" className="text-body text-ink-secondary">
-            {homeFooter.copyright}
-          </p>
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
+            <p lang="en" className="text-body text-ink-secondary">
+              {homeFooter.copyright}
+            </p>
+            <Link href={termsFooterLink.href} className={`${textLink} self-start sm:self-auto`}>
+              {termsFooterLink.label}
+            </Link>
+          </div>
           <ul aria-label={homeFooter.socialLabel} className="-mx-2 flex items-center gap-2 sm:gap-2">
             {socialLinks.map((item) => (
               <li key={item.name}>
