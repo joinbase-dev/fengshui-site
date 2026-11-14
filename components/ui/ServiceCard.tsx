@@ -16,7 +16,7 @@ type ServiceCardProps = {
 // brand-red border and 8px corners, over the temple-hall photo. Copy on the left, 40px in
 // from the top, left and bottom: the white eyebrow and title, the gold summary and, at
 // the foot, the white "ดูรายละเอียด" and its arrow; the service's photo on the right,
-// 219px wide and the card's full height, behind a hairline. The design widened the card
+// 219px wide and the card's full height, edge to edge (no hairline: Ohm, 2026-11-14). The design widened the card
 // from 558 to 588 but kept its 324 + 15 + 219 insides, leaving a 30px strip after the
 // photo; here the copy takes those 30px so the photo stays flush with the edge. The
 // design draws the first card in its hover state (deep red #800000): hover and keyboard
@@ -61,7 +61,7 @@ export function ServiceCard({ service, moreLabel }: ServiceCardProps) {
         </span>
         <ArrowRightIcon className="absolute top-7 right-6 size-4 text-white sm:hidden" />
       </div>
-      <div className="relative aspect-[342/191] shrink-0 overflow-hidden bg-placeholder sm:aspect-auto sm:w-54.75 sm:border-l sm:border-hairline">
+      <div className="relative aspect-[342/191] shrink-0 overflow-hidden bg-placeholder sm:aspect-auto sm:w-54.75">
         <Image src={phonePhoto} alt={photo.alt} fill sizes="100vw" quality={85} className="object-cover sm:hidden" />
         <div className="absolute inset-0 hidden sm:block">
           <CardSlideshow photos={photos} sizes="219px" />

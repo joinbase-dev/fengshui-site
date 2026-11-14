@@ -75,7 +75,7 @@
   --color-hairline: #e9e9e9; /* border neutral */
   --color-muted: #626266; /* border neutral muted: the profile card's edge */
   --color-mint: #e9f5f0; /* surface neutral mint: the footer call to action */
-  --color-overlay-ground: #c4ad96; /* the overlay panel while its photo loads */
+  --color-panel: #490604; /* the red temple panel behind the overlays and the menu, while it loads */
   --color-overlay-rule: #a9a8a8; /* Gray/600: the overlay's copy box */
   --color-warm: #f1ece9; /* surface neutral warm: the page under the hero (Figma, 2026-11-01) */
   --color-placeholder: #dfe2eb; /* surface neutral placeholder: photo before it loads */
@@ -84,7 +84,8 @@
   --color-surface-brand-line: rgb(4 199 85);
   --color-profile-overlay: rgb(0 0 0 / 0.5); /* the founder card, alpha kept at 0.5 */
   /* Red-and-gold sections (Figma 55:3535, 2026-11-13). */
-  --color-gold-dim: #948772; /* dark end of the gold type gradient (from brand-gold) */
+  --color-hero-gold-from: #f1d8b0; /* the hero's gold type, light end (Figma 84:2190) */
+  --color-hero-gold-to: #c49d5c; /* and its deep end */
   --color-hero-shade: rgb(82 0 0 / 0.75); /* shade behind the hero headline */
   --color-card-active: #800000; /* service card, hover and focus (the design's first card) */
   --color-card: rgb(0 0 0 / 0.5); /* service card at rest */
@@ -94,6 +95,11 @@
   --color-veil: rgb(241 236 233 / 0.5); /* cream veil over the footer's ink wash */
   --color-fade-red: rgb(77 10 8 / 0.95); /* founder section, top fade from the services */
   --color-fade-cream: rgb(245 232 214 / 0.95); /* founder section, foot fade to the ink wash */
+  --color-ink-wash: #f1eae4; /* the ink wash's still water, under its phone crop */
+  /* Gallery / Framed Photo (Figma 86:1629): the activities' cream mounts and red seals. */
+  --color-mount: #faf5eb; /* the mount around each photo */
+  --color-mount-edge: #b89159; /* its gold hairline; the photo's at 60% */
+  --color-seal: #9e120d; /* the 福 seal; its character is banner-title */
 
   --font-thai: var(--font-noto-thai), ui-sans-serif, system-ui, sans-serif;
   /* The Chinese eyebrows (風水, 生肖). The design names Inter Light, which has no Chinese
@@ -131,6 +137,7 @@
   --shadow-button: 0 1px 2px 0 rgb(16 24 40 / 0.05);
   --shadow-overlay-box: 0 1px 4px 0 rgb(12 12 13 / 0.1), 0 1px 4px 0 rgb(12 12 13 / 0.05); /* Drop Shadow/200 */
   --shadow-card: 0 1px 4px 0 rgb(12 12 13 / 0.05), 0 1px 4px 0 rgb(12 12 13 / 0.1); /* service card on phones */
+  --shadow-mount: 0 8px 10px 0 rgb(89 51 26 / 0.18); /* activities' framed photos */
 
   --container-content: 1140px; /* sections (1440 frame, 150px margins) */
   --container-founder: 1200px; /* founder portrait and card */
