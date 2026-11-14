@@ -15,7 +15,7 @@
   display: flex;
   /* Below lg: never shorter than the h1, the button and the whole figure (short or
      landscape screens scroll a little rather than crop the emblem). */
-  min-height: calc(20rem + var(--figure-w) * 600 / 547);
+  min-height: calc(22.5rem + var(--figure-w) * 600 / 547);
   height: 100vh;
   height: 100svh;
 }
@@ -65,9 +65,11 @@
   margin-top: 1.5rem;
 }
 
+/* Below lg the h1 is larger than the type scale's h1 (Ohm, 2026-11-14): 56px on a
+   390 phone, growing to the design's 64px. */
 .home-hero-title {
-  font-size: var(--text-h1);
-  line-height: var(--text-h1--line-height);
+  font-size: clamp(3.5rem, 2.5rem + 4vw, 4rem);
+  line-height: 1.344;
 }
 
 /* The design's dark shade behind the headline (a blurred ellipse), drawn as a soft
@@ -276,9 +278,6 @@
   border-radius: 4px;
   background: var(--color-mount);
   box-shadow: var(--shadow-mount);
-  transition:
-    transform var(--duration-lift) var(--ease-refined),
-    box-shadow var(--duration-lift) var(--ease-refined);
 }
 
 .activity-photo-frame {
@@ -292,7 +291,6 @@
 
 .activity-photo {
   object-fit: cover;
-  transition: transform var(--duration-lift) var(--ease-refined);
 }
 
 .activity-seal {
@@ -308,17 +306,6 @@
   color: var(--color-banner-title);
   font-size: 18px;
   line-height: normal;
-}
-
-@media (hover: hover) {
-  .activity-mount:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-mount-lift);
-  }
-
-  .activity-mount:hover .activity-photo {
-    transform: scale(1.04);
-  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

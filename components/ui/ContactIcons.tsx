@@ -40,7 +40,13 @@ const icons: { platform: Platform; viewBox: string; width: number; height: numbe
 
 // The club's accounts as a row of icons, 16px apart as drawn. Each link's hit area is
 // 44px, overlapping its neighbours' spacing rather than widening the row.
-export function ContactIcons({ label }: { label: string }) {
+// dark on light grounds (the service pages); light on the overlays' red panel.
+const tones = {
+  dark: "text-black hover:text-red-800 focus-visible:outline-red-800",
+  light: "text-white hover:text-brand-gold focus-visible:outline-white",
+} as const;
+
+export function ContactIcons({ label, tone = "dark" }: { label: string; tone?: keyof typeof tones }) {
   return (
     <ul aria-label={label} className="flex items-center gap-4">
       {icons.map((icon) => (
@@ -49,7 +55,7 @@ export function ContactIcons({ label }: { label: string }) {
             href={social[icon.platform].href}
             target="_blank"
             rel="noopener noreferrer"
-            className="-m-2.5 flex size-11 items-center justify-center rounded-sm text-black transition-colors duration-200 ease-refined hover:text-red-800 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-red-800"
+            className={`-m-2.5 flex size-11 items-center justify-center rounded-sm transition-colors duration-200 ease-refined focus-visible:outline-2 focus-visible:-outline-offset-2 ${tones[tone]}`}
           >
             <svg width={icon.width} height={icon.height} viewBox={icon.viewBox} aria-hidden="true">
               <path fill="currentColor" fillRule="evenodd" d={icon.path} />

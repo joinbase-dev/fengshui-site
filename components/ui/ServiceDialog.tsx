@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, type MouseEvent, type PointerEvent, type ReactNode } from "react";
 import { closeService, readOpenService, useOpenService } from "@/lib/service-overlay";
-import panelBackground from "@/public/images/home/v3/overlay-bg.webp";
+import panelBackground from "@/public/images/home/v4/panel-bg.jpg";
 
 type ServiceDialogProps = {
   slug: string;
@@ -21,8 +21,10 @@ const doubleClickGuard = 500;
 // The overlay shell: a native modal <dialog>, which brings the focus trap, Escape to
 // close, an inert page behind it and focus back on the card that opened it. The panel
 // is a 702px drawer on the right (Figma 37:2816, 2026-11-01) over the page dimmed to
-// 40% black, full width below lg. Its ground is a blurred photo in warm browns that
-// darkens towards the foot; it stays put while the content scrolls over it. It opens when the address bar names its service
+// 40% black, full width below lg. Its ground is Ohm's red temple panel (dark red silk,
+// a fretwork border, a dragon on the right and misty peaks at the foot; 1404×2774, 2x
+// the 702px drawer, at quality 90, Ohm 2026-11-14); it stays put while the content
+// scrolls over it, which is set in white. It opens when the address bar names its service
 // (lib/service-overlay.ts), and closing it in any way (button, Escape, a click beside
 // the panel, back) clears that. The content is rendered on the server and stays in the
 // HTML; while closed it is display: none, so its lazy images and the image loop cost
@@ -76,13 +78,13 @@ export function ServiceDialog({ slug, labelledBy, closeLabel, children }: Servic
       onClick={handleClick}
       className="service-dialog"
     >
-      <div className="service-dialog-panel relative ml-auto h-full w-full overflow-hidden bg-overlay-ground lg:max-w-drawer">
-        <Image src={panelBackground} alt="" fill sizes="(min-width: 1024px) 702px, 100vw" quality={70} className="object-cover" />
+      <div className="service-dialog-panel relative ml-auto h-full w-full overflow-hidden bg-panel lg:max-w-drawer">
+        <Image src={panelBackground} alt="" fill sizes="(min-width: 1024px) 702px, 100vw" quality={90} className="object-cover" />
         <div ref={panelRef} className="absolute inset-0 overflow-y-auto overscroll-contain">
           <form method="dialog" className="absolute top-6 right-3 z-10 md:right-6">
             <button
               type="submit"
-              className="min-h-11 rounded-xs px-2 text-copy-sm text-black opacity-80 transition-opacity duration-200 ease-refined hover:opacity-100 hover:underline focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-red-800 md:text-copy"
+              className="min-h-11 rounded-xs px-2 text-copy-sm text-white opacity-80 transition-opacity duration-200 ease-refined hover:opacity-100 hover:underline focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-white md:text-copy"
             >
               {closeLabel}
             </button>

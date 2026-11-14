@@ -14,7 +14,7 @@
   background-image: none;
 }
 
-/* The full-screen menu below lg (components/ui/MobileMenu.tsx): a blush sheet over the
+/* The full-screen menu below lg (components/ui/MobileMenu.tsx): a red sheet over the
    whole screen that scrolls on its own if it has to, with the page under it locked. */
 .menu-dialog {
   position: fixed;
@@ -26,7 +26,7 @@
   margin: 0;
   padding: 0;
   border: 0;
-  background: var(--color-blush);
+  background: var(--color-panel);
   color: inherit;
   overflow-y: auto;
   overscroll-behavior: contain;

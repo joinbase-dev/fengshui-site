@@ -61,7 +61,7 @@ export function HomeHeader() {
       <div className="flex items-center justify-between gap-6 pb-2 lg:hidden">
         {logo("focus-visible:outline-white")}
         <MobileMenu
-          logo={logo("focus-visible:outline-red-800")}
+          logo={logo("focus-visible:outline-white")}
           links={[
             { label: homeHeader.homeLabel, href: "#top" },
             ...serviceDetails.map((service) => ({ label: service.title, href: "", service: service.slug })),
