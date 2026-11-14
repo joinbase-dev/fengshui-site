@@ -1,9 +1,9 @@
 import { serviceDetails, type PhotoAsset } from "@/content/services";
 import { address, contact, gallery, lineBooking, site } from "@/content/site";
-import portrait from "@/public/images/home/hero/04-portrait.webp";
-import partnerPlaceholder from "@/public/images/home/v3/partners/placeholder.webp";
+import heroPortrait from "@/public/images/home/v4/hero-portrait.webp";
+import founderPortrait from "@/public/images/home/v4/founder-portrait.webp";
 
-// Copy of the home page (Figma 19:1781, "Web v.3"), kept apart from layout so copy
+// Copy of the home page (Figma 55:3535, "Web v.3", 2026-11-13), kept apart from layout so copy
 // changes do not touch components. The services' cards read their own copy from
 // content/services/ (`card`).
 
@@ -22,25 +22,22 @@ export const homeHeader = {
 export const homeHero = {
   id: "top",
   // One h1, set on two lines as the design breaks it.
-  titleLines: ["คลับฮวงจุ้ย", "แห่งประเทศไทย"],
-  // The design spells it so here (the footer keeps "Fengshui").
-  subtitle: "FengShui Club Thailand",
+  titleLines: ["คลับฮวงจุ้ย", "ประเทศไทย"],
+  // The master's name beside his portrait, on two lines as the design breaks it.
+  nameLines: ["อ.ดำรงชัย", "แท่นศรีเจริญ"],
+  // A cut-out: the backdrop shows around him.
+  photo: {
+    src: heroPortrait,
+    alt: "อาจารย์ดำรงชัย แท่นศรีเจริญ ในชุดจีนสีแดง ถือโถกระเบื้องลายอักษรมงคล",
+  } satisfies PhotoAsset,
 } as const;
-
-// Figma Partners strip (19:1803). Until the club's real partners and their permission
-// arrive, every slot shows Ohm's "LOGO" placeholder (2026-11-01). The placeholders
-// say nothing, so their alt is empty; give each real logo its company's name.
-export const partners = {
-  label: "พาร์ทเนอร์",
-  logos: Array.from({ length: 8 }, () => ({ src: partnerPlaceholder, alt: "" })) satisfies PhotoAsset[],
-};
 
 export const homeServices = {
   id: "services",
   eyebrowChinese: "三大命理",
   eyebrow: "ศาสตร์หลัก",
   // Phrases a narrow screen must not split (components/ui/Phrases.tsx).
-  title: ["โหราศาสตร์จีนโดย", "อ.ดำรงชัย"],
+  title: ["คลับฮวงจุ้ย", "โดย อ.ดำรงชัย"],
   more: "ดูรายละเอียด",
 } as const;
 
@@ -57,9 +54,10 @@ export const founderProfile = {
     "วางแผนชีวิตและธุรกิจ",
     "วิเคราะห์โหงวเฮ้ง",
   ],
+  // A cut-out, standing on the left of the section.
   photo: {
-    src: portrait,
-    alt: "อาจารย์ดำรงชัย แท่นศรีเจริญ ในชุดจีนสีแดง ถือโถกระเบื้องลายอักษรมงคล",
+    src: founderPortrait,
+    alt: "อาจารย์ดำรงชัย แท่นศรีเจริญ ในชุดจีนสีทอง ถือหล่อแก เข็มทิศฮวงจุ้ย",
   } satisfies PhotoAsset,
 } as const;
 
@@ -103,13 +101,13 @@ export const activities = {
   photos: [
     gallery.photos[1],
     servicePhoto("courses", 2),
-    servicePhoto("destiny-physiognomy", 1),
+    servicePhoto("destiny-physiognomy", 2),
     servicePhoto("sae-ki", 2),
     servicePhoto("courses", 3),
     gallery.photos[0],
     servicePhoto("feng-shui-home", 5),
     servicePhoto("sae-ki", 6),
-    servicePhoto("destiny-physiognomy", 7),
+    servicePhoto("destiny-physiognomy", 8),
     servicePhoto("courses", 6),
   ] satisfies PhotoAsset[],
 };

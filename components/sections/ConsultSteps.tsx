@@ -15,7 +15,7 @@ export function ConsultSteps() {
     <section
       id={consultSteps.id}
       aria-labelledby="consult-title"
-      className="scroll-mt-6 bg-warm px-5 py-16 md:px-10 md:py-20 xl:py-25"
+      className="scroll-mt-6 px-5 py-16 md:px-10 md:py-20 xl:py-25"
     >
       <div className="mx-auto flex max-w-content flex-col items-center gap-10 md:gap-16">
         <h2 id="consult-title" className="text-center text-h2 font-semibold text-ink">

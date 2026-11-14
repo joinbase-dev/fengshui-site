@@ -1,48 +1,261 @@
 /* Home page v3 (Figma 19:1781): what Tailwind classes cannot say on their own. Values
    are the design's; tokens are in tokens.css. */
 
-/* The hero is 800px tall in the 1440 frame and keeps that proportion down to 560px.
-   The 390 frame (31:1572) is 800px tall too; on phones it fills the screen, between
-   560px and 800px. */
+/* ---- Hero (Figma 61:1813, 2026-11-13) ----
+   The section is as tall as the screen (Ohm, 2026-11-13): the small viewport height, so
+   a phone's browser chrome never covers its foot, and never shorter than the content.
+   From lg the design's 1440 frame scales with the width: --u is one design pixel. The
+   frame is 746 tall and sits in the middle of the screen; the h1, the portrait and the
+   name sit where the design puts them, and the portrait runs on down to the section's
+   foot, which crops it. Below lg (derived) the h1 is centred at the top and the portrait
+   stands on the foot. */
 .home-hero {
-  min-height: clamp(35rem, 55.56vw, 50rem);
+  --u: min(1px, 100vw / 1440);
+  --figure-w: min(108vw, 30rem);
+  display: flex;
+  /* Below lg: never shorter than the h1, the button and the whole figure (short or
+     landscape screens scroll a little rather than crop the emblem). */
+  min-height: calc(22.5rem + var(--figure-w) * 600 / 547);
+  height: 100vh;
+  height: 100svh;
 }
 
-@media (width < 48rem) {
-  .home-hero {
-    min-height: clamp(35rem, 100svh, 50rem);
-  }
+.home-hero-stage {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding-top: calc(max(1rem, env(safe-area-inset-top)) + 6rem);
+  text-align: center;
 }
 
-/* The emblem is 640×592 in the 1440 frame, centred 37px below the middle; 383px wide
-   and centred in the 390 frame. */
-.home-hero-emblem {
-  width: clamp(20rem, 44.44vw, 40rem);
+/* Gold type: the design's gradient, light to deep across the line. */
+.gold-text {
+  background-image: linear-gradient(90deg, var(--color-hero-gold-from), var(--color-hero-gold-to));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* The hero's h1 and name are outlined in brand red (Figma 84:2190 / 84:2191, about 5px
+   outside the 64px letters). The outline is the line drawn again behind the gold, with
+   a stroke twice that wide, so only its outer half shows; it comes from data-text, so
+   the words are in the page once and screen readers skip the copy. */
+.home-hero-line {
+  position: relative;
+  display: block;
+  isolation: isolate;
+}
+
+.home-hero-line::before {
+  content: attr(data-text) / "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: var(--color-brand-red);
+  -webkit-text-stroke: 0.16em var(--color-brand-red);
+  pointer-events: none;
+}
+
+/* The LINE button: under the h1, centred below lg, above the figure. */
+.home-hero-cta {
+  position: relative;
+  z-index: 1;
+  margin-top: 1.5rem;
+}
+
+/* Below lg the h1 is larger than the type scale's h1 (Ohm, 2026-11-14): 56px on a
+   390 phone, growing to the design's 64px. */
+.home-hero-title {
+  font-size: clamp(3.5rem, 2.5rem + 4vw, 4rem);
+  line-height: 1.344;
+}
+
+/* The design's dark shade behind the headline (a blurred ellipse), drawn as a soft
+   radial gradient. The red veil and warm glow are part of Ohm's background export. */
+.home-hero-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.home-hero-shade {
+  background: radial-gradient(
+    ellipse min(24rem, 70vw) 9rem at 50% 9.5rem,
+    var(--color-home-hero-shade),
+    rgb(82 0 0 / 0.45) 45%,
+    transparent 100%
+  );
+}
+
+/* Portrait and emblem. The portrait is cropped below the vase by the section's foot. */
+/* The section's foot crops the portrait. The figure is a size container so the emblem
+   can be placed by its width: centred behind his head and shoulders (55% of the
+   figure's width down), no wider than the screen and no lower than the section's foot,
+   so the whole emblem always shows (Ohm, 2026-11-14). */
+.home-hero-figure {
+  position: relative;
+  width: var(--figure-w);
+  margin-top: auto;
+  aspect-ratio: 547 / 600;
+  container-type: inline-size;
+}
+
+.home-hero-portrait {
+  position: absolute;
+  inset: 0 0 auto;
+  width: 100%;
   height: auto;
-  left: 50%;
-  top: calc(50% + 2.57vw);
-  transform: translate(-50%, -50%);
 }
 
-@media (width < 48rem) {
-  .home-hero-emblem {
-    width: min(98vw, 30rem);
-    top: 50%;
+/* The emblem turns once every 90 seconds, on the compositor (rotate only, no layout);
+   it stays still for people who prefer reduced motion. */
+.home-hero-emblem {
+  position: absolute;
+  top: calc(55cqw - min(54cqw, 47vw));
+  left: 50%;
+  width: min(108cqw, 94vw);
+  transform: translateX(-50%);
+}
+
+.home-hero-emblem-spin {
+  width: 100%;
+  max-width: none;
+  height: auto;
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-hero-emblem-spin {
+    animation: home-hero-emblem-turn 90s linear infinite;
+    will-change: rotate;
   }
 }
 
-/* The design's text shadow on the hero heading and subtitle. */
-.home-hero-text {
-  filter: drop-shadow(0 4px 4px rgb(0 0 0 / 0.15)) drop-shadow(0 1px 1.5px rgb(0 0 0 / 0.3));
+@keyframes home-hero-emblem-turn {
+  to {
+    rotate: 1turn;
+  }
 }
 
-/* Activities strip (Figma 19:1938): tiles 285 wide and 257.5 tall at 1440, edge to edge.
-   Each tile is two stacked pills cut from one photo; the pills' ends are quarter
-   ellipses 46px across, so four-pointed white stars open between neighbours. The strip
-   drifts left on a loop (two copies of the tiles, moved by one copy's width). */
+.home-hero-name {
+  position: absolute;
+  right: 1rem;
+  bottom: 1.5rem;
+  font-size: clamp(1.375rem, 1rem + 1.8vw, 2.25rem);
+  line-height: 1.05;
+  text-align: left;
+}
+
+@media (width >= 40rem) {
+  .home-hero {
+    --figure-w: min(70vw, 34rem);
+  }
+
+  .home-hero-name {
+    right: max(2.5rem, 50% - 22rem);
+    bottom: 4rem;
+  }
+}
+
+@media (width >= 64rem) {
+  /* Everything in the frame is placed against the section: --x and --y are where the
+     frame's top left corner lies, with the frame (1440 × 746 design pixels) centred in
+     the section's width and height. The section is never taller than the portrait can
+     fill. */
+  .home-hero {
+    --x: calc(50% - 720 * var(--u));
+    --y: calc(50% - 373 * var(--u));
+    display: block;
+    min-height: calc(746 * var(--u));
+    max-height: calc(1190 * var(--u));
+  }
+
+  .home-hero-stage {
+    position: static;
+    display: block;
+    height: 100%;
+    padding: 0;
+    text-align: left;
+  }
+
+  .home-hero-shade {
+    background: radial-gradient(
+      ellipse calc(350 * var(--u)) calc(240 * var(--u)) at calc(var(--x) + 280 * var(--u))
+        calc(var(--y) + 310 * var(--u)),
+      var(--color-home-hero-shade),
+      rgb(82 0 0 / 0.45) 45%,
+      transparent 100%
+    );
+  }
+
+  .home-hero-title {
+    position: absolute;
+    top: calc(var(--y) + 224 * var(--u));
+    left: calc(var(--x) + 103 * var(--u));
+    font-size: calc(64 * var(--u));
+    line-height: calc(86 * var(--u));
+  }
+
+  /* Figma 84:2193: 52px tall, its left edge under the h1's, 413px down the frame. */
+  .home-hero-cta {
+    position: absolute;
+    top: calc(var(--y) + 413 * var(--u));
+    left: calc(var(--x) + 107.5 * var(--u));
+    margin: 0;
+  }
+
+  /* From its place in the frame down to the section's foot, which crops the portrait. */
+  .home-hero-figure {
+    position: absolute;
+    top: calc(var(--y) + 148 * var(--u));
+    bottom: 0;
+    left: 50%;
+    width: calc(547 * var(--u));
+    height: auto;
+    margin: 0;
+    aspect-ratio: auto;
+    overflow: visible;
+    transform: translateX(-50%);
+  }
+
+  .home-hero-emblem {
+    top: calc(33 * var(--u));
+    width: calc(767 * var(--u));
+  }
+
+  .home-hero-name {
+    top: calc(var(--y) + 615 * var(--u));
+    right: auto;
+    bottom: auto;
+    left: calc(var(--x) + 912 * var(--u));
+    font-size: calc(40 * var(--u));
+    line-height: calc(40 * var(--u));
+  }
+}
+
+/* ---- Ink wash (Figma 67:1630 / 67:1631) ----
+   Under 40rem the phone crop sits at the top at its own size and fades out over its
+   last tenth into the colour of its water, which fills the rest. */
+@media (width < 40rem) {
+  .ink-wash picture img {
+    bottom: auto;
+    height: auto;
+    object-fit: fill;
+    mask-image: linear-gradient(#000 88%, transparent);
+  }
+}
+
+/* Activities strip (Figma Gallery / Marquee, 86:1633, 2026-11-14): photos in cream
+   mounts, 260×215 at 1440 inside 10px of mount and a gold hairline, 32px apart, each
+   with a red 福 seal 8px in from the photo's lower right corner. The strip drifts left
+   on a loop (two copies of the mounts, moved by one copy's width). From 1440 down the
+   mounts shrink with the width, to 200px wide on phones. */
 .activity-strip {
-  --tile-h: clamp(10rem, 17.88vw, 16.09rem);
-  --tile-w: calc(var(--tile-h) * 285 / 257.5);
+  --photo-w: clamp(12.5rem, 18.06vw, 16.25rem);
+  --photo-h: calc(var(--photo-w) * 215 / 260);
+  --mount-gap: clamp(1.25rem, 2.22vw, 2rem);
 }
 
 .activity-track {
@@ -50,46 +263,49 @@
   width: max-content;
 }
 
-.activity-tile {
+/* Each copy ends with a gap, so the loop's seam is spaced like the rest. */
+.activity-copy {
+  display: flex;
+  gap: var(--mount-gap);
+  padding-inline-end: var(--mount-gap);
+}
+
+.activity-mount {
   position: relative;
-  width: var(--tile-w);
-  height: var(--tile-h);
   flex: none;
+  padding: 10px;
+  border: 1px solid var(--color-mount-edge);
+  border-radius: 4px;
+  background: var(--color-mount);
+  box-shadow: var(--shadow-mount);
 }
 
-.activity-pill {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 50%;
+.activity-photo-frame {
+  position: relative;
+  width: var(--photo-w);
+  height: var(--photo-h);
   overflow: hidden;
-  border-radius: 16.14% / 50%;
+  border: 1px solid rgb(184 145 89 / 0.6);
+  border-radius: 2px;
 }
 
-.activity-pill:first-child {
-  top: 0;
-}
-
-.activity-pill:last-child {
-  bottom: 0;
-}
-
-/* The photo spans the whole tile; each pill shows its half. */
 .activity-photo {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 200%;
   object-fit: cover;
-  transition: transform var(--duration-lift) var(--ease-refined);
 }
 
-.activity-pill:last-child .activity-photo {
-  top: -100%;
-}
-
-.activity-tile:hover .activity-photo {
-  transform: scale(1.04);
+.activity-seal {
+  position: absolute;
+  right: 19px;
+  bottom: 19px;
+  display: flex;
+  height: 26px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  background: var(--color-seal);
+  color: var(--color-banner-title);
+  font-size: 18px;
+  line-height: normal;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -110,22 +326,90 @@ body:has(.home-page) {
   background: var(--color-warm);
 }
 
-/* Partner logos (Figma 39:3155, and 39:3169 on phones): 120×44, 68px apart at every
-   width. Each logo carries the gap after it, so the two copies tile seamlessly. */
-.partner-track {
+/* ---- Founder (Figma 61:1886) ----
+   The design's two fades: dark red from the temple hall above (140px), cream into the
+   ink wash below (150px). */
+.founder {
+  --u: min(1px, 100vw / 1440);
+}
+
+.founder-fade-top,
+.founder-fade-foot {
+  position: absolute;
+  inset-inline: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.founder-fade-top {
+  top: 0;
+  height: 8.75rem;
+  background: linear-gradient(var(--color-fade-red), rgb(140 51 13 / 0));
+}
+
+.founder-fade-foot {
+  bottom: 0;
+  height: 9.375rem;
+  background: linear-gradient(rgb(245 229 204 / 0), var(--color-fade-cream));
+}
+
+.founder-stage {
   display: flex;
-  width: max-content;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1.25rem 4.5rem;
 }
 
-.partner-logo {
-  width: 7.5rem;
-  height: 2.75rem;
-  margin-right: 4.25rem;
-  flex: none;
+/* Below lg the portrait shows him down to the compass; the card overlaps the rest. */
+.founder-figure {
+  position: relative;
+  width: min(88vw, 26rem);
+  aspect-ratio: 671 / 760;
+  overflow: clip;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .partner-track {
-    animation: activity-drift 40s linear infinite;
+.founder-portrait {
+  position: absolute;
+  inset: 0 0 auto;
+  width: 100%;
+  height: auto;
+}
+
+.founder-card {
+  max-width: 42rem;
+  margin-top: -6rem;
+}
+
+@media (width >= 48rem) {
+  .founder-stage {
+    padding-inline: 2.5rem;
+  }
+}
+
+@media (width >= 64rem) {
+  .founder-stage {
+    position: relative;
+    max-width: 1440px;
+    min-height: calc(720 * var(--u));
+    margin-inline: auto;
+    align-items: flex-end;
+    justify-content: center;
+    padding: calc(80 * var(--u)) calc(120 * var(--u));
+  }
+
+  .founder-figure {
+    position: absolute;
+    top: calc(-12 * var(--u));
+    left: calc(65 * var(--u));
+    width: calc(671 * var(--u));
+    height: calc(1007 * var(--u));
+    aspect-ratio: auto;
+    overflow: visible;
+  }
+
+  .founder-card {
+    width: min(38.875rem, 46vw);
+    max-width: none;
+    margin-top: 0;
   }
 }
