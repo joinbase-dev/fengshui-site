@@ -1,10 +1,11 @@
 import { CornerMarks } from "@/components/ui/CornerMarks";
 import { terms, type TermsSection } from "@/content/terms";
 
-// Figma "Terms document" (91:1796, phones 91:1879): a parchment sheet with brass corner
-// marks. The heading block, a rule with a brass diamond, the red-edged "สิ่งสำคัญก่อน
-// ยืนยัน" box, then the six numbered sections. Phones tighten the padding and type and
-// leave out the date line, as the design does.
+// Figma "Terms document" (91:1796, revised 2026-11-15): a parchment sheet with brass
+// corner marks. The heading and intro, a rule with a brass diamond, the red-edged
+// "สิ่งสำคัญก่อนยืนยัน" box, then the six numbered sections. Type follows the site's
+// Fengshui styles (H2, H3, Body, Body large) in Noto Sans Thai, scaling down on phones
+// as the home page does; phones also tighten the padding (91:1879).
 export function TermsDocument() {
   return (
     <article
@@ -14,19 +15,10 @@ export function TermsDocument() {
       <CornerMarks variant="document" />
 
       <header className="flex flex-col gap-2.5">
-        <p className="text-sm leading-label font-medium text-brass">
-          <span lang="zh-Hant">{terms.eyebrowZh}</span> · {terms.eyebrow}
-        </p>
-        <h1 id="terms-title" className="font-serif-thai text-display-sm leading-tight font-bold text-lacquer md:text-doc-title">
+        <h1 id="terms-title" className="text-h2 leading-tight font-semibold text-lacquer">
           {terms.title}
         </h1>
-        <p className="text-note leading-copy text-umber-soft md:text-brand">{terms.intro}</p>
-        <p className="hidden text-fine leading-label text-brass md:block">
-          {terms.updated}
-          <span aria-hidden="true">&nbsp;&nbsp;·&nbsp;&nbsp;</span>
-          <span className="sr-only"> </span>
-          {terms.readingTime}
-        </p>
+        <p className="text-body-lg text-umber-soft">{terms.intro}</p>
       </header>
 
       <div aria-hidden="true" className="flex items-center gap-3">
@@ -37,15 +29,15 @@ export function TermsDocument() {
 
       <section
         aria-labelledby="terms-important"
-        className="flex flex-col gap-2.5 rounded-panel border-l-3 border-cinnabar bg-parchment-deep p-4.5 leading-copy md:px-7 md:py-6"
+        className="flex flex-col gap-2.5 rounded-panel border-l-3 border-cinnabar bg-parchment-deep p-4.5 md:px-7 md:py-6"
       >
-        <h2 id="terms-important" className="text-base font-semibold text-cinnabar md:text-lg">
+        <h2 id="terms-important" className="text-h3 font-semibold text-cinnabar">
           {terms.importantTitle}
         </h2>
         <ul className="flex flex-col gap-2.5">
           {terms.important.map((item) => (
-            <li key={item} className="flex items-start gap-2 text-sm md:gap-3 md:text-base">
-              <span aria-hidden="true" className="w-3 shrink-0 pt-1.25 text-marker md:w-4 md:pt-0 md:text-base">
+            <li key={item} className="flex items-start gap-2 text-body md:gap-3">
+              <span aria-hidden="true" className="w-3 shrink-0 pt-1.5 text-marker md:w-4 md:pt-0 md:text-body">
                 ◆
               </span>
               <span className="flex-1">{item}</span>
@@ -64,17 +56,17 @@ export function TermsDocument() {
 function TermsSectionBlock({ section }: { section: TermsSection }) {
   return (
     <section id={section.id} aria-labelledby={`${section.id}-title`} className="terms-section flex flex-col gap-3">
-      <h2 id={`${section.id}-title`} className="flex items-center gap-3.5 text-section-sm md:text-section">
-        <span className="font-serif-thai leading-numeral font-semibold text-brass">{section.number}</span>
-        <span className="leading-label font-bold text-lacquer">{section.title}</span>
+      <h2 id={`${section.id}-title`} className="flex items-center gap-3.5 text-h3 font-semibold">
+        <span className="text-brass">{section.number}</span>
+        <span className="text-lacquer">{section.title}</span>
       </h2>
       {typeof section.body === "string" ? (
-        <p className="text-note leading-prose md:text-base">{section.body}</p>
+        <p className="text-body">{section.body}</p>
       ) : (
         <ol className="flex flex-col gap-3">
           {section.body.map((item, index) => (
-            <li key={item} className="flex items-start gap-2 text-note leading-prose md:text-base">
-              <span aria-hidden="true" className="w-4 shrink-0 md:w-5">
+            <li key={item} className="flex items-start gap-2 text-body">
+              <span aria-hidden="true" className="w-5 shrink-0">
                 {index + 1}.
               </span>
               <span className="flex-1">{item}</span>

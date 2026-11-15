@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { payment } from "@/content/terms";
 
-// Figma "Button / secondary" (95:2123): saves the QR to the visitor's device. On
+// Figma "Button / secondary" (95:2123, phones 95:2540): saves the QR to the visitor's device. On
 // phones that can share files (iOS, Android) it opens the share sheet, whose "Save
 // Image" puts the QR in the photo album for the bank app's "scan from album". Elsewhere
 // it downloads the PNG.
@@ -38,12 +38,18 @@ export function SaveQrButton({ src }: { src: string }) {
     <button
       type="button"
       onClick={save}
-      className="flex h-11 w-full cursor-pointer items-center justify-center gap-2.5 rounded-button border-[1.2px] border-cinnabar px-2 text-note font-semibold whitespace-nowrap text-cinnabar transition duration-200 ease-refined hover:bg-cinnabar hover:text-parchment active:scale-98 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-cinnabar md:w-auto md:px-6"
+      className="flex h-11 w-full cursor-pointer items-center justify-center rounded-button border-[1.2px] border-cinnabar px-2 text-action font-semibold whitespace-nowrap text-cinnabar transition duration-200 ease-refined hover:bg-cinnabar hover:text-parchment active:scale-98 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-cinnabar md:w-79.5 md:px-6"
     >
-      <span aria-hidden="true" className="font-inter">
-        {saved ? "✓" : "↓"}
+      <span aria-live="polite">
+        {saved ? (
+          payment.saved
+        ) : (
+          <>
+            <span className="md:hidden">{payment.saveCompact}</span>
+            <span className="hidden md:inline">{payment.save}</span>
+          </>
+        )}
       </span>
-      <span aria-live="polite">{saved ? payment.saved : payment.save}</span>
     </button>
   );
 }

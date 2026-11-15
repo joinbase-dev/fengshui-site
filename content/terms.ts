@@ -9,8 +9,6 @@ export const paymentPath = "/terms/payment";
 // The footer's way in, the flow's only entrance.
 export const termsFooterLink = { label: "ข้อกำหนดและเงื่อนไข", href: termsPath } as const;
 
-export const checkoutSteps = ["ข้อกำหนด", "ชำระเงิน", "ยืนยันนัดหมาย"] as const;
-
 export type TermsSection = {
   id: string;
   number: string;
@@ -23,16 +21,11 @@ export const terms = {
   seoTitle: "ข้อกำหนดและเงื่อนไข",
   seoDescription:
     "ข้อกำหนดและเงื่อนไขการใช้บริการของคลับฮวงจุ้ยแห่งประเทศไทย: การนัดหมาย การเลื่อนนัด การชำระเงิน การยกเลิกและคืนเงิน และข้อมูลส่วนบุคคล",
-  eyebrowZh: "條款",
-  eyebrow: "ข้อกำหนดการใช้บริการ",
   title: "ข้อกำหนดและเงื่อนไขการใช้บริการ",
   intro: "โปรดอ่านให้ครบก่อนยืนยันนัดหมายและชำระค่าบริการ",
-  updated: "ปรับปรุงล่าสุด 14 พฤศจิกายน 2569",
-  readingTime: "อ่านประมาณ 3 นาที",
   tocTitle: "สารบัญ",
   importantTitle: "สิ่งสำคัญก่อนยืนยัน",
   important: [
-    "คำปรึกษาเป็นแนวทางตามหลักฮวงจุ้ยและโหราศาสตร์จีน ไม่ใช่การรับประกันผลลัพธ์",
     "เลื่อนนัดได้ 1 ครั้ง โดยแจ้งล่วงหน้าอย่างน้อย 48 ชั่วโมง",
     "ค่าบริการที่ชำระแล้วไม่สามารถขอคืนได้ ยกเว้นกรณีในข้อ 04",
   ],
@@ -94,9 +87,9 @@ export const terms = {
 export const payment = {
   seoTitle: "ชำระค่าบริการ",
   seoDescription: "สแกน QR พร้อมเพย์เพื่อชำระค่าบริการคลับฮวงจุ้ยแห่งประเทศไทย แล้วแจ้งชำระเงินทาง LINE",
+  // Phones say ย้อนกลับ (Figma 95:2606), wider screens กลับไปอ่านข้อกำหนด (97:2549).
   back: "กลับไปอ่านข้อกำหนด",
-  eyebrowZh: "付款",
-  eyebrow: "ชำระเงินผ่าน QR พร้อมเพย์",
+  backCompact: "ย้อนกลับ",
   title: "สแกนเพื่อชำระค่าบริการ",
   qrBadge: "THAI QR PAYMENT",
   qrLabel: "พร้อมเพย์",
@@ -107,14 +100,10 @@ export const payment = {
   // QR before this goes live.
   accountName: `ชื่อบัญชี: บริษัท ${site.name} จำกัด`,
   reference: "เลขอ้างอิง  FSC-691114-0128",
-  save: "บันทึกรูป QR",
-  saved: "บันทึกรูป QR แล้ว",
-  howTo: [
-    { title: "เปิดแอปธนาคาร", text: "เลือกเมนูสแกนจ่าย" },
-    { title: "สแกน QR นี้", text: "หรือเลือกรูปจากอัลบั้ม" },
-    { title: "ตรวจชื่อบัญชีและยอด", text: "แล้วกดยืนยันการโอน" },
-  ],
-  howToLabel: "วิธีชำระเงิน",
+  // Phones say บันทึกรูป QR (Figma 95:2542), wider screens บันทึกรูป (95:2125).
+  save: "บันทึกรูป",
+  saveCompact: "บันทึกรูป QR",
+  saved: "บันทึกแล้ว",
   // Step 3: the visitor sends the slip in the club's LINE, where the booking is confirmed.
   done: { label: "แจ้งชำระเงินแล้ว", href: lineBooking },
 } as const;

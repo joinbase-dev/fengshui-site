@@ -36,12 +36,12 @@ export function TermsAgreement() {
             <path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </span>
-        <span className="text-sm leading-normal text-parchment md:max-w-82.5 md:text-base">{terms.agreement}</span>
+        <span className="text-body text-parchment md:max-w-82.5">{terms.agreement}</span>
       </label>
       <button
         type="submit"
         disabled={!accepted}
-        className="min-h-11 w-full shrink-0 cursor-pointer rounded-button bg-linear-to-r from-gilt-light to-gilt-dark px-6.5 py-3.5 text-base leading-none font-semibold text-lacquer transition duration-200 ease-refined hover:brightness-105 hover:shadow-md active:scale-98 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brass-light disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:brightness-100 disabled:hover:shadow-none disabled:active:scale-100 md:w-42"
+        className="min-h-11 w-full shrink-0 cursor-pointer rounded-button bg-linear-to-r from-gilt-light to-gilt-dark px-6.5 py-2.5 text-action font-semibold text-lacquer transition duration-200 ease-refined hover:brightness-105 hover:shadow-md active:scale-98 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brass-light disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:brightness-100 disabled:hover:shadow-none disabled:active:scale-100 md:w-42"
       >
         {terms.next}
       </button>

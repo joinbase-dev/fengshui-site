@@ -28,9 +28,9 @@ export function TermsToc() {
   return (
     <nav
       aria-labelledby="terms-toc-title"
-      className="sticky top-6 flex w-65 shrink-0 flex-col gap-1 rounded-card border border-brass-light/30 bg-toc px-5 py-6 leading-label"
+      className="sticky top-6 flex w-65 shrink-0 flex-col gap-1 rounded-card border border-brass-light/30 bg-toc px-5 py-6"
     >
-      <h2 id="terms-toc-title" className="text-sm font-semibold text-brass-light">
+      <h2 id="terms-toc-title" className="text-action font-semibold text-brass-light">
         {terms.tocTitle}
       </h2>
       <ol className="flex flex-col gap-1">
@@ -41,13 +41,13 @@ export function TermsToc() {
               <a
                 href={`#${section.id}`}
                 aria-current={active ? "location" : undefined}
-                className={`flex items-start gap-2.5 rounded-sm py-2.5 pl-2.5 whitespace-nowrap transition-colors duration-200 ease-refined focus-visible:outline-2 focus-visible:outline-brass-light ${
+                className={`flex items-center gap-2.5 rounded-sm py-2.5 pl-2.5 whitespace-nowrap transition-colors duration-200 ease-refined focus-visible:outline-2 focus-visible:outline-brass-light ${
                   active ? "bg-brass-light/15 font-semibold" : "hover:bg-brass-light/10"
                 }`}
                 onClick={() => setCurrent(section.id)}
               >
-                <span className="font-serif-thai text-sm font-semibold text-brass-light">{section.number}</span>
-                <span className="text-note text-parchment">{section.title}</span>
+                <span className="text-kicker font-normal text-brass-light">{section.number}</span>
+                <span className="text-body text-parchment">{section.title}</span>
               </a>
             </li>
           );
