@@ -18,11 +18,12 @@ function serviceBySlug(slug: string) {
 // Figma header/desktop (19:1980): white links on the hero, 24px from the top, with the
 // club's emblem in the middle, centred across the page. The service links open their
 // overlays. Below lg (derived) the emblem moves left and a menu button on the right opens
-// the full-screen menu, which lists home and all four services.
-export function HomeHeader() {
+// the full-screen menu, which lists home and all four services. Other pages (the terms
+// flow) pass `homeHref="/"` so home and the emblem lead back to the home page.
+export function HomeHeader({ homeHref = "#top" }: { homeHref?: string }) {
   const logo = (outline: string) => (
     <a
-      href="#top"
+      href={homeHref}
       aria-label={homeHeader.logoLabel}
       className={`flex size-16 shrink-0 items-center justify-center rounded-full transition-transform duration-300 ease-refined hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 ${outline}`}
     >
@@ -47,7 +48,7 @@ export function HomeHeader() {
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-8 xl:gap-12">
           <ul className="flex items-center justify-end gap-8 xl:gap-12">
             <li>
-              <a href="#top" className={linkStyle}>
+              <a href={homeHref} className={linkStyle}>
                 {homeHeader.homeLabel}
               </a>
             </li>
@@ -63,7 +64,7 @@ export function HomeHeader() {
         <MobileMenu
           logo={logo("focus-visible:outline-white")}
           links={[
-            { label: homeHeader.homeLabel, href: "#top" },
+            { label: homeHeader.homeLabel, href: homeHref },
             ...serviceDetails.map((service) => ({ label: service.title, href: "", service: service.slug })),
           ]}
           social={footer.social}

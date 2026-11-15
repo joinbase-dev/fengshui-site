@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { contact, footer } from "@/content/site";
+import { termsFooterLink } from "@/content/terms";
 import { MailIcon } from "@/components/ui/MailIcon";
 import { PhoneIcon } from "@/components/ui/PhoneIcon";
 
@@ -6,7 +8,8 @@ const link =
   "rounded-xs underline-offset-4 transition-colors duration-200 ease-refined hover:text-red-800 hover:underline focus-visible:outline-2 focus-visible:outline-red-800";
 
 // Figma footer (1:807): a rule across the content width, then the club's name, address,
-// email and phone (each behind a red icon) beside its social links, set as plain text.
+// email and phone (each behind a red icon) and the terms link, beside its social links,
+// set as plain text.
 // 80px margins and 90px above and below at 1440; below md (derived) the links move
 // under the name.
 export function Footer() {
@@ -33,6 +36,9 @@ export function Footer() {
               </a>
             </span>
           </address>
+          <Link href={termsFooterLink.href} className={`-my-2.5 inline-flex min-h-11 items-center self-start text-footer ${link}`}>
+            {termsFooterLink.label}
+          </Link>
         </div>
         <ul aria-label={footer.socialLabel} className="-mx-2 flex flex-wrap gap-x-4 md:-my-2.5">
           {footer.social.map((item) => (
