@@ -22,7 +22,7 @@ export default function PaymentPage() {
   return (
     <main
       id="main"
-      className="mx-auto flex w-full max-w-160 flex-col items-start gap-4 px-4 pt-26 pb-6 md:box-content md:gap-6 md:px-10 md:pb-24 lg:pt-57"
+      className="mx-auto flex w-full max-w-160 flex-col items-start gap-4 px-4 pt-24 pb-6 md:box-content md:gap-6 md:px-10 md:pb-24 lg:pt-34"
     >
       <Link
         href={termsPath}

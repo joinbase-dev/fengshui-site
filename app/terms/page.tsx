@@ -19,7 +19,7 @@ export const metadata = pageMetadata({
 // on phones, with the desktop padding from md.
 export default function TermsPage() {
   return (
-    <main id="main" className="mx-auto flex max-w-280 gap-8 px-4 pt-26 pb-6 md:px-10 md:pb-24 lg:pt-57">
+    <main id="main" className="mx-auto flex max-w-280 gap-8 px-4 pt-24 pb-6 md:px-10 md:pb-24 lg:pt-34">
       <div className="hidden xl:block">
         <TermsToc />
       </div>
