@@ -17,3 +17,15 @@ export const isProduction = process.env.VERCEL_ENV === "production" || process.e
 export function absoluteUrl(path: string): string {
   return path === "/" ? siteUrl : `${siteUrl}${path}`;
 }
+
+// Ownership tags for Google Search Console and Bing Webmaster Tools, for when the site is
+// verified by HTML tag rather than by DNS: paste the code the console gives (the
+// content="…" value only) into GOOGLE_SITE_VERIFICATION or BING_SITE_VERIFICATION in
+// Vercel and redeploy. Unset, no tag is written.
+const google = process.env.GOOGLE_SITE_VERIFICATION?.trim();
+const bing = process.env.BING_SITE_VERIFICATION?.trim();
+
+export const searchConsoleVerification = {
+  ...(google ? { google } : {}),
+  ...(bing ? { other: { "msvalidate.01": bing } } : {}),
+};

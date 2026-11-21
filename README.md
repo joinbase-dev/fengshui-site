@@ -92,3 +92,4 @@ See `.env.example`.
 | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Production domain (`https://…`, no trailing slash) for canonical links, sitemap, OG and JSON-LD. Set it for Production and Preview. Falls back to Vercel's production domain. |
 | `SITE_INDEXABLE` | `true` to allow indexing outside Vercel. On Vercel only the production deployment is indexable. |
+| `GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION` | Optional. The `content` value of Search Console's / Bing Webmaster Tools' HTML-tag verification; adds the meta tag to every page. Not needed when verifying by DNS. |

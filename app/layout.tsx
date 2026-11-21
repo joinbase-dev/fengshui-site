@@ -1,16 +1,19 @@
 import type { Metadata, Viewport } from "next";
 import { Epilogue, Noto_Sans_Thai } from "next/font/google";
 import { seo } from "@/content/seo";
-import { isProduction, siteUrl } from "@/lib/site-url";
+import { isProduction, searchConsoleVerification, siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 // Epilogue is the site font. It has no Thai glyphs, so Thai text falls through to
 // Noto Sans Thai (see --font-sans in app/styles/tokens.css). Both are variable fonts,
-// so every weight comes from one file per subset.
+// so every weight comes from one file per subset. The home, terms and payment pages are
+// set in Noto Sans Thai alone, so Epilogue is not preloaded: the service pages fetch it
+// when they first use it rather than every page paying for it before its hero image.
 const epilogue = Epilogue({
   subsets: ["latin"],
   variable: "--font-epilogue",
   display: "swap",
+  preload: false,
 });
 
 // The home page sets everything in Noto Sans Thai, Latin included, so it loads both
@@ -29,6 +32,7 @@ export const metadata: Metadata = {
   description: seo.home.description,
   applicationName: seo.siteName,
   robots: isProduction ? { index: true, follow: true } : { index: false, follow: false },
+  verification: searchConsoleVerification,
 };
 
 export const viewport: Viewport = {
