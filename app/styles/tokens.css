@@ -91,6 +91,7 @@
   --color-card: rgb(0 0 0 / 0.5); /* service card at rest */
   --color-founder-card: rgb(61 8 5 / 0.62); /* the founder's smoked-red card */
   --color-banner-title: #fae3bf; /* footer banner heading */
+  --color-banner-foot: #2c0001; /* the foot of the phone banner's lacquer panel, below its photo */
   --color-banner-text: rgb(245 229 209 / 0.85); /* footer banner line of text */
   --color-veil: rgb(241 236 233 / 0.5); /* cream veil over the footer's ink wash */
   --color-fade-red: rgb(77 10 8 / 0.95); /* founder section, top fade from the services */

@@ -247,6 +247,24 @@
   }
 }
 
+/* ---- Footer banner, phones ----
+   Below 48rem the banner's photo keeps its own proportions at the top of the panel
+   (cover-scaling it would crop the lattice down its sides) and fades out over its last
+   fifth into the panel's dark foot, which fills the rest. The dragon spans the top 38%
+   of the photo's width, so the heading starts 40% of the banner's width down. */
+@media (width < 48rem) {
+  .home-banner {
+    padding-top: 40%;
+  }
+
+  .home-banner picture img {
+    bottom: auto;
+    height: auto;
+    object-fit: fill;
+    mask-image: linear-gradient(#000 80%, transparent);
+  }
+}
+
 /* Figma "blend / from experience" (123:1875): the ink wash rises out of the clients
    section's warm grey over its first 180px. */
 .ink-wash-fade-top {

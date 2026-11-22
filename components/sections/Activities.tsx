@@ -1,6 +1,7 @@
 import Image from "next/image";
 import localFont from "next/font/local";
 import { activities } from "@/content/home";
+import activitiesBackgroundMobile from "@/public/images/home/v4/activities-bg-mobile.jpg";
 
 // The seal's 福 in Ma Shan Zheng, as the design sets it: a one-glyph subset (1.4 KB,
 // from Google Fonts' text= API), loaded only where it is used.
@@ -15,14 +16,27 @@ const sealFont = localFont({
 // full-width strip of the club's photos in cream mounts, each with a red 福 seal (shape
 // and drift in app/styles/home.css). The mounts are drawn twice so the strip can loop;
 // the second copy is hidden from screen readers.
+//
+// On phones (below 640px), where the ink wash has faded into its still water above, the
+// section has Ohm's own backdrop (2026-11-22, @2x): misty mountains and a pagoda over
+// a lake, its edges the same colour as the water so the two meet without a seam. It is
+// hidden from 640px, and as it lazy loads, larger screens never fetch it.
 export function Activities() {
   const copies = [false, true];
   return (
     <section
       id={activities.id}
       aria-labelledby="activities-title"
-      className="scroll-mt-6 overflow-hidden py-16 md:py-20 xl:py-25"
+      className="relative isolate scroll-mt-6 overflow-hidden py-16 md:py-20 xl:py-25"
     >
+      <Image
+        src={activitiesBackgroundMobile}
+        alt=""
+        fill
+        sizes="100vw"
+        quality={90}
+        className="-z-10 object-cover sm:hidden"
+      />
       <h2 id="activities-title" className="px-5 text-center text-h2 font-semibold text-ink">
         {activities.title}
       </h2>
