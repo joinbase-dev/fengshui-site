@@ -247,6 +247,18 @@
   }
 }
 
+/* Figma "blend / from experience" (123:1875): the ink wash rises out of the clients
+   section's warm grey over its first 180px. */
+.ink-wash-fade-top {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  z-index: -1;
+  height: 180px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--color-warm), rgb(241 236 233 / 0));
+}
+
 /* Activities strip (Figma Gallery / Marquee, 86:1633, 2026-11-14): photos in cream
    mounts, 260×215 at 1440 inside 10px of mount and a gold hairline, 32px apart, each
    with a red 福 seal 8px in from the photo's lower right corner. The strip drifts left
