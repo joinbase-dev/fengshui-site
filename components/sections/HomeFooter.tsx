@@ -9,8 +9,11 @@ import { ServiceLink } from "@/components/ui/ServiceLink";
 import { SocialIcon, type SocialName } from "@/components/ui/SocialIcon";
 import { Phrases } from "@/components/ui/Phrases";
 import emblem from "@/public/images/emblem.png";
+import { SectionBackdrop } from "@/components/ui/SectionBackdrop";
 import bannerBackground from "@/public/images/home/v4/banner-bg.webp";
+import bannerBackgroundMobile from "@/public/images/home/v4/banner-bg-mobile.jpg";
 import footerBackground from "@/public/images/home/v4/footer-bg.webp";
+import footerBackgroundMobile from "@/public/images/home/v4/footer-bg-mobile.jpg";
 import bannerPortrait from "@/public/images/home/v3/banner-portrait.webp";
 
 const textLink =
@@ -39,14 +42,32 @@ const socialLinks: { name: SocialName; label: string; href: string }[] = [
 // emblem, cut off by the banner's foot. The design's emblem carries the club's name as
 // part of the picture; here the name is real text under the emblem. Email and phone,
 // which the design leaves out, stay under the address. Below md everything stacks.
+//
+// Below md, where the banner and the footer take their phone layouts, both use Ohm's own
+// phone backgrounds (2026-11-22, @2x): a red lacquer panel with the dragon across its top
+// and lattice down its sides, and a tall cream sky over a mountain lake. The phone banner
+// is taller than its photo, so the heading starts below the dragon and the photo fades
+// into the panel's dark foot (app/styles/home.css).
 export function HomeFooter() {
   return (
     <footer className="relative isolate overflow-hidden bg-warm px-5 pt-16 md:px-10 md:pt-20 xl:pt-25">
-      <Image src={footerBackground} alt="" fill sizes="100vw" quality={75} className="-z-10 object-cover object-bottom" />
+      <SectionBackdrop
+        desktop={footerBackground}
+        mobile={footerBackgroundMobile}
+        mobileMedia="(max-width: 767.98px)"
+        quality={75}
+        className="object-bottom"
+      />
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-veil" />
       <div className="mx-auto flex max-w-content flex-col gap-10 md:gap-16">
-        <div className="relative isolate flex flex-col items-center overflow-hidden rounded-banner bg-brand-red-dark px-6 pt-8 text-center md:min-h-51.5 md:items-start md:py-10 md:pr-10 md:pl-60 md:text-left lg:pl-76 xl:flex-row xl:items-center xl:justify-between xl:py-0 xl:pr-16 xl:pl-83.5">
-          <Image src={bannerBackground} alt="" fill sizes="(min-width: 1280px) 1140px, 100vw" quality={80} className="-z-10 object-cover" />
+        <div className="home-banner relative isolate flex flex-col items-center overflow-hidden rounded-banner bg-banner-foot px-6 text-center md:bg-brand-red-dark md:min-h-51.5 md:items-start md:py-10 md:pr-10 md:pl-60 md:text-left lg:pl-76 xl:flex-row xl:items-center xl:justify-between xl:py-0 xl:pr-16 xl:pl-83.5">
+          <SectionBackdrop
+            desktop={bannerBackground}
+            mobile={bannerBackgroundMobile}
+            mobileMedia="(max-width: 767.98px)"
+            sizes="(min-width: 1280px) 1140px, 100vw"
+            quality={80}
+          />
           <Image
             src={emblem}
             alt=""
