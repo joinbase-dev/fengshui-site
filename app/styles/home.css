@@ -247,6 +247,18 @@
   }
 }
 
+/* Figma "blend / from experience" (123:1875): the ink wash rises out of the clients
+   section's warm grey over its first 180px. */
+.ink-wash-fade-top {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  z-index: -1;
+  height: 180px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--color-warm), rgb(241 236 233 / 0));
+}
+
 /* Activities strip (Figma Gallery / Marquee, 86:1633, 2026-11-14): photos in cream
    mounts, 260×215 at 1440 inside 10px of mount and a gold hairline, 32px apart, each
    with a red 福 seal 8px in from the photo's lower right corner. The strip drifts left
@@ -315,6 +327,190 @@
 }
 
 @keyframes activity-drift {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---- Experience & Clients (Figma 122:1870) ----
+   A faint ink wash (45%) that fades into warm grey at the top (260px, from the founder
+   section) and the foot (140px, into the steps). The logo strip sits between two gold
+   rails that fade out at both ends; its cards are 240x160 with a 40px gap at 1440
+   (derived on phones: 180x120, 24px gap). */
+.clients-fade-top,
+.clients-fade-foot {
+  position: absolute;
+  inset-inline: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.clients-fade-top {
+  top: 0;
+  height: 260px;
+  background: linear-gradient(to bottom, var(--color-warm), rgb(241 236 233 / 0));
+}
+
+.clients-fade-foot {
+  bottom: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, rgb(241 236 233 / 0), var(--color-warm));
+}
+
+.clients-rule {
+  height: 1px;
+  width: clamp(1.5rem, 8.33vw, 7.5rem);
+  flex: none;
+  background: linear-gradient(to right, rgb(184 145 89 / 0), var(--color-brass));
+}
+
+.clients-rule:last-child {
+  transform: scaleX(-1);
+}
+
+.clients-diamond {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  rotate: 45deg;
+  background: var(--color-seal);
+}
+
+.clients-strip {
+  --client-w: 180px;
+  --client-h: 120px;
+  --client-gap: 24px;
+  --client-pad-x: 18px;
+  --client-pad-y: 15px;
+  position: relative;
+  overflow: hidden;
+  padding-block: 28px;
+}
+
+@media (min-width: 768px) {
+  .clients-strip {
+    --client-w: 240px;
+    --client-h: 160px;
+    --client-gap: 40px;
+    --client-pad-x: 24px;
+    --client-pad-y: 20px;
+    padding-block: 36px;
+  }
+}
+
+.clients-strip::before,
+.clients-strip::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgb(184 145 89 / 0) 0%,
+    rgb(184 145 89 / 0.7) 20%,
+    rgb(184 145 89 / 0.7) 80%,
+    rgb(184 145 89 / 0) 100%
+  );
+}
+
+.clients-strip::before {
+  top: 0;
+}
+
+.clients-strip::after {
+  bottom: 0;
+}
+
+.clients-track {
+  display: flex;
+  width: max-content;
+}
+
+/* Each copy ends with a gap, so the loop's seam is spaced like the rest. */
+.clients-copy {
+  display: flex;
+  gap: var(--client-gap);
+  padding-inline-end: var(--client-gap);
+}
+
+.client-card {
+  position: relative;
+  display: flex;
+  flex: none;
+  width: var(--client-w);
+  height: var(--client-h);
+  padding: var(--client-pad-y) var(--client-pad-x);
+  border: 1px solid var(--color-brass);
+  border-radius: var(--radius-client-card);
+  background: var(--color-client-card);
+  box-shadow: var(--shadow-client-card);
+}
+
+/* The inner hairline, 5px in. */
+.client-card::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgb(184 145 89 / 0.35);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.client-logo {
+  position: relative;
+  flex: 1;
+}
+
+.client-logo img {
+  object-fit: contain;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .clients-track {
+    animation: clients-drift 40s linear infinite;
+  }
+}
+
+/* Still, the strip shows every logo once, centred in rows of three (two smaller cards
+   a row on phones). */
+@media (prefers-reduced-motion: reduce) {
+  .clients-strip {
+    --client-w: 150px;
+    --client-h: 100px;
+    --client-gap: 16px;
+    --client-pad-x: 14px;
+    --client-pad-y: 12px;
+  }
+
+  .clients-track {
+    width: auto;
+    justify-content: center;
+    padding-inline: 20px;
+  }
+
+  .clients-copy {
+    max-width: calc(3 * var(--client-w) + 2 * var(--client-gap));
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-inline-end: 0;
+  }
+
+  .clients-copy[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: reduce) {
+  .clients-strip {
+    --client-w: 240px;
+    --client-h: 160px;
+    --client-gap: 40px;
+    --client-pad-x: 24px;
+    --client-pad-y: 20px;
+  }
+}
+
+@keyframes clients-drift {
   to {
     transform: translateX(-50%);
   }

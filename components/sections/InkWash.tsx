@@ -9,11 +9,13 @@ import inkWashMobile from "@/public/images/home/v4/process-bg-mobile.jpg";
 // full-resolution export (2880 wide) and his phone crop, anchored to the top so the
 // gold haze stays under the steps' heading. The two sections stack far taller than a
 // phone screen, so there the crop keeps its own size (2x a 390 screen, never scaled up)
-// and dissolves into the still water of its foot (app/styles/home.css).
+// and dissolves into the still water of its foot (app/styles/home.css). Its top fades
+// up from the clients section's warm grey (Figma 123:1875).
 export function InkWash({ children }: { children: ReactNode }) {
   return (
     <div className="ink-wash relative isolate bg-ink-wash">
       <SectionBackdrop desktop={inkWash} mobile={inkWashMobile} className="object-top" />
+      <div aria-hidden="true" className="ink-wash-fade-top" />
       {children}
     </div>
   );

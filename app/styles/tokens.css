@@ -100,6 +100,9 @@
   --color-mount: #faf5eb; /* the mount around each photo */
   --color-mount-edge: #b89159; /* its gold hairline; the photo's at 60% */
   --color-seal: #9e120d; /* the 福 seal; its character is banner-title */
+  /* Clients / Logo Card (Figma 122:1788, 2026-11-22): cream mat, gold border and hairline. */
+  --color-client-card: #fcf9f1;
+  --color-client-gold: #997038; /* the section's eyebrow: about 3.8:1 on warm, under AA */
 
   --font-thai: var(--font-noto-thai), ui-sans-serif, system-ui, sans-serif;
   /* The Chinese eyebrows (風水, 生肖). The design names Inter Light, which has no Chinese
@@ -126,10 +129,14 @@
   --text-kicker--line-height: 1.375rem;
   --text-checklist: 1rem; /* 16/28 */
   --text-checklist--line-height: 1.75;
+  --text-client-eyebrow: 1rem; /* Medium 16, line height "normal", tracking 0.64px */
+  --text-client-eyebrow--line-height: normal;
+  --text-client-eyebrow--letter-spacing: 0.04em;
 
   --radius-panel: 12px; /* footer call to action, LINE buttons */
   --radius-profile: 16px; /* founder card */
   --radius-banner: 24px; /* footer wide banner */
+  --radius-client-card: 6px; /* client logo card; its inner hairline is 3px */
 
   --shadow-portrait: 0 16px 100px 0 #000000;
   --shadow-profile: 8px 16px 46px 0 rgb(0 0 0 / 0.4);
@@ -138,6 +145,7 @@
   --shadow-overlay-box: 0 1px 4px 0 rgb(12 12 13 / 0.1), 0 1px 4px 0 rgb(12 12 13 / 0.05); /* Drop Shadow/200 */
   --shadow-card: 0 1px 4px 0 rgb(12 12 13 / 0.05), 0 1px 4px 0 rgb(12 12 13 / 0.1); /* service card on phones */
   --shadow-mount: 0 8px 10px 0 rgb(89 51 26 / 0.18); /* activities' framed photos */
+  --shadow-client-card: 0 8px 10px 0 rgb(89 51 26 / 0.14); /* client logo cards */
 
   --container-content: 1140px; /* sections (1440 frame, 150px margins) */
   --container-founder: 1200px; /* founder portrait and card */
