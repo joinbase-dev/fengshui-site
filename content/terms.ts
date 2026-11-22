@@ -91,15 +91,12 @@ export const payment = {
   back: "กลับไปอ่านข้อกำหนด",
   backCompact: "ย้อนกลับ",
   title: "สแกนเพื่อชำระค่าบริการ",
-  qrBadge: "THAI QR PAYMENT",
-  qrLabel: "พร้อมเพย์",
   qrAlt: "QR พร้อมเพย์สำหรับชำระค่าบริการคลับฮวงจุ้ยแห่งประเทศไทย",
   // The saved file's name on the visitor's device.
   qrFileName: "fengshuiclub-promptpay-qr.png",
   // PLACEHOLDER (Figma's mock-up values): replace with the club's real account name and
   // QR before this goes live.
   accountName: `ชื่อบัญชี: บริษัท ${site.name} จำกัด`,
-  reference: "เลขอ้างอิง  FSC-691114-0128",
   // Phones say บันทึกรูป QR (Figma 95:2542), wider screens บันทึกรูป (95:2125).
   save: "บันทึกรูป",
   saveCompact: "บันทึกรูป QR",

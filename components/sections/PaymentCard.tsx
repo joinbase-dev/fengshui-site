@@ -5,11 +5,12 @@ import { payment } from "@/content/terms";
 import qrCode from "@/public/images/terms/promptpay-qr.png";
 
 // Figma "Payment card" (95:1908, phones 95:2325, revised 2026-11-15): the heading, the
-// white QR block with brass corner marks and the account name, "บันทึกรูป", then
+// white QR block with brass corner marks and the account name (the PromptPay badge and
+// reference number removed at Ohm's request, 2026-11-22), "บันทึกรูป", then
 // "แจ้งชำระเงินแล้ว", which opens the club's LINE to send the slip. Type follows the
 // site's Fengshui styles (H2, Label, Eyebrow) in Noto Sans Thai. On wider screens the
 // two buttons are 318px wide and centred; on phones they span the card, and the account
-// lines drop to 12px (95:2529) so the name stays on one line.
+// line drops to 12px (95:2529) so the name stays on one line.
 export function PaymentCard() {
   return (
     <section
@@ -22,17 +23,8 @@ export function PaymentCard() {
 
       <figure className="relative flex flex-col items-center gap-3.5 rounded-card border border-brass/80 bg-white p-4.5 md:p-5.5">
         <CornerMarks variant="qr" />
-        <figcaption className="flex items-center gap-2 text-kicker">
-          <span lang="en" className="rounded-photo bg-lacquer-deep px-2.5 py-1 text-parchment">
-            {payment.qrBadge}
-          </span>
-          <span className="text-lacquer-deep">{payment.qrLabel}</span>
-        </figcaption>
         <Image src={qrCode} alt={payment.qrAlt} sizes="(min-width: 768px) 260px, 220px" className="size-55 md:size-65" />
-        <div className="flex flex-col items-center gap-0.5 text-center text-xs leading-5 md:text-kicker">
-          <p>{payment.accountName}</p>
-          <p className="whitespace-pre text-umber-soft">{payment.reference}</p>
-        </div>
+        <figcaption className="text-center text-xs leading-5 md:text-kicker">{payment.accountName}</figcaption>
       </figure>
 
       <SaveQrButton src={qrCode.src} />
