@@ -2,6 +2,12 @@ import { serviceDetails, type PhotoAsset } from "@/content/services";
 import { address, contact, gallery, lineBooking, site } from "@/content/site";
 import heroPortrait from "@/public/images/home/v4/hero-portrait.webp";
 import founderPortrait from "@/public/images/home/v4/founder-portrait.webp";
+import krungsriLogo from "@/public/images/home/clients/krungsri.webp";
+import sisbLogo from "@/public/images/home/clients/sisb.webp";
+import golfChannelLogo from "@/public/images/home/clients/golf-channel.webp";
+import dekSomBoonLogo from "@/public/images/home/clients/dek-som-boon.webp";
+import wanasnanLogo from "@/public/images/home/clients/wanasnan.webp";
+import astrologyAssocLogo from "@/public/images/home/clients/astrology-assoc.webp";
 
 // Copy of the home page (Figma 55:3535, "Web v.3", 2026-11-13), kept apart from layout so copy
 // changes do not touch components. The services' cards read their own copy from
@@ -92,6 +98,24 @@ function servicePhoto(slug: string, n: number): PhotoAsset {
   if (!photo) throw new Error(`No photo ${n} for service ${slug}`);
   return photo;
 }
+
+// Experience & Clients (Figma 122:1870, 2026-11-22): organisations and brands the
+// master has advised, as their logos in a strip that loops sideways. The eyebrow and
+// the heading keep the design's line breaks on narrow screens (Phrases).
+export const clients = {
+  id: "clients",
+  eyebrow: ["ให้คำปรึกษาแก่องค์กร", "และแบรนด์ชั้นนำของประเทศ"],
+  title: ["ประสบการณ์", "การให้คำปรึกษา", "กว่า 30ปี"],
+  listLabel: "ลูกค้าที่เคยรับคำปรึกษา",
+  logos: [
+    { src: krungsriLogo, alt: "ธนาคารกรุงศรีอยุธยา (krungsri)" },
+    { src: sisbLogo, alt: "SISB Schools" },
+    { src: golfChannelLogo, alt: "Golf Channel Thailand" },
+    { src: dekSomBoonLogo, alt: "ตราเด็กสมบูรณ์ (Dek Som Boon)" },
+    { src: wanasnanLogo, alt: "วนัสนันท์ (Vanusnun)" },
+    { src: astrologyAssocLogo, alt: "สมาคมโหราศาสตร์นานาชาติ (The International Astrological Association)" },
+  ] satisfies PhotoAsset[],
+} as const;
 
 // The design's strip holds stock photos as stand-ins; until the club's own activity
 // photos arrive it shows these, from the club's events, courses and ceremonies.
