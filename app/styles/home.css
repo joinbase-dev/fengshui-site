@@ -444,9 +444,6 @@
   border-radius: var(--radius-client-card);
   background: var(--color-client-card);
   box-shadow: var(--shadow-client-card);
-  transition:
-    translate var(--duration-hover) var(--ease-refined),
-    box-shadow var(--duration-hover) var(--ease-refined);
 }
 
 /* The inner hairline, 5px in. */
@@ -466,14 +463,6 @@
 
 .client-logo img {
   object-fit: contain;
-}
-
-/* Proposed hover (not in the design): the card lifts a little on its gold shadow. */
-@media (hover: hover) {
-  .client-card:hover {
-    translate: 0 -4px;
-    box-shadow: 0 14px 18px 0 rgb(89 51 26 / 0.2);
-  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
