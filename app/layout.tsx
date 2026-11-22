@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Epilogue, Noto_Sans_Thai } from "next/font/google";
 import { seo } from "@/content/seo";
 import { isProduction, searchConsoleVerification, siteUrl } from "@/lib/site-url";
@@ -50,6 +51,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           ข้ามไปยังเนื้อหา
         </a>
         {children}
+        {/* Vercel Web Analytics: page views and visitors, cookieless. Only reports on Vercel deployments. */}
+        <Analytics />
       </body>
     </html>
   );
